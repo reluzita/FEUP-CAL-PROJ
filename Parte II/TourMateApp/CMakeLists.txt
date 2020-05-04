@@ -8,4 +8,4 @@ link_libraries(ws2_32 wsock32)
 
 include_directories(lib)
 include_directories(resources)
-add_executable(FichaJUNG FichaJUNG.cpp lib/connection.cpp lib/graphviewer.cpp)
+add_executable(FichaJUNG main.cpp lib/connection.cpp lib/graphviewer.cpp)
