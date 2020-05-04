@@ -7,9 +7,10 @@
 
 #include <string>
 #include <iostream>
+#include <fstream>
+#include <graphviewer.h>
 #include "Graph.h"
 
-template <class T>
-Graph<T> readMap(string nodesfile, string edgesfile);
+Graph readMap(string nodesfile, string edgesfile);
 
 #endif //READFILES_H

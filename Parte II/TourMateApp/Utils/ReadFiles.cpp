@@ -6,44 +6,52 @@
 
 using namespace std;
 
-class <template T>
-void readMap(string nodesfile, string edgesfile)
+Graph readMap(string nodesfile, string edgesfile)
 {
+    /*
     GraphViewer *gv = new GraphViewer(600, 600, false);
     gv->createWindow(600, 600);
     gv->defineVertexColor("blue");
     gv->defineEdgeColor("black");
+*/
+    Graph graph;
 
     ifstream nodes, edges;
-    nodes.open("../resources/mapa1/nos.txt");
-    edges.open("../resources/mapa1/arestas.txt");
+    nodes.open(nodesfile);
+    edges.open(edgesfile);
 
     string line;
-    while(getline(nodes, line)) {
+    getline(nodes, line);
+    int numNodes = stoi(line);
+    for (int i = 0; i < numNodes; i++) {
+        getline(nodes, line);
         int id, x, y;
-        size_t pos = 0;
-        pos = line.find(";");
-        id = stoi(line.substr(0, pos));
-        line.erase(0, pos + 1);
-        pos = line.find(";");
+        size_t pos = 1;
+        size_t next = line.find(",");
+        id = stoi(line.substr(pos, next));
+        line.erase(0, next + 2);
+        pos = line.find(",");
         x = stoi(line.substr(0, pos));
-        line.erase(0, pos + 1);
-        y = stoi(line);
-        gv->addNode(id, x, y);
+        line.erase(0, pos + 2);
+        pos = line.find(")");
+        y = stoi(line.substr(0, pos));
+        graph.addVertex(id, x, y);
     }
     nodes.close();
-    while(getline(edges, line)) {
-        int id, n1, n2;
-        size_t pos = 0;
-        pos = line.find(";");
-        id = stoi(line.substr(0, pos));
-        line.erase(0, pos + 1);
-        pos = line.find(";");
-        n1 = stoi(line.substr(0, pos));
-        line.erase(0, pos + 1);
-        n2 = stoi(line);
-        gv->addEdge(id, n1, n2, EdgeType::UNDIRECTED);
+
+    getline(edges, line);
+    int numEdges = stoi(line);
+    for (int i = 0; i < numEdges; i++) {
+        getline(edges, line);
+        int n1, n2;
+        size_t pos = 1;
+        size_t next = line.find(",");
+        n1 = stoi(line.substr(pos, next));
+        line.erase(0, next + 2);
+        pos = line.find(")");
+        n2 = stoi(line.substr(0, pos));
+        graph.addEdge(n1, n2, 1);
     }
     edges.close();
-    gv->rearrange();
+    return graph;
 }

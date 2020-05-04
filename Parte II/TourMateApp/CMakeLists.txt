@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.15)
-project(FichaJUNG)
+project(TourMateApp)
 
 set(CMAKE_CXX_STANDARD 14)
 # The line below is necessary if you are under Windows only
@@ -8,4 +8,5 @@ link_libraries(ws2_32 wsock32)
 
 include_directories(lib)
 include_directories(resources)
-add_executable(FichaJUNG main.cpp lib/connection.cpp lib/graphviewer.cpp)
+include_directories(Graph)
+add_executable(TourMateApp main.cpp lib/connection.cpp lib/graphviewer.cpp Utils/ReadFiles.cpp Graph/Graph.cpp Graph/Edge.cpp Graph/Vertex.cpp)

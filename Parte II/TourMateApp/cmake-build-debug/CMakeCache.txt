@@ -156,7 +156,7 @@ CMAKE_PROJECT_DESCRIPTION:STATIC=
 CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=FichaJUNG
+CMAKE_PROJECT_NAME:STATIC=TourMateApp
 
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=C:/Program Files (x86)/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/ranlib.exe
@@ -243,6 +243,12 @@ FichaJUNG_BINARY_DIR:STATIC=C:/Users/ineso/OneDrive/Documentos/Ines-Universidade
 
 //Value Computed by CMake
 FichaJUNG_SOURCE_DIR:STATIC=C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Proj/Parte II/TourMateApp
+
+//Value Computed by CMake
+TourMateApp_BINARY_DIR:STATIC=C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Proj/Parte II/TourMateApp/cmake-build-debug
+
+//Value Computed by CMake
+TourMateApp_SOURCE_DIR:STATIC=C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Proj/Parte II/TourMateApp
 
 
 ########################

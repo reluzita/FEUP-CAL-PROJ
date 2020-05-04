@@ -55,17 +55,6 @@ CMAKE_BINARY_DIR = "C:\Users\ineso\OneDrive\Documentos\Ines-Universidade\2 ano\2
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	"C:\Program Files\JetBrains\CLion 2019.2.2\bin\cmake\win\bin\cmake.exe" -E echo "No interactive CMake dialog available."
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
-
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
@@ -76,6 +65,17 @@ rebuild_cache:
 rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
+
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	"C:\Program Files\JetBrains\CLion 2019.2.2\bin\cmake\win\bin\cmake.exe" -E echo "No interactive CMake dialog available."
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -110,44 +110,125 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named FichaJUNG
+# Target rules for targets named TourMateApp
 
 # Build rule for target.
-FichaJUNG: cmake_check_build_system
-	$(MAKE) -f CMakeFiles\Makefile2 FichaJUNG
-.PHONY : FichaJUNG
+TourMateApp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles\Makefile2 TourMateApp
+.PHONY : TourMateApp
 
 # fast build rule for target.
-FichaJUNG/fast:
-	$(MAKE) -f CMakeFiles\FichaJUNG.dir\build.make CMakeFiles/FichaJUNG.dir/build
-.PHONY : FichaJUNG/fast
+TourMateApp/fast:
+	$(MAKE) -f CMakeFiles\TourMateApp.dir\build.make CMakeFiles/TourMateApp.dir/build
+.PHONY : TourMateApp/fast
 
-FichaJUNG.obj: FichaJUNG.cpp.obj
+Graph/Edge.obj: Graph/Edge.cpp.obj
 
-.PHONY : FichaJUNG.obj
+.PHONY : Graph/Edge.obj
 
 # target to build an object file
-FichaJUNG.cpp.obj:
-	$(MAKE) -f CMakeFiles\FichaJUNG.dir\build.make CMakeFiles/FichaJUNG.dir/FichaJUNG.cpp.obj
-.PHONY : FichaJUNG.cpp.obj
+Graph/Edge.cpp.obj:
+	$(MAKE) -f CMakeFiles\TourMateApp.dir\build.make CMakeFiles/TourMateApp.dir/Graph/Edge.cpp.obj
+.PHONY : Graph/Edge.cpp.obj
 
-FichaJUNG.i: FichaJUNG.cpp.i
+Graph/Edge.i: Graph/Edge.cpp.i
 
-.PHONY : FichaJUNG.i
+.PHONY : Graph/Edge.i
 
 # target to preprocess a source file
-FichaJUNG.cpp.i:
-	$(MAKE) -f CMakeFiles\FichaJUNG.dir\build.make CMakeFiles/FichaJUNG.dir/FichaJUNG.cpp.i
-.PHONY : FichaJUNG.cpp.i
+Graph/Edge.cpp.i:
+	$(MAKE) -f CMakeFiles\TourMateApp.dir\build.make CMakeFiles/TourMateApp.dir/Graph/Edge.cpp.i
+.PHONY : Graph/Edge.cpp.i
 
-FichaJUNG.s: FichaJUNG.cpp.s
+Graph/Edge.s: Graph/Edge.cpp.s
 
-.PHONY : FichaJUNG.s
+.PHONY : Graph/Edge.s
 
 # target to generate assembly for a file
-FichaJUNG.cpp.s:
-	$(MAKE) -f CMakeFiles\FichaJUNG.dir\build.make CMakeFiles/FichaJUNG.dir/FichaJUNG.cpp.s
-.PHONY : FichaJUNG.cpp.s
+Graph/Edge.cpp.s:
+	$(MAKE) -f CMakeFiles\TourMateApp.dir\build.make CMakeFiles/TourMateApp.dir/Graph/Edge.cpp.s
+.PHONY : Graph/Edge.cpp.s
+
+Graph/Graph.obj: Graph/Graph.cpp.obj
+
+.PHONY : Graph/Graph.obj
+
+# target to build an object file
+Graph/Graph.cpp.obj:
+	$(MAKE) -f CMakeFiles\TourMateApp.dir\build.make CMakeFiles/TourMateApp.dir/Graph/Graph.cpp.obj
+.PHONY : Graph/Graph.cpp.obj
+
+Graph/Graph.i: Graph/Graph.cpp.i
+
+.PHONY : Graph/Graph.i
+
+# target to preprocess a source file
+Graph/Graph.cpp.i:
+	$(MAKE) -f CMakeFiles\TourMateApp.dir\build.make CMakeFiles/TourMateApp.dir/Graph/Graph.cpp.i
+.PHONY : Graph/Graph.cpp.i
+
+Graph/Graph.s: Graph/Graph.cpp.s
+
+.PHONY : Graph/Graph.s
+
+# target to generate assembly for a file
+Graph/Graph.cpp.s:
+	$(MAKE) -f CMakeFiles\TourMateApp.dir\build.make CMakeFiles/TourMateApp.dir/Graph/Graph.cpp.s
+.PHONY : Graph/Graph.cpp.s
+
+Graph/Vertex.obj: Graph/Vertex.cpp.obj
+
+.PHONY : Graph/Vertex.obj
+
+# target to build an object file
+Graph/Vertex.cpp.obj:
+	$(MAKE) -f CMakeFiles\TourMateApp.dir\build.make CMakeFiles/TourMateApp.dir/Graph/Vertex.cpp.obj
+.PHONY : Graph/Vertex.cpp.obj
+
+Graph/Vertex.i: Graph/Vertex.cpp.i
+
+.PHONY : Graph/Vertex.i
+
+# target to preprocess a source file
+Graph/Vertex.cpp.i:
+	$(MAKE) -f CMakeFiles\TourMateApp.dir\build.make CMakeFiles/TourMateApp.dir/Graph/Vertex.cpp.i
+.PHONY : Graph/Vertex.cpp.i
+
+Graph/Vertex.s: Graph/Vertex.cpp.s
+
+.PHONY : Graph/Vertex.s
+
+# target to generate assembly for a file
+Graph/Vertex.cpp.s:
+	$(MAKE) -f CMakeFiles\TourMateApp.dir\build.make CMakeFiles/TourMateApp.dir/Graph/Vertex.cpp.s
+.PHONY : Graph/Vertex.cpp.s
+
+Utils/ReadFiles.obj: Utils/ReadFiles.cpp.obj
+
+.PHONY : Utils/ReadFiles.obj
+
+# target to build an object file
+Utils/ReadFiles.cpp.obj:
+	$(MAKE) -f CMakeFiles\TourMateApp.dir\build.make CMakeFiles/TourMateApp.dir/Utils/ReadFiles.cpp.obj
+.PHONY : Utils/ReadFiles.cpp.obj
+
+Utils/ReadFiles.i: Utils/ReadFiles.cpp.i
+
+.PHONY : Utils/ReadFiles.i
+
+# target to preprocess a source file
+Utils/ReadFiles.cpp.i:
+	$(MAKE) -f CMakeFiles\TourMateApp.dir\build.make CMakeFiles/TourMateApp.dir/Utils/ReadFiles.cpp.i
+.PHONY : Utils/ReadFiles.cpp.i
+
+Utils/ReadFiles.s: Utils/ReadFiles.cpp.s
+
+.PHONY : Utils/ReadFiles.s
+
+# target to generate assembly for a file
+Utils/ReadFiles.cpp.s:
+	$(MAKE) -f CMakeFiles\TourMateApp.dir\build.make CMakeFiles/TourMateApp.dir/Utils/ReadFiles.cpp.s
+.PHONY : Utils/ReadFiles.cpp.s
 
 lib/connection.obj: lib/connection.cpp.obj
 
@@ -155,7 +236,7 @@ lib/connection.obj: lib/connection.cpp.obj
 
 # target to build an object file
 lib/connection.cpp.obj:
-	$(MAKE) -f CMakeFiles\FichaJUNG.dir\build.make CMakeFiles/FichaJUNG.dir/lib/connection.cpp.obj
+	$(MAKE) -f CMakeFiles\TourMateApp.dir\build.make CMakeFiles/TourMateApp.dir/lib/connection.cpp.obj
 .PHONY : lib/connection.cpp.obj
 
 lib/connection.i: lib/connection.cpp.i
@@ -164,7 +245,7 @@ lib/connection.i: lib/connection.cpp.i
 
 # target to preprocess a source file
 lib/connection.cpp.i:
-	$(MAKE) -f CMakeFiles\FichaJUNG.dir\build.make CMakeFiles/FichaJUNG.dir/lib/connection.cpp.i
+	$(MAKE) -f CMakeFiles\TourMateApp.dir\build.make CMakeFiles/TourMateApp.dir/lib/connection.cpp.i
 .PHONY : lib/connection.cpp.i
 
 lib/connection.s: lib/connection.cpp.s
@@ -173,7 +254,7 @@ lib/connection.s: lib/connection.cpp.s
 
 # target to generate assembly for a file
 lib/connection.cpp.s:
-	$(MAKE) -f CMakeFiles\FichaJUNG.dir\build.make CMakeFiles/FichaJUNG.dir/lib/connection.cpp.s
+	$(MAKE) -f CMakeFiles\TourMateApp.dir\build.make CMakeFiles/TourMateApp.dir/lib/connection.cpp.s
 .PHONY : lib/connection.cpp.s
 
 lib/graphviewer.obj: lib/graphviewer.cpp.obj
@@ -182,7 +263,7 @@ lib/graphviewer.obj: lib/graphviewer.cpp.obj
 
 # target to build an object file
 lib/graphviewer.cpp.obj:
-	$(MAKE) -f CMakeFiles\FichaJUNG.dir\build.make CMakeFiles/FichaJUNG.dir/lib/graphviewer.cpp.obj
+	$(MAKE) -f CMakeFiles\TourMateApp.dir\build.make CMakeFiles/TourMateApp.dir/lib/graphviewer.cpp.obj
 .PHONY : lib/graphviewer.cpp.obj
 
 lib/graphviewer.i: lib/graphviewer.cpp.i
@@ -191,7 +272,7 @@ lib/graphviewer.i: lib/graphviewer.cpp.i
 
 # target to preprocess a source file
 lib/graphviewer.cpp.i:
-	$(MAKE) -f CMakeFiles\FichaJUNG.dir\build.make CMakeFiles/FichaJUNG.dir/lib/graphviewer.cpp.i
+	$(MAKE) -f CMakeFiles\TourMateApp.dir\build.make CMakeFiles/TourMateApp.dir/lib/graphviewer.cpp.i
 .PHONY : lib/graphviewer.cpp.i
 
 lib/graphviewer.s: lib/graphviewer.cpp.s
@@ -200,8 +281,35 @@ lib/graphviewer.s: lib/graphviewer.cpp.s
 
 # target to generate assembly for a file
 lib/graphviewer.cpp.s:
-	$(MAKE) -f CMakeFiles\FichaJUNG.dir\build.make CMakeFiles/FichaJUNG.dir/lib/graphviewer.cpp.s
+	$(MAKE) -f CMakeFiles\TourMateApp.dir\build.make CMakeFiles/TourMateApp.dir/lib/graphviewer.cpp.s
 .PHONY : lib/graphviewer.cpp.s
+
+main.obj: main.cpp.obj
+
+.PHONY : main.obj
+
+# target to build an object file
+main.cpp.obj:
+	$(MAKE) -f CMakeFiles\TourMateApp.dir\build.make CMakeFiles/TourMateApp.dir/main.cpp.obj
+.PHONY : main.cpp.obj
+
+main.i: main.cpp.i
+
+.PHONY : main.i
+
+# target to preprocess a source file
+main.cpp.i:
+	$(MAKE) -f CMakeFiles\TourMateApp.dir\build.make CMakeFiles/TourMateApp.dir/main.cpp.i
+.PHONY : main.cpp.i
+
+main.s: main.cpp.s
+
+.PHONY : main.s
+
+# target to generate assembly for a file
+main.cpp.s:
+	$(MAKE) -f CMakeFiles\TourMateApp.dir\build.make CMakeFiles/TourMateApp.dir/main.cpp.s
+.PHONY : main.cpp.s
 
 # Help Target
 help:
@@ -209,18 +317,30 @@ help:
 	@echo ... all (the default if no target is provided)
 	@echo ... clean
 	@echo ... depend
-	@echo ... edit_cache
-	@echo ... FichaJUNG
 	@echo ... rebuild_cache
-	@echo ... FichaJUNG.obj
-	@echo ... FichaJUNG.i
-	@echo ... FichaJUNG.s
+	@echo ... TourMateApp
+	@echo ... edit_cache
+	@echo ... Graph/Edge.obj
+	@echo ... Graph/Edge.i
+	@echo ... Graph/Edge.s
+	@echo ... Graph/Graph.obj
+	@echo ... Graph/Graph.i
+	@echo ... Graph/Graph.s
+	@echo ... Graph/Vertex.obj
+	@echo ... Graph/Vertex.i
+	@echo ... Graph/Vertex.s
+	@echo ... Utils/ReadFiles.obj
+	@echo ... Utils/ReadFiles.i
+	@echo ... Utils/ReadFiles.s
 	@echo ... lib/connection.obj
 	@echo ... lib/connection.i
 	@echo ... lib/connection.s
 	@echo ... lib/graphviewer.obj
 	@echo ... lib/graphviewer.i
 	@echo ... lib/graphviewer.s
+	@echo ... main.obj
+	@echo ... main.i
+	@echo ... main.s
 .PHONY : help
 
 

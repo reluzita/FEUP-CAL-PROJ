@@ -4,7 +4,10 @@
 #include <iostream>
 #include <sstream>
 
-int main() {
+#include "Utils/ReadFiles.h"
 
-	return 0;
+int main() {
+    Graph g = readMap("C:\\Users\\ineso\\OneDrive\\Documentos\\Ines-Universidade\\2 ano\\2 semestre\\CAL-Proj\\Parte II\\TourMateApp\\resources\\GridGraphs\\8x8\\nodes.txt","C:\\Users\\ineso\\OneDrive\\Documentos\\Ines-Universidade\\2 ano\\2 semestre\\CAL-Proj\\Parte II\\TourMateApp\\resources\\GridGraphs\\8x8\\edges.txt" );
+    cout << "Acabou yey" << endl;
+    return 0;
 }

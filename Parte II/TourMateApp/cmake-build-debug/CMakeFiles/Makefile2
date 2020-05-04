@@ -52,12 +52,12 @@ CMAKE_BINARY_DIR = "C:\Users\ineso\OneDrive\Documentos\Ines-Universidade\2 ano\2
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/FichaJUNG.dir/all
+all: CMakeFiles/TourMateApp.dir/all
 
 .PHONY : all
 
 # The main recursive "clean" target.
-clean: CMakeFiles/FichaJUNG.dir/clean
+clean: CMakeFiles/TourMateApp.dir/clean
 
 .PHONY : clean
 
@@ -67,31 +67,31 @@ preinstall:
 .PHONY : preinstall
 
 #=============================================================================
-# Target rules for target CMakeFiles/FichaJUNG.dir
+# Target rules for target CMakeFiles/TourMateApp.dir
 
 # All Build rule for target.
-CMakeFiles/FichaJUNG.dir/all:
-	$(MAKE) -f CMakeFiles\FichaJUNG.dir\build.make CMakeFiles/FichaJUNG.dir/depend
-	$(MAKE) -f CMakeFiles\FichaJUNG.dir\build.make CMakeFiles/FichaJUNG.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="C:\Users\ineso\OneDrive\Documentos\Ines-Universidade\2 ano\2 semestre\CAL-Proj\Parte II\TourMateApp\cmake-build-debug\CMakeFiles" --progress-num=1,2,3,4 "Built target FichaJUNG"
-.PHONY : CMakeFiles/FichaJUNG.dir/all
+CMakeFiles/TourMateApp.dir/all:
+	$(MAKE) -f CMakeFiles\TourMateApp.dir\build.make CMakeFiles/TourMateApp.dir/depend
+	$(MAKE) -f CMakeFiles\TourMateApp.dir\build.make CMakeFiles/TourMateApp.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="C:\Users\ineso\OneDrive\Documentos\Ines-Universidade\2 ano\2 semestre\CAL-Proj\Parte II\TourMateApp\cmake-build-debug\CMakeFiles" --progress-num=1,2,3,4,5,6,7,8 "Built target TourMateApp"
+.PHONY : CMakeFiles/TourMateApp.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/FichaJUNG.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "C:\Users\ineso\OneDrive\Documentos\Ines-Universidade\2 ano\2 semestre\CAL-Proj\Parte II\TourMateApp\cmake-build-debug\CMakeFiles" 4
-	$(MAKE) -f CMakeFiles\Makefile2 CMakeFiles/FichaJUNG.dir/all
+CMakeFiles/TourMateApp.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start "C:\Users\ineso\OneDrive\Documentos\Ines-Universidade\2 ano\2 semestre\CAL-Proj\Parte II\TourMateApp\cmake-build-debug\CMakeFiles" 8
+	$(MAKE) -f CMakeFiles\Makefile2 CMakeFiles/TourMateApp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start "C:\Users\ineso\OneDrive\Documentos\Ines-Universidade\2 ano\2 semestre\CAL-Proj\Parte II\TourMateApp\cmake-build-debug\CMakeFiles" 0
-.PHONY : CMakeFiles/FichaJUNG.dir/rule
+.PHONY : CMakeFiles/TourMateApp.dir/rule
 
 # Convenience name for target.
-FichaJUNG: CMakeFiles/FichaJUNG.dir/rule
+TourMateApp: CMakeFiles/TourMateApp.dir/rule
 
-.PHONY : FichaJUNG
+.PHONY : TourMateApp
 
 # clean rule for target.
-CMakeFiles/FichaJUNG.dir/clean:
-	$(MAKE) -f CMakeFiles\FichaJUNG.dir\build.make CMakeFiles/FichaJUNG.dir/clean
-.PHONY : CMakeFiles/FichaJUNG.dir/clean
+CMakeFiles/TourMateApp.dir/clean:
+	$(MAKE) -f CMakeFiles\TourMateApp.dir\build.make CMakeFiles/TourMateApp.dir/clean
+.PHONY : CMakeFiles/TourMateApp.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.
