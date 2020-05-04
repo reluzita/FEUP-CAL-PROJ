@@ -1,4 +1,7 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/TourMateApp.dir/Algorithms/BFS.cpp.obj"
+  "CMakeFiles/TourMateApp.dir/Algorithms/DFS.cpp.obj"
+  "CMakeFiles/TourMateApp.dir/Algorithms/Dijkstra.cpp.obj"
   "CMakeFiles/TourMateApp.dir/Graph/Edge.cpp.obj"
   "CMakeFiles/TourMateApp.dir/Graph/Graph.cpp.obj"
   "CMakeFiles/TourMateApp.dir/Graph/Vertex.cpp.obj"

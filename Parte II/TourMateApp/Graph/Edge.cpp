@@ -4,4 +4,12 @@
 
 #include "Edge.h"
 
-Edge::Edge(int nodeID, double w): nodeID(nodeID), weight(w) {}
+Edge::Edge(int destID, double w): destID(destID), weight(w) {}
+
+int Edge::getDest() {
+    return destID;
+}
+
+int Edge::getWeight() {
+    return weight;
+}

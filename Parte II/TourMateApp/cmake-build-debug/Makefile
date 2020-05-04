@@ -122,6 +122,87 @@ TourMateApp/fast:
 	$(MAKE) -f CMakeFiles\TourMateApp.dir\build.make CMakeFiles/TourMateApp.dir/build
 .PHONY : TourMateApp/fast
 
+Algorithms/BFS.obj: Algorithms/BFS.cpp.obj
+
+.PHONY : Algorithms/BFS.obj
+
+# target to build an object file
+Algorithms/BFS.cpp.obj:
+	$(MAKE) -f CMakeFiles\TourMateApp.dir\build.make CMakeFiles/TourMateApp.dir/Algorithms/BFS.cpp.obj
+.PHONY : Algorithms/BFS.cpp.obj
+
+Algorithms/BFS.i: Algorithms/BFS.cpp.i
+
+.PHONY : Algorithms/BFS.i
+
+# target to preprocess a source file
+Algorithms/BFS.cpp.i:
+	$(MAKE) -f CMakeFiles\TourMateApp.dir\build.make CMakeFiles/TourMateApp.dir/Algorithms/BFS.cpp.i
+.PHONY : Algorithms/BFS.cpp.i
+
+Algorithms/BFS.s: Algorithms/BFS.cpp.s
+
+.PHONY : Algorithms/BFS.s
+
+# target to generate assembly for a file
+Algorithms/BFS.cpp.s:
+	$(MAKE) -f CMakeFiles\TourMateApp.dir\build.make CMakeFiles/TourMateApp.dir/Algorithms/BFS.cpp.s
+.PHONY : Algorithms/BFS.cpp.s
+
+Algorithms/DFS.obj: Algorithms/DFS.cpp.obj
+
+.PHONY : Algorithms/DFS.obj
+
+# target to build an object file
+Algorithms/DFS.cpp.obj:
+	$(MAKE) -f CMakeFiles\TourMateApp.dir\build.make CMakeFiles/TourMateApp.dir/Algorithms/DFS.cpp.obj
+.PHONY : Algorithms/DFS.cpp.obj
+
+Algorithms/DFS.i: Algorithms/DFS.cpp.i
+
+.PHONY : Algorithms/DFS.i
+
+# target to preprocess a source file
+Algorithms/DFS.cpp.i:
+	$(MAKE) -f CMakeFiles\TourMateApp.dir\build.make CMakeFiles/TourMateApp.dir/Algorithms/DFS.cpp.i
+.PHONY : Algorithms/DFS.cpp.i
+
+Algorithms/DFS.s: Algorithms/DFS.cpp.s
+
+.PHONY : Algorithms/DFS.s
+
+# target to generate assembly for a file
+Algorithms/DFS.cpp.s:
+	$(MAKE) -f CMakeFiles\TourMateApp.dir\build.make CMakeFiles/TourMateApp.dir/Algorithms/DFS.cpp.s
+.PHONY : Algorithms/DFS.cpp.s
+
+Algorithms/Dijkstra.obj: Algorithms/Dijkstra.cpp.obj
+
+.PHONY : Algorithms/Dijkstra.obj
+
+# target to build an object file
+Algorithms/Dijkstra.cpp.obj:
+	$(MAKE) -f CMakeFiles\TourMateApp.dir\build.make CMakeFiles/TourMateApp.dir/Algorithms/Dijkstra.cpp.obj
+.PHONY : Algorithms/Dijkstra.cpp.obj
+
+Algorithms/Dijkstra.i: Algorithms/Dijkstra.cpp.i
+
+.PHONY : Algorithms/Dijkstra.i
+
+# target to preprocess a source file
+Algorithms/Dijkstra.cpp.i:
+	$(MAKE) -f CMakeFiles\TourMateApp.dir\build.make CMakeFiles/TourMateApp.dir/Algorithms/Dijkstra.cpp.i
+.PHONY : Algorithms/Dijkstra.cpp.i
+
+Algorithms/Dijkstra.s: Algorithms/Dijkstra.cpp.s
+
+.PHONY : Algorithms/Dijkstra.s
+
+# target to generate assembly for a file
+Algorithms/Dijkstra.cpp.s:
+	$(MAKE) -f CMakeFiles\TourMateApp.dir\build.make CMakeFiles/TourMateApp.dir/Algorithms/Dijkstra.cpp.s
+.PHONY : Algorithms/Dijkstra.cpp.s
+
 Graph/Edge.obj: Graph/Edge.cpp.obj
 
 .PHONY : Graph/Edge.obj
@@ -320,6 +401,15 @@ help:
 	@echo ... rebuild_cache
 	@echo ... TourMateApp
 	@echo ... edit_cache
+	@echo ... Algorithms/BFS.obj
+	@echo ... Algorithms/BFS.i
+	@echo ... Algorithms/BFS.s
+	@echo ... Algorithms/DFS.obj
+	@echo ... Algorithms/DFS.i
+	@echo ... Algorithms/DFS.s
+	@echo ... Algorithms/Dijkstra.obj
+	@echo ... Algorithms/Dijkstra.i
+	@echo ... Algorithms/Dijkstra.s
 	@echo ... Graph/Edge.obj
 	@echo ... Graph/Edge.i
 	@echo ... Graph/Edge.s

@@ -4,6 +4,9 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
+  "C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Proj/Parte II/TourMateApp/Algorithms/BFS.cpp" "C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Proj/Parte II/TourMateApp/cmake-build-debug/CMakeFiles/TourMateApp.dir/Algorithms/BFS.cpp.obj"
+  "C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Proj/Parte II/TourMateApp/Algorithms/DFS.cpp" "C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Proj/Parte II/TourMateApp/cmake-build-debug/CMakeFiles/TourMateApp.dir/Algorithms/DFS.cpp.obj"
+  "C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Proj/Parte II/TourMateApp/Algorithms/Dijkstra.cpp" "C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Proj/Parte II/TourMateApp/cmake-build-debug/CMakeFiles/TourMateApp.dir/Algorithms/Dijkstra.cpp.obj"
   "C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Proj/Parte II/TourMateApp/Graph/Edge.cpp" "C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Proj/Parte II/TourMateApp/cmake-build-debug/CMakeFiles/TourMateApp.dir/Graph/Edge.cpp.obj"
   "C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Proj/Parte II/TourMateApp/Graph/Graph.cpp" "C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Proj/Parte II/TourMateApp/cmake-build-debug/CMakeFiles/TourMateApp.dir/Graph/Graph.cpp.obj"
   "C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Proj/Parte II/TourMateApp/Graph/Vertex.cpp" "C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Proj/Parte II/TourMateApp/cmake-build-debug/CMakeFiles/TourMateApp.dir/Graph/Vertex.cpp.obj"
@@ -18,7 +21,6 @@ set(CMAKE_CXX_COMPILER_ID "GNU")
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "../lib"
   "../resources"
-  "../Graph"
   )
 
 # Targets to which this target links.

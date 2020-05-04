@@ -6,10 +6,13 @@
 #define TOURMATEAPP_EDGE_H
 
 class Edge {
-    int nodeID;      // destination vertex
+    int destID;      // destination vertex
     double weight;         // edge weight
 public:
-    Edge(int nodeID, double w);
+    Edge(int destID, double w);
+
+    int getDest();
+    int getWeight();
     friend class Graph;
     friend class Vertex;
 };

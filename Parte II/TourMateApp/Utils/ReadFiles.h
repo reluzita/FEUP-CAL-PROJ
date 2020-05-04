@@ -9,7 +9,7 @@
 #include <iostream>
 #include <fstream>
 #include <graphviewer.h>
-#include "Graph.h"
+#include "../Graph/Graph.h"
 
 Graph readMap(string nodesfile, string edgesfile);
 

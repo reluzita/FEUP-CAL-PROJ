@@ -73,12 +73,12 @@ preinstall:
 CMakeFiles/TourMateApp.dir/all:
 	$(MAKE) -f CMakeFiles\TourMateApp.dir\build.make CMakeFiles/TourMateApp.dir/depend
 	$(MAKE) -f CMakeFiles\TourMateApp.dir\build.make CMakeFiles/TourMateApp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="C:\Users\ineso\OneDrive\Documentos\Ines-Universidade\2 ano\2 semestre\CAL-Proj\Parte II\TourMateApp\cmake-build-debug\CMakeFiles" --progress-num=1,2,3,4,5,6,7,8 "Built target TourMateApp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="C:\Users\ineso\OneDrive\Documentos\Ines-Universidade\2 ano\2 semestre\CAL-Proj\Parte II\TourMateApp\cmake-build-debug\CMakeFiles" --progress-num=1,2,3,4,5,6,7,8,9,10,11 "Built target TourMateApp"
 .PHONY : CMakeFiles/TourMateApp.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/TourMateApp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "C:\Users\ineso\OneDrive\Documentos\Ines-Universidade\2 ano\2 semestre\CAL-Proj\Parte II\TourMateApp\cmake-build-debug\CMakeFiles" 8
+	$(CMAKE_COMMAND) -E cmake_progress_start "C:\Users\ineso\OneDrive\Documentos\Ines-Universidade\2 ano\2 semestre\CAL-Proj\Parte II\TourMateApp\cmake-build-debug\CMakeFiles" 11
 	$(MAKE) -f CMakeFiles\Makefile2 CMakeFiles/TourMateApp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start "C:\Users\ineso\OneDrive\Documentos\Ines-Universidade\2 ano\2 semestre\CAL-Proj\Parte II\TourMateApp\cmake-build-debug\CMakeFiles" 0
 .PHONY : CMakeFiles/TourMateApp.dir/rule

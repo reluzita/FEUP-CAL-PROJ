@@ -13,6 +13,7 @@ class Graph {
 
 public:
     Graph();
+    void initializeGraph();
     Vertex *findVertex(const int &id) const;
     bool addVertex(const int &id, const int &x, const int &y);
     bool addEdge(const int &sourc, const int &dest, double w);
@@ -21,7 +22,7 @@ public:
 /*
     // Fp05 - single source
     void unweightedShortestPath(const int &s);    //TODO...
-    void dijkstraShortestPath(const int &s);      //TODO...
+          //TODO...
     void bellmanFordShortestPath(const int &s);   //TODO...
     vector<T> getPathTo(const int &dest) const;   //TODO...
 

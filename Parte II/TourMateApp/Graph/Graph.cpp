@@ -8,6 +8,13 @@ using namespace std;
 
 Graph::Graph() = default;
 
+void Graph::initializeGraph() {
+    for(auto v: vertexSet) {
+        v->dist = INT_MAX;
+        v->path = NULL;
+    }
+}
+
 int Graph::getNumVertex() const {
     return vertexSet.size();
 }
@@ -82,31 +89,7 @@ void Graph<T>::unweightedShortestPath(const int &orig) {
 }
 
 
-template<class T>
-void Graph<T>::dijkstraShortestPath(const int &origin) {
-    for(auto v: vertexSet) {
-        v->dist = INT_MAX;
-        v->path = NULL;
-    }
-    Vertex<T> * vertex = findVertex(origin);
-    vertex->dist = 0;
-    MutablePriorityQueue<Vertex<T>> q;
-    q.insert(vertex);
-    while(!q.empty()) {
-        Vertex<T>* temp = q.extractMin();
-        for(Edge<T> edge: temp->adj) {
-            bool notFound = ((edge.dest)->dist == INT_MAX);
-            if((edge.dest)->dist > temp->dist + edge.weight) {
-                (edge.dest)->dist = temp->dist + edge.weight;
-                (edge.dest)->path = temp;
-                if(notFound)
-                    q.insert(edge.dest);
-                else
-                    q.decreaseKey(edge.dest);
-            }
-        }
-    }
-}
+
 
 
 template<class T>

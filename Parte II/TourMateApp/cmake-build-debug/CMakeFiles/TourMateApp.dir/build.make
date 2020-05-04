@@ -154,6 +154,48 @@ CMakeFiles/TourMateApp.dir/Graph/Vertex.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/TourMateApp.dir/Graph/Vertex.cpp.s"
 	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\ineso\OneDrive\Documentos\Ines-Universidade\2 ano\2 semestre\CAL-Proj\Parte II\TourMateApp\Graph\Vertex.cpp" -o CMakeFiles\TourMateApp.dir\Graph\Vertex.cpp.s
 
+CMakeFiles/TourMateApp.dir/Algorithms/Dijkstra.cpp.obj: CMakeFiles/TourMateApp.dir/flags.make
+CMakeFiles/TourMateApp.dir/Algorithms/Dijkstra.cpp.obj: CMakeFiles/TourMateApp.dir/includes_CXX.rsp
+CMakeFiles/TourMateApp.dir/Algorithms/Dijkstra.cpp.obj: ../Algorithms/Dijkstra.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\ineso\OneDrive\Documentos\Ines-Universidade\2 ano\2 semestre\CAL-Proj\Parte II\TourMateApp\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/TourMateApp.dir/Algorithms/Dijkstra.cpp.obj"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\TourMateApp.dir\Algorithms\Dijkstra.cpp.obj -c "C:\Users\ineso\OneDrive\Documentos\Ines-Universidade\2 ano\2 semestre\CAL-Proj\Parte II\TourMateApp\Algorithms\Dijkstra.cpp"
+
+CMakeFiles/TourMateApp.dir/Algorithms/Dijkstra.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/TourMateApp.dir/Algorithms/Dijkstra.cpp.i"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\ineso\OneDrive\Documentos\Ines-Universidade\2 ano\2 semestre\CAL-Proj\Parte II\TourMateApp\Algorithms\Dijkstra.cpp" > CMakeFiles\TourMateApp.dir\Algorithms\Dijkstra.cpp.i
+
+CMakeFiles/TourMateApp.dir/Algorithms/Dijkstra.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/TourMateApp.dir/Algorithms/Dijkstra.cpp.s"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\ineso\OneDrive\Documentos\Ines-Universidade\2 ano\2 semestre\CAL-Proj\Parte II\TourMateApp\Algorithms\Dijkstra.cpp" -o CMakeFiles\TourMateApp.dir\Algorithms\Dijkstra.cpp.s
+
+CMakeFiles/TourMateApp.dir/Algorithms/DFS.cpp.obj: CMakeFiles/TourMateApp.dir/flags.make
+CMakeFiles/TourMateApp.dir/Algorithms/DFS.cpp.obj: CMakeFiles/TourMateApp.dir/includes_CXX.rsp
+CMakeFiles/TourMateApp.dir/Algorithms/DFS.cpp.obj: ../Algorithms/DFS.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\ineso\OneDrive\Documentos\Ines-Universidade\2 ano\2 semestre\CAL-Proj\Parte II\TourMateApp\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/TourMateApp.dir/Algorithms/DFS.cpp.obj"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\TourMateApp.dir\Algorithms\DFS.cpp.obj -c "C:\Users\ineso\OneDrive\Documentos\Ines-Universidade\2 ano\2 semestre\CAL-Proj\Parte II\TourMateApp\Algorithms\DFS.cpp"
+
+CMakeFiles/TourMateApp.dir/Algorithms/DFS.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/TourMateApp.dir/Algorithms/DFS.cpp.i"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\ineso\OneDrive\Documentos\Ines-Universidade\2 ano\2 semestre\CAL-Proj\Parte II\TourMateApp\Algorithms\DFS.cpp" > CMakeFiles\TourMateApp.dir\Algorithms\DFS.cpp.i
+
+CMakeFiles/TourMateApp.dir/Algorithms/DFS.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/TourMateApp.dir/Algorithms/DFS.cpp.s"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\ineso\OneDrive\Documentos\Ines-Universidade\2 ano\2 semestre\CAL-Proj\Parte II\TourMateApp\Algorithms\DFS.cpp" -o CMakeFiles\TourMateApp.dir\Algorithms\DFS.cpp.s
+
+CMakeFiles/TourMateApp.dir/Algorithms/BFS.cpp.obj: CMakeFiles/TourMateApp.dir/flags.make
+CMakeFiles/TourMateApp.dir/Algorithms/BFS.cpp.obj: CMakeFiles/TourMateApp.dir/includes_CXX.rsp
+CMakeFiles/TourMateApp.dir/Algorithms/BFS.cpp.obj: ../Algorithms/BFS.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\ineso\OneDrive\Documentos\Ines-Universidade\2 ano\2 semestre\CAL-Proj\Parte II\TourMateApp\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/TourMateApp.dir/Algorithms/BFS.cpp.obj"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\TourMateApp.dir\Algorithms\BFS.cpp.obj -c "C:\Users\ineso\OneDrive\Documentos\Ines-Universidade\2 ano\2 semestre\CAL-Proj\Parte II\TourMateApp\Algorithms\BFS.cpp"
+
+CMakeFiles/TourMateApp.dir/Algorithms/BFS.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/TourMateApp.dir/Algorithms/BFS.cpp.i"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\ineso\OneDrive\Documentos\Ines-Universidade\2 ano\2 semestre\CAL-Proj\Parte II\TourMateApp\Algorithms\BFS.cpp" > CMakeFiles\TourMateApp.dir\Algorithms\BFS.cpp.i
+
+CMakeFiles/TourMateApp.dir/Algorithms/BFS.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/TourMateApp.dir/Algorithms/BFS.cpp.s"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\ineso\OneDrive\Documentos\Ines-Universidade\2 ano\2 semestre\CAL-Proj\Parte II\TourMateApp\Algorithms\BFS.cpp" -o CMakeFiles\TourMateApp.dir\Algorithms\BFS.cpp.s
+
 # Object files for target TourMateApp
 TourMateApp_OBJECTS = \
 "CMakeFiles/TourMateApp.dir/main.cpp.obj" \
@@ -162,7 +204,10 @@ TourMateApp_OBJECTS = \
 "CMakeFiles/TourMateApp.dir/Utils/ReadFiles.cpp.obj" \
 "CMakeFiles/TourMateApp.dir/Graph/Graph.cpp.obj" \
 "CMakeFiles/TourMateApp.dir/Graph/Edge.cpp.obj" \
-"CMakeFiles/TourMateApp.dir/Graph/Vertex.cpp.obj"
+"CMakeFiles/TourMateApp.dir/Graph/Vertex.cpp.obj" \
+"CMakeFiles/TourMateApp.dir/Algorithms/Dijkstra.cpp.obj" \
+"CMakeFiles/TourMateApp.dir/Algorithms/DFS.cpp.obj" \
+"CMakeFiles/TourMateApp.dir/Algorithms/BFS.cpp.obj"
 
 # External object files for target TourMateApp
 TourMateApp_EXTERNAL_OBJECTS =
@@ -174,11 +219,14 @@ TourMateApp.exe: CMakeFiles/TourMateApp.dir/Utils/ReadFiles.cpp.obj
 TourMateApp.exe: CMakeFiles/TourMateApp.dir/Graph/Graph.cpp.obj
 TourMateApp.exe: CMakeFiles/TourMateApp.dir/Graph/Edge.cpp.obj
 TourMateApp.exe: CMakeFiles/TourMateApp.dir/Graph/Vertex.cpp.obj
+TourMateApp.exe: CMakeFiles/TourMateApp.dir/Algorithms/Dijkstra.cpp.obj
+TourMateApp.exe: CMakeFiles/TourMateApp.dir/Algorithms/DFS.cpp.obj
+TourMateApp.exe: CMakeFiles/TourMateApp.dir/Algorithms/BFS.cpp.obj
 TourMateApp.exe: CMakeFiles/TourMateApp.dir/build.make
 TourMateApp.exe: CMakeFiles/TourMateApp.dir/linklibs.rsp
 TourMateApp.exe: CMakeFiles/TourMateApp.dir/objects1.rsp
 TourMateApp.exe: CMakeFiles/TourMateApp.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="C:\Users\ineso\OneDrive\Documentos\Ines-Universidade\2 ano\2 semestre\CAL-Proj\Parte II\TourMateApp\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable TourMateApp.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="C:\Users\ineso\OneDrive\Documentos\Ines-Universidade\2 ano\2 semestre\CAL-Proj\Parte II\TourMateApp\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_11) "Linking CXX executable TourMateApp.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\TourMateApp.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
