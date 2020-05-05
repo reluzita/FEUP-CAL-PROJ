@@ -12,7 +12,7 @@ public:
     Edge(int destID, double w);
 
     int getDest();
-    int getWeight();
+    double getWeight();
     friend class Graph;
     friend class Vertex;
 };

@@ -20,7 +20,7 @@ class Vertex {
     vector<Edge> adj;		// outgoing edges
 
     double dist = 0;
-    Vertex *path = NULL;
+    Vertex *path = nullptr;
     int queueIndex = 0; 		// required by MutablePriorityQueue
 
     bool visited = false;		// auxiliary field
@@ -33,8 +33,8 @@ class Vertex {
 public:
     Vertex(int id, int x, int y, std::string type);
     int getID();
-    int getDist();
-    void setDist(int dist);
+    double getDist();
+    void setDist(double dist);
     Vertex* getPath();
     void setPath(Vertex* v);
     vector<Edge> getAdj();

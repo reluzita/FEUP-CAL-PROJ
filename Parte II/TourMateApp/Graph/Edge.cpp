@@ -10,6 +10,6 @@ int Edge::getDest() {
     return destID;
 }
 
-int Edge::getWeight() {
+double Edge::getWeight() {
     return weight;
 }

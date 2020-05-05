@@ -10,7 +10,7 @@
 #include "Algorithms/BFS.h"
 
 int main() {
-    Graph g = readMap("C:\\Users\\ineso\\OneDrive\\Documentos\\Ines-Universidade\\2 ano\\2 semestre\\CAL-Proj\\Parte II\\TourMateApp\\resources\\GridGraphs\\8x8\\nodes.txt","C:\\Users\\ineso\\OneDrive\\Documentos\\Ines-Universidade\\2 ano\\2 semestre\\CAL-Proj\\Parte II\\TourMateApp\\resources\\GridGraphs\\8x8\\edges.txt" );
+    Graph g = readMap(R"(C:\Users\ineso\OneDrive\Documentos\Ines-Universidade\2 ano\2 semestre\CAL-Proj\Parte II\TourMateApp\resources\GridGraphs\8x8\nodes.txt)",R"(C:\Users\ineso\OneDrive\Documentos\Ines-Universidade\2 ano\2 semestre\CAL-Proj\Parte II\TourMateApp\resources\GridGraphs\8x8\edges.txt)" );
     /*queue<Vertex*> q = dijkstraShortestPath(g, 1, 17);
     while(!q.empty()) {
         cout << q.front()->getID()<< endl;

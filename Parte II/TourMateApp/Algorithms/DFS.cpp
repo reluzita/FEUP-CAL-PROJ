@@ -6,8 +6,7 @@
 
 vector<int> dfs(Graph g, const int &source, const int &dest) {
     vector<int> res;
-    for(Vertex* v: g.getVertexSet()) //fazer funcao em graph
-        v->setVisited(false);
+    g.initializeForSearch();
     Vertex* s = g.findVertex(source);
     Vertex* d = g.findVertex(dest);
     if(!dfsVisit(g, s, d, res))
@@ -15,7 +14,7 @@ vector<int> dfs(Graph g, const int &source, const int &dest) {
     return res;
 }
 
-bool dfsVisit(Graph g, Vertex *s, Vertex* d, vector<int> & res){
+bool dfsVisit(const Graph& g, Vertex *s, Vertex* d, vector<int> & res){
     s->setVisited(true);
     res.push_back(s->getID());
     for(Edge edge: s->getAdj()) {

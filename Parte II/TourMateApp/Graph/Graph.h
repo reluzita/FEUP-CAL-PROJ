@@ -14,6 +14,7 @@ class Graph {
 public:
     Graph();
     void initializeGraph();
+    void initializeForSearch();
     Vertex *findVertex(const int &id) const;
     bool addVertex(const int &id, const int &x, const int &y);
     bool addEdge(const int &sourc, const int &dest, double w);

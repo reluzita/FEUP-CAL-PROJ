@@ -9,8 +9,7 @@ using namespace std;
 vector<int> bfs(Graph g, const int &source, const int &dest) {
     vector<int> res;
     queue<Vertex*> q;
-    for(Vertex* v: g.getVertexSet()) //fazer funcao em graph
-        v->setVisited(false);
+    g.initializeForSearch();
 
     Vertex* s = g.findVertex(source);
     q.push(s);

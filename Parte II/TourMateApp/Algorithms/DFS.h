@@ -8,6 +8,6 @@
 #include "../Graph/Graph.h"
 
 vector<int> dfs(Graph g, const int &source, const int &dest);
-bool dfsVisit(Graph g,  Vertex *s, Vertex* d, vector<int> & res);
+bool dfsVisit(const Graph& g,  Vertex *s, Vertex* d, vector<int> & res);
 
 #endif //TOURMATEAPP_DFS_H

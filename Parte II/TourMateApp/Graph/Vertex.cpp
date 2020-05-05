@@ -4,10 +4,12 @@
 
 #include "Vertex.h"
 
+#include <utility>
+
 using namespace std;
 
 
-Vertex::Vertex(int id, int x, int y, string type): id(id), x(x), y(y) {}
+Vertex::Vertex(int id, int x, int y, string type): id(id), x(x), y(y), type(type) {}
 
 int Vertex::getID() {
     return id;
@@ -22,11 +24,11 @@ void Vertex::addEdge(const int &dest, double w) {
     adj.emplace_back(dest, w);
 }
 
-int Vertex::getDist() {
+double Vertex::getDist() {
     return dist;
 }
 
-void Vertex::setDist(int dist) {
+void Vertex::setDist(double dist) {
     this->dist = dist;
 }
 

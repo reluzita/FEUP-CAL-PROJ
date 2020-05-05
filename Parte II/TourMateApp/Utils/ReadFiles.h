@@ -11,6 +11,6 @@
 #include <graphviewer.h>
 #include "../Graph/Graph.h"
 
-Graph readMap(string nodesfile, string edgesfile);
+Graph readMap(const string& nodesfile, const string& edgesfile);
 
 #endif //READFILES_H

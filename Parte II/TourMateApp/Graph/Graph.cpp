@@ -11,8 +11,13 @@ Graph::Graph() = default;
 void Graph::initializeGraph() {
     for(auto v: vertexSet) {
         v->dist = INT_MAX;
-        v->path = NULL;
+        v->path = nullptr;
     }
+}
+
+void Graph::initializeForSearch() {
+    for(Vertex* v: vertexSet)
+        v->visited = false;
 }
 
 int Graph::getNumVertex() const {
@@ -32,7 +37,7 @@ Vertex * Graph::findVertex(const int &id) const {
     for (auto v : vertexSet)
         if (v->id == id)
             return v;
-    return NULL;
+    return nullptr;
 }
 
 /*
@@ -41,7 +46,7 @@ Vertex * Graph::findVertex(const int &id) const {
  */
 
 bool Graph::addVertex(const int &id, const int &x, const int &y) {
-    if ( findVertex(id) != NULL)
+    if ( findVertex(id) != nullptr)
         return false;
     vertexSet.push_back(new Vertex(id, x, y, " "));
     return true;
@@ -55,7 +60,7 @@ bool Graph::addVertex(const int &id, const int &x, const int &y) {
 bool Graph::addEdge(const int &sourc, const int &dest, double w) {
     auto v1 = findVertex(sourc);
     auto v2 = findVertex(dest);
-    if (v1 == NULL || v2 == NULL)
+    if (v1 == nullptr || v2 == nullptr)
         return false;
     v1->addEdge(dest,w);
     return true;
