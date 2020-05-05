@@ -40,6 +40,12 @@ void Vertex::setDist(double dist) {
     this->dist = dist;
 }
 
+string Vertex::getType() {
+    return type;
+}
+void Vertex::setType(string type) {
+    this->type = type;
+}
 
 Vertex* Vertex::getPath() {
     return path;

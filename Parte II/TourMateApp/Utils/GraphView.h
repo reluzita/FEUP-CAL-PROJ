@@ -9,5 +9,7 @@
 #include <graphviewer.h>
 
 GraphViewer* createMapViewer(const Graph &g);
+GraphViewer* createPathViewer(const Graph &g, queue<Vertex*> path);
+void showPath(GraphViewer* gv, queue<Vertex*> path);
 
 #endif //TOURMATEAPP_GRAPHVIEW_H

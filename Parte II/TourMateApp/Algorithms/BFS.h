@@ -9,5 +9,6 @@
 #include <queue>
 
 vector<int> bfs(Graph g, const int &source, const int &dest);
+vector<int> bfsAll(Graph g, const int &source);
 
 #endif //TOURMATEAPP_BFS_H

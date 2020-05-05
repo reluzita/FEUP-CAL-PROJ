@@ -10,8 +10,10 @@
 #include <fstream>
 #include <graphviewer.h>
 #include <cmath>
+#include <algorithm>
 #include "../Graph/Graph.h"
 
-Graph readMap(const string& nodesfile, const string& edgesfile);
+Graph readMap(const string& cityname);
+vector<int> readTags(Graph &g , string tagfile);
 
 #endif //READFILES_H

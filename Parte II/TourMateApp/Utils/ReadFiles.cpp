@@ -6,17 +6,28 @@
 
 using namespace std;
 
-Graph readMap(const string &nodesfile, const string &edgesfile)
+Graph readMap(const string &cityName)
 {
-
     Graph graph;
+    string lowercase = cityName;
+    transform(lowercase.begin(), lowercase.end(), lowercase.begin(), ::tolower);
+    string nodesfile = "../resources/PortugalMaps/PortugalMaps/" + cityName + "/nodes_x_y_" + lowercase + ".txt";
+    string edgesfile = "../resources/PortugalMaps/PortugalMaps/" + cityName + "/edges_"+ lowercase + ".txt";
+
+    cout << nodesfile << endl;
+    cout << edgesfile << endl;
 
     ifstream nodes, edges;
     nodes.open(nodesfile);
+    if(nodes.fail())
+        cout << "fail!" << endl;
     edges.open(edgesfile);
+    if(edges.fail())
+        cout << "fail!" << endl;
 
     string line;
     getline(nodes, line);
+
     int numNodes = stoi(line);
     for (int i = 0; i < numNodes; i++) {
         getline(nodes, line);
@@ -30,6 +41,7 @@ Graph readMap(const string &nodesfile, const string &edgesfile)
         pos = line.find(')');
         y = stoi(line.substr(0, pos));
         graph.addVertex(id, x, y);
+        cout << id << endl;
     }
     nodes.close();
 
@@ -51,4 +63,29 @@ Graph readMap(const string &nodesfile, const string &edgesfile)
     }
     edges.close();
     return graph;
+}
+
+vector<int> readTags(Graph &g , string tagfile) {
+    vector<int> res;
+    ifstream file;
+    file.open(tagfile);
+
+    string line;
+    getline(file, line);
+    int numTypes = stoi(line);
+    for (int i = 0; i < numTypes; i++) {
+        string type;
+        getline(file, type);
+        type.erase(0, 8);
+        int numNodes;
+        getline(file, line);
+        numNodes = stoi(line);
+        for(int j = 0; j < numNodes; j++) {
+            getline(file, line);
+            Vertex* v = g.findVertex(stoi(line));
+            v->setType(type);
+            res.push_back(stoi(line));
+        }
+    }
+    return res;
 }

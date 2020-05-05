@@ -37,6 +37,8 @@ public:
     double getY();
     double getDist();
     void setDist(double dist);
+    string getType();
+    void setType(string type);
     Vertex* getPath();
     void setPath(Vertex* v);
     vector<Edge> getAdj();

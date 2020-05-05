@@ -32,5 +32,31 @@ vector<int> bfs(Graph g, const int &source, const int &dest) {
             }
         }
     }
+    res.clear();
+    return res;
+}
+
+vector<int> bfsAll(Graph g, const int &source) {
+    vector<int> res;
+    queue<Vertex*> q;
+    g.initializeForSearch();
+
+    Vertex* s = g.findVertex(source);
+    q.push(s);
+    s->setVisited(true);
+
+    while (!q.empty()) {
+        Vertex* temp = q.front();
+        q.pop();
+        res.push_back(temp->getID());
+
+        for(Edge edge: temp->getAdj()) {
+            Vertex *d = g.findVertex(edge.getDest());
+            if (!d->isVisited()) {
+                q.push(d);
+                d->setVisited(true);
+            }
+        }
+    }
     return res;
 }
