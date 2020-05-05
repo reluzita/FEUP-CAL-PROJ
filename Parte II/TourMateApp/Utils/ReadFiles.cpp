@@ -8,12 +8,7 @@ using namespace std;
 
 Graph readMap(const string &nodesfile, const string &edgesfile)
 {
-    /*
-    GraphViewer *gv = new GraphViewer(600, 600, false);
-    gv->createWindow(600, 600);
-    gv->defineVertexColor("blue");
-    gv->defineEdgeColor("black");
-*/
+
     Graph graph;
 
     ifstream nodes, edges;
@@ -48,7 +43,11 @@ Graph readMap(const string &nodesfile, const string &edgesfile)
         line.erase(0, pos + 2);
         pos = line.find(')');
         n2 = stoi(line.substr(0, pos));
-        graph.addEdge(n1, n2, 1);
+
+        Vertex* v1 = graph.findVertex(n1);
+        Vertex* v2 = graph.findVertex(n2);
+        double weight = sqrt((v2->getX() - v1->getX())*(v2->getX() - v1->getX()) + (v2->getY() - v1->getY())*(v2->getY() - v1->getY()));
+        graph.addEdge(n1, n2, weight);
     }
     edges.close();
     return graph;

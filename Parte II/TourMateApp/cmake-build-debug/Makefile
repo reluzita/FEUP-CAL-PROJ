@@ -122,6 +122,33 @@ TourMateApp/fast:
 	$(MAKE) -f CMakeFiles\TourMateApp.dir\build.make CMakeFiles/TourMateApp.dir/build
 .PHONY : TourMateApp/fast
 
+Algorithms/AStar.obj: Algorithms/AStar.cpp.obj
+
+.PHONY : Algorithms/AStar.obj
+
+# target to build an object file
+Algorithms/AStar.cpp.obj:
+	$(MAKE) -f CMakeFiles\TourMateApp.dir\build.make CMakeFiles/TourMateApp.dir/Algorithms/AStar.cpp.obj
+.PHONY : Algorithms/AStar.cpp.obj
+
+Algorithms/AStar.i: Algorithms/AStar.cpp.i
+
+.PHONY : Algorithms/AStar.i
+
+# target to preprocess a source file
+Algorithms/AStar.cpp.i:
+	$(MAKE) -f CMakeFiles\TourMateApp.dir\build.make CMakeFiles/TourMateApp.dir/Algorithms/AStar.cpp.i
+.PHONY : Algorithms/AStar.cpp.i
+
+Algorithms/AStar.s: Algorithms/AStar.cpp.s
+
+.PHONY : Algorithms/AStar.s
+
+# target to generate assembly for a file
+Algorithms/AStar.cpp.s:
+	$(MAKE) -f CMakeFiles\TourMateApp.dir\build.make CMakeFiles/TourMateApp.dir/Algorithms/AStar.cpp.s
+.PHONY : Algorithms/AStar.cpp.s
+
 Algorithms/BFS.obj: Algorithms/BFS.cpp.obj
 
 .PHONY : Algorithms/BFS.obj
@@ -284,6 +311,33 @@ Graph/Vertex.cpp.s:
 	$(MAKE) -f CMakeFiles\TourMateApp.dir\build.make CMakeFiles/TourMateApp.dir/Graph/Vertex.cpp.s
 .PHONY : Graph/Vertex.cpp.s
 
+Utils/GraphView.obj: Utils/GraphView.cpp.obj
+
+.PHONY : Utils/GraphView.obj
+
+# target to build an object file
+Utils/GraphView.cpp.obj:
+	$(MAKE) -f CMakeFiles\TourMateApp.dir\build.make CMakeFiles/TourMateApp.dir/Utils/GraphView.cpp.obj
+.PHONY : Utils/GraphView.cpp.obj
+
+Utils/GraphView.i: Utils/GraphView.cpp.i
+
+.PHONY : Utils/GraphView.i
+
+# target to preprocess a source file
+Utils/GraphView.cpp.i:
+	$(MAKE) -f CMakeFiles\TourMateApp.dir\build.make CMakeFiles/TourMateApp.dir/Utils/GraphView.cpp.i
+.PHONY : Utils/GraphView.cpp.i
+
+Utils/GraphView.s: Utils/GraphView.cpp.s
+
+.PHONY : Utils/GraphView.s
+
+# target to generate assembly for a file
+Utils/GraphView.cpp.s:
+	$(MAKE) -f CMakeFiles\TourMateApp.dir\build.make CMakeFiles/TourMateApp.dir/Utils/GraphView.cpp.s
+.PHONY : Utils/GraphView.cpp.s
+
 Utils/ReadFiles.obj: Utils/ReadFiles.cpp.obj
 
 .PHONY : Utils/ReadFiles.obj
@@ -401,6 +455,9 @@ help:
 	@echo ... rebuild_cache
 	@echo ... TourMateApp
 	@echo ... edit_cache
+	@echo ... Algorithms/AStar.obj
+	@echo ... Algorithms/AStar.i
+	@echo ... Algorithms/AStar.s
 	@echo ... Algorithms/BFS.obj
 	@echo ... Algorithms/BFS.i
 	@echo ... Algorithms/BFS.s
@@ -419,6 +476,9 @@ help:
 	@echo ... Graph/Vertex.obj
 	@echo ... Graph/Vertex.i
 	@echo ... Graph/Vertex.s
+	@echo ... Utils/GraphView.obj
+	@echo ... Utils/GraphView.i
+	@echo ... Utils/GraphView.s
 	@echo ... Utils/ReadFiles.obj
 	@echo ... Utils/ReadFiles.i
 	@echo ... Utils/ReadFiles.s

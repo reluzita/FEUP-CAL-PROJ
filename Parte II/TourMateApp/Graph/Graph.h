@@ -9,6 +9,11 @@
 
 class Graph {
     std::vector<Vertex*> vertexSet;    // vertex set
+
+    double maxX;
+    double minX;
+    double maxY;
+    double minY;
     //vector<vector<int>> D;
 
 public:
@@ -16,10 +21,16 @@ public:
     void initializeGraph();
     void initializeForSearch();
     Vertex *findVertex(const int &id) const;
-    bool addVertex(const int &id, const int &x, const int &y);
+    bool addVertex(const int &id, const double &x, const double &y);
     bool addEdge(const int &sourc, const int &dest, double w);
     int getNumVertex() const;
     std::vector<Vertex*> getVertexSet() const;
+
+    double getMaxX() const;
+    double getMinX() const;
+    double getMaxY() const;
+    double getMinY()const;
+
 /*
     // Fp05 - single source
     void unweightedShortestPath(const int &s);    //TODO...

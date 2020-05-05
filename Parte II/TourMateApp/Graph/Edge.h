@@ -10,7 +10,6 @@ class Edge {
     double weight;         // edge weight
 public:
     Edge(int destID, double w);
-
     int getDest();
     double getWeight();
     friend class Graph;

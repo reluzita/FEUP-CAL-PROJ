@@ -84,6 +84,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Proj/Parte II/TourMateApp/Algorithms/AStar.cpp">
+			<Option target="TourMateApp"/>
+		</Unit>
+		<Unit filename="C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Proj/Parte II/TourMateApp/Algorithms/AStar.h">
+			<Option target="TourMateApp"/>
+		</Unit>
 		<Unit filename="C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Proj/Parte II/TourMateApp/Algorithms/BFS.cpp">
 			<Option target="TourMateApp"/>
 		</Unit>
@@ -118,6 +124,12 @@
 			<Option target="TourMateApp"/>
 		</Unit>
 		<Unit filename="C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Proj/Parte II/TourMateApp/Graph/Vertex.h">
+			<Option target="TourMateApp"/>
+		</Unit>
+		<Unit filename="C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Proj/Parte II/TourMateApp/Utils/GraphView.cpp">
+			<Option target="TourMateApp"/>
+		</Unit>
+		<Unit filename="C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Proj/Parte II/TourMateApp/Utils/GraphView.h">
 			<Option target="TourMateApp"/>
 		</Unit>
 		<Unit filename="C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Proj/Parte II/TourMateApp/Utils/ReadFiles.cpp">

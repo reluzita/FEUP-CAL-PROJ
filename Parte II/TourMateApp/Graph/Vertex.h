@@ -14,8 +14,8 @@ using namespace std;
 
 class Vertex {
     int id;
-    int x;
-    int y;
+    double x;
+    double y;
     string type;            // content of the vertex
     vector<Edge> adj;		// outgoing edges
 
@@ -31,8 +31,10 @@ class Vertex {
 
 
 public:
-    Vertex(int id, int x, int y, std::string type);
+    Vertex(int id, double x, double y, std::string type);
     int getID();
+    double getX();
+    double getY();
     double getDist();
     void setDist(double dist);
     Vertex* getPath();

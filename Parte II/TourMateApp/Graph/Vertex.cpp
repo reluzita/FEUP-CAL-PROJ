@@ -9,10 +9,18 @@
 using namespace std;
 
 
-Vertex::Vertex(int id, int x, int y, string type): id(id), x(x), y(y), type(type) {}
+Vertex::Vertex(int id, double x, double y, string type): id(id), x(x), y(y), type(type) {}
 
 int Vertex::getID() {
     return id;
+}
+
+double Vertex::getX() {
+    return x;
+}
+
+double Vertex::getY() {
+    return y;
 }
 
 /*
@@ -31,6 +39,7 @@ double Vertex::getDist() {
 void Vertex::setDist(double dist) {
     this->dist = dist;
 }
+
 
 Vertex* Vertex::getPath() {
     return path;

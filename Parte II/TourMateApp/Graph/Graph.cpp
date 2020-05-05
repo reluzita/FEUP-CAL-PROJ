@@ -6,7 +6,12 @@
 
 using namespace std;
 
-Graph::Graph() = default;
+Graph::Graph() {
+    maxX = INT_MIN;
+    minX = INT_MAX;
+    maxY = INT_MIN;
+    minY = INT_MAX;
+}
 
 void Graph::initializeGraph() {
     for(auto v: vertexSet) {
@@ -45,10 +50,15 @@ Vertex * Graph::findVertex(const int &id) const {
  *  Returns true if successful, and false if a vertex with that content already exists.
  */
 
-bool Graph::addVertex(const int &id, const int &x, const int &y) {
+bool Graph::addVertex(const int &id, const double &x, const double &y) {
     if ( findVertex(id) != nullptr)
         return false;
     vertexSet.push_back(new Vertex(id, x, y, " "));
+    if(x > maxX) maxX = x;
+    if(x < minX) minX = x;
+    if(y > maxY) maxY = y;
+    if(y < minY) minY = y;
+
     return true;
 }
 
@@ -66,7 +76,19 @@ bool Graph::addEdge(const int &sourc, const int &dest, double w) {
     return true;
 }
 
+double Graph::getMaxX() const{
+    return maxX;
+}
 
+double Graph::getMinX() const{
+    return minX;
+}
+double Graph::getMaxY() const{
+    return maxY;
+}
+double Graph::getMinY() const{
+    return minY;
+}
 /*
 
 
