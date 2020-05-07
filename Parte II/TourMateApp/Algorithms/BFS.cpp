@@ -49,7 +49,7 @@ vector<int> bfsAll(Graph g, const int &source) {
         Vertex* temp = q.front();
         q.pop();
         res.push_back(temp->getID());
-
+        cout << temp->getID() << endl;
         for(Edge edge: temp->getAdj()) {
             Vertex *d = g.findVertex(edge.getDest());
             if (!d->isVisited()) {

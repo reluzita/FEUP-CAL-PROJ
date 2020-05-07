@@ -17,12 +17,22 @@ void Graph::initializeGraph() {
     for(auto v: vertexSet) {
         v->dist = INT_MAX;
         v->path = nullptr;
+        v->distFromDest = 0;
     }
 }
 
 void Graph::initializeForSearch() {
     for(Vertex* v: vertexSet)
         v->visited = false;
+}
+
+void Graph::initializeForAStar(const int &dest) {
+    Vertex* d = findVertex(dest);
+    for(auto v: vertexSet) {
+        v->dist = INT_MAX;
+        v->path = nullptr;
+        v->distFromDest = v->distanceLatLon(d);
+    }
 }
 
 int Graph::getNumVertex() const {
@@ -73,6 +83,7 @@ bool Graph::addEdge(const int &sourc, const int &dest, double w) {
     if (v1 == nullptr || v2 == nullptr)
         return false;
     v1->addEdge(dest,w);
+    v2->addEdge(sourc, w);
     return true;
 }
 
@@ -199,3 +210,26 @@ vector<T> Graph<T>::getfloydWarshallPath(const int &orig, const int &dest) const
     return res;
 }
 */
+
+vector<pair<double,double>> Graph::getCityCoords(){
+    vector<pair<double,double>> cityCoords;
+    for(auto v: vertexSet){
+        pair<double,double> p = {v->getX(),v->getY()};
+        cityCoords.push_back(p);
+    }
+    return cityCoords;
+}
+vector<pair<double,double>> Graph::idToCoords(vector<int> v){
+    vector<pair<double,double>> coords;
+
+    for(auto id: v){
+        Vertex * vertex = findVertex(id);
+        pair<double,double> c = {vertex->getX(),vertex->getY()};
+        coords.push_back(c);
+    }
+    return coords;
+}
+
+
+
+

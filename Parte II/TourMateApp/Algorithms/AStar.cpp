@@ -6,7 +6,7 @@
 using namespace std;
 
 queue<Vertex*> aStar(Graph g, const int &origin, const int &dest) {
-    g.initializeGraph();
+    g.initializeForAStar(dest);
     Vertex * vertex = g.findVertex(origin);
     vertex->setDist(0);
     MutablePriorityQueue<Vertex> q;

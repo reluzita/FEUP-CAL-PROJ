@@ -12,38 +12,56 @@ Graph readMap(const string &cityName)
     string lowercase = cityName;
     transform(lowercase.begin(), lowercase.end(), lowercase.begin(), ::tolower);
     string nodesfile = "../resources/PortugalMaps/PortugalMaps/" + cityName + "/nodes_x_y_" + lowercase + ".txt";
+    string latlonfile = "../resources/PortugalMaps/PortugalMaps/" + cityName + "/nodes_lat_lon_" + lowercase + ".txt";
     string edgesfile = "../resources/PortugalMaps/PortugalMaps/" + cityName + "/edges_"+ lowercase + ".txt";
 
-    cout << nodesfile << endl;
-    cout << edgesfile << endl;
+    //cout << nodesfile << endl;
+    //cout << edgesfile << endl;
 
-    ifstream nodes, edges;
+    ifstream nodes, latlon, edges;
     nodes.open(nodesfile);
-    if(nodes.fail())
-        cout << "fail!" << endl;
+    latlon.open(latlonfile);
     edges.open(edgesfile);
-    if(edges.fail())
-        cout << "fail!" << endl;
 
     string line;
     getline(nodes, line);
-
     int numNodes = stoi(line);
     for (int i = 0; i < numNodes; i++) {
         getline(nodes, line);
-        int id, x, y;
+        int id;
+        double x, y;
         size_t pos = line.find(',');
         id = stoi(line.substr(1, pos));
         line.erase(0, pos + 2);
         pos = line.find(',');
-        x = stoi(line.substr(0, pos));
+        x = stof(line.substr(0, pos));
         line.erase(0, pos + 2);
         pos = line.find(')');
-        y = stoi(line.substr(0, pos));
+        y = stof(line.substr(0, pos));
         graph.addVertex(id, x, y);
-        cout << id << endl;
+        //cout << id << endl;
     }
     nodes.close();
+
+    getline(latlon, line);
+    numNodes = stoi(line);
+    for (int i = 0; i < numNodes; i++) {
+        getline(latlon, line);
+        int id;
+        double lat, lon;
+        size_t pos = line.find(',');
+        id = stoi(line.substr(1, pos));
+        line.erase(0, pos + 2);
+        pos = line.find(',');
+        lat = stof(line.substr(0, pos));
+        line.erase(0, pos + 2);
+        pos = line.find(')');
+        lon = stof(line.substr(0, pos));
+        Vertex* v = graph.findVertex(id);
+        v->setLat(lat);
+        v->setLon(lon);
+    }
+    latlon.close();
 
     getline(edges, line);
     int numEdges = stoi(line);
@@ -58,14 +76,18 @@ Graph readMap(const string &cityName)
 
         Vertex* v1 = graph.findVertex(n1);
         Vertex* v2 = graph.findVertex(n2);
-        double weight = sqrt((v2->getX() - v1->getX())*(v2->getX() - v1->getX()) + (v2->getY() - v1->getY())*(v2->getY() - v1->getY()));
+        double weight = v1->distanceLatLon(v2);
         graph.addEdge(n1, n2, weight);
     }
     edges.close();
     return graph;
 }
 
-vector<int> readTags(Graph &g , string tagfile) {
+vector<int> readTags(Graph &g , const string &cityName) {
+    string lowercase = cityName;
+    transform(lowercase.begin(), lowercase.end(), lowercase.begin(), ::tolower);
+    string tagfile = "../resources/TagExamples/" + cityName + "/t03_tags_" + lowercase + ".txt";
+
     vector<int> res;
     ifstream file;
     file.open(tagfile);

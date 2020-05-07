@@ -4,6 +4,8 @@
 
 #include "DFS.h"
 
+using namespace std;
+
 vector<int> dfs(Graph g, const int &source, const int &dest) {
     vector<int> res;
     g.initializeForSearch();
@@ -27,4 +29,26 @@ bool dfsVisit(const Graph& g, Vertex *s, Vertex* d, vector<int> & res){
             return dfsVisit(g, dest, d, res);
     }
     return false;
+}
+
+////TEMPORARIO!!!
+
+vector<int> dfsTemp(Graph g) {
+    vector<int> res;
+    g.initializeForSearch();
+    for (auto v : g.getVertexSet())
+        if (! v->isVisited())
+            dfsVisitTemp(g,v, res);
+    return res;
+}
+
+void dfsVisitTemp(const Graph &g, Vertex*v, vector<int> & res) {
+    v->setVisited(true);
+    res.push_back(v->getID());
+    cout << v->getID() << endl;
+    for (auto & e : v->getAdj()) {
+        auto w = g.findVertex(e.getDest());
+        if ( ! w->isVisited())
+            dfsVisitTemp(g, w, res);
+    }
 }

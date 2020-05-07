@@ -20,6 +20,7 @@ public:
     Graph();
     void initializeGraph();
     void initializeForSearch();
+    void initializeForAStar(const int &dest);
     Vertex *findVertex(const int &id) const;
     bool addVertex(const int &id, const double &x, const double &y);
     bool addEdge(const int &sourc, const int &dest, double w);
@@ -42,6 +43,8 @@ public:
     void floydWarshallShortestPath();   //TODO...
     vector<T> getfloydWarshallPath(const int &origin, const int &dest) const;   //TODO...
 */
+    vector<pair<double,double>> getCityCoords();
+    vector<pair<double,double>> idToCoords(vector<int> v);
 };
 
 

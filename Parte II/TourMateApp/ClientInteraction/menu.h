@@ -7,16 +7,19 @@
 #include <stdlib.h>
 #include "../Utils/util.cpp"
 #include "../Utils/ReadFile.cpp"
+#include "../Graph/Graph.cpp"
 using namespace std;
 
-int mainMenu(string title, vector<string>items);
+int standardMenu(string title, vector<string>items);
 void firstQuestion();
 void citysMenu();
-void whereAreYou();
-int whereToGo();
-int meansOfTransportation();
-int pointsOfInterest();
-
+int whereAreYou(vector<pair<double,double>> v);
+int whereToGo(int idStart,Graph g);
+string meansOfTransportation();
+vector<int>  pointsOfInterest();
+int timeAvailable();
+vector<string> pairToString(vector<pair<double,double>> v);
+vector<int> poiMenu(vector<string> poi);
 
 
 

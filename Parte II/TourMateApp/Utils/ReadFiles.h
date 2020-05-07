@@ -12,8 +12,9 @@
 #include <cmath>
 #include <algorithm>
 #include "../Graph/Graph.h"
+#include "util.h"
 
-Graph readMap(const string& cityname);
-vector<int> readTags(Graph &g , string tagfile);
+Graph readMap(const string &cityName);
+vector<int> readTags(Graph &g , const string &cityName);
 
 #endif //READFILES_H

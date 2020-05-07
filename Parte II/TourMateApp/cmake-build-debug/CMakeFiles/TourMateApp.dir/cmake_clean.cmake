@@ -8,6 +8,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/TourMateApp.dir/Graph/Vertex.cpp.obj"
   "CMakeFiles/TourMateApp.dir/Utils/GraphView.cpp.obj"
   "CMakeFiles/TourMateApp.dir/Utils/ReadFiles.cpp.obj"
+  "CMakeFiles/TourMateApp.dir/Utils/util.cpp.obj"
   "CMakeFiles/TourMateApp.dir/lib/connection.cpp.obj"
   "CMakeFiles/TourMateApp.dir/lib/graphviewer.cpp.obj"
   "CMakeFiles/TourMateApp.dir/main.cpp.obj"

@@ -1,6 +1,4 @@
-#include <iostream>
-#include <string>
-#include <algorithm>
+#include "util.h"
 using namespace std;
 
 
@@ -21,3 +19,26 @@ void menu_int_options(int &option, int omin, int nmax){
         }
     }
 }
+
+
+double distancePath(queue<Vertex*> path) {
+    if(path.empty())
+        return 0;
+    double res = 0;
+    Vertex * v1 = path.front();
+    path.pop();
+    Vertex* v2;
+    while(!path.empty()) {
+        v2 = path.front();
+        path.pop();
+        for(Edge e: v2->getAdj()) {
+            if (e.getDest() == v1->getID()) {
+                res += e.getWeight();
+                break;
+            }
+        }
+        v1 = v2;
+    }
+    return res;
+}
+

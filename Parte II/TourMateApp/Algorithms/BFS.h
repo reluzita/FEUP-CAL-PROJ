@@ -7,6 +7,7 @@
 
 #include "../Graph/Graph.h"
 #include <queue>
+#include <iostream>
 
 vector<int> bfs(Graph g, const int &source, const int &dest);
 vector<int> bfsAll(Graph g, const int &source);

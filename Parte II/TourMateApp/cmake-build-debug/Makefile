@@ -365,6 +365,33 @@ Utils/ReadFiles.cpp.s:
 	$(MAKE) -f CMakeFiles\TourMateApp.dir\build.make CMakeFiles/TourMateApp.dir/Utils/ReadFiles.cpp.s
 .PHONY : Utils/ReadFiles.cpp.s
 
+Utils/util.obj: Utils/util.cpp.obj
+
+.PHONY : Utils/util.obj
+
+# target to build an object file
+Utils/util.cpp.obj:
+	$(MAKE) -f CMakeFiles\TourMateApp.dir\build.make CMakeFiles/TourMateApp.dir/Utils/util.cpp.obj
+.PHONY : Utils/util.cpp.obj
+
+Utils/util.i: Utils/util.cpp.i
+
+.PHONY : Utils/util.i
+
+# target to preprocess a source file
+Utils/util.cpp.i:
+	$(MAKE) -f CMakeFiles\TourMateApp.dir\build.make CMakeFiles/TourMateApp.dir/Utils/util.cpp.i
+.PHONY : Utils/util.cpp.i
+
+Utils/util.s: Utils/util.cpp.s
+
+.PHONY : Utils/util.s
+
+# target to generate assembly for a file
+Utils/util.cpp.s:
+	$(MAKE) -f CMakeFiles\TourMateApp.dir\build.make CMakeFiles/TourMateApp.dir/Utils/util.cpp.s
+.PHONY : Utils/util.cpp.s
+
 lib/connection.obj: lib/connection.cpp.obj
 
 .PHONY : lib/connection.obj
@@ -482,6 +509,9 @@ help:
 	@echo ... Utils/ReadFiles.obj
 	@echo ... Utils/ReadFiles.i
 	@echo ... Utils/ReadFiles.s
+	@echo ... Utils/util.obj
+	@echo ... Utils/util.i
+	@echo ... Utils/util.s
 	@echo ... lib/connection.obj
 	@echo ... lib/connection.i
 	@echo ... lib/connection.s

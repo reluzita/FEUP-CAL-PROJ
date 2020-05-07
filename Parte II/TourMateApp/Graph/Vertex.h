@@ -9,6 +9,8 @@
 #include "MutablePriorityQueue.h"
 #include <string>
 #include <vector>
+#include <cmath>
+#define PI 3.14159265358979323846
 
 using namespace std;
 
@@ -16,10 +18,13 @@ class Vertex {
     int id;
     double x;
     double y;
+    double lat;
+    double lon;
     string type;            // content of the vertex
     vector<Edge> adj;		// outgoing edges
 
     double dist = 0;
+    double distFromDest = 0;
     Vertex *path = nullptr;
     int queueIndex = 0; 		// required by MutablePriorityQueue
 
@@ -35,8 +40,14 @@ public:
     int getID();
     double getX();
     double getY();
+    double getLon();
+    double getLat();
+    void setLat(double lat);
+    void setLon(double lon);
     double getDist();
     void setDist(double dist);
+    double getDistFromDest();
+    void setDistFromDest(double dist);
     string getType();
     void setType(string type);
     Vertex* getPath();
@@ -44,6 +55,9 @@ public:
     vector<Edge> getAdj();
     bool isVisited();
     void setVisited(bool visited);
+
+
+    double distanceLatLon(Vertex* v2);
     /*T getInfo() const;
     double getDist() const;
     Vertex *getPath() const;

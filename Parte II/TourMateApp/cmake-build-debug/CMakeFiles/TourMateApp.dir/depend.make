@@ -62,6 +62,13 @@ CMakeFiles/TourMateApp.dir/Utils/ReadFiles.cpp.obj: ../Graph/MutablePriorityQueu
 CMakeFiles/TourMateApp.dir/Utils/ReadFiles.cpp.obj: ../Graph/Vertex.h
 CMakeFiles/TourMateApp.dir/Utils/ReadFiles.cpp.obj: ../Utils/ReadFiles.cpp
 CMakeFiles/TourMateApp.dir/Utils/ReadFiles.cpp.obj: ../Utils/ReadFiles.h
+CMakeFiles/TourMateApp.dir/Utils/ReadFiles.cpp.obj: ../Utils/util.h
+
+CMakeFiles/TourMateApp.dir/Utils/util.cpp.obj: ../Graph/Edge.h
+CMakeFiles/TourMateApp.dir/Utils/util.cpp.obj: ../Graph/MutablePriorityQueue.h
+CMakeFiles/TourMateApp.dir/Utils/util.cpp.obj: ../Graph/Vertex.h
+CMakeFiles/TourMateApp.dir/Utils/util.cpp.obj: ../Utils/util.cpp
+CMakeFiles/TourMateApp.dir/Utils/util.cpp.obj: ../Utils/util.h
 
 CMakeFiles/TourMateApp.dir/lib/connection.cpp.obj: ../lib/connection.cpp
 CMakeFiles/TourMateApp.dir/lib/connection.cpp.obj: ../lib/connection.h
@@ -74,6 +81,7 @@ CMakeFiles/TourMateApp.dir/lib/graphviewer.cpp.obj: ../lib/graphviewer.h
 CMakeFiles/TourMateApp.dir/main.cpp.obj: ../lib/connection.h
 CMakeFiles/TourMateApp.dir/main.cpp.obj: ../lib/edgetype.h
 CMakeFiles/TourMateApp.dir/main.cpp.obj: ../lib/graphviewer.h
+CMakeFiles/TourMateApp.dir/main.cpp.obj: ../Algorithms/AStar.h
 CMakeFiles/TourMateApp.dir/main.cpp.obj: ../Algorithms/BFS.h
 CMakeFiles/TourMateApp.dir/main.cpp.obj: ../Algorithms/DFS.h
 CMakeFiles/TourMateApp.dir/main.cpp.obj: ../Algorithms/Dijkstra.h
@@ -83,5 +91,6 @@ CMakeFiles/TourMateApp.dir/main.cpp.obj: ../Graph/MutablePriorityQueue.h
 CMakeFiles/TourMateApp.dir/main.cpp.obj: ../Graph/Vertex.h
 CMakeFiles/TourMateApp.dir/main.cpp.obj: ../Utils/GraphView.h
 CMakeFiles/TourMateApp.dir/main.cpp.obj: ../Utils/ReadFiles.h
+CMakeFiles/TourMateApp.dir/main.cpp.obj: ../Utils/util.h
 CMakeFiles/TourMateApp.dir/main.cpp.obj: ../main.cpp
 

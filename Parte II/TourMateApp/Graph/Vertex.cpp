@@ -23,6 +23,22 @@ double Vertex::getY() {
     return y;
 }
 
+double Vertex::getLat() {
+    return lat;
+}
+
+double Vertex::getLon() {
+    return lon;
+}
+
+void Vertex::setLat(double lat) {
+    this->lat = lat;
+}
+
+void Vertex::setLon(double lon) {
+    this->lon = lon;
+}
+
 /*
  * Auxiliary function to add an outgoing edge to a vertex (this),
  * with a given destination vertex (d) and edge weight (w).
@@ -38,6 +54,14 @@ double Vertex::getDist() {
 
 void Vertex::setDist(double dist) {
     this->dist = dist;
+}
+
+double Vertex::getDistFromDest() {
+    return distFromDest;
+}
+
+void Vertex::setDistFromDest(double dist) {
+    distFromDest = dist;
 }
 
 string Vertex::getType() {
@@ -67,9 +91,24 @@ void Vertex::setVisited(bool visited) {
     this->visited = visited;
 }
 
+double Vertex::distanceLatLon(Vertex* v2) {
+    double deg2radMultiplier =  PI / 180;
+    double lon1 = lon * deg2radMultiplier;
+    double lat1 = lat * deg2radMultiplier;
+    double lat2 = v2->getLat() * deg2radMultiplier;
+    double lon2 = v2->getLon() * deg2radMultiplier;
+
+    double radius = 6378.137; // earth mean radius defined by WGS84
+    double dlon = lon2 - lon1;
+    double distance = acos( sin(lat1) * sin(lat2) +  cos(lat1) * cos(lat2) * cos(dlon)) * radius;
+
+    return distance;
+}
+
+
 
 bool Vertex::operator<(Vertex & vertex) const {
-    return this->dist < vertex.dist;
+    return (this->dist +this->distFromDest) < (vertex.distFromDest + vertex.dist);
 }
 /*
 template <class T>
