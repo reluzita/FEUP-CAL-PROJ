@@ -1,4 +1,4 @@
-"C:\Program Files\JetBrains\CLion 2019.2.2\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" "C:\Users\ineso\OneDrive\Documentos\Ines-Universidade\2 ano\2 semestre\CAL-Proj\Parte II\TourMateApp"
+"C:\Users\ritap\Downloads\Software universidade\CLion 2019.2.2\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" "C:\Users\ritap\OneDrive\Ambiente de Trabalho\Faculdade\2 Ano\2 semestre\CAL\Projeto\FEUP-CAL-PROJ\Parte II\TourMateApp"
 -- Configuring done
 -- Generating done
--- Build files have been written to: C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Proj/Parte II/TourMateApp/cmake-build-debug
+-- Build files have been written to: C:/Users/ritap/OneDrive/Ambiente de Trabalho/Faculdade/2 Ano/2 semestre/CAL/Projeto/FEUP-CAL-PROJ/Parte II/TourMateApp/cmake-build-debug

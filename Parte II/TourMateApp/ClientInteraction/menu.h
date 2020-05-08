@@ -5,9 +5,8 @@
 #include <string>
 #include <vector>
 #include <stdlib.h>
-#include "../Utils/util.cpp"
-#include "../Utils/ReadFile.cpp"
-#include "../Graph/Graph.cpp"
+#include "../Utils/ReadFiles.h"
+#include "../Algorithms/BFS.h"
 using namespace std;
 
 int standardMenu(string title, vector<string>items);
@@ -15,7 +14,7 @@ void firstQuestion();
 void citysMenu();
 int whereAreYou(vector<pair<double,double>> v);
 int whereToGo(int idStart,Graph g);
-string meansOfTransportation();
+string meansOfTransportation(string city);
 vector<int>  pointsOfInterest();
 int timeAvailable();
 vector<string> pairToString(vector<pair<double,double>> v);

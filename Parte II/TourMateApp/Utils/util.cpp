@@ -2,8 +2,8 @@
 using namespace std;
 
 
-void menu_int_options(int &option, int omin, int nmax){
-    cout << endl << "Choose an option from the menu (integer number): ";
+void menu_int_options(int &option, int omin, int nmax, string description){
+    cout << endl << description;
     cin >> option;
     while (cin.fail() || option > nmax || option < omin) {
         if (cin.eof()) { //caso de ter sido introduzido o 'crtl-z'

@@ -215,7 +215,7 @@ vector<T> Graph<T>::getfloydWarshallPath(const int &orig, const int &dest) const
 vector<pair<double,double>> Graph::getCityCoords(){
     vector<pair<double,double>> cityCoords;
     for(auto v: vertexSet){
-        pair<double,double> p(v->getX(),v->getY());
+        pair<double,double> p(v->getLat(),v->getLon());
         cityCoords.push_back(p);
     }
     return cityCoords;

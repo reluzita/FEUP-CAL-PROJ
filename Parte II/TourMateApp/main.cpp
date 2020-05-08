@@ -6,12 +6,13 @@
 #include <ctime>
 #include <chrono>
 
-#include "Utils/ReadFiles.h"
+/*#include "Utils/ReadFiles.h"
 #include "Algorithms/Dijkstra.h"
 #include "Algorithms/DFS.h"
 #include "Algorithms/BFS.h"
 #include "Algorithms/AStar.h"
-#include "Utils/GraphView.h"
+#include "Utils/GraphView.h"*/
+#include "ClientInteraction/menu.h"
 
 using namespace std::chrono;
 
@@ -23,13 +24,13 @@ double distance(Graph g, int orig, int dest) {
 }
 
 int main() {
-    string city = "Porto";
+    /*string city = "Porto";
     Graph g = readMap(city);
     vector<int> pointsOfInterest = readTags(g, city);
 
     cout << "map is read" << endl;
 
-    int orig = 314042698, dest = 1334167600;
+    int orig = 314042698, dest = 1334167600;*/
     /*
     vector<int> visit = dfsTemp(g);
     int i = 0;
@@ -70,7 +71,7 @@ int main() {
 
     //cout << "going to dijkstra" << endl;
 
-    milliseconds t0 = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
+    /*milliseconds t0 = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
     queue<Vertex*> qStar = aStar(g, orig, dest);
     milliseconds t1 = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
 
@@ -87,7 +88,13 @@ int main() {
     //cout << "D: " << distancePath(qDijkstra) << endl;
 
     GraphViewer *gv = createPathViewer(g, qStar);
-    getchar();
+    getchar();*/
+
+    //devia ir para  main
+
+    cout << "Hi! Welcome to TourMateApp\n";
+    cout <<"Let's go ahead and fill out the preferences form\n"<<endl;
+    firstQuestion();
     return 0;
 }
 
