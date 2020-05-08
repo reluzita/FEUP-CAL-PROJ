@@ -211,20 +211,21 @@ vector<T> Graph<T>::getfloydWarshallPath(const int &orig, const int &dest) const
 }
 */
 
+
 vector<pair<double,double>> Graph::getCityCoords(){
     vector<pair<double,double>> cityCoords;
     for(auto v: vertexSet){
-        pair<double,double> p = {v->getX(),v->getY()};
+        pair<double,double> p(v->getX(),v->getY());
         cityCoords.push_back(p);
     }
     return cityCoords;
 }
 vector<pair<double,double>> Graph::idToCoords(vector<int> v){
     vector<pair<double,double>> coords;
-
+    
     for(auto id: v){
         Vertex * vertex = findVertex(id);
-        pair<double,double> c = {vertex->getX(),vertex->getY()};
+        pair<double,double> c (vertex->getX(),vertex->getY());
         coords.push_back(c);
     }
     return coords;
