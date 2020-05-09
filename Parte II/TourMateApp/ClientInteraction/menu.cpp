@@ -74,8 +74,9 @@ int whereAreYou(vector<pair<double,double>> v){
     return op-1;
 }
 int whereToGo(int idStart, Graph g){
-    cout <<"Hello\n";
-    vector <int> v = bfsAll(g,idStart);
+    cout <<"Hello\n" << endl;
+    cout << idStart << " " << g.getVertexSet().at(idStart)->getID() << endl;
+    vector <int> v = bfsAll(g,g.getVertexSet().at(idStart)->getID());
     vector<pair<double,double>> coordP = g.idToCoords(v);
     vector<string> coords = pairToString(coordP); //buscar as coordenadas de onde pode ir a partir daquele ponto
     coords.push_back("There is no way of getting to the point you wish from where you are");

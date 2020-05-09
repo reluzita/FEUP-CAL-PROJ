@@ -28,7 +28,7 @@ class Vertex {
     Vertex *path = nullptr;
     int queueIndex = 0; 		// required by MutablePriorityQueue
 
-    bool visited = false;		// auxiliary field
+    bool visited;		// auxiliary field
     bool processing = false;	// auxiliary field
 
     void addEdge(const int &dest, double w);

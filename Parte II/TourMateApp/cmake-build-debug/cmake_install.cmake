@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/ritap/OneDrive/Ambiente de Trabalho/Faculdade/2 Ano/2 semestre/CAL/Projeto/FEUP-CAL-PROJ/Parte II/TourMateApp
+# Install script for directory: C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Proj/Parte II/TourMateApp
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/ritap/OneDrive/Ambiente de Trabalho/Faculdade/2 Ano/2 semestre/CAL/Projeto/FEUP-CAL-PROJ/Parte II/TourMateApp/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Proj/Parte II/TourMateApp/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

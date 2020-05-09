@@ -42,6 +42,8 @@ vector<int> bfsAll(Graph g, const int &source) {
     g.initializeForSearch();
 
     Vertex* s = g.findVertex(source);
+    if(s == nullptr)
+        return res;
     q.push(s);
     s->setVisited(true);
 

@@ -9,7 +9,9 @@
 using namespace std;
 
 
-Vertex::Vertex(int id, double x, double y, string type): id(id), x(x), y(y), type(type) {}
+Vertex::Vertex(int id, double x, double y, string type): id(id), x(x), y(y), type(type) {
+    this->visited = false;
+}
 
 int Vertex::getID() {
     return id;

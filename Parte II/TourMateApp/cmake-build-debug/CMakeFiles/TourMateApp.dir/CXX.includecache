@@ -6,25 +6,33 @@
 
 #IncludeRegexTransform: 
 
-C:/Users/ritap/OneDrive/Ambiente de Trabalho/Faculdade/2 Ano/2 semestre/CAL/Projeto/FEUP-CAL-PROJ/Parte II/TourMateApp/Graph/Edge.h
+C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Proj/Parte II/TourMateApp/Algorithms/BFS.cpp
+BFS.h
+C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Proj/Parte II/TourMateApp/Algorithms/BFS.h
 
-C:/Users/ritap/OneDrive/Ambiente de Trabalho/Faculdade/2 Ano/2 semestre/CAL/Projeto/FEUP-CAL-PROJ/Parte II/TourMateApp/Graph/Graph.cpp
-Graph.h
-C:/Users/ritap/OneDrive/Ambiente de Trabalho/Faculdade/2 Ano/2 semestre/CAL/Projeto/FEUP-CAL-PROJ/Parte II/TourMateApp/Graph/Graph.h
+C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Proj/Parte II/TourMateApp/Algorithms/BFS.h
+../Graph/Graph.h
+C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Proj/Parte II/TourMateApp/Graph/Graph.h
+queue
+-
+iostream
+-
 
-C:/Users/ritap/OneDrive/Ambiente de Trabalho/Faculdade/2 Ano/2 semestre/CAL/Projeto/FEUP-CAL-PROJ/Parte II/TourMateApp/Graph/Graph.h
+C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Proj/Parte II/TourMateApp/Graph/Edge.h
+
+C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Proj/Parte II/TourMateApp/Graph/Graph.h
 Vertex.h
-C:/Users/ritap/OneDrive/Ambiente de Trabalho/Faculdade/2 Ano/2 semestre/CAL/Projeto/FEUP-CAL-PROJ/Parte II/TourMateApp/Graph/Vertex.h
+C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Proj/Parte II/TourMateApp/Graph/Vertex.h
 
-C:/Users/ritap/OneDrive/Ambiente de Trabalho/Faculdade/2 Ano/2 semestre/CAL/Projeto/FEUP-CAL-PROJ/Parte II/TourMateApp/Graph/MutablePriorityQueue.h
+C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Proj/Parte II/TourMateApp/Graph/MutablePriorityQueue.h
 vector
 -
 
-C:/Users/ritap/OneDrive/Ambiente de Trabalho/Faculdade/2 Ano/2 semestre/CAL/Projeto/FEUP-CAL-PROJ/Parte II/TourMateApp/Graph/Vertex.h
+C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Proj/Parte II/TourMateApp/Graph/Vertex.h
 Edge.h
-C:/Users/ritap/OneDrive/Ambiente de Trabalho/Faculdade/2 Ano/2 semestre/CAL/Projeto/FEUP-CAL-PROJ/Parte II/TourMateApp/Graph/Edge.h
+C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Proj/Parte II/TourMateApp/Graph/Edge.h
 MutablePriorityQueue.h
-C:/Users/ritap/OneDrive/Ambiente de Trabalho/Faculdade/2 Ano/2 semestre/CAL/Projeto/FEUP-CAL-PROJ/Parte II/TourMateApp/Graph/MutablePriorityQueue.h
+C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Proj/Parte II/TourMateApp/Graph/MutablePriorityQueue.h
 string
 -
 vector
