@@ -1,3 +1,0 @@
-C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Proj/Parte II/TourMateApp/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Proj/Parte II/TourMateApp/cmake-build-debug/CMakeFiles/TourMateApp.dir
-C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Proj/Parte II/TourMateApp/cmake-build-debug/CMakeFiles/edit_cache.dir

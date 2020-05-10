@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.15)
 project(TourMateApp)
 
 set(CMAKE_CXX_STANDARD 14)
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static-libstdc++ -static-libgcc")
 # The line below is necessary if you are under Windows only
 # Comment the line below if you are under Linux or Mac OS
 link_libraries(ws2_32 wsock32)
