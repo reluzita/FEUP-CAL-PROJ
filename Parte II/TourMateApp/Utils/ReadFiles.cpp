@@ -11,21 +11,25 @@ Graph readMap(const string &cityName)
     Graph graph;
     string lowercase = cityName;
     transform(lowercase.begin(), lowercase.end(), lowercase.begin(), ::tolower);
+
+    readNodesFile(graph, cityName, lowercase);
+    readLatLonFile(graph, cityName, lowercase);
+    readEdgesFile(graph, cityName, lowercase);
+
+    return graph;
+}
+
+void readNodesFile(Graph &graph, const string &cityName, const string &lowercase){
     string nodesfile = "../resources/PortugalMaps/PortugalMaps/" + cityName + "/nodes_x_y_" + lowercase + ".txt";
-    string latlonfile = "../resources/PortugalMaps/PortugalMaps/" + cityName + "/nodes_lat_lon_" + lowercase + ".txt";
-    string edgesfile = "../resources/PortugalMaps/PortugalMaps/" + cityName + "/edges_"+ lowercase + ".txt";
-
-    //cout << nodesfile << endl;
-    //cout << edgesfile << endl;
-
-    ifstream nodes, latlon, edges;
-    nodes.open(nodesfile);
-    latlon.open(latlonfile);
-    edges.open(edgesfile);
-
+    ifstream nodes;
     string line;
+    int numNodes;
+
+    nodes.open(nodesfile);
+
     getline(nodes, line);
-    int numNodes = stoi(line);
+    numNodes = stoi(line);
+
     for (int i = 0; i < numNodes; i++) {
         getline(nodes, line);
         int id;
@@ -43,25 +47,16 @@ Graph readMap(const string &cityName)
     }
     nodes.close();
 
-    getline(latlon, line);
-    numNodes = stoi(line);
-    for (int i = 0; i < numNodes; i++) {
-        getline(latlon, line);
-        int id;
-        double lat, lon;
-        size_t pos = line.find(',');
-        id = stoi(line.substr(1, pos));
-        line.erase(0, pos + 2);
-        pos = line.find(',');
-        lat = stof(line.substr(0, pos));
-        line.erase(0, pos + 2);
-        pos = line.find(')');
-        lon = stof(line.substr(0, pos));
-        Vertex* v = graph.findVertex(id);
-        v->setLat(lat);
-        v->setLon(lon);
-    }
-    latlon.close();
+}
+
+void readEdgesFile(Graph &graph, const string &cityName, const string &lowercase){
+
+    string edgesfile = "../resources/PortugalMaps/PortugalMaps/" + cityName + "/edges_"+ lowercase + ".txt";
+    ifstream edges;
+    string line;
+    int numNodes;
+
+    edges.open(edgesfile);
 
     getline(edges, line);
     int numEdges = stoi(line);
@@ -80,21 +75,54 @@ Graph readMap(const string &cityName)
         graph.addEdge(n1, n2, weight);
     }
     edges.close();
-    return graph;
 }
 
-vector<int> readTags(Graph &g , const string &cityName) {
+void readLatLonFile(Graph &graph, const string &cityName, const string &lowercase){
+
+    string latlonfile = "../resources/PortugalMaps/PortugalMaps/" + cityName + "/nodes_lat_lon_" + lowercase + ".txt";
+    ifstream latlon;
+    string line;
+    int numNodes;
+
+    latlon.open(latlonfile);
+
+    getline(latlon, line);
+    numNodes = stoi(line);
+
+    for (int i = 0; i < numNodes; i++) {
+        getline(latlon, line);
+        int id;
+        double lat, lon;
+        size_t pos = line.find(',');
+        id = stoi(line.substr(1, pos));
+        line.erase(0, pos + 2);
+        pos = line.find(',');
+        lat = stof(line.substr(0, pos));
+        line.erase(0, pos + 2);
+        pos = line.find(')');
+        lon = stof(line.substr(0, pos));
+        Vertex* v = graph.findVertex(id);
+        v->setLat(lat);
+        v->setLon(lon);
+    }
+    latlon.close();
+}
+
+vector<int> readTags(Graph &g, const string &cityName) {
+
     string lowercase = cityName;
     transform(lowercase.begin(), lowercase.end(), lowercase.begin(), ::tolower);
     string tagfile = "../resources/TagExamples/" + cityName + "/t03_tags_" + lowercase + ".txt";
 
     vector<int> res;
     ifstream file;
+    string line;
+    int numTypes;
+
     file.open(tagfile);
 
-    string line;
     getline(file, line);
-    int numTypes = stoi(line);
+    numTypes = stoi(line);
     for (int i = 0; i < numTypes; i++) {
         string type;
         getline(file, type);

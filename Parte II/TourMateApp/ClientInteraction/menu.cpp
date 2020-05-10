@@ -37,18 +37,24 @@ void citysMenu(){
     vector<string> items = {"Aveiro", "Braga", "Coimbra", "Ermesinde", "Fafe", "Gondomar", "Lisboa", "Maia", "Porto","Viseu"};
     string description = "Choose one city from the menu (integer number): ";
     int op = standardMenu("Citys available",items, description);
+
+    if(op == 0) return; //sem isto da porcaria! verificar se esta correto
     cout <<items.at(op-1)<<endl;
+
     string m = meansOfTransportation(items.at(op-1));
     char mean;
     if(m == "Walking/Biking") mean = 'W';
     if(m == "Public Transportation") mean = 'P';
     if(m == "Car") mean = 'C';
+    if(m == "") return;
 
     Graph g = readMap(items.at(op-1));
     vector<pair<double,double>> cityCoords = g.getCityCoords();
 
     int idStart = whereAreYou(cityCoords);
+    if(idStart == -1) return;
     int idEnd = whereToGo(idStart,g);
+    if(idEnd == -1) return;
 
     int time = timeAvailable();
     vector<int> poi = pointsOfInterest();
@@ -64,6 +70,7 @@ string meansOfTransportation(string city){
         items = {"Walking/Biking", "Car"};
     }
     int op = standardMenu("How do you want to do your tour?",items, description);
+    if(op == 0) return ""; //sem isto da porcaria! verificar se esta correto
     return items.at(op-1);
 }
 
@@ -71,6 +78,7 @@ int whereAreYou(vector<pair<double,double>> v){
     vector<string> cityCoords = pairToString(v);
     string description = "Choose your coordinates at the moment from the menu (integer number): ";
     int op = standardMenu("Where are you?", cityCoords,description);
+
     return op-1;
 }
 int whereToGo(int idStart, Graph g){
@@ -79,7 +87,7 @@ int whereToGo(int idStart, Graph g){
     vector <int> v = bfsAll(g,g.getVertexSet().at(idStart)->getID());
     vector<pair<double,double>> coordP = g.idToCoords(v);
     vector<string> coords = pairToString(coordP); //buscar as coordenadas de onde pode ir a partir daquele ponto
-    coords.push_back("There is no way of getting to the point you wish from where you are");
+    coords.push_back("There is no way of getting to the point you wish from where you are!");
     string description = "Choose the coordinates you wish to go to from the menu (integer number): ";
     int op = standardMenu("Where do you want to go to?", coords,description);
     return op-1;

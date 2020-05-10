@@ -15,6 +15,9 @@
 #include "util.h"
 
 Graph readMap(const string &cityName);
+void readNodesFile(Graph &graph, const string &cityName, const string &lowercase);
+void readEdgesFile(Graph &graph, const string &cityName, const string &lowercase);
+void readLatLonFile(Graph &graph, const string &cityName, const string &lowercase);
 vector<int> readTags(Graph &g , const string &cityName);
 
 #endif //READFILES_H
