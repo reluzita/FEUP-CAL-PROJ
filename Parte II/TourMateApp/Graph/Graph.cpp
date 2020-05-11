@@ -40,7 +40,7 @@ void Graph::initializeForAStar(const int &orig, const int &dest) {
 }
 
 void Graph::initializeForInvertedSearch() {
-    for(Vertex* v: vertexSet)
+    for(Vertex* v: vertexSet){
         v->invertedVisited = false;
     }
 }

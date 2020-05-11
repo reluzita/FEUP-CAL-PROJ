@@ -16,9 +16,9 @@ int standardMenu(string title, vector<string>items, string description){
 
 
     menu_int_options(option,0,items.size(),description);
-
-    
     cin.ignore(1000,'\n');
+    
+
     return option;
 }
 
@@ -57,7 +57,8 @@ int citysMenu(){
     if(m == "Walking/Biking") mean = 'W';
     if(m == "Public Transportation") mean = 'P';
     if(m == "Car") mean = 'C';
-    if(m == "") return;
+    if(m == "") return 0;
+    if(m == "crash") return -1;
 
     Graph g = readMap(items.at(op-1));
     vector<pair<double,double>> cityCoords = g.getCityCoords();
@@ -75,6 +76,12 @@ int citysMenu(){
     else if(time ==-1) return -1;
 
     vector<int> poi = pointsOfInterest();
+    if(poi.empty())
+        return -1;
+    if(poi.at(0) == -1)
+        return 0;
+
+    return 0;
 
 }
 string meansOfTransportation(string city){
@@ -88,6 +95,7 @@ string meansOfTransportation(string city){
     }
     int op = standardMenu("How do you want to do your tour?",items, description);
     if(op == 0) return ""; //sem isto da porcaria! verificar se esta correto
+    if(op == -1) return "crash";
     return items.at(op-1);
 }
 
@@ -138,18 +146,38 @@ vector<int> poiMenu(vector<string> poi){
     string description = "Choose your points of interest from the menu (integer numbers): ";
 
     cout << "---------------- "<<"Points of Interest" <<" ----------------\n\n";
-    for(int i=0; i<poi.size();i++){
+    int i=0;
+    for(i=0; i<poi.size();i++){
         cout << i+1 <<" . "<<poi[i]<<"\n\n";
     }
-    cout << "0. I've choosen all \n\n";
+    i+=2;
+    cout << i << " . I've choosen all\n\n";
+    cout << "0. Refill the form \n\n";
+    cout <<"Insert CTRL + Z to leave the app\n";
     cout << "--------------------------------------\n";
-    cout <<"Choose one option: ";
 
     menu_int_options(option,0,poi.size(),description);
+
+    if(option == -1) {
+        res = {};
+        return res;
+    }
+    if(option == 0){
+        res = {-1};
+        return res;
+    }
     cin.ignore(1000,'\n');
-    while(option != 0){
+    while(option != i){
         res.push_back(option-1);
         menu_int_options(option,0,poi.size(),description);
+        if(option == -1) {
+            res = {};
+            return res;
+        }
+        if(option == 0){
+            res = {-1};
+            return res;
+        }
         cin.ignore(1000,'\n');
     }
     

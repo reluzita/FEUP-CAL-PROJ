@@ -12,7 +12,7 @@
 #include "Algorithms/BFS.h"
 #include "Algorithms/AStar.h"
 #include "Utils/GraphView.h"
-//#include "ClientInteraction/menu.h"
+#include "ClientInteraction/menu.h"
 
 using namespace std::chrono;
 
@@ -24,7 +24,7 @@ double distance(Graph g, int orig, int dest) {
 }
 
 int main() {
-    string city = "Coimbra";
+   /* string city = "Coimbra";
     Graph g = readMap(city);
     vector<int> pointsOfInterest = readTags(g, city);
 
@@ -45,7 +45,7 @@ int main() {
 
     cout << orig << " " << dest << endl;
     vector<int> temp = dfs(g, orig, dest);
-    if(temp.empty()) return 0;
+    if(temp.empty()) return 0;*/
 
     //vector<int> allPoints = bfsAll(g, orig);
 
@@ -62,7 +62,7 @@ int main() {
 
     //cout << "going to dijkstra" << endl;
 
-    milliseconds t0 = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
+   /* milliseconds t0 = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
     queue<Vertex*> qStar = aStar(g, orig, dest);
     milliseconds t1 = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
 
@@ -79,20 +79,20 @@ int main() {
     //cout << "D: " << distancePath(qDijkstra) << endl;
 
     GraphViewer *gv = createPathViewer(g, qStar);
-    getchar();
+    getchar();*/
 
     //devia ir para  main
-/*
+
     int res;
     cout << "Hi! Welcome to TourMateApp\n";
     cout <<"Let's go ahead and fill out the preferences form\n"<<endl;
     do{
-        firstQuestion();
+        res = firstQuestion();
     }
     while(res!=-1 && res == 0);
     cout <<"Thanks for using our app!\n";
     
-    */
+
     return 0;
 }
 

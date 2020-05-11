@@ -14,7 +14,7 @@
 
 using namespace std;
 
-int menu_int_options(int &option, int omin, int nmax, string description);
+void menu_int_options(int &option, int omin, int nmax, string description);
 double distancePath(queue<Vertex*> path);
 void trim(string &str);
 void verification_int(string &aux);

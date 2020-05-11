@@ -2,15 +2,14 @@
 using namespace std;
 
 
-int menu_int_options(int &option, int omin, int nmax, string description){
+void menu_int_options(int &option, int omin, int nmax, string description){
     cout << endl << description;
     cin >> option;
     while (cin.fail() || option > nmax || option < omin) {
         if (cin.eof()) { //caso de ter sido introduzido o 'crtl-z'
             cin.clear();
-            //cout << "Invalid operation, please insert a valid one: ";
-            //cin >> option;
             option = -1;
+            return;
         }
         else { //qualquer outro caso que nao corresponda ao input pretendido
             cin.clear();
