@@ -20,7 +20,8 @@ public:
     Graph();
     void initializeGraph();
     void initializeForSearch();
-    void initializeForAStar(const int &dest);
+    void initializeForAStar(const int &orig, const int &dest);
+    void initializeForInvertedSearch();
     Vertex *findVertex(const int &id) const;
     bool addVertex(const int &id, const double &x, const double &y);
     bool addEdge(const int &sourc, const int &dest, double w);

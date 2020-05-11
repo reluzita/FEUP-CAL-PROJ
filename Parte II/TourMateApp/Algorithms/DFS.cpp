@@ -26,19 +26,20 @@ bool dfsVisit(const Graph& g, Vertex *s, Vertex* d, vector<int> & res){
             return true;
         }
         if (!(dest->isVisited()))
-            return dfsVisit(g, dest, d, res);
+            if(dfsVisit(g, dest, d, res))
+                return true;
     }
     return false;
 }
 
 ////TEMPORARIO!!!
 
-vector<int> dfsTemp(Graph g) {
+vector<int> dfsTemp(Graph g, const int &source) {
     vector<int> res;
     g.initializeForSearch();
-    for (auto v : g.getVertexSet())
-        if (! v->isVisited())
-            dfsVisitTemp(g,v, res);
+
+    Vertex* v = g.findVertex(source);
+    dfsVisitTemp(g,v, res);
     return res;
 }
 

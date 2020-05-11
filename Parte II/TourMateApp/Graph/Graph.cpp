@@ -18,6 +18,7 @@ void Graph::initializeGraph() {
         v->dist = INT_MAX;
         v->path = nullptr;
         v->distFromDest = 0;
+        v->distSourcToDest = 0;
     }
 }
 
@@ -26,12 +27,21 @@ void Graph::initializeForSearch() {
         v->visited = false;
 }
 
-void Graph::initializeForAStar(const int &dest) {
+void Graph::initializeForAStar(const int &orig, const int &dest) {
+    Vertex* o = findVertex(orig);
     Vertex* d = findVertex(dest);
+    double pathDist = o->distanceLatLon(d);
     for(auto v: vertexSet) {
         v->dist = INT_MAX;
         v->path = nullptr;
         v->distFromDest = v->distanceLatLon(d);
+        v->distSourcToDest = pathDist;
+    }
+}
+
+void Graph::initializeForInvertedSearch() {
+    for(Vertex* v: vertexSet)
+        v->invertedVisited = false;
     }
 }
 
@@ -225,7 +235,7 @@ vector<pair<double,double>> Graph::idToCoords(vector<int> v){
     
     for(auto id: v){
         Vertex * vertex = findVertex(id);
-        pair<double,double> c (vertex->getX(),vertex->getY());
+        pair<double,double> c (vertex->getLat(),vertex->getLon());
         coords.push_back(c);
     }
     return coords;

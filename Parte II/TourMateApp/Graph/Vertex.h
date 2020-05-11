@@ -25,10 +25,14 @@ class Vertex {
 
     double dist = 0;
     double distFromDest = 0;
+    double distSourcToDest = 0;
+
     Vertex *path = nullptr;
+    Vertex * invertedPath = nullptr;
     int queueIndex = 0; 		// required by MutablePriorityQueue
 
     bool visited;		// auxiliary field
+    bool invertedVisited;
     bool processing = false;	// auxiliary field
 
     void addEdge(const int &dest, double w);
@@ -52,9 +56,13 @@ public:
     void setType(string type);
     Vertex* getPath();
     void setPath(Vertex* v);
+    Vertex* getInvertedPath();
+    void setInvertedPath(Vertex* v);
     vector<Edge> getAdj();
     bool isVisited();
     void setVisited(bool visited);
+    bool isInvertedVisited();
+    void setInvertedVisited(bool visited);
 
 
     double distanceLatLon(Vertex* v2);

@@ -81,6 +81,14 @@ void Vertex::setPath(Vertex* v) {
     path = v;
 }
 
+Vertex* Vertex::getInvertedPath() {
+    return invertedPath;
+}
+
+void Vertex::setInvertedPath(Vertex* v) {
+    invertedPath = v;
+}
+
 vector<Edge> Vertex::getAdj() {
     return adj;
 }
@@ -91,6 +99,14 @@ bool Vertex::isVisited() {
 
 void Vertex::setVisited(bool visited) {
     this->visited = visited;
+}
+
+bool Vertex::isInvertedVisited() {
+    return invertedVisited;
+}
+
+void Vertex::setInvertedVisited(bool visited) {
+    this->invertedVisited = visited;
 }
 
 double Vertex::distanceLatLon(Vertex* v2) {
@@ -110,8 +126,9 @@ double Vertex::distanceLatLon(Vertex* v2) {
 
 
 bool Vertex::operator<(Vertex & vertex) const {
-    return (this->dist +this->distFromDest) < (vertex.distFromDest + vertex.dist);
+    return (this->dist - this->distSourcToDest + this->distFromDest) < (vertex.dist - this->distSourcToDest + vertex.distFromDest);
 }
+
 /*
 template <class T>
 T Vertex<T>::getInfo() const {

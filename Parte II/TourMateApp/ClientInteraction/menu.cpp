@@ -10,7 +10,8 @@ int standardMenu(string title, vector<string>items, string description){
     for(int i=0; i<items.size();i++){
         cout << i+1 <<" . "<<items[i]<<"\n";
     }
-    cout << "0 . Quit \n\n";
+    cout << "0 . Refill the form \n\n";
+    cout <<"Insert CTRL + Z to leave the app\n";
     cout << "--------------------------------------\n";
 
 
@@ -21,27 +22,37 @@ int standardMenu(string title, vector<string>items, string description){
     return option;
 }
 
-void firstQuestion(){
+int firstQuestion(){
     vector<string> items = {"Intercity", "Intracity"};
     string description = "Choose one option from the menu (integer number): ";
     int op = standardMenu("Type of tour",items,description);
-    if (op == 1){
-        //to do
+    while(1){
+        if (op == 1){
+        //to do: maybe show the portugal map 
+        }
+        else if (op==2){
+            op = citysMenu();
+        }
+        else if(op == 0){
+            return 0;
+        }
+        else if(op==-1){
+            return -1;
+        }
     }
-    else if (op==2){
-        citysMenu();
-    }
+   
 }
 
-void citysMenu(){
+int citysMenu(){
     vector<string> items = {"Aveiro", "Braga", "Coimbra", "Ermesinde", "Fafe", "Gondomar", "Lisboa", "Maia", "Porto","Viseu"};
     string description = "Choose one city from the menu (integer number): ";
     int op = standardMenu("Citys available",items, description);
 
-    if(op == 0) return; //sem isto da porcaria! verificar se esta correto
+    if(op == 0) return 0;
+    else if (op ==-1) return -1;
     cout <<items.at(op-1)<<endl;
 
-    string m = meansOfTransportation(items.at(op-1));
+    string m = meansOfTransportation(items.at(op-1));//ainda falta por neste o crlz e o 0
     char mean;
     if(m == "Walking/Biking") mean = 'W';
     if(m == "Public Transportation") mean = 'P';
@@ -52,11 +63,17 @@ void citysMenu(){
     vector<pair<double,double>> cityCoords = g.getCityCoords();
 
     int idStart = whereAreYou(cityCoords);
-    if(idStart == -1) return;
+    if(idStart==-1) return 0;
+    else if(idStart ==-2) return -1;
+
     int idEnd = whereToGo(idStart,g);
-    if(idEnd == -1) return;
+    if(idEnd==-1) return 0;
+    else if(idEnd ==-2) return -1;
 
     int time = timeAvailable();
+    if(time ==0) return 0;
+    else if(time ==-1) return -1;
+
     vector<int> poi = pointsOfInterest();
 
 }
@@ -82,11 +99,9 @@ int whereAreYou(vector<pair<double,double>> v){
     return op-1;
 }
 int whereToGo(int idStart, Graph g){
-    cout <<"Hello\n" << endl;
-    cout << idStart << " " << g.getVertexSet().at(idStart)->getID() << endl;
     vector <int> v = bfsAll(g,g.getVertexSet().at(idStart)->getID());
     vector<pair<double,double>> coordP = g.idToCoords(v);
-    vector<string> coords = pairToString(coordP); //buscar as coordenadas de onde pode ir a partir daquele ponto
+    vector<string> coords = pairToString(coordP); 
     coords.push_back("There is no way of getting to the point you wish from where you are!");
     string description = "Choose the coordinates you wish to go to from the menu (integer number): ";
     int op = standardMenu("Where do you want to go to?", coords,description);
@@ -98,12 +113,23 @@ vector<int> pointsOfInterest(){
     vector<int> op = poiMenu(items);
     return op;
 }
+
 int timeAvailable(){
-    int time; 
-    cout << "Please enter the time you have available for the tour (in minutes): ";
-    cin >> time;
-    return time;
+    string time;
+    cout << "Please enter the time you have available for the tour (in minutes, insert 0 to refill the form and CTRL+Z to leave the app): ";
+    getline(cin, time);
+    while(cin.fail() && cin.eof()){
+        cin.clear();
+        if(cin.eof()){
+            return -1;
+        }
+        cout << "Invalid character. Please insert a valid input: ";
+        getline(cin, time);
+    }
+    verification_int(time);
+    return stoi(time);
 }
+
 
 vector<int> poiMenu(vector<string> poi){
     vector<int> res;
@@ -130,39 +156,6 @@ vector<int> poiMenu(vector<string> poi){
     return res;
 
 }
-
-/*
-
-cout << endl << "Do you want to order a product? Choose the number of the product (insert 0 to return to the main menu): ";
-    product_menu(option, 0, size);
-    cin.ignore(1000, '\n');
-    if (option == 0)
-        return {};
-    result.push_back(option-1);
-
-    cout << endl;
-    while (option != 0) {
-        system("cls");
-        cout << " --> " << restaurant.getName() << ", " << restaurant.getCounty() << endl;
-        for(int i = 0; i < size; i++){
-            cout << "Product " << i+1 <<  ": " << restaurant.getProducts().at(i) << endl;
-        }
-
-        cout << endl << "Product added to the cart! You currenty have " << result.size() << " products: " << endl;
-        float total = 0;
-        for (int x: result){
-            cout << restaurant.getProducts().at(x).getName() << " - " << restaurant.getProducts().at(x).getPrice() << "$" << endl;
-            total += restaurant.getProducts().at(x).getPrice();
-        }
-        cout << endl << "Total price (w/o tax): " << total << endl;
-        cout << endl << "Do you want to order another product? Choose the number of the product (insert 0 to finish the order): ";
-        product_menu(option, 0, size);
-        cin.ignore(1000, '\n');
-        if (option != 0)
-            result.push_back(option-1);
-    }
-    return result;
-*/
 
 vector<string> pairToString(vector<pair<double,double>> v){
     vector<string> res;

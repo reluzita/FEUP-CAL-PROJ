@@ -10,8 +10,8 @@
 using namespace std;
 
 int standardMenu(string title, vector<string>items);
-void firstQuestion();
-void citysMenu();
+int firstQuestion();
+int citysMenu();
 int whereAreYou(vector<pair<double,double>> v);
 int whereToGo(int idStart,Graph g);
 string meansOfTransportation(string city);

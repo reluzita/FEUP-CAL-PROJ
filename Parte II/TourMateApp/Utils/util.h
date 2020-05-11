@@ -14,7 +14,9 @@
 
 using namespace std;
 
-void menu_int_options(int &option, int omin, int nmax, string description);
+int menu_int_options(int &option, int omin, int nmax, string description);
 double distancePath(queue<Vertex*> path);
+void trim(string &str);
+void verification_int(string &aux);
 
 #endif //TOURMATEAPP_UTIL_H

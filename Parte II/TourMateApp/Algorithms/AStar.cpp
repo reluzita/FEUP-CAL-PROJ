@@ -6,7 +6,7 @@
 using namespace std;
 
 queue<Vertex*> aStar(Graph g, const int &origin, const int &dest) {
-    g.initializeForAStar(dest);
+    g.initializeForAStar(origin, dest);
     Vertex * vertex = g.findVertex(origin);
     vertex->setDist(0);
     MutablePriorityQueue<Vertex> q;
@@ -20,7 +20,7 @@ queue<Vertex*> aStar(Graph g, const int &origin, const int &dest) {
                 v->setDist(temp->getDist() + edge.getWeight());
                 v->setPath(temp);
                 if(notFound)
-                    q.insert(v);
+                    q.insert(v);    
                 else
                     q.decreaseKey(v);
             }

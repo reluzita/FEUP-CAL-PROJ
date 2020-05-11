@@ -6,13 +6,13 @@
 #include <ctime>
 #include <chrono>
 
-/*#include "Utils/ReadFiles.h"
+#include "Utils/ReadFiles.h"
 #include "Algorithms/Dijkstra.h"
 #include "Algorithms/DFS.h"
 #include "Algorithms/BFS.h"
 #include "Algorithms/AStar.h"
-#include "Utils/GraphView.h"*/
-#include "ClientInteraction/menu.h"
+#include "Utils/GraphView.h"
+//#include "ClientInteraction/menu.h"
 
 using namespace std::chrono;
 
@@ -24,37 +24,28 @@ double distance(Graph g, int orig, int dest) {
 }
 
 int main() {
-    /*string city = "Porto";
+    string city = "Coimbra";
     Graph g = readMap(city);
     vector<int> pointsOfInterest = readTags(g, city);
 
     cout << "map is read" << endl;
 
-    int orig = 314042698, dest = 1334167600;*/
-    /*
-    vector<int> visit = dfsTemp(g);
-    int i = 0;
-    while(true) {
-        if(g.findVertex(visit[i])->getType() != " ") {
-            orig = visit[i];
-            i++;
-            break;
-        }
-        i++;
-    }
+    int orig = 206155870, dest;
+
+
+    vector<int> visit = dfsTemp(g, orig);
+    int i = visit.size() - 1;
     while(true) {
         if(g.findVertex(visit[i])->getType() != " ") {
             dest = visit[i];
-            i++;
             break;
         }
-        i++;
+        i--;
     }
 
     cout << orig << " " << dest << endl;
-     */
-    //vector<int> temp = dfs(g, orig, dest);
-    //if(temp.empty()) return 0;
+    vector<int> temp = dfs(g, orig, dest);
+    if(temp.empty()) return 0;
 
     //vector<int> allPoints = bfsAll(g, orig);
 
@@ -71,7 +62,7 @@ int main() {
 
     //cout << "going to dijkstra" << endl;
 
-    /*milliseconds t0 = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
+    milliseconds t0 = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
     queue<Vertex*> qStar = aStar(g, orig, dest);
     milliseconds t1 = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
 
@@ -88,13 +79,20 @@ int main() {
     //cout << "D: " << distancePath(qDijkstra) << endl;
 
     GraphViewer *gv = createPathViewer(g, qStar);
-    getchar();*/
+    getchar();
 
     //devia ir para  main
-
+/*
+    int res;
     cout << "Hi! Welcome to TourMateApp\n";
     cout <<"Let's go ahead and fill out the preferences form\n"<<endl;
-    firstQuestion();
+    do{
+        firstQuestion();
+    }
+    while(res!=-1 && res == 0);
+    cout <<"Thanks for using our app!\n";
+    
+    */
     return 0;
 }
 
