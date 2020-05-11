@@ -11,6 +11,7 @@ using namespace std;
 
 int standardMenu(string title, vector<string>items);
 int firstQuestion();
+int multipleCitysMenu();
 int citysMenu();
 int whereAreYou(vector<pair<double,double>> v);
 int whereToGo(int idStart,Graph g);
@@ -19,7 +20,7 @@ vector<int>  pointsOfInterest();
 int timeAvailable();
 vector<string> pairToString(vector<pair<double,double>> v);
 vector<int> poiMenu(vector<string> poi);
-
+int cantGetThere();
 
 
 

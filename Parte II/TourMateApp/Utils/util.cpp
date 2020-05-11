@@ -61,7 +61,12 @@ void verification_int(string &aux) {
         if (!isValid) {
             cout << "Invalid character. Please insert a valid input: ";
             getline(cin, aux);
-            if (cin.fail() && cin.eof()) {
+            if (cin.fail()) {
+                if(cin.eof()){
+                    cin.clear();
+                    aux = "-1";
+                    return;
+                }
                 cin.clear();
                 continue;
             }

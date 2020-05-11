@@ -16,7 +16,7 @@ int standardMenu(string title, vector<string>items, string description){
 
 
     menu_int_options(option,0,items.size(),description);
-    cin.ignore(1000,'\n');
+    //cin.ignore(1000,'\n');
     
 
     return option;
@@ -28,7 +28,7 @@ int firstQuestion(){
     int op = standardMenu("Type of tour",items,description);
     while(1){
         if (op == 1){
-        //to do: maybe show the portugal map 
+            op = multipleCitysMenu();
         }
         else if (op==2){
             op = citysMenu();
@@ -42,6 +42,14 @@ int firstQuestion(){
     }
    
 }
+int multipleCitysMenu(){
+    //to do: maybe show the portugal map
+    system("cls");
+    cout <<"To be done ...\n";
+    Sleep(2000);
+    return -1;
+}
+
 
 int citysMenu(){
     vector<string> items = {"Aveiro", "Braga", "Coimbra", "Ermesinde", "Fafe", "Gondomar", "Lisboa", "Maia", "Porto","Viseu"};
@@ -72,7 +80,7 @@ int citysMenu(){
     else if(idEnd ==-2) return -1;
 
     int time = timeAvailable();
-    if(time ==0) return 0;
+    if(time == 0) return 0;
     else if(time ==-1) return -1;
 
     vector<int> poi = pointsOfInterest();
@@ -113,7 +121,9 @@ int whereToGo(int idStart, Graph g){
     coords.push_back("There is no way of getting to the point you wish from where you are!");
     string description = "Choose the coordinates you wish to go to from the menu (integer number): ";
     int op = standardMenu("Where do you want to go to?", coords,description);
-    return op-1;
+    if(op != coords.size())
+        return op-1;
+    return cantGetThere();
 }
 
 vector<int> pointsOfInterest(){
@@ -127,14 +137,18 @@ int timeAvailable(){
     cout << "Please enter the time you have available for the tour (in minutes, insert 0 to refill the form and CTRL+Z to leave the app): ";
     getline(cin, time);
     while(cin.fail() && cin.eof()){
-        cin.clear();
+        cout <<"Hello\n";
         if(cin.eof()){
+            cin.clear();
             return -1;
         }
+        cin.clear();
+        cout <<"why are you here\n";
         cout << "Invalid character. Please insert a valid input: ";
         getline(cin, time);
     }
     verification_int(time);
+    cout <<time <<endl;
     return stoi(time);
 }
 
@@ -167,7 +181,7 @@ vector<int> poiMenu(vector<string> poi){
         return res;
     }
     cin.ignore(1000,'\n');
-    while(option != i){
+    while(option != i && option != i-1){
         res.push_back(option-1);
         menu_int_options(option,0,poi.size(),description);
         if(option == -1) {
@@ -180,7 +194,6 @@ vector<int> poiMenu(vector<string> poi){
         }
         cin.ignore(1000,'\n');
     }
-    
     return res;
 
 }
@@ -193,4 +206,17 @@ vector<string> pairToString(vector<pair<double,double>> v){
         res.push_back(aux);
     }
     return res;
+}
+
+int cantGetThere(){
+    int option;
+    system("cls");
+    string description = "What do you wish to do? (choose an integer number) ";
+    cout <<" 1. Refill the form\n";
+    cout <<" 2. Leave the app \n";
+    menu_int_options(option,1,2,description);
+    if(option == -1 || option == 2)
+        return -2;
+    else
+        return -1;
 }

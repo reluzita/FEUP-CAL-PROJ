@@ -90,8 +90,10 @@ int main() {
         res = firstQuestion();
     }
     while(res!=-1 && res == 0);
+    system("cls");
+    cout <<"\nYou're exiting ...\n";
     cout <<"Thanks for using our app!\n";
-    
+    Sleep(2000);
 
     return 0;
 }
