@@ -14,7 +14,7 @@ Graph readMap(const string &cityName)
 
     readNodesFile(graph, cityName, lowercase);
     readLatLonFile(graph, cityName, lowercase);
-    readEdgesFile(graph, cityName, lowercase);
+    readEdgesFile(graph, cityName, lowercase, true);
 
     return graph;
 }
@@ -49,7 +49,7 @@ void readNodesFile(Graph &graph, const string &cityName, const string &lowercase
 
 }
 
-void readEdgesFile(Graph &graph, const string &cityName, const string &lowercase){
+void readEdgesFile(Graph &graph, const string &cityName, const string &lowercase, bool bidir){
 
     string edgesfile = "../resources/PortugalMaps/PortugalMaps/" + cityName + "/edges_"+ lowercase + ".txt";
     ifstream edges;
@@ -72,7 +72,10 @@ void readEdgesFile(Graph &graph, const string &cityName, const string &lowercase
         Vertex* v1 = graph.findVertex(n1);
         Vertex* v2 = graph.findVertex(n2);
         double weight = v1->distanceLatLon(v2);
-        graph.addEdge(n1, n2, weight);
+        if(bidir)
+            graph.addBiDirEdge(n1, n2, weight);
+        else
+            graph.addEdge(n1, n2, weight);
     }
     edges.close();
 }
@@ -104,6 +107,7 @@ void readLatLonFile(Graph &graph, const string &cityName, const string &lowercas
         Vertex* v = graph.findVertex(id);
         v->setLat(lat);
         v->setLon(lon);
+        graph.checkLatLon(lat, lon);
     }
     latlon.close();
 }
@@ -138,4 +142,99 @@ vector<int> readTags(Graph &g, const string &cityName) {
         }
     }
     return res;
+}
+
+void readMetroFile(Graph &g) {
+    ifstream file;
+    string line;
+    int numStations;
+
+    file.open("../resources/TagExamples/STCPRoutes/metro_routes_porto.txt");
+    
+    getline(file, line);
+    numStations = stoi(line);
+
+    for(int i = 0; i < numStations; i++){
+        MetroStation* metroStation = new MetroStation();
+
+        getline(file, line);
+        size_t pos = line.find(',');
+
+        Vertex* v = g.findVertex(stoi(line.substr(1, pos-1)));
+        if(v == nullptr)
+            continue;
+
+        line.erase(0, pos + 2);
+
+        pos = line.find(',');
+        metroStation->setStationName(line.substr(1, pos-2));
+        line.erase(0, pos + 2);
+
+        pos = line.find('[');
+        line.erase(0, pos+1);
+
+        while(line != ""){
+            pos = line.find(',');
+            if(pos == string::npos){
+                pos = line.find(']');
+            }
+            metroStation->addLine(line.substr(1, pos-2));
+            line.erase(0, pos+2);
+        }
+       
+        v->setMetroStation(metroStation);
+    }
+
+}
+
+
+void readBusFile(Graph &g) {
+    ifstream file;
+    file.open("../resources/TagExamples/STCPRoutes/stcp_routes_porto.txt");
+
+    string line;
+    getline(file, line);
+    int n = stoi(line);
+    for (int i = 0; i < n; i++) {
+        BusStop* busStop = new BusStop();
+        
+        getline(file, line);
+        size_t pos = line.find(',');
+        Vertex* v = g.findVertex(stoi(line.substr(1, pos)));
+        if(v == nullptr)
+            continue;
+        line.erase(0, pos + 2);
+        
+        pos = line.find(',');
+        busStop->setCodStop(line.substr(1, pos-1));
+        line.erase(0, pos + 2);
+
+        pos = line.find(',');
+        busStop->setCodLine(line.substr(1, pos-1));
+        line.erase(0, pos + 2);
+
+        pos = line.find(',');
+        busStop->setCodZone(line.substr(1, pos-1));
+        line.erase(0, pos + 2);
+        
+        pos = line.find(',');
+        busStop->setCounty(line.substr(1, pos-1));
+        line.erase(0, pos + 2);
+
+        pos = line.find(',');
+        busStop->setParish(line.substr(1, pos-1));
+        line.erase(0, pos + 2);
+
+        pos = line.find(',');
+        busStop->setAddress(line.substr(1, pos-1));
+        line.erase(0, pos + 2);
+
+        pos = line.find(',');
+        busStop->setType(line.substr(1, pos-1));
+        line.erase(0, pos + 2);
+        
+        v->setBusStop(busStop);
+        cout << v->getID() << endl;
+    }
+
 }

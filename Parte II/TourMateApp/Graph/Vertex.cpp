@@ -41,6 +41,14 @@ void Vertex::setLon(double lon) {
     this->lon = lon;
 }
 
+void Vertex::setBusStop(BusStop* busStop) {
+    this->busStop = busStop;
+}
+
+void Vertex::setMetroStation(MetroStation* metroStation) {
+    this->metroStation = metroStation;
+}
+
 /*
  * Auxiliary function to add an outgoing edge to a vertex (this),
  * with a given destination vertex (d) and edge weight (w).

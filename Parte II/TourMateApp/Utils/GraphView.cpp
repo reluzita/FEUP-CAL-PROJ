@@ -1,8 +1,3 @@
-//
-// Created by ineso on 5/5/2020.
-//
-
-
 #include <queue>
 #include "GraphView.h"
 

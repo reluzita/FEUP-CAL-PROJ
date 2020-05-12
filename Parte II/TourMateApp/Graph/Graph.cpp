@@ -11,6 +11,11 @@ Graph::Graph() {
     minX = INT_MAX;
     maxY = INT_MIN;
     minY = INT_MAX;
+
+    maxLat = INT_MIN;
+    minLat = INT_MAX;
+    maxLon = INT_MIN;
+    minLon = INT_MAX;
 }
 
 void Graph::initializeGraph() {
@@ -34,12 +39,12 @@ void Graph::initializeForAStar(const int &orig, const int &dest) {
     for(auto v: vertexSet) {
         v->dist = INT_MAX;
         v->path = nullptr;
-        v->distFromDest = v->distanceLatLon(d);
+      v->distFromDest = v->distanceLatLon(d);
         v->distSourcToDest = pathDist;
     }
 }
 
-void Graph::initializeForInvertedSearch() {
+void Graph::initializeForBirDir() {
     for(Vertex* v: vertexSet){
         v->invertedVisited = false;
     }
@@ -47,6 +52,9 @@ void Graph::initializeForInvertedSearch() {
 
 int Graph::getNumVertex() const {
     return vertexSet.size();
+}
+void Graph::setVertexSet(vector<Vertex*> vertexSet){
+    this->vertexSet = vertexSet;
 }
 
 
@@ -93,6 +101,15 @@ bool Graph::addEdge(const int &sourc, const int &dest, double w) {
     if (v1 == nullptr || v2 == nullptr)
         return false;
     v1->addEdge(dest,w);
+    return true;
+}
+
+bool Graph::addBiDirEdge(const int &sourc, const int &dest, double w) {
+    auto v1 = findVertex(sourc);
+    auto v2 = findVertex(dest);
+    if (v1 == nullptr || v2 == nullptr)
+        return false;
+    v1->addEdge(dest,w);
     v2->addEdge(sourc, w);
     return true;
 }
@@ -109,6 +126,27 @@ double Graph::getMaxY() const{
 }
 double Graph::getMinY() const{
     return minY;
+}
+
+void Graph::checkLatLon(double lat, double lon) {
+    if(lat > maxLat) maxLat = lat;
+    if(lat < minLat) minLat = lat;
+    if(lon > maxLon) maxLon = lon;
+    if(lon < minLon) minLon = lon;
+}
+
+double Graph::getMaxLat() const{
+    return maxLat;
+}
+
+double Graph::getMinLat() const{
+    return minLat;
+}
+double Graph::getMaxLon() const{
+    return maxLon;
+}
+double Graph::getMinLon() const{
+    return minLon;
 }
 /*
 

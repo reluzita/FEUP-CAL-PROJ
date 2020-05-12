@@ -1,7 +1,3 @@
-//
-// Created by ineso on 5/7/2020.
-//
-
 #ifndef TOURMATEAPP_UTIL_H
 #define TOURMATEAPP_UTIL_H
 
@@ -18,5 +14,6 @@ void menu_int_options(int &option, int omin, int nmax, string description);
 double distancePath(queue<Vertex*> path);
 void trim(string &str);
 void verification_int(string &aux);
+vector<string> pairToString(vector<pair<double,double>> v);
 
 #endif //TOURMATEAPP_UTIL_H

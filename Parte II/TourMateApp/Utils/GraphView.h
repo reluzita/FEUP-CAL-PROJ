@@ -1,7 +1,3 @@
-//
-// Created by ineso on 5/5/2020.
-//
-
 #ifndef TOURMATEAPP_GRAPHVIEW_H
 #define TOURMATEAPP_GRAPHVIEW_H
 

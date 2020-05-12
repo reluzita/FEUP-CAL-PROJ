@@ -14,6 +14,11 @@ class Graph {
     double minX;
     double maxY;
     double minY;
+
+    double maxLat;
+    double minLat;
+    double maxLon;
+    double minLon;
     //vector<vector<int>> D;
 
 public:
@@ -21,17 +26,25 @@ public:
     void initializeGraph();
     void initializeForSearch();
     void initializeForAStar(const int &orig, const int &dest);
-    void initializeForInvertedSearch();
+    void initializeForBirDir() ;
     Vertex *findVertex(const int &id) const;
     bool addVertex(const int &id, const double &x, const double &y);
     bool addEdge(const int &sourc, const int &dest, double w);
+    bool addBiDirEdge(const int &sourc, const int &dest, double w);
     int getNumVertex() const;
     std::vector<Vertex*> getVertexSet() const;
+    void setVertexSet(vector<Vertex*> vertexSet);
 
     double getMaxX() const;
     double getMinX() const;
     double getMaxY() const;
     double getMinY()const;
+
+    void checkLatLon(double lat, double lon);
+    double getMaxLat() const;
+    double getMinLat() const;
+    double getMaxLon() const;
+    double getMinLon()const;
 
 /*
     // Fp05 - single source

@@ -16,8 +16,10 @@
 
 Graph readMap(const string &cityName);
 void readNodesFile(Graph &graph, const string &cityName, const string &lowercase);
-void readEdgesFile(Graph &graph, const string &cityName, const string &lowercase);
+void readEdgesFile(Graph &graph, const string &cityName, const string &lowercase, bool bidir);
 void readLatLonFile(Graph &graph, const string &cityName, const string &lowercase);
 vector<int> readTags(Graph &g , const string &cityName);
+void readMetroFile(Graph &g);
+void readBusFile(Graph &g);
 
 #endif //READFILES_H

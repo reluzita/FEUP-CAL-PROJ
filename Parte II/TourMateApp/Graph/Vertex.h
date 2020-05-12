@@ -6,6 +6,7 @@
 #define TOURMATEAPP_VERTEX_H
 
 #include "Edge.h"
+#include "Stop.h"
 #include "MutablePriorityQueue.h"
 #include <string>
 #include <vector>
@@ -21,6 +22,9 @@ class Vertex {
     double lat;
     double lon;
     string type;            // content of the vertex
+    BusStop *busStop = nullptr;
+    MetroStation *metroStation = nullptr;
+
     vector<Edge> adj;		// outgoing edges
 
     double dist = 0;
@@ -48,6 +52,8 @@ public:
     double getLat();
     void setLat(double lat);
     void setLon(double lon);
+    void setBusStop(BusStop* busStop);
+    void setMetroStation(MetroStation* metroStation);
     double getDist();
     void setDist(double dist);
     double getDistFromDest();

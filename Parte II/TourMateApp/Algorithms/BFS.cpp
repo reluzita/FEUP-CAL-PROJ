@@ -39,7 +39,7 @@ vector<int> bfs(Graph g, const int &source, const int &dest) {
 vector<int> invertedBfs(Graph g, const int &source, const int &dest) {
     vector<int> res;
     queue<Vertex*> q;
-    g.initializeForInvertedSearch();
+    g.initializeForBirDir();
 
     Vertex* s = g.findVertex(source);
     q.push(s);

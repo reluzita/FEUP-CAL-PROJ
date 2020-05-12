@@ -4,12 +4,12 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <stdlib.h>
+#include <cstdlib>
 #include "../Utils/ReadFiles.h"
 #include "../Algorithms/BFS.h"
 using namespace std;
 
-int standardMenu(string title, vector<string>items);
+int standardMenu(string title, vector<string>items, string description,bool firstMenu);
 int firstQuestion();
 int multipleCitysMenu();
 int citysMenu();
@@ -18,7 +18,6 @@ int whereToGo(int idStart,Graph g);
 string meansOfTransportation(string city);
 vector<int>  pointsOfInterest();
 int timeAvailable();
-vector<string> pairToString(vector<pair<double,double>> v);
 vector<int> poiMenu(vector<string> poi);
 int cantGetThere();
 

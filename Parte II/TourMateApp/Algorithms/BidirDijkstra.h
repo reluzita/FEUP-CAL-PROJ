@@ -16,6 +16,7 @@ using namespace std;
 
 int biDirSearch(int s, int t, int numberNodes);
 void bfsAux(list<int> *queue, bool *visited, int *parent);
+void addReverseEdges(Graph *reverse, Graph g);
 
 
 

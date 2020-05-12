@@ -1,12 +1,12 @@
 #include "util.h"
-using namespace std;
+
 
 
 void menu_int_options(int &option, int omin, int nmax, string description){
     cout << endl << description;
     cin >> option;
     while (cin.fail() || option > nmax || option < omin) {
-        if (cin.eof()) { //caso de ter sido introduzido o 'crtl-z'
+        if (cin.eof()) { //caso de ter sido introduzido o 'crtl+z'
             cin.clear();
             option = -1;
             return;
@@ -24,10 +24,12 @@ void menu_int_options(int &option, int omin, int nmax, string description){
 double distancePath(queue<Vertex*> path) {
     if(path.empty())
         return 0;
+
     double res = 0;
     Vertex * v1 = path.front();
     path.pop();
     Vertex* v2;
+
     while(!path.empty()) {
         v2 = path.front();
         path.pop();
@@ -74,3 +76,12 @@ void verification_int(string &aux) {
     }
 }
 
+vector<string> pairToString(vector<pair<double,double>> v){
+    vector<string> res;
+    string aux;
+    for(auto p :v ){
+        aux = to_string(p.first) + ", " + to_string(p.second);
+        res.push_back(aux);
+    }
+    return res;
+}

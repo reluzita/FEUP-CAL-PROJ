@@ -24,12 +24,22 @@ double distance(Graph g, int orig, int dest) {
 }
 
 int main() {
-   /* string city = "Coimbra";
+    string city = "Porto";
     Graph g = readMap(city);
-    vector<int> pointsOfInterest = readTags(g, city);
 
-    cout << "map is read" << endl;
+    cout << "Max lat: " << g.getMaxLat() << endl;
+    cout << "Min lat: " << g.getMinLat() << endl;
+    cout << "Max lon: " << g.getMaxLon() << endl;
+    cout << "Min lon: " << g.getMinLon() << endl;
 
+    readBusFile(g);
+    readMetroFile(g);
+
+    //vector<int> pointsOfInterest = readTags(g, city);
+
+    //cout << "map is read" << endl;
+
+    /*
     int orig = 206155870, dest;
 
 
@@ -82,7 +92,7 @@ int main() {
     getchar();*/
 
     //devia ir para  main
-
+/*
     int res;
     cout << "Hi! Welcome to TourMateApp\n";
     cout <<"Let's go ahead and fill out the preferences form\n"<<endl;
@@ -94,8 +104,6 @@ int main() {
     cout <<"\nYou're exiting ...\n";
     cout <<"Thanks for using our app!\n";
     Sleep(2000);
-
+*/
     return 0;
 }
-
-
