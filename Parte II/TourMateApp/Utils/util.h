@@ -12,6 +12,7 @@ using namespace std;
 
 void menu_int_options(int &option, int omin, int nmax, string description);
 double distancePath(queue<Vertex*> path);
+int minutesFromDistance(double distance, string transportation);
 void trim(string &str);
 void verification_int(string &aux);
 vector<string> pairToString(vector<pair<double,double>> v);

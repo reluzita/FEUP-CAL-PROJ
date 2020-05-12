@@ -8,7 +8,8 @@ int standardMenu(string title, vector<string>items, string description,bool firs
     for(int i=0; i<items.size();i++){
         cout << i+1 <<" . "<<items[i]<<"\n";
     }
-    cout << "0 . Refill the form \n\n";
+    if(!firstMenu)
+        cout << "0 . Refill the form \n\n";
     cout <<"Insert CTRL+Z to leave the app\n";
     cout << "--------------------------------------\n";
 
@@ -18,20 +19,20 @@ int standardMenu(string title, vector<string>items, string description,bool firs
     return option;
 }
 
-int firstQuestion(){
+int firstQuestion(ClientInfo *info, Graph g){
     vector<string> items = {"Intercity", "Intracity"};
     string description = "Choose one option from the menu (integer number): ";
     int op = standardMenu("Type of tour",items,description, true);
 
     while(1){
-        if (op == 1) op = multipleCitysMenu();
-        else if (op==2) op = citysMenu();
+        if (op == 1) op = multipleCitysMenu(info,g);
+        else if (op==2) op = citysMenu(info,g);
         else if(op == 0) return 0;
         else if(op == -1) return -1;
     }
    
 }
-int multipleCitysMenu(){
+int multipleCitysMenu(ClientInfo *info, Graph g){
     //to do: maybe show the portugal map
     system("cls");
     cout <<"To be done ...\n";
@@ -40,40 +41,45 @@ int multipleCitysMenu(){
 }
 
 
-int citysMenu(){
+int citysMenu(ClientInfo *info, Graph g){
     vector<string> items = {"Aveiro", "Braga", "Coimbra", "Ermesinde", "Fafe", "Gondomar", "Lisboa", "Maia", "Porto","Viseu"};
     string description = "Choose one city from the menu (integer number): ";
     int op = standardMenu("Citys available",items, description,false);
-
     if(op == 0) return 0;
     else if (op ==-1) return -1;
+    info->setCity(items.at(op-1));
 
     string m = meansOfTransportation(items.at(op-1));
-    char mean;
-    if(m == "Walking/Biking") mean = 'W';
-    if(m == "Public Transportation") mean = 'P';
-    if(m == "Car") mean = 'C';
+    bool bidir = false, publicTransportation = false;
+    if(m == "Walking/Biking") bidir = true;
+    else if(m == "Public Transportation") publicTransportation = true;
+    //else if(m == "Car") bidir = false;
     if(m == "") return 0;
     if(m == "crash") return -1;
+    info->setMeansOfTransportation(m);
 
-    Graph g = readMap(items.at(op-1));
+     g = readMap(items.at(op-1), bidir, publicTransportation);
     vector<pair<double,double>> cityCoords = g.getCityCoords();
 
     int idStart = whereAreYou(cityCoords);
     if(idStart==-1) return 0;
     else if(idStart ==-2) return -1;
+    info->setIdStart(idStart);
 
     int idEnd = whereToGo(idStart,g);
     if(idEnd==-1) return 0;
     else if(idEnd ==-2) return -1;
+    info->setIdEnd(idEnd);
 
     int time = timeAvailable();
     if(time == 0) return 0;
     else if(time ==-1) return -1;
+    info->setTimeAvailable(time);
 
-    vector<int> poi = pointsOfInterest();
+    vector<string> poi = pointsOfInterest();
     if(poi.empty()) return -1;
-    if(poi.at(0) == -1) return 0;
+    //if(poi.at(0) == -1) return 0;
+    info->setPoi(poi);
 
     return 0;
 }
@@ -114,10 +120,16 @@ int whereToGo(int idStart, Graph g){
     return cantGetThere();
 }
 
-vector<int> pointsOfInterest(){
+vector<string> pointsOfInterest(){
+    vector<string> res; 
     vector<string> items = {"Information", "Hotel", "Attraction", "ViewPoint", "GuestHouse", "Picnic Site", "Artwork", "Campsite","Museum","None in particular"};
     vector<int> op = poiMenu(items);
-    return op;
+    for(int i: op){
+        if(res.at(i)== "crash")
+            res
+        res.push_back(items.at(op.at(i)));
+    }
+    return res;
 }
 
 int timeAvailable(){

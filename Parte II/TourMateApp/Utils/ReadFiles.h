@@ -14,7 +14,7 @@
 #include "../Graph/Graph.h"
 #include "util.h"
 
-Graph readMap(const string &cityName);
+Graph readMap(const string &cityName, bool bidir, bool publictransportation);
 void readNodesFile(Graph &graph, const string &cityName, const string &lowercase);
 void readEdgesFile(Graph &graph, const string &cityName, const string &lowercase, bool bidir);
 void readLatLonFile(Graph &graph, const string &cityName, const string &lowercase);

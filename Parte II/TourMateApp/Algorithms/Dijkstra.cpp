@@ -40,3 +40,4 @@ queue<Vertex*> dijkstraShortestPath(Graph g, const int &origin, const int &dest)
 
     return path;
 }
+

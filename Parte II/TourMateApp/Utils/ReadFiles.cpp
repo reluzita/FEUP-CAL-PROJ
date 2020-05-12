@@ -6,7 +6,7 @@
 
 using namespace std;
 
-Graph readMap(const string &cityName)
+Graph readMap(const string &cityName, bool bidir, bool publictransportation)
 {
     Graph graph;
     string lowercase = cityName;
@@ -14,7 +14,13 @@ Graph readMap(const string &cityName)
 
     readNodesFile(graph, cityName, lowercase);
     readLatLonFile(graph, cityName, lowercase);
-    readEdgesFile(graph, cityName, lowercase, true);
+    readEdgesFile(graph, cityName, lowercase, bidir);
+
+    if(publictransportation){
+        readBusFile(graph);
+        readMetroFile(graph);
+    }
+
 
     return graph;
 }

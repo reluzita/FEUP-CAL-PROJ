@@ -13,6 +13,7 @@
 #include "Algorithms/AStar.h"
 #include "Utils/GraphView.h"
 #include "ClientInteraction/menu.h"
+#include "Utils/MagicGenerator.h"
 
 using namespace std::chrono;
 
@@ -24,8 +25,9 @@ double distance(Graph g, int orig, int dest) {
 }
 
 int main() {
+    /*
     string city = "Porto";
-    Graph g = readMap(city);
+    Graph g = readMap(city, true, true);
 
     cout << "Max lat: " << g.getMaxLat() << endl;
     cout << "Min lat: " << g.getMinLat() << endl;
@@ -34,7 +36,7 @@ int main() {
 
     readBusFile(g);
     readMetroFile(g);
-
+*/
     //vector<int> pointsOfInterest = readTags(g, city);
 
     //cout << "map is read" << endl;
@@ -92,18 +94,21 @@ int main() {
     getchar();*/
 
     //devia ir para  main
-/*
+
     int res;
+    ClientInfo info;
+    Graph graph;
     cout << "Hi! Welcome to TourMateApp\n";
     cout <<"Let's go ahead and fill out the preferences form\n"<<endl;
     do{
-        res = firstQuestion();
+        res = firstQuestion(&info, graph);
     }
     while(res!=-1 && res == 0);
+    magicGenerator(graph, &info);
     system("cls");
     cout <<"\nYou're exiting ...\n";
     cout <<"Thanks for using our app!\n";
     Sleep(2000);
-*/
+
     return 0;
 }
