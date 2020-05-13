@@ -6,6 +6,7 @@
 #define TOURMATEAPP_GRAPH_H
 
 #include "Vertex.h"
+#include <string>
 
 class Graph {
     std::vector<Vertex*> vertexSet;    // vertex set
@@ -19,6 +20,10 @@ class Graph {
     double minLat;
     double maxLon;
     double minLon;
+
+    bool publicTransportation;
+
+    std::string cityName;
     //vector<vector<int>> D;
 
 public:
@@ -34,17 +39,20 @@ public:
     int getNumVertex() const;
     std::vector<Vertex*> getVertexSet() const;
     void setVertexSet(vector<Vertex*> vertexSet);
+    void setCityName(string name );
+    void setPublicTransportation(bool publicTransportation);
 
     double getMaxX() const;
     double getMinX() const;
     double getMaxY() const;
     double getMinY()const;
-
     void checkLatLon(double lat, double lon);
     double getMaxLat() const;
     double getMinLat() const;
     double getMaxLon() const;
     double getMinLon()const;
+    string getCityName() const;
+    bool getPublicTransportation() const;
 
 /*
     // Fp05 - single source

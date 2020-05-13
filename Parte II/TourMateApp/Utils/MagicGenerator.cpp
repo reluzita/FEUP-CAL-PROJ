@@ -7,12 +7,18 @@
 using namespace std;
 
 queue<Vertex*> magicGenerator(Graph &g, ClientInfo* info) {
+
+    cout << "BROOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO" << endl;
     queue<Vertex*> res;
 
     vector<int> points = bfsAll(g, info->getIdStart());
     if(find(points.begin(), points.end(), info->getIdEnd()) == points.end()) {
-        //no path!
+        cout << "no path!" << endl;
         return res;
+    }
+
+    for(int point: points) {
+        cout << "Points in the path: " << point << endl;
     }
 
     Vertex* start = g.findVertex(info->getIdStart());
@@ -22,7 +28,7 @@ queue<Vertex*> magicGenerator(Graph &g, ClientInfo* info) {
     double distance = distancePath(path);
 
     if(minutesFromDistance(distance, info->getMeansOfTransportation()) > info->getTimeAvailable()) {
-        //no time!
+        cout << "no time!" << endl;
         return res;
     }
 
@@ -36,7 +42,7 @@ queue<Vertex*> magicGenerator(Graph &g, ClientInfo* info) {
     }
 
     for(int point: poi) {
-        cout << point << endl;
+        cout << "Genrated poi: " << point << endl;
     }
     return res;
 }

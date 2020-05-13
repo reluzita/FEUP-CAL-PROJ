@@ -1,5 +1,5 @@
-#ifndef TOURMATEAPP_MENU_H
-#define TOURMATEAPP_MENU_H
+#ifndef TOURMATEAPP_MENU2_H
+#define TOURMATEAPP_MENU2_H
 
 #include <iostream>
 #include <string>
@@ -10,7 +10,7 @@
 #include "../Utils/MagicGenerator.h"
 using namespace std;
 
-int standardMenu(string title, vector<string>items, string description,bool firstMenu);
+/*int standardMenu(string title, vector<string>items, string description,bool firstMenu);
 int firstQuestion(ClientInfo *info, Graph g);
 int multipleCitysMenu(ClientInfo *info, Graph g);
 int citysMenu(ClientInfo *info, Graph g);
@@ -20,10 +20,9 @@ string meansOfTransportation(string city);
 vector<string> pointsOfInterest();
 int timeAvailable();
 vector<int> poiMenu(vector<string> poi);
-int cantGetThere();
+int cantGetThere();*/
 
+int generatePath(ClientInfo* info);
+int pointsMenu(string title, vector<Vertex*> items, string description);
 
-
-
-
-#endif //TOURMATEAPP_MENU_H
+#endif //TOURMATEAPP_MENU2_H

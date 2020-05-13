@@ -39,7 +39,7 @@ void Graph::initializeForAStar(const int &orig, const int &dest) {
     for(auto v: vertexSet) {
         v->dist = INT_MAX;
         v->path = nullptr;
-      v->distFromDest = v->distanceLatLon(d);
+        v->distFromDest = v->distanceLatLon(d);
         v->distSourcToDest = pathDist;
     }
 }
@@ -61,6 +61,8 @@ void Graph::setVertexSet(vector<Vertex*> vertexSet){
 vector<Vertex*> Graph::getVertexSet() const {
     return vertexSet;
 }
+
+
 
 /*
  * Auxiliary function to find a vertex with a given content.
@@ -114,6 +116,7 @@ bool Graph::addBiDirEdge(const int &sourc, const int &dest, double w) {
     return true;
 }
 
+
 double Graph::getMaxX() const{
     return maxX;
 }
@@ -148,117 +151,22 @@ double Graph::getMaxLon() const{
 double Graph::getMinLon() const{
     return minLon;
 }
-/*
 
-
-template<class T>
-void Graph<T>::unweightedShortestPath(const int &orig) {
-    for(auto v: vertexSet) {
-        v->dist = INT_MAX;
-        v->path = NULL;
-    }
-    Vertex<T> * vertex = findVertex(orig);
-    vertex->dist = 0;
-    queue<Vertex<T>*> q;
-    q.push(vertex);
-    while(!q.empty()) {
-        Vertex<T> * temp = q.front();
-        q.pop();
-        for(Edge<T> edge: temp->adj) {
-            if((edge.dest)->getDist() == INT_MAX) {
-                q.push(edge.dest);
-                (edge.dest)->dist = temp->dist + 1;
-                (edge.dest)->path = temp;
-            }
-        }
-    }
+string Graph::getCityName() const{
+    return cityName;
 }
 
-
-
-
-
-template<class T>
-void Graph<T>::bellmanFordShortestPath(const int &orig) {
-    for(auto v: vertexSet) {
-        v->dist = INT_MAX;
-        v->path = NULL;
-    }
-    Vertex<T> * vertex = findVertex(orig);
-    vertex->dist = 0;
-
-    for (int i = 1; i < vertexSet.size() - 1; i++) {
-        for (auto v : vertexSet) {
-            for(Edge<T> edge: v->adj) {
-                if(edge.dest->dist > v->dist + edge.weight) {
-                    edge.dest->dist = v->dist + edge.weight;
-                    edge.dest->path = v;
-                }
-            }
-        }
-    }
-    for (auto v : vertexSet) {
-        for(Edge<T> edge: v->adj) {
-            if(edge.dest->dist > v->dist + edge.weight) {
-                edge.dest->dist = v->dist + edge.weight;
-                edge.dest->path = v;
-                cout << "Negative cycle!" << endl;
-            }
-        }
-    }
+bool Graph::getPublicTransportation() const{
+    return publicTransportation;
 }
 
-
-template<class T>
-vector<T> Graph<T>::getPathTo(const int &dest) const{
-    vector<T> res;
-    stack<T> temp;
-    Vertex<T> * vertex = findVertex(dest);
-    temp.push(vertex->getInfo());
-    while(vertex->getDist()!=0) {
-        vertex = vertex->getPath();
-        temp.push(vertex->getInfo());
-    }
-    while(!temp.empty()) {
-        res.push_back(temp.top());
-        temp.pop();
-    }
-    return res;
+void Graph::setCityName(string name){
+    this->cityName = name;
 }
 
-
-template<class T>
-void Graph<T>::floydWarshallShortestPath() {
-    for(int i = 0; i < vertexSet.size(); i++) {
-        for (int j = 0; j < vertexSet.size(); j++)
-            D[i][j] = INT_MAX;
-    }
-    for(int i = 0; i < vertexSet.size(); i++) {
-        for(Edge<T> edge: vertexSet[i]->adj) {
-            auto it = find(vertexSet.begin(), vertexSet.end(), edge.dest);
-            int j = distance(vertexSet.begin(), it);
-            D[i][j] = edge.weight;
-        }
-    }
-
-    for(int k = 0; k < vertexSet.size(); k++) {
-        for(int i = 0; i < vertexSet.size(); i++) {
-            for (int j = 0; j < vertexSet.size(); j++) {
-                if(D[i][k] + D[k][j] < D[i][j])
-                    D[i][j] = D[i][k] + D[k][j];
-            }
-        }
-    }
+void Graph::setPublicTransportation(bool publicTransportation){
+    this->publicTransportation = publicTransportation;
 }
-
-template<class T>
-vector<T> Graph<T>::getfloydWarshallPath(const int &orig, const int &dest) const{
-    vector<T> res;
-
-    return res;
-}
-*/
-
 
 vector<pair<double,double>> Graph::getCityCoords(){
     vector<pair<double,double>> cityCoords;

@@ -25,4 +25,8 @@ class ClientInfo{
         int getIdEnd();
         int getTimeAvailable();
         vector<string> getPoi();
+        void addPoi(string point);
+        void addAllPoi(vector<string> points);
+        void removePoi(int index);
+        void removeAllPoi();
 };

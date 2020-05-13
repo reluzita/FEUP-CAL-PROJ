@@ -14,7 +14,7 @@ void ClientInfo::setIdStart(int idStart){
  
 void ClientInfo::setIdEnd(int idEnd){
     this->idEnd = idEnd;
-}
+}  
  
 void ClientInfo::setTimeAvailable(int timeAvailable){
     this->timeAvailable = timeAvailable;
@@ -45,4 +45,16 @@ int ClientInfo::getTimeAvailable(){
  
 vector<string> ClientInfo::getPoi(){
     return  poi;
+}
+void ClientInfo::addPoi(string point){
+    this->poi.push_back(point);
+}
+void ClientInfo::addAllPoi(vector<string> points){
+    this.poi = points;
+}
+void ClientInfo::removePoi(int index){
+    this->poi.erase(index);
+}
+void ClientInfo::removeAllPoi(){
+    this->poi.erase(this->poi.begin(), this->poi.end());
 }

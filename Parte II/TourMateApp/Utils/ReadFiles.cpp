@@ -21,7 +21,8 @@ Graph readMap(const string &cityName, bool bidir, bool publictransportation)
         readMetroFile(graph);
     }
 
-
+    graph->setCityName(cityName);
+    graph->setPublicTransportation(publictransportation);
     return graph;
 }
 

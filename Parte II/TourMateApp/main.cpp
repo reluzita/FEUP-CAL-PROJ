@@ -13,7 +13,7 @@
 #include "Algorithms/AStar.h"
 #include "Utils/GraphView.h"
 #include "ClientInteraction/menu.h"
-#include "Utils/MagicGenerator.h"
+//#include "Utils/MagicGenerator.h"
 
 using namespace std::chrono;
 
@@ -100,11 +100,11 @@ int main() {
     Graph graph;
     cout << "Hi! Welcome to TourMateApp\n";
     cout <<"Let's go ahead and fill out the preferences form\n"<<endl;
-    do{
-        res = firstQuestion(&info, graph);
-    }
-    while(res!=-1 && res == 0);
-    magicGenerator(graph, &info);
+    
+    res = firstQuestion(&info, graph);
+
+    getchar();
+    //magicGenerator(graph, &info);
     system("cls");
     cout <<"\nYou're exiting ...\n";
     cout <<"Thanks for using our app!\n";

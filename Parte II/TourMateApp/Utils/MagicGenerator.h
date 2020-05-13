@@ -15,6 +15,7 @@
 #include "../Algorithms/BFS.h"
 #include "../Algorithms/Dijkstra.h"
 #include "util.h"
+#include "../ClientInteraction/ClientInfo.h"
 #include <algorithm>
 #include <vector>
 
