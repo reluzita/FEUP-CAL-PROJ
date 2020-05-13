@@ -226,7 +226,7 @@ int managePreferences(ClientInfo * info){
             removeInterest(info);
         }
         else if(op == 3){
-            //view interest
+            viewInterest(info);//still not perfect -- go back to this menu is wrong
         }
         else if (op == 4) break; 
         else if (op == -1) return -1;
