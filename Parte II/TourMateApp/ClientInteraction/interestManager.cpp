@@ -41,8 +41,6 @@ void addInterest(ClientInfo * info){
     
     if(option == possibleNew.size()-2) info->addAllPoi(availablePOI);
 
-    return ;
-
 }
 
 void removeInterest(ClientInfo * info){

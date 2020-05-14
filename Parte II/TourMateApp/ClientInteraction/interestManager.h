@@ -7,12 +7,13 @@
 #include <cstdlib>
 #include "ClientInfo.h"
 #include "../Utils/util.h"
+
 using namespace std;
 
 int choice(const string& title, const string& description, vector<string> poi);
-int addInterest(ClientInfo * info);
-int removeInterest(ClientInfo * info);
-int viewInterest();
+void addInterest(ClientInfo * info);
+void removeInterest(ClientInfo * info);
+void viewInterest(ClientInfo* info);
 
 
 #endif //TOURMATEAPP_INTERESTMANAGER_H

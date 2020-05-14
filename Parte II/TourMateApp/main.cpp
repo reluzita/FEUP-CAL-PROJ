@@ -6,14 +6,7 @@
 #include <ctime>
 #include <chrono>
 
-#include "Utils/ReadFiles.h"
-#include "Algorithms/Dijkstra.h"
-#include "Algorithms/DFS.h"
-#include "Algorithms/BFS.h"
-#include "Algorithms/AStar.h"
-#include "Utils/GraphView.h"
-#include "ClientInteraction/menu.h"
-//#include "Utils/MagicGenerator.h"
+#include "ClientInteraction/menu2.h"
 
 using namespace std::chrono;
 
@@ -97,11 +90,10 @@ int main() {
 
     int res;
     ClientInfo info;
-    Graph graph;
     cout << "Hi! Welcome to TourMateApp\n";
     cout <<"Let's go ahead and fill out the preferences form\n"<<endl;
     
-    res = firstQuestion(&info, graph);
+    res = mainMenu(&info);
 
     getchar();
     //magicGenerator(graph, &info);

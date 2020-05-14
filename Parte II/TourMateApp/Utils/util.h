@@ -10,7 +10,7 @@
 
 using namespace std;
 
-void menu_int_options(const int &option, int omin, int nmax, string description);
+void menu_int_options(int &option, int omin, int nmax, const string &description);
 double distancePath(queue<Vertex*> path);
 int minutesFromDistance(double distance, const string& transportation);
 void trim(string &str);

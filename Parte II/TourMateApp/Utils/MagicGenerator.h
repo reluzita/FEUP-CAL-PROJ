@@ -14,8 +14,8 @@
 #include "../Graph/Graph.h"
 #include "../Algorithms/BFS.h"
 #include "../Algorithms/Dijkstra.h"
-#include "util.h"
-#include "../ClientInteraction/ClientInfo.h"
+#include "../ClientInteraction/interestManager.h"
+//#include "../Utils/util.h"
 #include <algorithm>
 #include <vector>
 

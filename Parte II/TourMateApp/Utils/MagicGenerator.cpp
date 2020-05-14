@@ -42,7 +42,7 @@ queue<Vertex*> magicGenerator(Graph &g, ClientInfo* info) {
     }
 
     for(int point: poi) {
-        cout << "Genrated poi: " << point << endl;
+        cout << "Generated poi: " << point << endl;
     }
     return res;
 }

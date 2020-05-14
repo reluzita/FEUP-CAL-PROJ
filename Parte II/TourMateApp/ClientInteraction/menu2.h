@@ -7,8 +7,8 @@
 #include <cstdlib>
 #include "../Utils/ReadFiles.h"
 #include "../Algorithms/BFS.h"
+#include "../Utils/util.h"
 #include "../Utils/MagicGenerator.h"
-#include "interestManager.h"
 #include "../Utils/GraphView.h"
 
 using namespace std;

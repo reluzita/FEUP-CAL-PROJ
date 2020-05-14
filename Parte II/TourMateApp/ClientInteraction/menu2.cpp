@@ -33,7 +33,7 @@ int displayMenu(const string& title, vector<string>options, const string& descri
     for(unsigned i=0; i<options.size();i++){
         cout << i+1 <<" . "<<options[i]<<"\n";
     }
-    cout <<"Insert CTRL+Z to leave the app\n";
+    cout <<"\nInsert CTRL+Z to leave the app\n";
     cout << "--------------------------------------\n";
 
 
@@ -56,6 +56,7 @@ int mainMenu(ClientInfo *info){
         else if (option == 3) value = supriseMe();
         else if (option == 4) value = managePreferences(info);
         
+        if(!(graphs.size() ))
     } while((option != 5) || (value != -1));
 
     return 0; //idk
@@ -123,6 +124,7 @@ int generatePath(ClientInfo* info){
 
     description = "Choose the coordinates you wish to go to from the menu (integer number): ";
     id = pointsMenu("Where do you want to go to?", vertexes ,description);
+    cin.ignore(1000,'\n');
 
     info->setIdEnd(id);
 
@@ -182,7 +184,6 @@ int pointsMenu(const string& title, const vector<Vertex*>& items, const string& 
             cin >> option;
         }
     }
-    //cin.ignore(1000,'\n');
     
     return option;
 }
@@ -202,7 +203,7 @@ int managePreferences(ClientInfo * info){
             removeInterest(info);
         }
         else if(option == 3){
-            viewInterest();//view interest
+            viewInterest(info);//view interest
         }
         else if (option == 4) break;
         else if (option == -1) return -1;
