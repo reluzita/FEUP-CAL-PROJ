@@ -23,6 +23,22 @@ void menu_int_options(int &option, int omin, int nmax, const string& description
     }
 }
 
+int displayMenu(const string& title, vector<string>options, const string& description){
+    int option = -1;
+    system("cls");
+
+    cout << "---------------- "<<title <<" ----------------\n\n";
+    for(unsigned i=0; i<options.size();i++){
+        cout << i+1 <<" . "<<options[i]<<"\n";
+    }
+    cout <<"\nInsert CTRL+Z to leave the app\n";
+    cout << "--------------------------------------\n";
+
+
+    menu_int_options(option,1,options.size(),description);
+    return option;
+}
+
 double distancePath(queue<Vertex*> path) {
     if(path.empty())
         return 0;
@@ -46,12 +62,12 @@ double distancePath(queue<Vertex*> path) {
     return res;
 }
 
-int minutesFromDistance(double distance, const string& transportation) {
-    if (transportation == "w") //walking
+int minutesFromDistance(double distance, const char& transportation) {
+    if (transportation == 'w') //walking
         return 5*distance*60;
-    else if(transportation == "c") //car
+    else if(transportation == 'c') //car
         return 30*distance*60;
-    else if (transportation == "p") //public
+    else if (transportation == 'p') //public
         return 20*distance*60;
     return 0;
 }
@@ -76,17 +92,38 @@ void verification_int(string &aux) {
             cout << "Invalid character. Please insert a valid input: ";
             getline(cin, aux);
             if (cin.fail()) {
-                if(cin.eof()){
+                if (cin.eof()) {
                     cin.clear();
                     aux = "-1";
                     return;
                 }
-                cin.clear();
-                continue;
             }
         }
     }
 }
+
+int generateRandomTime(string type) {
+
+    if(type == "information") return rand()%11 + 10;
+    
+    else if(type == "hotel") return rand()%31 + 90;
+
+    else if(type == "attraction") return rand()%31 + 60;
+    
+    else if(type == "viewpoint") return rand()%16 + 30;
+    
+    else if(type == "guest_house") return rand()%31 + 90;
+    
+    else if(type == "picnic_site") return rand()%31 + 30;
+    
+    else if(type == "artwork") return rand()%16 + 15;
+    
+    else if(type == "camp_site") return rand()%31 + 90;
+    
+    else if(type == "museum") return rand()%31 + 90;
+    
+    return rand()%11 + 10;
+}               
 
 vector<string> pairToString(const vector<pair<double,double>>& v){
     vector<string> res;

@@ -4,7 +4,7 @@ void ClientInfo::setCity(string city) {
     this->city = city;
 }
  
-void ClientInfo::setMeansOfTransportation(string meansOfTransportation){
+void ClientInfo::setMeansOfTransportation(char meansOfTransportation){
     this->meansOfTransportation = meansOfTransportation;
 }
  
@@ -27,7 +27,7 @@ string ClientInfo::getCity() {
     return city;
 }
  
-string ClientInfo::getMeansOfTransportation(){
+char ClientInfo::getMeansOfTransportation(){
     return meansOfTransportation;
 }
  

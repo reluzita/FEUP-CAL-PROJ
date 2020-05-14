@@ -10,6 +10,7 @@
 #include "../Utils/util.h"
 #include "../Utils/MagicGenerator.h"
 #include "../Utils/GraphView.h"
+#include "GeneratePathMenu.h"
 
 using namespace std;
 
@@ -26,10 +27,8 @@ vector<int> poiMenu(vector<string> poi);
 int cantGetThere();*/
 
 Graph findCityGraph(const string &city);
-int displayMenu(const string &title, vector<string>options,const string &description);
 int mainMenu(ClientInfo *info);
 int generatePath(ClientInfo* info);
-int pointsMenu(const string& title, const vector<Vertex*>& items, const string& description);
 int managePreferences(ClientInfo * info);
 int viewMaps();
 int supriseMe();

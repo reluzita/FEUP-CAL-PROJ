@@ -30,6 +30,7 @@ class Vertex {
     double dist = 0;
     double distFromDest = 0;
     double distSourcToDest = 0;
+    int duration = 0;
 
     Vertex *path = nullptr;
     Vertex * invertedPath = nullptr;
@@ -50,6 +51,7 @@ public:
     double getY();
     double getLon();
     double getLat();
+    int getDuration();
     void setLat(double lat);
     void setLon(double lon);
     void setBusStop(BusStop* busStop);
@@ -69,7 +71,7 @@ public:
     void setVisited(bool visited);
     bool isInvertedVisited();
     void setInvertedVisited(bool visited);
-
+    void setDuration(int dur);
 
     double distanceLatLon(Vertex* v2);
     /*T getInfo() const;

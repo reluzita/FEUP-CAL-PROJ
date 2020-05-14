@@ -5,6 +5,8 @@
 #include <string>
 #include <vector>
 #include <cstdlib>
+#include <cstdio>
+#include <unistd.h>
 #include "ClientInfo.h"
 #include "../Utils/util.h"
 

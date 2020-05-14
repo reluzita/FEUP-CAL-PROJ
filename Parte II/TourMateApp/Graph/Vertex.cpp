@@ -33,6 +33,10 @@ double Vertex::getLon() {
     return lon;
 }
 
+int Vertex::getDuration() {
+    return duration;
+}
+
 void Vertex::setLat(double lat) {
     this->lat = lat;
 }
@@ -49,10 +53,9 @@ void Vertex::setMetroStation(MetroStation* metroStation) {
     this->metroStation = metroStation;
 }
 
-/*
- * Auxiliary function to add an outgoing edge to a vertex (this),
- * with a given destination vertex (d) and edge weight (w).
- */
+void Vertex::setDuration(int dur) {
+    this->duration = dur;
+}
 
 void Vertex::addEdge(const int &dest, double w) {
     adj.emplace_back(dest, w);

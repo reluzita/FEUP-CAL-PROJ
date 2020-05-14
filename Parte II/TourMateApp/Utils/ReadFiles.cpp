@@ -15,6 +15,7 @@ Graph readMap(const string &cityName, bool bidir, bool publictransportation)
     readNodesFile(graph, cityName, lowercase);
     readLatLonFile(graph, cityName, lowercase);
     readEdgesFile(graph, cityName, lowercase, bidir);
+    readTags(graph, cityName);
 
     if(publictransportation){
         readBusFile(graph);
@@ -119,6 +120,7 @@ void readLatLonFile(Graph &graph, const string &cityName, const string &lowercas
 }
 
 vector<int> readTags(Graph &g, const string &cityName) {
+    srand(time(NULL));
 
     string lowercase = cityName;
     transform(lowercase.begin(), lowercase.end(), lowercase.begin(), ::tolower);
@@ -144,6 +146,8 @@ vector<int> readTags(Graph &g, const string &cityName) {
             getline(file, line);
             Vertex* v = g.findVertex(stoi(line));
             v->setType(type);
+            int dur = generateRandomTime(type);
+            v->setDuration(dur);
             res.push_back(stoi(line));
         }
     }

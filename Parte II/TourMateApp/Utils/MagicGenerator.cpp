@@ -7,8 +7,7 @@
 using namespace std;
 
 queue<Vertex*> magicGenerator(Graph &g, ClientInfo* info) {
-
-    cout << "BROOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO" << endl;
+    cout << "Makin sum magic" << endl;
     queue<Vertex*> res;
 
     vector<int> points = bfsAll(g, info->getIdStart());
@@ -28,6 +27,7 @@ queue<Vertex*> magicGenerator(Graph &g, ClientInfo* info) {
     double distance = distancePath(path);
 
     if(minutesFromDistance(distance, info->getMeansOfTransportation()) > info->getTimeAvailable()) {
+        //gerar caminho mais curto
         cout << "no time!" << endl;
         return res;
     }
@@ -36,7 +36,9 @@ queue<Vertex*> magicGenerator(Graph &g, ClientInfo* info) {
     for(int point: points) {
         Vertex* v = g.findVertex(point);
         if(v->getType() != " ") {
-            if (find(info->getPoi().begin(), info->getPoi().end(), v->getType()) != info->getPoi().end())
+            if(info->getPoi().empty())
+                poi.push_back(point);
+            else if (find(info->getPoi().begin(), info->getPoi().end(), v->getType()) != info->getPoi().end())
                 poi.push_back(point);
         }
     }
@@ -44,5 +46,9 @@ queue<Vertex*> magicGenerator(Graph &g, ClientInfo* info) {
     for(int point: poi) {
         cout << "Generated poi: " << point << endl;
     }
+
+    int done;
+    cin >> done;
+
     return res;
 }

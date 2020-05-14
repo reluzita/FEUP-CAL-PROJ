@@ -1,8 +1,9 @@
 #include "interestManager.h"
 
-#include <utility>
 
-int choice(const string& title, const string& description, vector<string> poi){//returns the index of the option in the poi vector
+
+
+int choice(const string& title, const string& description, vector<string> poi){
     int option = -1;
     system("cls");
 
@@ -13,8 +14,9 @@ int choice(const string& title, const string& description, vector<string> poi){/
     cout << "--------------------------------------\n";
 
 
-    menu_int_options(option,0,poi.size(),description);
-    return option-1;
+    menu_int_options(option,1,poi.size(),description);
+    cout <<option <<endl;
+    return option;
 }
 
 void addInterest(ClientInfo * info){
@@ -26,20 +28,29 @@ void addInterest(ClientInfo * info){
         if(find(poi.begin(), poi.end(),i)== poi.end())
             possibleNew.push_back(i);
     }
+
+    if(possibleNew.empty()){
+        system("cls");
+        cout << "\nThere aren't any interests to add. You will be redirected to the previous menu\n\n";
+        sleep(2);
+        return;
+    }
     possibleNew.emplace_back("All");
     possibleNew.emplace_back("Back to Main");
-    int option = choice("Add interest", "Choose the interest you want to add (integer number): ", possibleNew);
+    string description = "Choose the interest you want to add (integer number): ";
+    int option = choice("Add interest",description , possibleNew);//retorna o indice no vetor
     cin.ignore(1000,'\n');
 
-    string description = "O QUE E PARA ESCREVER AQUI?";
 
-    while((option != possibleNew.size()-1) && (option != possibleNew.size()-2)){
-        info->addPoi(possibleNew.at(option));
-        menu_int_options(option,0,possibleNew.size()+1,description);
+    while((option != possibleNew.size()-1) && (option != possibleNew.size())){
+        info->addPoi(possibleNew.at(option-1));
+        menu_int_options(option,1,possibleNew.size(),description);
         cin.ignore(1000,'\n');
     }
-    
-    if(option == possibleNew.size()-2) info->addAllPoi(availablePOI);
+
+    if(option == (possibleNew.size()-1)) info->addAllPoi(availablePOI);
+
+    return;
 
 }
 
@@ -47,34 +58,55 @@ void removeInterest(ClientInfo * info){
     vector<string> poi = info->getPoi();
     poi.emplace_back("All");
     poi.emplace_back("Back to main");
-    int option = choice("Remove interest", "Choose the interest you want to remove (integer number): ", poi);
+    if(poi.empty()){
+        system("cls");
+        cout << "\nThere aren't any interests to remove. You will be redirected to the previous menu\n\n";
+        sleep(2);
+        return;
+    }
 
-
-    option = choice("Add interest", "Choose the interest you want to add (integer number): ", poi /*possibleNew*/);
+    string description = "Choose the interest you want to remove (integer number): ";
+    int option = choice("Remove interest",description , poi);
     cin.ignore(1000,'\n');
 
-
-    string description = "O QUE E PARA POR AQUI?";
-
-    while((option != poi.size()-1) && (option != poi.size()-2)){
-        info->removePoi(poi.at(option));
-        menu_int_options(option,0,poi.size()+1,description);
+    while((option != poi.size()-1) && (option != poi.size())){
+        info->removePoi(poi.at(option-1));
+        menu_int_options(option,1,poi.size(),description);
         cin.ignore(1000,'\n');
     }
-    
-    if(option == poi.size()-2) info->removeAllPoi();
+
+    if(option == (poi.size()-1)) info->removeAllPoi();
     return;
 
 }
 
-void viewInterest(ClientInfo* info){
+void viewInterest(ClientInfo* info){//a verficaçao do input so está certa para ints
     vector<string> poi = info->getPoi();
-    cout << "These are you defined interests at the moment: \n";
-    for(int i =0; i<poi.size();i++){
-        cout <<poi.at(i)<<endl;
+
+    system("cls");
+    if(poi.empty()){
+        cout <<"\nYou have no interests defined\n\n";
+    }
+    else {
+        cout << "\nThese are you defined interests at the moment:\n\n";
+        for (int i = 0; i < poi.size(); i++) {
+            cout << poi.at(i) << endl;
+        }
     }
     int op;
-    cout <<"Press 0 to go back to the menu: ";
+    cout <<"\nPress 0 to go back to the menu: ";
     cin >> op;
-    if(op ==0) return;
+    while(op!=0){
+        if(cin.fail()){
+            cin.clear();
+            cin.ignore(1000,'\n');
+        }
+        else if(cin.eof()){
+            cin.clear();
+            cin.ignore(1000,'\n');
+        }
+        cout <<"Invalid input. Try again: ";
+        cin >> op;
+    }
+    return;
 }

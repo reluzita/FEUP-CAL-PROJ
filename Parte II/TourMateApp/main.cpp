@@ -95,12 +95,11 @@ int main() {
     
     res = mainMenu(&info);
 
-    getchar();
     //magicGenerator(graph, &info);
     system("cls");
     cout <<"\nYou're exiting ...\n";
     cout <<"Thanks for using our app!\n";
-    Sleep(2000);
+    sleep(2);
 
     return 0;
 }
