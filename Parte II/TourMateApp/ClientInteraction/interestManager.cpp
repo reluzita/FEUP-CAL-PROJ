@@ -17,7 +17,7 @@ int choice(const string& title, const string& description, vector<string> poi){/
     return option-1;
 }
 
-int addInterest(ClientInfo * info){
+void addInterest(ClientInfo * info){
     vector<string> poi = info->getPoi();
     vector<string> availablePOI = {"Information", "Hotel", "Attraction", "ViewPoint", "GuestHouse", "Picnic Site", "Artwork", "Campsite","Museum"};
     vector<string> possibleNew;
@@ -41,11 +41,11 @@ int addInterest(ClientInfo * info){
     
     if(option == possibleNew.size()-2) info->addAllPoi(availablePOI);
 
-    return 0;
+    return ;
 
 }
 
-int removeInterest(ClientInfo * info){
+void removeInterest(ClientInfo * info){
     vector<string> poi = info->getPoi();
     poi.emplace_back("All");
     poi.emplace_back("Back to main");
@@ -65,11 +65,18 @@ int removeInterest(ClientInfo * info){
     }
     
     if(option == poi.size()-2) info->removeAllPoi();
-    return 0;
+    return;
 
 }
 
-int viewInterest(){
-    // TO DO 
-    return 0;
+void viewInterest(ClientInfo* info){
+    vector<string> poi = info->getPoi();
+    cout << "These are you defined interests at the moment: \n";
+    for(int i =0; i<poi.size();i++){
+        cout <<poi.at(i)<<endl;
+    }
+    int op;
+    cout <<"Press 0 to go back to the menu: ";
+    cin >> op;
+    if(op ==0) return;
 }

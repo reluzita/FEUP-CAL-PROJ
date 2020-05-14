@@ -202,7 +202,7 @@ int managePreferences(ClientInfo * info){
             removeInterest(info);
         }
         else if(option == 3){
-            //view interest
+            viewInterest();//view interest
         }
         else if (option == 4) break;
         else if (option == -1) return -1;
