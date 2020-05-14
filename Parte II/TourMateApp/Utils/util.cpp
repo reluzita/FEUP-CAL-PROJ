@@ -1,6 +1,6 @@
 #include "util.h"
 
-void menu_int_options(int &option, int omin, int nmax, string description){
+void menu_int_options(int &option, int omin, int nmax, const string& description){
     cout << endl << description;
     cin >> option;
     while (cin.fail() || option > nmax || option < omin) {
@@ -20,9 +20,8 @@ void menu_int_options(int &option, int omin, int nmax, string description){
             cout << "Invalid operation, please insert a valid one: ";
             cin >> option;
         }
-    }   
+    }
 }
-
 
 double distancePath(queue<Vertex*> path) {
     if(path.empty())
@@ -47,7 +46,7 @@ double distancePath(queue<Vertex*> path) {
     return res;
 }
 
-int minutesFromDistance(double distance, string transportation) {
+int minutesFromDistance(double distance, const string& transportation) {
     if (transportation == "w") //walking
         return 5*distance*60;
     else if(transportation == "c") //car
@@ -68,8 +67,8 @@ void verification_int(string &aux) {
 
     bool isValid = false;
 
-    while (!isValid || aux == "") {
-        if (aux != "") {
+    while (!isValid || aux.empty()) {
+        if (aux.empty()) {
             trim(aux);
             isValid = (aux.find_last_not_of(numbers) == string::npos);
         }
@@ -89,7 +88,7 @@ void verification_int(string &aux) {
     }
 }
 
-vector<string> pairToString(vector<pair<double,double>> v){
+vector<string> pairToString(const vector<pair<double,double>>& v){
     vector<string> res;
     string aux;
     for(auto p :v ){

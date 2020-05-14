@@ -1,11 +1,11 @@
 #include "menu.h"
 
-int standardMenu(string title, vector<string>items, string description,bool firstMenu){
+int standardMenu(const string& title, vector<string>items, const string& description,bool firstMenu){
     int option = -1;
     system("cls");
 
     cout << "---------------- "<<title <<" ----------------\n\n";
-    for(int i=0; i<items.size();i++){
+    for(unsigned i=0; i<items.size();i++){
         cout << i+1 <<" . "<<items[i]<<"\n";
     }
     if(!firstMenu)
@@ -23,7 +23,7 @@ int standardMenu(string title, vector<string>items, string description,bool firs
     return option;
 }
 
-int pointsMenu(string title, vector<Vertex*> items, string description){
+int pointsMenu(const string& title, const vector<Vertex*>& items, const string& description){
     int option = -1;
     system("cls");
 
@@ -40,8 +40,7 @@ int pointsMenu(string title, vector<Vertex*> items, string description){
     while (cin.fail()) {
         if (cin.eof()) { //caso de ter sido introduzido o 'crtl+z'
             cin.clear();
-            option = -1;
-            return;
+            return -1;
         }
         else if(cin.fail()){
             cin.clear();
@@ -65,7 +64,7 @@ int firstQuestion(ClientInfo *info, Graph g){
     string description = "Choose one option from the menu (integer number): ";
     int op = standardMenu("Type of tour",items,description, true);
 
-    while(1){
+    while(true){
         if (op == 1) op = multipleCitysMenu(info,g);
         else if (op==2) op = citysMenu(info,g);
         else if(op == 0) break;
@@ -77,7 +76,7 @@ int firstQuestion(ClientInfo *info, Graph g){
     return 0;
 }
 
-int multipleCitysMenu(ClientInfo *info, Graph g){
+int multipleCitysMenu(ClientInfo *info, const Graph& g){
     //to do: maybe show the portugal map
     system("cls");
     cout <<"To be done ...\n";
@@ -99,7 +98,7 @@ int citysMenu(ClientInfo *info, Graph g){
     if(m == "Walking/Biking") bidir = true;
     else if(m == "Public Transportation") publicTransportation = true;
     //else if(m == "Car") bidir = false;
-    if(m == "") return 0;
+    if(m.empty()) return 0;
     if(m == "crash") return -1;
     info->setMeansOfTransportation(m);
 
@@ -131,7 +130,7 @@ int citysMenu(ClientInfo *info, Graph g){
     return 0;
 }
 
-string meansOfTransportation(string city){
+string meansOfTransportation(const string& city){
     vector<string> items;
     string description = "Choose one means of transportation from the menu (integer number): ";
     if(city == "Porto" || city == "Gondomar" || city == "Maia" || city == "Ermesinde"){
@@ -159,7 +158,7 @@ int whereToGo(int idStart, Graph g){
     vector<int> v = bfsAll(g,g.getVertexSet().at(idStart)->getID());
     vector<pair<double,double>> coordP = g.idToCoords(v);
     vector<string> coords = pairToString(coordP); 
-    coords.push_back("There is no way of getting to the point you wish from where you are!");
+    coords.emplace_back("There is no way of getting to the point you wish from where you are!");
     string description = "Choose the coordinates you wish to go to from the menu (integer number): ";
 
     int op = standardMenu("Where do you want to go to?", coords,description,false);
@@ -177,7 +176,7 @@ vector<string> pointsOfInterest(){
         return res;
     }
     if (op.at(0)==-1){//re do 
-        res.push_back("crash");
+        res.emplace_back("crash");
         return res;
     }
     for(int i: op){
@@ -208,7 +207,8 @@ int timeAvailable(){
 
 vector<int> poiMenu(vector<string> poi){
     vector<int> res;
-    int option=-1, i=0;
+    int option=-1;
+    unsigned i=0;
     system("cls");
     string description = "Choose your points of interest from the menu (integer numbers): ";
 

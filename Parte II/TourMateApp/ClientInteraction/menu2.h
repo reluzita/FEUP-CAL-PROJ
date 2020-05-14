@@ -8,6 +8,9 @@
 #include "../Utils/ReadFiles.h"
 #include "../Algorithms/BFS.h"
 #include "../Utils/MagicGenerator.h"
+#include "interestManager.h"
+#include "../Utils/GraphView.h"
+
 using namespace std;
 
 /*int standardMenu(string title, vector<string>items, string description,bool firstMenu);
@@ -22,7 +25,13 @@ int timeAvailable();
 vector<int> poiMenu(vector<string> poi);
 int cantGetThere();*/
 
+Graph findCityGraph(const string &city);
+int displayMenu(const string &title, vector<string>options,const string &description);
+int mainMenu(ClientInfo *info);
 int generatePath(ClientInfo* info);
-int pointsMenu(string title, vector<Vertex*> items, string description);
+int pointsMenu(const string& title, const vector<Vertex*>& items, const string& description);
+int managePreferences(ClientInfo * info);
+int viewMaps();
+int supriseMe();
 
 #endif //TOURMATEAPP_MENU2_H

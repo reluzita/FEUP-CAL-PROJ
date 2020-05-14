@@ -66,9 +66,11 @@ public:
     vector<T> getfloydWarshallPath(const int &origin, const int &dest) const;   //TODO...
 */
     vector<pair<double,double>> getCityCoords();
-    vector<pair<double,double>> idToCoords(vector<int> v);
+    vector<pair<double,double>> idToCoords(const vector<int> &v);
+
+    bool operator ==(const Graph &graph);
 };
 
 
 
-#endif //TOURMATEAPP_GRAPH_H
+#endif //TOURM&ATEAPP_GRAPH_H

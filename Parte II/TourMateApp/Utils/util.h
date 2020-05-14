@@ -10,11 +10,11 @@
 
 using namespace std;
 
-void menu_int_options(int &option, int omin, int nmax, string description);
+void menu_int_options(const int &option, int omin, int nmax, string description);
 double distancePath(queue<Vertex*> path);
-int minutesFromDistance(double distance, string transportation);
+int minutesFromDistance(double distance, const string& transportation);
 void trim(string &str);
 void verification_int(string &aux);
-vector<string> pairToString(vector<pair<double,double>> v);
+vector<string> pairToString(const vector<pair<double,double>>& v);
 
 #endif //TOURMATEAPP_UTIL_H

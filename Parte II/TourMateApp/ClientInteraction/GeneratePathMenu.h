@@ -1,3 +1,6 @@
+#ifndef TOURMATEAPP_GENERATEPATHMENU_H
+#define TOURMATEAPP_GENERATEPATHMENU_H
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -8,5 +11,7 @@
 
 using namespace std;
 
-int generatePath(ClientInfo* info);
-int pointsMenu(string title, vector<Vertex*> items, string description);
+//int generatePath(ClientInfo* info);
+//int pointsMenu(const string& title, const vector<Vertex*>& items, const string& description);
+
+#endif //TOURMATEAPP_GENERATEPATHMENU_H

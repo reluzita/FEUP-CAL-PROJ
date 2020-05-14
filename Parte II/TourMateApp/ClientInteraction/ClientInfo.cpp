@@ -44,16 +44,18 @@ int ClientInfo::getTimeAvailable(){
 }
  
 vector<string> ClientInfo::getPoi(){
-    return  poi;
+    return poi;
 }
-void ClientInfo::addPoi(string point){
+void ClientInfo::addPoi(const string& point){
     this->poi.push_back(point);
 }
-void ClientInfo::addAllPoi(vector<string> points){
-    this.poi = points;
+void ClientInfo::addAllPoi(const vector<string> &points){
+    this->poi = points;
 }
-void ClientInfo::removePoi(int index){
-    this->poi.erase(index);
+void ClientInfo::removePoi(const string& point){
+    auto it = find(poi.begin(), poi.end(), point);
+    if(it != poi.end())
+        this->poi.erase(it);
 }
 void ClientInfo::removeAllPoi(){
     this->poi.erase(this->poi.begin(), this->poi.end());

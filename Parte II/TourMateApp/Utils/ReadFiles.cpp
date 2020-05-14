@@ -21,8 +21,8 @@ Graph readMap(const string &cityName, bool bidir, bool publictransportation)
         readMetroFile(graph);
     }
 
-    graph->setCityName(cityName);
-    graph->setPublicTransportation(publictransportation);
+    graph.setCityName(cityName);
+    graph.setPublicTransportation(publictransportation); //é preciso?
     return graph;
 }
 
@@ -61,7 +61,6 @@ void readEdgesFile(Graph &graph, const string &cityName, const string &lowercase
     string edgesfile = "../resources/PortugalMaps/PortugalMaps/" + cityName + "/edges_"+ lowercase + ".txt";
     ifstream edges;
     string line;
-    int numNodes;
 
     edges.open(edgesfile);
 
@@ -162,7 +161,7 @@ void readMetroFile(Graph &g) {
     numStations = stoi(line);
 
     for(int i = 0; i < numStations; i++){
-        MetroStation* metroStation = new MetroStation();
+        auto metroStation = new MetroStation();
 
         getline(file, line);
         size_t pos = line.find(',');
@@ -180,7 +179,7 @@ void readMetroFile(Graph &g) {
         pos = line.find('[');
         line.erase(0, pos+1);
 
-        while(line != ""){
+        while(line.empty()){
             pos = line.find(',');
             if(pos == string::npos){
                 pos = line.find(']');
@@ -203,7 +202,7 @@ void readBusFile(Graph &g) {
     getline(file, line);
     int n = stoi(line);
     for (int i = 0; i < n; i++) {
-        BusStop* busStop = new BusStop();
+        auto busStop = new BusStop();
         
         getline(file, line);
         size_t pos = line.find(',');

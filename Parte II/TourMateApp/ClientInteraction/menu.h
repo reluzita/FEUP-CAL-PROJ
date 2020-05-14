@@ -10,13 +10,13 @@
 #include "../Utils/MagicGenerator.h"
 using namespace std;
 
-int standardMenu(string title, vector<string>items, string description,bool firstMenu);
+int standardMenu(const string& title, vector<string>items, const string& description,bool firstMenu);
 int firstQuestion(ClientInfo *info, Graph g);
-int multipleCitysMenu(ClientInfo *info, Graph g);
+int multipleCitysMenu(ClientInfo *info, const Graph& g);
 int citysMenu(ClientInfo *info, Graph g);
 int whereAreYou(Graph g);
 int whereToGo(int idStart,Graph g);
-string meansOfTransportation(string city);
+string meansOfTransportation(const string& city);
 vector<string> pointsOfInterest();
 int timeAvailable();
 vector<int> poiMenu(vector<string> poi);

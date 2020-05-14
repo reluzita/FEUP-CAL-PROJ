@@ -1,5 +1,7 @@
 #include <string>
 #include <vector>
+#include <algorithm>
+
 using namespace std;
 
 
@@ -25,8 +27,8 @@ class ClientInfo{
         int getIdEnd();
         int getTimeAvailable();
         vector<string> getPoi();
-        void addPoi(string point);
-        void addAllPoi(vector<string> points);
-        void removePoi(int index);
+        void addPoi(const string &point);
+        void addAllPoi(const vector<string> &points);
+        void removePoi(const string& point);
         void removeAllPoi();
 };

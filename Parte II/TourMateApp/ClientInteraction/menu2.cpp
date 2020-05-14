@@ -2,14 +2,14 @@
 
 static vector<Graph> graphs; 
 
-Graph findCityGraph(string city){
+Graph findCityGraph(const string& city){
     
     for(Graph graph: graphs){
         if(graph.getCityName() == city)
             return graph;
     }
 
-    return null;
+    return Graph();
 }
 
 //TO IMPLEMENT:
@@ -25,54 +25,31 @@ Graph findCityGraph(string city){
     }
 */
 
-void menu_int_options(int &option, int omin, int nmax, string description){
-    cout << endl << description;
-    cin >> option;
-    while (cin.fail() || option > nmax || option < omin) {
-        if (cin.eof()) { //caso de ter sido introduzido o 'crtl+z'
-            cin.clear();
-            option = -1;
-            return;
-        }
-        else if(cin.fail()){
-            cin.clear();
-            cin.ignore(1000, '\n');
-            cout << "Invalid operation, please insert a valid one: ";
-            cin >> option;
-        }
-        else { //qualquer outro caso que nao corresponda ao input pretendido
-            cin.ignore(1000, '\n');
-            cout << "Invalid operation, please insert a valid one: ";
-            cin >> option;
-        }
-    }   
-}
-
-int displayMenu(string title, vector<string>options, string description){
+int displayMenu(const string& title, vector<string>options, const string& description){
     int option = -1;
     system("cls");
 
     cout << "---------------- "<<title <<" ----------------\n\n";
-    for(int i=0; i<items.size();i++){
-        cout << i+1 <<" . "<<items[i]<<"\n";
+    for(unsigned i=0; i<options.size();i++){
+        cout << i+1 <<" . "<<options[i]<<"\n";
     }
     cout <<"Insert CTRL+Z to leave the app\n";
     cout << "--------------------------------------\n";
 
 
-    menu_int_options(option,1,items.size(),description);    
+    menu_int_options(option,1,options.size(),description);
     return option;
 }
 
 
-int mainMenu(Client *info){
+int mainMenu(ClientInfo *info){
     vector<string> items = {"View Maps", "Generate Path", "Surprise Me", "Manage Preferences", "Quit Program"};
     string description = "Choose one option from the menu (integer number): ";
     
-    int value;
-    
+    int value = 0, option;
+
     do{
-        int option = displayMenu("Welcome", items, description);
+        option = displayMenu("Welcome", items, description);
 
         if(option == 1) value = viewMaps();
         else if (option == 2) value = generatePath(info);
@@ -92,7 +69,7 @@ int generatePath(ClientInfo* info){
     string description = "Choose one option from the menu (integer number): ";
     int op = displayMenu("Type of tour", items, description);
 
-    while(1) {
+    while(true) {
         if (op == 1) op = displayMenu("Type of tour", items, description); //To be done...
         else if (op == 2) break;
         else if(op == 3) return 0;
@@ -174,7 +151,7 @@ int generatePath(ClientInfo* info){
     return 0;
 }
 
-int pointsMenu(string title, vector<Vertex*> items, string description) {
+int pointsMenu(const string& title, const vector<Vertex*>& items, const string& description) {
     int option = -1;
     system("cls");
 
@@ -191,8 +168,7 @@ int pointsMenu(string title, vector<Vertex*> items, string description) {
     while (cin.fail()) {
         if (cin.eof()) { //caso de ter sido introduzido o 'crtl+z'
             cin.clear();
-            option = -1;
-            return;
+            return -1;
         }
         else if(cin.fail()){
             cin.clear();
@@ -219,17 +195,17 @@ int managePreferences(ClientInfo * info){
     int option = displayMenu("Manage Preferences", items, description);  
     
     while(true){
-        if(op==1){
+        if(option==1){
             addInterest(info);
         }
-        else if (op==2){
+        else if (option==2){
             removeInterest(info);
         }
-        else if(op == 3){
+        else if(option == 3){
             //view interest
         }
-        else if (op == 4) break; 
-        else if (op == -1) return -1;
+        else if (option == 4) break;
+        else if (option == -1) return -1;
     }  
     return 0;
 }
@@ -246,7 +222,7 @@ int viewMaps(){
     string city = items.at(option - 1);
     Graph g = findCityGraph(city);
 
-    if(g == null){
+    if(g == Graph()){
         g = readMap(city, false, false);
         graphs.push_back(g);
     }
@@ -258,7 +234,7 @@ int viewMaps(){
 }
 
 int supriseMe(){
-
+    return 0;
 }
 
 

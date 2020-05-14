@@ -16,6 +16,8 @@ Graph::Graph() {
     minLat = INT_MAX;
     maxLon = INT_MIN;
     minLon = INT_MAX;
+
+    publicTransportation = false;
 }
 
 void Graph::initializeGraph() {
@@ -176,7 +178,7 @@ vector<pair<double,double>> Graph::getCityCoords(){
     }
     return cityCoords;
 }
-vector<pair<double,double>> Graph::idToCoords(vector<int> v){
+vector<pair<double,double>> Graph::idToCoords(const vector<int>& v){
     vector<pair<double,double>> coords;
     
     for(auto id: v){
@@ -187,6 +189,8 @@ vector<pair<double,double>> Graph::idToCoords(vector<int> v){
     return coords;
 }
 
-
+bool Graph::operator== (const Graph &graph) {
+    return cityName == graph.cityName;
+}
 
 
