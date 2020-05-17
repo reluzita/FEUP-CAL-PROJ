@@ -1,7 +1,3 @@
-//
-// Created by ineso on 5/12/2020.
-//
-
 #ifndef TOURMATEAPP_MAGICGENERATOR_H
 #define TOURMATEAPP_MAGICGENERATOR_H
 
@@ -18,8 +14,12 @@
 //#include "../Utils/util.h"
 #include <algorithm>
 #include <vector>
-
+using namespace std;
 queue<Vertex*> magicGenerator(Graph &g, ClientInfo* info);
+queue<Vertex*> findPoiInPath(Graph &g, vector<Vertex*> poi, const int &orig, const int &dest, const int &availableTime, char transportation);
+int hasTime(queue<Vertex*> path, char transportation, int availableTime);
+int countPOIs(queue<Vertex*> path);
+vector<Vertex*> POIsInPath(queue<Vertex*> path);
 
 
 #endif //TOURMATEAPP_MAGICGENERATOR_H

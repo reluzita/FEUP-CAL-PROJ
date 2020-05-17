@@ -1,7 +1,3 @@
-//
-// Created by ineso on 5/5/2020.
-//
-
 #ifndef TOURMATEAPP_BIDIRDIJKSTRA_H
 #define TOURMATEAPP_BIDIRDIJKSTRA_H
 

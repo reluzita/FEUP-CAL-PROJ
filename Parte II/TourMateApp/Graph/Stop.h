@@ -1,7 +1,3 @@
-//
-// Created by ineso on 5/12/2020.
-//
-
 #ifndef TOURMATEAPP_STOP_H
 #define TOURMATEAPP_STOP_H
 

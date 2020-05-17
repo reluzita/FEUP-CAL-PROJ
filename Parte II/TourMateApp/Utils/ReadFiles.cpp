@@ -1,7 +1,3 @@
-//
-// Created by ineso on 5/4/2020.
-//
-
 #include "ReadFiles.h"
 
 using namespace std;

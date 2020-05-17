@@ -32,7 +32,7 @@ int getTransportation(string city) {
     }
     int op = displayMenu("How do you want to do your tour?", items, description);
 
-    if(op == items.size() - 1) return 0;
+    if(op == items.size()) return 0;
 
     return op;
 }
@@ -45,13 +45,13 @@ int getStartPoint(const Graph &g) {
 }
 
 int getEndPoint(const Graph &g, int orig) {
-    vector<int> v = bfsAll(g, orig);
-    vector<Vertex*> vertexes;
-    for(int i: v)
-        vertexes.push_back(g.findVertex(i));
+    vector<Vertex*> v = bfsAll(g, orig);
+    vector<Vertex*> vertices;
+    for(Vertex* i: v)
+        vertices.push_back(i);
 
     string description = "Choose the coordinates you wish to go to from the menu (integer number): ";
-    return pointsMenu("Where do you want to go to?", vertexes ,description);
+    return pointsMenu("Where do you want to go to?", vertices ,description);
 }
 
 int getAvailableTime() {

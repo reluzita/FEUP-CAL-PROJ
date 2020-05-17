@@ -1,7 +1,3 @@
-//
-// Created by ineso on 5/4/2020.
-//
-
 #ifndef READFILES_H
 #define READFILES_H
 

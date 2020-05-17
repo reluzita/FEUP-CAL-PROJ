@@ -1,12 +1,11 @@
-//
-// Created by ineso on 5/4/2020.
-//
-
 #include "Dijkstra.h"
 
 using namespace std;
 
 queue<Vertex*> dijkstraShortestPath(Graph g, const int &origin, const int &dest) {
+    queue<Vertex*> path;
+    if(origin == dest)
+        return path;
     g.initializeGraph();
     Vertex * vertex = g.findVertex(origin);
     vertex->setDist(0);
@@ -29,7 +28,7 @@ queue<Vertex*> dijkstraShortestPath(Graph g, const int &origin, const int &dest)
     }
 
     Vertex* final = g.findVertex(dest);
-    queue<Vertex*> path;
+
     path.push(final);
     Vertex* previous = final->getPath();
     path.push(previous);

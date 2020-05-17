@@ -1,8 +1,5 @@
 #include "interestManager.h"
 
-
-
-
 int choice(const string& title, const string& description, vector<string> poi){
     int option = -1;
     system("cls");
@@ -97,11 +94,7 @@ void viewInterest(ClientInfo* info){//a verficaçao do input so está certa para
     cout <<"\nPress 0 to go back to the menu: ";
     cin >> op;
     while(op!=0){
-        if(cin.fail()){
-            cin.clear();
-            cin.ignore(1000,'\n');
-        }
-        else if(cin.eof()){
+        if(cin.fail()||cin.eof()){
             cin.clear();
             cin.ignore(1000,'\n');
         }

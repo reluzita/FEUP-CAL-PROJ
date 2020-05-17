@@ -6,22 +6,13 @@
 #include <ctime>
 #include <chrono>
 
-#include "ClientInteraction/menu2.h"
+#include "ClientInteraction/menu.h"
 
 using namespace std::chrono;
 
-double distance(Graph g, int orig, int dest) {
-    Vertex* o = g.findVertex(orig);
-    Vertex* d = g.findVertex(dest);
-
-    return sqrt((o->getX() - d->getX())*(o->getX() - d->getX()) + (o->getY() - d->getY())*(o->getY() - d->getY()));
-}
-
 int main() {
-    /*
-    string city = "Porto";
-    Graph g = readMap(city, true, true);
 
+/*
     cout << "Max lat: " << g.getMaxLat() << endl;
     cout << "Min lat: " << g.getMinLat() << endl;
     cout << "Max lon: " << g.getMaxLon() << endl;
@@ -37,8 +28,7 @@ int main() {
     /*
     int orig = 206155870, dest;
 
-
-    vector<int> visit = dfsTemp(g, orig);
+    vector<int> visit = bfsAll(g, orig);
     int i = visit.size() - 1;
     while(true) {
         if(g.findVertex(visit[i])->getType() != " ") {
@@ -50,8 +40,8 @@ int main() {
 
     cout << orig << " " << dest << endl;
     vector<int> temp = dfs(g, orig, dest);
-    if(temp.empty()) return 0;*/
-
+    if(temp.empty()) return 0;
+*/
     //vector<int> allPoints = bfsAll(g, orig);
 
 
@@ -100,6 +90,51 @@ int main() {
     cout <<"\nYou're exiting ...\n";
     cout <<"Thanks for using our app!\n";
     sleep(2);
+
+/*
+    string city = "Porto";
+    Graph g = readMap(city, false, false);
+
+    int orig = 1223751712, dest = 447867546;
+
+    vector<Vertex*> visit = bfsAll(g, orig);
+    vector<Vertex*> poi;
+    //unsigned i = visit.size() - 1;
+    for(Vertex* p: visit) {
+        if(p->getType() != " ") {
+            poi.push_back(p);
+        }
+    }
+
+    queue<Vertex*> path = findPoiInPath(g, poi, orig, dest, 120, 'c');
+    GraphViewer* gv = createPathViewer(g, path);
+*/
+    //GraphViewer* gv = createMapViewer(g);
+    //showPOI(gv, poi);
+
+    //queue<Vertex*> path = dijkstraShortestPath(g, orig, dest);
+
+    /*
+    int orig = 275996469, dest = 1338726423;
+    queue<Vertex*> path = dijkstraShortestPath(g, orig, dest);
+    double distance = distancePath(path);
+    cout << "Time: " << minutesFromDistance(distance, 'w') << endl;
+
+    vector<int> points = bfsAll(g, orig);
+
+    vector<int> poi;
+    for(int point: points) {
+        Vertex* vertex = g.findVertex(point);
+        if (vertex->getType() != " " && point != orig && point != dest)
+            poi.push_back(vertex->getID());
+    }
+
+    //cout << "Going to find poi" << endl;
+*/
+
+
+
+    getchar();
 
     return 0;
 }

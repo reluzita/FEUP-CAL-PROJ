@@ -1,7 +1,3 @@
-//
-// Created by ineso on 5/4/2020.
-//
-
 #include "Graph.h"
 
 using namespace std;
@@ -71,10 +67,10 @@ vector<Vertex*> Graph::getVertexSet() const {
  */
 
 Vertex * Graph::findVertex(const int &id) const {
-    for (auto v : vertexSet)
-        if (v->id == id)
-            return v;
-    return nullptr;
+    auto it = vertexMap.find(id); 
+    if(it == vertexMap.end())
+        return nullptr;
+    return vertexSet.at(it->second);
 }
 
 /*
@@ -90,6 +86,8 @@ bool Graph::addVertex(const int &id, const double &x, const double &y) {
     if(x < minX) minX = x;
     if(y > maxY) maxY = y;
     if(y < minY) minY = y;
+
+    vertexMap.insert(make_pair(id, vertexSet.size() - 1));
 
     return true;
 }

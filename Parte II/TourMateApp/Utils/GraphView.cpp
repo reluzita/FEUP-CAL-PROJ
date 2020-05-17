@@ -9,10 +9,20 @@ GraphViewer* createMapViewer(const Graph &g) {
     double width = g.getMaxX() - g.getMinX();
 
     cout << height << " " << width << endl;
-    int graphSize = 2000;
+    int graphHeight, graphWidth;
+    if(width/height < 2) {
+        graphHeight = 600;
+        graphWidth = (width * graphHeight) / height;
+    }
+    else {
+        graphWidth = 1500;
+        graphHeight = (height * graphWidth) / width;
+    }
 
-    auto *gv = new GraphViewer(graphSize, graphSize, false);
-    gv->createWindow(graphSize, graphSize);
+    cout << graphHeight << " " << graphWidth << endl;
+
+    auto *gv = new GraphViewer(graphWidth, graphHeight, false);
+    gv->createWindow(graphWidth, graphHeight);
     gv->defineVertexColor("blue");
     gv->defineEdgeColor("black");
 
@@ -20,7 +30,7 @@ GraphViewer* createMapViewer(const Graph &g) {
         double y = (vertex->getY() - g.getMinY())/height;
         double x = (vertex->getX() - g.getMinX())/width;
 
-        gv->addNode(vertex->getID(), (int)(x*graphSize), (int)(y*1341));
+        gv->addNode(vertex->getID(), (int)(x*graphWidth), (int)(y*graphHeight));
         gv->setVertexSize(vertex->getID(), 5);
     }
     int id = 0;
@@ -33,6 +43,7 @@ GraphViewer* createMapViewer(const Graph &g) {
     gv->rearrange();
     return gv;
 }
+
 GraphViewer* createPathViewer(const Graph &g, queue<Vertex*> path) {
 
     double height = abs(g.getMaxY() - g.getMinY());
@@ -51,7 +62,7 @@ GraphViewer* createPathViewer(const Graph &g, queue<Vertex*> path) {
         double x = abs(vertex->getX() - g.getMinX())/width;
 
         gv->addNode(vertex->getID(), (int)(x*graphSize), (int)(y*524));
-        gv->setVertexSize(vertex->getID(), 5);
+        gv->setVertexSize(vertex->getID(), 2);
     }
 
     int i = 0;
@@ -59,7 +70,77 @@ GraphViewer* createPathViewer(const Graph &g, queue<Vertex*> path) {
         Vertex* vertex = path.front();
         path.pop();
 
+        for(Edge edge: vertex->getAdj()) {
+            if (edge.getDest() == path.front()->getID()) {
+                gv->addEdge(i, vertex->getID(), (path.front())->getID(), EdgeType::UNDIRECTED);
+                i++;
+            }
+        }
+        if(vertex->getType() != " ") {
+            gv->setVertexColor(vertex->getID(), "red");
+            gv->setVertexLabel(vertex->getID(), to_string(vertex->getID()) + "-" + to_string(vertex->getDuration()));
+        }
+        gv->setVertexSize(vertex->getID(), 10);
+    }
+
+    gv->rearrange();
+    return gv;
+}
+/*
+GraphViewer* createPathViewer(const Graph &g, queue<Vertex*> path) {
+    double maxX = INT_MIN, minX = INT_MAX, maxY = INT_MIN, minY = INT_MAX;
+
+    queue<Vertex*> aux;
+    while(!path.empty()) {
+        Vertex* v = path.front();
+        path.pop();
+        aux.push(v);
+        if(v->getX() > maxX) maxX = v->getX();
+        if(v->getX() < minX) minX = v->getX();
+        if(v->getY() > maxY) maxY = v->getY();
+        if(v->getY() < minY) minY = v->getY();
+    }
+    cout << maxX << " " << minX << endl;
+    cout << maxY << " " << minY << endl;
+
+    double height = abs(maxY - minY);
+    double width = abs(maxX - minX);
+
+    cout << height << " " << width << endl;
+    int graphHeight, graphWidth;
+    if(width/height < 2) {
+        graphHeight = 800;
+        graphWidth = (width * graphHeight) / height;
+    }
+    else {
+        graphWidth = 1800;
+        graphHeight = (height * graphWidth) / width;
+    }
+
+    cout << graphHeight << " " << graphWidth << endl;
+
+    auto *gv = new GraphViewer(graphWidth, graphHeight, false);
+    gv->createWindow(graphWidth, graphHeight);
+    gv->defineVertexColor("blue");
+    gv->defineEdgeColor("black");
+
+    for(Vertex* vertex: g.getVertexSet()) {
+        if(vertex->getX() >= minX && vertex->getX() <= maxX && vertex->getY() >= minY && vertex->getY() <= maxY) {
+            double y = abs(vertex->getY() - g.getMinY()) / height;
+            double x = abs(vertex->getX() - g.getMinX()) / width;
+
+            gv->addNode(vertex->getID(), (int) (x * graphWidth), (int) (y * graphHeight));
+            gv->setVertexSize(vertex->getID(), 5);
+        }
+    }
+
+    int i = 0;
+    while(!aux.empty()) {
+        Vertex* vertex = aux.front();
+        aux.pop();
+
         if(vertex->getPath() != nullptr) {
+            cout << "found one" << endl;
             gv->addEdge(i, vertex->getID(), (vertex->getPath())->getID(), EdgeType::UNDIRECTED);
             i++;
         }
@@ -70,12 +151,13 @@ GraphViewer* createPathViewer(const Graph &g, queue<Vertex*> path) {
     gv->rearrange();
     return gv;
 }
-
-void showPOI(GraphViewer* gv, vector<int> points) {
+*/
+void showPOI(GraphViewer* gv, const vector<int>& points) {
     for(int p: points) {
         gv->setVertexColor(p, "red");
         gv->setVertexLabel(p, to_string(p));
     }
+
     gv->rearrange();
 }
 

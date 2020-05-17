@@ -1,7 +1,3 @@
-//
-// Created by ineso on 5/5/2020.
-//
-
 #ifndef TOURMATEAPP_ASTAR_H
 #define TOURMATEAPP_ASTAR_H
 
@@ -23,4 +19,5 @@ using namespace std;
   
 #define ROW 9 
 #define COL 10 
+
 #endif //TOURMATEAPP_ASTAR_H

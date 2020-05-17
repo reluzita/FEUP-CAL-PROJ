@@ -1,15 +1,16 @@
-//
-// Created by ineso on 5/4/2020.
-//
-
 #ifndef TOURMATEAPP_GRAPH_H
 #define TOURMATEAPP_GRAPH_H
 
 #include "Vertex.h"
 #include <string>
+#include <map>
+#include <utility>
+#include <unordered_map>
 
+using namespace std;
 class Graph {
     std::vector<Vertex*> vertexSet;    // vertex set
+    unordered_map<int, int> vertexMap; //<id, index>
 
     double maxX;
     double minX;

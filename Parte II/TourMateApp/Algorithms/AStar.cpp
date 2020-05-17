@@ -1,7 +1,3 @@
-//
-// Created by ineso on 5/5/2020.
-//
-
 #include "AStar.h"
 using namespace std;
 

@@ -62,13 +62,15 @@ double distancePath(queue<Vertex*> path) {
     return res;
 }
 
+
+
 int minutesFromDistance(double distance, const char& transportation) {
     if (transportation == 'w') //walking
-        return 5*distance*60;
+        return (distance/5.0)*60;
     else if(transportation == 'c') //car
-        return 30*distance*60;
+        return (distance/30.0)*60;
     else if (transportation == 'p') //public
-        return 20*distance*60;
+        return (distance/20.0)*60;
     return 0;
 }
 

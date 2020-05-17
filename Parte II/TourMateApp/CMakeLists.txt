@@ -15,5 +15,5 @@ add_executable(TourMateApp main.cpp lib/connection.cpp lib/graphviewer.cpp
         Utils/GraphView.cpp Utils/GraphView.h Utils/util.h Utils/util.cpp
         Graph/Stop.h ClientInteraction/ClientInfo.h ClientInteraction/ClientInfo.cpp
         Utils/MagicGenerator.cpp Utils/MagicGenerator.h
-        ClientInteraction/menu2.cpp ClientInteraction/menu2.h ClientInteraction/GeneratePathMenu.h ClientInteraction/GeneratePathMenu.cpp ClientInteraction/interestManager.cpp ClientInteraction/interestManager.h)
+        ClientInteraction/menu.cpp ClientInteraction/menu.h ClientInteraction/GeneratePathMenu.h ClientInteraction/GeneratePathMenu.cpp ClientInteraction/interestManager.cpp ClientInteraction/interestManager.h)
 #Algorithms/BidirDijkstra.cpp Algorithms/BidirDijkstra.h
