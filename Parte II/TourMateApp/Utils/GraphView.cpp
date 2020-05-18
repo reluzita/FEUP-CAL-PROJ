@@ -44,7 +44,7 @@ GraphViewer* createMapViewer(const Graph &g) {
     return gv;
 }
 
-GraphViewer* createPathViewer(const Graph &g, queue<Vertex*> path) {
+GraphViewer* createPathViewer(const Graph &g, queue<Vertex*> path, vector<int> visitedPoi) {
 
     double height = abs(g.getMaxY() - g.getMinY());
     double width = abs(g.getMaxX() - g.getMinX());
@@ -66,17 +66,21 @@ GraphViewer* createPathViewer(const Graph &g, queue<Vertex*> path) {
     }
 
     int i = 0;
+    gv->setVertexColor(path.front()->getID(), "yellow");
     while(!path.empty()) {
         Vertex* vertex = path.front();
         path.pop();
 
-        for(Edge edge: vertex->getAdj()) {
-            if (edge.getDest() == path.front()->getID()) {
-                gv->addEdge(i, vertex->getID(), (path.front())->getID(), EdgeType::UNDIRECTED);
+        for(Edge edge: path.front()->getAdj()) {
+            if (edge.getDest() == vertex->getID()) {
+                //cout << vertex->getID() << " <- " << path.front()->getID() << endl;
+                gv->addEdge(i, path.front()->getID(), vertex->getID(), EdgeType::DIRECTED);
                 i++;
             }
         }
-        if(vertex->getType() != " ") {
+        if(path.empty())
+            gv->setVertexColor(vertex->getID(), "green");
+        else if(find(visitedPoi.begin(), visitedPoi.end(), vertex->getID()) != visitedPoi.end()) {
             gv->setVertexColor(vertex->getID(), "red");
             gv->setVertexLabel(vertex->getID(), to_string(vertex->getID()) + "-" + to_string(vertex->getDuration()));
         }

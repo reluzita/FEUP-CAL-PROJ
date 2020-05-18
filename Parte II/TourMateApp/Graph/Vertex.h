@@ -35,6 +35,7 @@ class Vertex {
     bool visited;		// auxiliary field
     bool invertedVisited;
     bool processing = false;	// auxiliary field
+    bool usedInPath; //aux for findPOIinPath
 
     void addEdge(const int &dest, double w);
 
@@ -60,6 +61,8 @@ public:
     void setType(string type);
     Vertex* getPath();
     void setPath(Vertex* v);
+    bool isUsedInPath();
+    void setUsedInPath(bool stopped);
     Vertex* getInvertedPath();
     void setInvertedPath(Vertex* v);
     vector<Edge> getAdj();

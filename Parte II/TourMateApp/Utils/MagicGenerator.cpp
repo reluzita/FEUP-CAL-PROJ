@@ -1,7 +1,7 @@
 #include "MagicGenerator.h"
 
 static int visitedPoi=0; 
-
+/*
 queue<Vertex*> magicGenerator(Graph &g, ClientInfo* info) {
     cout << "Makin sum magic" << endl;
     queue<Vertex*> res;
@@ -41,8 +41,8 @@ queue<Vertex*> magicGenerator(Graph &g, ClientInfo* info) {
     visitedPoi = 0;
     return res;
 }
-
-
+*/
+/*
 queue<Vertex*> findPoiInPath(Graph &g, vector<Vertex*> poi, const int &orig, const int &dest, const int &availableTime, char transportation) {
     queue<Vertex*> empty;
     queue<Vertex*> best = dijkstraShortestPath(g, orig, dest);
@@ -106,36 +106,146 @@ queue<Vertex*> findPoiInPath(Graph &g, vector<Vertex*> poi, const int &orig, con
         }
     }
     return best;
-}
+} */
 
 int hasTime(queue<Vertex*> path, char transportation, int availableTime) {
     double distance = distancePath(path);
-    return availableTime - minutesFromDistance(distance, transportation);
+    int dur = minutesFromDistance(distance, transportation);
+    //cout << endl << dur << endl;
+    return availableTime - dur;
 }
 
+/*struct OptimizedPath{
+    queue<Vertex*> path;
+    vector<int> visitedPoi;
+};*/
 
-queue<Vertex*> findPoiInPath(Graph &g, vector<Vertex*> poi, const int &orig, const int &dest, const int &availableTime, char transportation) {
 
+OptimizedPath findPoiInPath(Graph &g, vector<Vertex*> poi, const int &orig, const int &dest, const int &availableTime, char transportation) {
+    struct OptimizedPath empty;  //empty queue to return when cant find path
+    struct OptimizedPath best;
+    best.path = dijkstraShortestPath(g, orig, dest);
+
+    int numPOIs = 0;//countPOIs(best.path, poi);
+
+    int time = hasTime(best.path, transportation, availableTime);
+    cout << endl << endl;
+    cout << "From orig to dest: " << time << endl;
+    if(time <= 0) {
+        cout << "No time!" << endl;
+        return empty;   //no time to go straight from orig to dest
+    }
+
+    for (Vertex* point: poi) {
+        if (point->getID() == orig || point->getID() == dest)
+            continue;   //point is the same as orig or dest
+
+        if (bfs(g, orig, point->getID()).empty())
+            continue;   //no path between orig and point
+
+        queue<Vertex *> pathFromOrig = dijkstraShortestPath(g, orig, point->getID());
+        int remainingTime = hasTime(pathFromOrig, transportation, availableTime) - point->getDuration();
+        cout << "From orig to point: " << remainingTime << endl;
+        if (remainingTime <= 0) {
+            cout << "No time!" << endl;
+            continue;   //no time to go from orig to point
+        }
+
+        vector<Vertex *> vec = bfsAll(g, point->getID());
+
+        if (find(vec.begin(), vec.end(), g.findVertex(dest)) == vec.end()) {
+            continue;   //no path between point and dest
+        }
+
+        queue<Vertex *> pathToDest = dijkstraShortestPath(g, point->getID(), dest);
+
+        queue<Vertex *> res = joinQueue(pathToDest, pathFromOrig);
+
+
+        int finalTime = hasTime(pathToDest, transportation, remainingTime);
+        cout << "Time from origin to point to dest: " << finalTime << endl;
+
+        if (finalTime <= 0) {
+            cout << "No time!" << endl;
+            continue;       //no time to go from orig to point to dest
+        }
+
+        int temp = 1;//countPOIs(res, poi);
+        if (temp > numPOIs) {
+            cout << "Found a path ( didnt make recursive call): " << hasTime(res, transportation, availableTime - point->getDuration()) << endl;
+            best.path = res;
+            numPOIs = temp;
+            best.visitedId.push_back(point->getID());
+        }
+
+        //remove points of interest already visited in the way from orig to point
+        //remove points of interest that cant go to from point
+        vector<Vertex *> POIsFromOrig = POIsInPath(pathFromOrig, poi);
+        vector<Vertex *> aux;
+
+        for (Vertex *vertex: poi) {
+            if (find(vec.begin(), vec.end(), vertex) != vec.end() &&
+                find(POIsFromOrig.begin(), POIsFromOrig.end(), vertex) == POIsFromOrig.end() &&
+                vertex->getDuration() < remainingTime)
+                aux.push_back(vertex);
+        }
+
+        OptimizedPath optPathToDest = findPoiInPath(g, aux, point->getID(), dest, remainingTime, transportation);
+        pathToDest = optPathToDest.path;
+
+        if (pathToDest.empty()) {
+            continue;     //couldn't find path
+        }
+
+        //update best with path found recursively
+        res = joinQueue(pathToDest, pathFromOrig);
+
+        time = hasTime(res, transportation, availableTime);
+        for(int id : optPathToDest.visitedId)
+            time -= g.findVertex(id)->getDuration();
+
+        if(time <= 0)
+            continue;
+
+        cout << "Found a path: " << hasTime(res, transportation, availableTime) << endl;
+        temp = optPathToDest.visitedId.size() + 1; //countPOIs(res, poi);
+        if (temp > numPOIs) {
+            best.path = res;
+            numPOIs = temp;
+            for(int i: optPathToDest.visitedId)
+                best.visitedId.push_back(i);
+        }
+    }
+
+    return best;
 }
 
 //chamar funcao outra vez
     //pôr o static int a 0
 
+template <class T>
+queue<T> joinQueue(queue<T> frontQ, queue<T> backQ) {
+    while(!backQ.empty()) {
+        frontQ.push(backQ.front());
+        backQ.pop();
+    }
+    return frontQ;
+}
 
-int countPOIs(queue<Vertex*> path) {
+int countPOIs(queue<Vertex*> path, vector<Vertex*> poi) {
     int res = 0;
     while(!path.empty()) {
-        if(path.front()->getType() != " ") 
+        if(find(poi.begin(), poi.end(), path.front()) != poi.end())
             res++;
         path.pop();
     }
     return res;
 }
 
-vector<Vertex*> POIsInPath(queue<Vertex*> path) {
+vector<Vertex*> POIsInPath(queue<Vertex*> path, vector<Vertex*> poi) {
     vector<Vertex*> res;
     while(!path.empty()) {
-        if(path.front()->getType() != " ")
+        if(find(poi.begin(), poi.end(), path.front()) != poi.end())
             res.push_back(path.front());
         path.pop();
     }

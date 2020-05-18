@@ -42,6 +42,12 @@ void Graph::initializeForAStar(const int &orig, const int &dest) {
     }
 }
 
+void Graph::initializeForFindPOI() {
+    for(auto v: vertexSet) {
+        v->setUsedInPath(false);
+    }
+}
+
 void Graph::initializeForBirDir() {
     for(Vertex* v: vertexSet){
         v->invertedVisited = false;

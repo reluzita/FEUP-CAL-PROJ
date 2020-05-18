@@ -12,52 +12,62 @@ using namespace std::chrono;
 
 int main() {
 
+    //FOR TESTING MENUS//
+
 /*
-    cout << "Max lat: " << g.getMaxLat() << endl;
-    cout << "Min lat: " << g.getMinLat() << endl;
-    cout << "Max lon: " << g.getMaxLon() << endl;
-    cout << "Min lon: " << g.getMinLon() << endl;
+    int res;
+    ClientInfo info;
+    cout << "Hi! Welcome to TourMateApp\n";
+    cout <<"Let's go ahead and fill out the preferences form\n"<<endl;
+    
+    res = mainMenu(&info);
 
-    readBusFile(g);
-    readMetroFile(g);
+    //magicGenerator(graph, &info);
+    system("cls");
+    cout <<"\nYou're exiting ...\n";
+    cout <<"Thanks for using our app!\n";
+    sleep(2);
 */
-    //vector<int> pointsOfInterest = readTags(g, city);
 
-    //cout << "map is read" << endl;
+    //FOR TESTING MAGIC GENERATOR//
 
-    /*
-    int orig = 206155870, dest;
+    string city = "Porto";
+    Graph g = readMap(city, false, false);
 
-    vector<int> visit = bfsAll(g, orig);
-    int i = visit.size() - 1;
-    while(true) {
-        if(g.findVertex(visit[i])->getType() != " ") {
-            dest = visit[i];
-            break;
+    int orig = 1223751712, dest = 447867546;
+
+    vector<Vertex*> visit = bfsAll(g, orig);
+    vector<Vertex*> poi;
+    int i = 0;
+    for(Vertex* p: visit) {
+        if(p->getType() != " ") {
+            poi.push_back(p);
+            i++;
         }
-        i--;
+        if(i > 30)
+            break;
     }
 
-    cout << orig << " " << dest << endl;
-    vector<int> temp = dfs(g, orig, dest);
-    if(temp.empty()) return 0;
-*/
-    //vector<int> allPoints = bfsAll(g, orig);
+    //cout << poi.size() << endl;
+
+   // g.initializeForFindPOI();
+    OptimizedPath optPath = findPoiInPath(g, poi, orig, dest, 120, 'c');
+    queue<Vertex*> path = optPath.path;
+    GraphViewer* gv = createPathViewer(g, path, optPath.visitedId);
+    cout << endl << hasTime(path, 'c', 120) << endl;
+
+    //GraphViewer* gv = createMapViewer(g);
+    //showPOI(gv, poi);
+
+    getchar();
 
 
-    //int dest = orig;
-    /*
-    for(int p: allPoints) {
-        Vertex* vertex = g.findVertex(p);
-        cout <<  p << " " << vertex->getType() << endl;
-    }
-*/
-    //GraphViewer *gv = createMapViewer(g);
-    //showPOI(gv, pointsOfInterest);
+    return 0;
+}
 
-    //cout << "going to dijkstra" << endl;
+// CONFUSING THINGS //
 
-   /* milliseconds t0 = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
+/* milliseconds t0 = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
     queue<Vertex*> qStar = aStar(g, orig, dest);
     milliseconds t1 = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
 
@@ -75,66 +85,3 @@ int main() {
 
     GraphViewer *gv = createPathViewer(g, qStar);
     getchar();*/
-
-    //devia ir para  main
-
-    int res;
-    ClientInfo info;
-    cout << "Hi! Welcome to TourMateApp\n";
-    cout <<"Let's go ahead and fill out the preferences form\n"<<endl;
-    
-    res = mainMenu(&info);
-
-    //magicGenerator(graph, &info);
-    system("cls");
-    cout <<"\nYou're exiting ...\n";
-    cout <<"Thanks for using our app!\n";
-    sleep(2);
-
-/*
-    string city = "Porto";
-    Graph g = readMap(city, false, false);
-
-    int orig = 1223751712, dest = 447867546;
-
-    vector<Vertex*> visit = bfsAll(g, orig);
-    vector<Vertex*> poi;
-    //unsigned i = visit.size() - 1;
-    for(Vertex* p: visit) {
-        if(p->getType() != " ") {
-            poi.push_back(p);
-        }
-    }
-
-    queue<Vertex*> path = findPoiInPath(g, poi, orig, dest, 120, 'c');
-    GraphViewer* gv = createPathViewer(g, path);
-*/
-    //GraphViewer* gv = createMapViewer(g);
-    //showPOI(gv, poi);
-
-    //queue<Vertex*> path = dijkstraShortestPath(g, orig, dest);
-
-    /*
-    int orig = 275996469, dest = 1338726423;
-    queue<Vertex*> path = dijkstraShortestPath(g, orig, dest);
-    double distance = distancePath(path);
-    cout << "Time: " << minutesFromDistance(distance, 'w') << endl;
-
-    vector<int> points = bfsAll(g, orig);
-
-    vector<int> poi;
-    for(int point: points) {
-        Vertex* vertex = g.findVertex(point);
-        if (vertex->getType() != " " && point != orig && point != dest)
-            poi.push_back(vertex->getID());
-    }
-
-    //cout << "Going to find poi" << endl;
-*/
-
-
-
-    getchar();
-
-    return 0;
-}

@@ -7,6 +7,7 @@ using namespace std;
 
 Vertex::Vertex(int id, double x, double y, string type): id(id), x(x), y(y), type(type) {
     this->visited = false;
+    this->duration = 0;
 }
 
 int Vertex::getID() {
@@ -86,6 +87,14 @@ Vertex* Vertex::getPath() {
 
 void Vertex::setPath(Vertex* v) {
     path = v;
+}
+
+bool Vertex::isUsedInPath() {
+    return usedInPath;
+}
+
+void Vertex::setUsedInPath(bool stopped) {
+    this->usedInPath = stopped;
 }
 
 Vertex* Vertex::getInvertedPath() {

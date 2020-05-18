@@ -82,8 +82,9 @@ int generatePath(ClientInfo* info){
 
     //nota: avisar se não houver caminho no tempo indicado
 
-    queue<Vertex*> path = magicGenerator(graph, info);
-    GraphViewer* gv = createPathViewer(graph, path);
+    queue<Vertex*> path;// = magicGenerator(graph, info);
+    vector<int> ISBAD;
+    GraphViewer* gv = createPathViewer(graph, path, ISBAD);
 
     getchar();
     
