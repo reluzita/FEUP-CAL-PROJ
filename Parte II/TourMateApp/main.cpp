@@ -14,7 +14,6 @@ int main() {
 
     //FOR TESTING MENUS//
 
-/*
     int res;
     ClientInfo info;
     cout << "Hi! Welcome to TourMateApp\n";
@@ -27,10 +26,10 @@ int main() {
     cout <<"\nYou're exiting ...\n";
     cout <<"Thanks for using our app!\n";
     sleep(2);
-*/
+
 
     //FOR TESTING MAGIC GENERATOR//
-
+/*
     string city = "Porto";
     Graph g = readMap(city, true, false);
 
@@ -62,7 +61,7 @@ int main() {
     //showPOI(gv, poi);
 
     getchar();
-
+*/
 
     return 0;
 }

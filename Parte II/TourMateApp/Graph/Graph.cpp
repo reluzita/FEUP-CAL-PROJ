@@ -14,7 +14,7 @@ Graph::Graph() {
     minLon = INT_MAX;
 
     publicTransportation = false;
-    bidir = false;
+    biDir = false;
 }
 
 void Graph::initializeGraph() {

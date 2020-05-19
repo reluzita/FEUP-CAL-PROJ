@@ -1,10 +1,10 @@
 #include "MagicGenerator.h"
 
 static int visitedPoi=0; 
-/*
-queue<Vertex*> magicGenerator(Graph &g, ClientInfo* info) {
+
+OptimizedPath magicGenerator(Graph &g, ClientInfo* info) {
     cout << "Makin sum magic" << endl;
-    queue<Vertex*> res;
+    OptimizedPath res;
 
     vector<Vertex*> points = bfsAll(g, info->getIdStart());
     if(find(points.begin(), points.end(), g.findVertex(info->getIdEnd())) == points.end()) {
@@ -24,7 +24,8 @@ queue<Vertex*> magicGenerator(Graph &g, ClientInfo* info) {
         cout << "There is no time to get from where you are to the point you want!" << endl;
         cout << "However, we have found the quickest way to get there ..."<< endl;
         cout << "It takes "<< time << " minutes "<<endl;
-        return path;
+        res.path = path;
+        return res;
     }
 
     vector<Vertex*> poi;
@@ -38,10 +39,9 @@ queue<Vertex*> magicGenerator(Graph &g, ClientInfo* info) {
     }
 
     res = findPoiInPath(g, poi, info->getIdStart(), info->getIdEnd(), info->getTimeAvailable(), info->getMeansOfTransportation());
-    visitedPoi = 0;
     return res;
 }
-*/
+
 /*
 queue<Vertex*> findPoiInPath(Graph &g, vector<Vertex*> poi, const int &orig, const int &dest, const int &availableTime, char transportation) {
     queue<Vertex*> empty;

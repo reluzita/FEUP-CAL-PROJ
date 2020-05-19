@@ -3,6 +3,8 @@
 static vector<Graph> graphs; 
 
 Graph findCityGraph(const string& city){
+
+
     
     for(Graph graph: graphs){
         if(graph.getCityName() == city)
@@ -82,9 +84,8 @@ int generatePath(ClientInfo* info){
 
     //nota: avisar se não houver caminho no tempo indicado
 
-    queue<Vertex*> path;// = magicGenerator(graph, info);
-    vector<int> ISBAD;
-    GraphViewer* gv = createPathViewer(graph, path, ISBAD);
+    OptimizedPath optPath = magicGenerator(graph, info);
+    GraphViewer* gv = createPathViewer(graph, optPath.path, optPath.visitedId);
 
     getchar();
     

@@ -21,7 +21,7 @@ struct OptimizedPath{
     vector<int> visitedId;
 };
 
-queue<Vertex*> magicGenerator(Graph &g, ClientInfo* info);
+OptimizedPath magicGenerator(Graph &g, ClientInfo* info);
 OptimizedPath findPoiInPath(Graph &g, const vector<Vertex*> &poi, const int &orig, const int &dest, const int &availableTime, char transportation);
 template <class T>
 queue<T> joinQueue(queue<T> frontQ, queue<T> backQ);
