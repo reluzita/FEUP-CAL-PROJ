@@ -127,6 +127,7 @@ void Vertex::setInvertedVisited(bool visited) {
 
 void Vertex::clearEdges() {
     adj.clear();
+    cout << "clearing: " << adj.size() << endl;
 }
 
 double Vertex::distanceLatLon(Vertex* v2) {

@@ -7,6 +7,6 @@
 
 GraphViewer* createMapViewer(const Graph &g);
 GraphViewer* createPathViewer(const Graph &g, queue<Vertex*> path, vector<int> visitedPoi);
-void showPOI(GraphViewer* gv, const vector<int> &points);
+void showPOI(GraphViewer* gv, const vector<Vertex*> &points);
 
 #endif //TOURMATEAPP_GRAPHVIEW_H

@@ -1,57 +1,89 @@
 #include "GeneratePathMenu.h"
 
-string getCity() {
-    vector<string> items = {"Intercity", "Intracity", "Back to main"};
-    string description = "Choose one option from the menu (integer number): ";
-    int op = displayMenu("Type of tour", items, description);
-
-    while(true) {
-        if (op == 1) op = displayMenu("Type of tour", items, description); //To be done...
-        else if (op == 2) break;
-        else return "";
-    }
-
-    items = {"Aveiro", "Braga", "Coimbra", "Ermesinde", "Fafe", "Gondomar", "Lisboa", "Maia", "Porto","Viseu", "Back to main"};
-    description = "Choose one city from the menu (integer number): ";
-    op = displayMenu("Citys available", items, description);
-
-    if (op < 0 || op >= items.size() - 1) return "";
-
-    return items.at(op-1);
-}
-
-int getTransportation(string city) {
-    vector<string> items;
+int getTransportation() {
+    vector<string> items = {"Walking/Biking", "Car", "Public Transportations", "Back to main"};
 
     string description = "Choose one means of transportation from the menu (integer number): ";
-    if(city == "Porto" || city == "Gondomar" || city == "Maia" || city == "Ermesinde"){
-        items = {"Walking/Biking", "Car", "Public Transportations", "Back to main"};
-    }
-    else{
-        items = {"Walking/Biking", "Car", "Back to main"};
-    }
+ 
     int op = displayMenu("How do you want to do your tour?", items, description);
 
     if(op == items.size()) return 0;
 
     return op;
 }
+string getTypeStartPoint(){
+    vector<string> items = {"Information", "Hotel", "Attraction", "ViewPoint", "Guest_House", "Picnic_Site", "Artwork", "Camp_Site","Museum","Generic", "Back to main"};
 
-int getStartPoint(const Graph &g) {
-    vector<Vertex*> vertexes = g.getVertexSet();
-    string description = "Choose the id of your coordinates at the moment (integer number): ";
+    string description = "Choose what type of point where your journey starts (integer number):";
+    string title = "Type of start point";
+    
+    int op = displayMenu(title, items, description);
 
-    return pointsMenu("Where are you?", vertexes, description);
+    if(op == items.size()) return "";
+    if(op == items.size()-1) return " ";
+
+    string lowercase = items.at(op-1);
+    transform(lowercase.begin(), lowercase.end(), lowercase.begin(), ::tolower);
+    return lowercase;
 }
 
-int getEndPoint(const Graph &g, int orig) {
-    vector<Vertex*> v = bfsAll(g, orig);
-    vector<Vertex*> vertices;
-    for(Vertex* i: v)
-        vertices.push_back(i);
+int getStartPoint(const Graph &g, string typeStart) {
+    //mudar para usar o graphviewer
+    GraphViewer* gv = createMapViewer(g);
+    //filtrar para mostrar
+    vector<Vertex*> poi;
+    for(Vertex* vertex: g.getVertexSet()) {
+        if(vertex->getType() == typeStart)
+            poi.push_back(vertex);
+    }
+    //mostrar
+    showPOI(gv, poi);
+    //escolher o ponto
+    int op;
+    string description = "Choose the id of your starting point on the map (integer number): ";
+    menu_int_options(op,1, poi.size(), description);
+    gv->closeWindow();
+    return poi.at(op)->getID();
+}
 
-    string description = "Choose the coordinates you wish to go to from the menu (integer number): ";
-    return pointsMenu("Where do you want to go to?", vertices ,description);
+string getTypeEndPoint(){
+    vector<string> items = {"Information", "Hotel", "Attraction", "ViewPoint", "Guest_House", "Picnic_Site", "Artwork", "Camp_site","Museum","Generic", "Back to main"};
+
+    string description = "Choose what type of point where your journey ends (integer number):";
+    string title = "Type of start point";
+    
+    int op = displayMenu(title, items, description);
+
+    if(op == items.size()) return "";
+    if(op == items.size()-1) return " ";
+
+    string lowercase = items.at(op-1);
+    transform(lowercase.begin(), lowercase.end(), lowercase.begin(), ::tolower);
+    return lowercase;
+}
+
+int getEndPoint(const Graph &g, int orig, string typeEnd) {
+    cout << "orig " << orig << endl;
+    //mudar para usar o graphviewer
+    GraphViewer* gv = createMapViewer(g);
+    gv->setVertexColor(orig, "green");
+    gv->setVertexSize(orig, 15);
+    gv->setVertexLabel(orig, "Start");
+
+    vector<Vertex*> v = bfsAll(g, orig);
+    vector<Vertex*> poi;
+    for(Vertex* i: v) {
+        if(i->getType() == typeEnd)
+            poi.push_back(i);
+    }
+    cout << "poi " << poi.size() << endl;
+    showPOI(gv, poi);
+
+    int op;
+    string description = "Choose the id of your starting point on the map (integer number): ";
+    menu_int_options(op,1, poi.size(), description);
+    gv->closeWindow();
+    return poi.at(op)->getID();
 }
 
 int getAvailableTime() {
@@ -71,7 +103,7 @@ int getAvailableTime() {
     return time;
 }
 
-int pointsMenu(const string& title, const vector<Vertex*>& items, const string& description) {
+/*int pointsMenu(const string& title, const vector<Vertex*>& items, const string& description) {
     int option = -1;
     system("cls");
 
@@ -104,4 +136,5 @@ int pointsMenu(const string& title, const vector<Vertex*>& items, const string& 
     }
 
     return option;
-}
+}*/
+

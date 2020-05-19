@@ -12,10 +12,6 @@ OptimizedPath magicGenerator(Graph &g, ClientInfo* info) {
         return res;
     }
 
-    for(Vertex* point: points) {
-        cout << "Points in the path: " << point->getID() << endl;
-    }
-
     queue<Vertex*> path = dijkstraShortestPath(g, info->getIdStart(), info->getIdEnd());
     double distance = distancePath(path);
 
@@ -30,7 +26,7 @@ OptimizedPath magicGenerator(Graph &g, ClientInfo* info) {
 
     vector<Vertex*> poi;
     for(Vertex* point: points) {
-        if(point->getType() != " ") {
+        if(point->getType() != " " && point->getDuration() < info->getTimeAvailable()) {
             if(info->getPoi().empty())
                 poi.push_back(point);
             else if (find(info->getPoi().begin(), info->getPoi().end(), point->getType()) != info->getPoi().end())

@@ -18,8 +18,9 @@ int main() {
     ClientInfo info;
     cout << "Hi! Welcome to TourMateApp\n";
     cout <<"Let's go ahead and fill out the preferences form\n"<<endl;
-    
-    res = mainMenu(&info);
+
+    Graph g = readMap(true);
+    res = mainMenu(&info, g);
 
     //magicGenerator(graph, &info);
     system("cls");
@@ -63,6 +64,12 @@ int main() {
     getchar();
 */
 
+    //FOR TESTING GRAPHVIEWER///
+ /*   Graph g = readMap(true);
+    GraphViewer * gv = createMapViewer(g);
+
+    getchar();
+*/
     return 0;
 }
 

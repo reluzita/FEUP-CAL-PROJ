@@ -1,40 +1,8 @@
 #include "menu.h"
 
-static vector<Graph> graphs; 
 
-Graph searchGraph(const string& city, bool biDir, bool publicTransportation){
-    
-    for(Graph graph: graphs){
-        if(graph.getCityName() == city){
-
-            if((!publicTransportation || graph.getPublicTransportation()) && (graph.getBiDir() == biDir)) //(no publicTransportation or graph has already bus/metro info) and graph is bidir
-                return graph;
-
-            else if(publicTransportation && (graph.getBiDir() == biDir)){ //when we need metro/bus info and graph is already bidir
-                graph.setPublicTransportation(true);
-                readBusFile(graph);
-                readMetroFile(graph);
-                return graph;
-            }
-            else if(graph.getBiDir() != biDir){ //when we need to change edges 
-                graph.clearEdges();
-                graph.setBiDir(biDir);
-                string lowercase = city;
-                transform(lowercase.begin(), lowercase.end(), lowercase.begin(), ::tolower);
-                readEdgesFile(graph, city, lowercase, biDir);
-                return graph;
-            }
-        }
-    }
-
-    Graph graph = readMap(city, biDir, publicTransportation);
-    graphs.push_back(graph);
-    return graph;
-}
-
-
-int mainMenu(ClientInfo *info){
-    vector<string> items = {"View Maps", "Generate Path", "Surprise Me", "Manage Preferences", "Quit Program", "main"};
+int mainMenu(ClientInfo *info, Graph &g){
+    vector<string> items = {"View Map", "Generate Path", "Surprise Me", "Manage Preferences", "Quit Program", "main"};
     string description = "Choose one option from the menu (integer number): ";
     
     int value = 0, option;
@@ -43,7 +11,7 @@ int mainMenu(ClientInfo *info){
         option = displayMenu("Welcome", items, description);
 
         if(option == 1) value = viewMaps();
-        else if (option == 2) value = generatePath(info);
+        else if (option == 2) value = generatePath(info, g);
         else if (option == 3) value = supriseMe();
         else if (option == 4) value = managePreferences(info);
         
@@ -52,34 +20,31 @@ int mainMenu(ClientInfo *info){
     return 0;
 }
 
-int generatePath(ClientInfo* info){ 
-
-    //cidade
-    string city = getCity();
-    if(city.empty()) return 0;
-    info->setCity(city);
+int generatePath(ClientInfo* info, Graph &g){
     
-    //meio de transporte
-
-    int op = getTransportation(city);
-    if(op == -1 || op == 0) return op;
-
-    bool publictransportation = (op == 3);
-    bool bidir = (op == 1);
-    
-    Graph graph = searchGraph(city, bidir, publictransportation);
-
     //inicio --  por coordenadas ou pesquisa nao exata
 
-    int idStart = getStartPoint(graph);
+    string typeStart = getTypeStartPoint();
+    if(typeStart.empty()) return 0;
+
+    int idStart = getStartPoint(g, typeStart);
     if(idStart == -1 || idStart == 0) return idStart;
     info->setIdStart(idStart);
 
     //fim
+    string typeEnd = getTypeEndPoint();
+    if(typeEnd.empty()) return 0;
 
-    int idEnd = getEndPoint(graph, idStart);
+    int idEnd = getEndPoint(g, idStart, typeEnd);
     if(idEnd == -1 || idEnd == 0) return idEnd;
     info->setIdEnd(idEnd);
+
+    //meio de transporte
+    int op = getTransportation();
+    if(op == -1 || op == 0) return op;
+
+
+    bool bidir = (op == 1);
 
     //tempo
 
@@ -89,11 +54,11 @@ int generatePath(ClientInfo* info){
 
     //nota: avisar se não houver caminho no tempo indicado
 
-    OptimizedPath optPath = magicGenerator(graph, info);
-    GraphViewer* gv = createPathViewer(graph, optPath.path, optPath.visitedId);
+    OptimizedPath optPath = magicGenerator(g, info);
+    GraphViewer* gv = createPathViewer(g, optPath.path, optPath.visitedId);
 
     getchar();
-    
+    gv->closeWindow();
     return 0;
 }
 
@@ -121,40 +86,17 @@ int managePreferences(ClientInfo * info){
 }
 
 int viewMaps(){
-    
-    vector<string> items = {"Aveiro", "Braga", "Coimbra", "Ermesinde", "Fafe", "Gondomar", "Lisboa", "Maia", "Porto","Viseu", "Back to Main"};
-    string description = "Choose a city from the menu (integer number): ";
-    int option = displayMenu("View Maps", items, description);
-    
-    if(option == -1)
-        return -1;
-    
-    if(option == items.size())
-        return 0;
-    string city = items.at(option - 1);
 
+    //Graph g = 
 
-    Graph g = searchGraph(city, false, false);
-
-    GraphViewer *gv = createMapViewer(g);  
+    //GraphViewer *gv = createMapViewer(g);  
 
     return 0;
 }
 
 int supriseMe(){
 
-    vector<string> items = {"Aveiro", "Braga", "Coimbra", "Ermesinde", "Fafe", "Gondomar", "Lisboa", "Maia", "Porto","Viseu", "Back to Main"};
-    string description = "Choose a city from the menu (integer number): ";
-    int option = displayMenu("Surprise Me", items, description);
-
-    if(option == -1)
-        return -1;
-
-        
-    if(option == items.size())
-        return 0;
-    string city = items.at(option - 1);
-
+    //escolher o ponto incial
     //random caminho, não sei como fazer isto ainda
 
     return 0;

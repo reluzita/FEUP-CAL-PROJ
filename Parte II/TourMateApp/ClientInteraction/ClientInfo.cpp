@@ -1,9 +1,6 @@
 #include "ClientInfo.h"
 
-void ClientInfo::setCity(string city) {
-    this->city = city;
-}
- 
+
 void ClientInfo::setMeansOfTransportation(char meansOfTransportation){
     this->meansOfTransportation = meansOfTransportation;
 }
@@ -23,10 +20,7 @@ void ClientInfo::setTimeAvailable(int timeAvailable){
 void ClientInfo::setPoi(vector <string> poi){
     this->poi = poi;
 }
-string ClientInfo::getCity() {
-    return city;
-}
- 
+
 char ClientInfo::getMeansOfTransportation(){
     return meansOfTransportation;
 }

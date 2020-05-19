@@ -2,30 +2,24 @@
 
 using namespace std;
 
-Graph readMap(const string &cityName, bool bidir, bool publictransportation)
+Graph readMap(bool bidir)
 {
     Graph graph;
-    string lowercase = cityName;
-    transform(lowercase.begin(), lowercase.end(), lowercase.begin(), ::tolower);
 
-    readNodesFile(graph, cityName, lowercase);
-    readLatLonFile(graph, cityName, lowercase);
-    readEdgesFile(graph, cityName, lowercase, bidir);
-    readTags(graph, cityName);
+    readNodesFile(graph);
+    readLatLonFile(graph);
+    readEdgesFile(graph, bidir);
+    readTags(graph);
 
-    if(publictransportation){
-        readBusFile(graph);
-        readMetroFile(graph);
-    }
+    readBusFile(graph);
+    readMetroFile(graph);
 
-    graph.setCityName(cityName);
     graph.setBiDir(bidir);
-    graph.setPublicTransportation(publictransportation);
     return graph;
 }
 
-void readNodesFile(Graph &graph, const string &cityName, const string &lowercase){
-    string nodesfile = "../resources/PortugalMaps/PortugalMaps/" + cityName + "/nodes_x_y_" + lowercase + ".txt";
+void readNodesFile(Graph &graph){
+    string nodesfile = "../resources/nodes_x_y.txt";
     ifstream nodes;
     string line;
     int numNodes;
@@ -48,15 +42,14 @@ void readNodesFile(Graph &graph, const string &cityName, const string &lowercase
         pos = line.find(')');
         y = stof(line.substr(0, pos));
         graph.addVertex(id, x, y);
-        //cout << id << endl;
     }
     nodes.close();
 
 }
 
-void readEdgesFile(Graph &graph, const string &cityName, const string &lowercase, bool bidir){
+void readEdgesFile(Graph &graph, bool bidir){
 
-    string edgesfile = "../resources/PortugalMaps/PortugalMaps/" + cityName + "/edges_"+ lowercase + ".txt";
+    string edgesfile = "../resources/edges.txt";
     ifstream edges;
     string line;
 
@@ -84,9 +77,8 @@ void readEdgesFile(Graph &graph, const string &cityName, const string &lowercase
     edges.close();
 }
 
-void readLatLonFile(Graph &graph, const string &cityName, const string &lowercase){
-
-    string latlonfile = "../resources/PortugalMaps/PortugalMaps/" + cityName + "/nodes_lat_lon_" + lowercase + ".txt";
+void readLatLonFile(Graph &graph){
+    string latlonfile = "../resources/nodes_lat_lon.txt";
     ifstream latlon;
     string line;
     int numNodes;
@@ -116,12 +108,10 @@ void readLatLonFile(Graph &graph, const string &cityName, const string &lowercas
     latlon.close();
 }
 
-vector<int> readTags(Graph &g, const string &cityName) {
+vector<int> readTags(Graph &g) {
     srand(time(NULL));
 
-    string lowercase = cityName;
-    transform(lowercase.begin(), lowercase.end(), lowercase.begin(), ::tolower);
-    string tagfile = "../resources/TagExamples/" + cityName + "/t03_tags_" + lowercase + ".txt";
+    string tagfile = "../resources/tags.txt";
 
     vector<int> res;
     ifstream file;
@@ -156,7 +146,7 @@ void readMetroFile(Graph &g) {
     string line;
     int numStations;
 
-    file.open("../resources/TagExamples/STCPRoutes/metro_routes_porto.txt");
+    file.open("../resources/metro_routes.txt");
     
     getline(file, line);
     numStations = stoi(line);
@@ -197,7 +187,7 @@ void readMetroFile(Graph &g) {
 
 void readBusFile(Graph &g) {
     ifstream file;
-    file.open("../resources/TagExamples/STCPRoutes/stcp_routes_porto.txt");
+    file.open("../resources/stcp_routes.txt");
 
     string line;
     getline(file, line);
@@ -241,7 +231,6 @@ void readBusFile(Graph &g) {
         line.erase(0, pos + 2);
         
         v->setBusStop(busStop);
-        cout << v->getID() << endl;
     }
 
 }

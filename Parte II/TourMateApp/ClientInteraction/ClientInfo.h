@@ -7,7 +7,6 @@ using namespace std;
 
 class ClientInfo{
     private:
-        string city; //maybe change this
         char meansOfTransportation;
         int idStart;
         int idEnd;
@@ -15,13 +14,11 @@ class ClientInfo{
         vector<string> poi;
 
     public: 
-        void setCity(string city);
         void setMeansOfTransportation(char meansOfTransportation);
         void setIdStart(int idStart);
         void setIdEnd(int idEnd);
         void setTimeAvailable(int timeAvailable);
         void setPoi(vector <string> poi);
-        string getCity();
         char getMeansOfTransportation();
         int getIdStart();
         int getIdEnd();

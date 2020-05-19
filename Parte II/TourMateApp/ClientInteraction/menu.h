@@ -9,14 +9,13 @@
 #include "../Algorithms/BFS.h"
 #include "../Utils/util.h"
 #include "../Utils/MagicGenerator.h"
-#include "../Utils/GraphView.h"
+
 #include "GeneratePathMenu.h"
 
 using namespace std;
 
-Graph searchGraph(const string& city, bool biDir, bool publicTransportation);
-int mainMenu(ClientInfo *info);
-int generatePath(ClientInfo* info);
+int mainMenu(ClientInfo *info, Graph &g);
+int generatePath(ClientInfo* info, Graph &g);
 int managePreferences(ClientInfo * info);
 int viewMaps();
 int supriseMe();

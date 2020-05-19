@@ -8,13 +8,16 @@
 #include "../Utils/util.h"
 #include "../Graph/Graph.h"
 #include "../Algorithms/BFS.h"
+#include "../Utils/GraphView.h"
 
 using namespace std;
 
 string getCity();
-int getTransportation(string city);
-int getStartPoint(const Graph &g);
-int getEndPoint(const Graph &g, int orig);
+string getTypeStartPoint();
+string getTypeEndPoint();
+int getTransportation();
+int getStartPoint(const Graph &g, string typeStart);
+int getEndPoint(const Graph &g, int orig, string typeEnd);
 int getAvailableTime();
 int pointsMenu(const string& title, const vector<Vertex*>& items, const string& description);
 

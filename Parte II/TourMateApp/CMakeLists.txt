@@ -11,7 +11,7 @@ include_directories(lib)
 add_executable(TourMateApp main.cpp lib/connection.cpp lib/graphviewer.cpp
         Utils/ReadFiles.cpp Graph/Graph.cpp Graph/Edge.cpp Graph/Vertex.cpp
         Graph/Graph.h Graph/Edge.h Graph/Vertex.h
-        Algorithms/Dijkstra.cpp Algorithms/Dijkstra.h Algorithms/DFS.cpp Algorithms/DFS.h Algorithms/BFS.cpp Algorithms/BFS.h Algorithms/AStar.cpp Algorithms/AStar.h
+        Algorithms/Dijkstra.cpp Algorithms/Dijkstra.h Algorithms/DFS.cpp Algorithms/DFS.h Algorithms/BFS.cpp Algorithms/BFS.h
         Utils/GraphView.cpp Utils/GraphView.h Utils/util.h Utils/util.cpp
         Graph/Stop.h ClientInteraction/ClientInfo.h ClientInteraction/ClientInfo.cpp
         Utils/MagicGenerator.cpp Utils/MagicGenerator.h

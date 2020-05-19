@@ -10,11 +10,11 @@
 #include "../Graph/Graph.h"
 #include "util.h"
 
-Graph readMap(const string &cityName, bool bidir, bool publictransportation);
-void readNodesFile(Graph &graph, const string &cityName, const string &lowercase);
-void readEdgesFile(Graph &graph, const string &cityName, const string &lowercase, bool bidir);
-void readLatLonFile(Graph &graph, const string &cityName, const string &lowercase);
-vector<int> readTags(Graph &g , const string &cityName);
+Graph readMap(bool bidir);
+void readNodesFile(Graph &graph);
+void readEdgesFile(Graph &graph, bool bidir);
+void readLatLonFile(Graph &graph);
+vector<int> readTags(Graph &g);
 void readMetroFile(Graph &g);
 void readBusFile(Graph &g);
 

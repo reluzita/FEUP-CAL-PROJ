@@ -31,9 +31,8 @@ int displayMenu(const string& title, vector<string>options, const string& descri
     for(; i<options.size()-1;i++){
         cout << i+1 <<" . "<<options.at(i)<<"\n";
     }
-    i++;
     if(options.at(options.size()-1)!= "main"){
-        cout << i +1 << options.at(i)<<endl;
+        cout << i +1 << " . "<<options.at(options.size()-1)<<endl;
         cout <<"\nInsert CTRL+Z to leave the app\n";
     }
     cout << "--------------------------------------\n";
