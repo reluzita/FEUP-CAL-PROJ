@@ -59,6 +59,8 @@ public:
     bool getPublicTransportation() const;
     bool getBiDir() const;
 
+    void clearEdges();
+
 /*
     // Fp05 - single source
     void unweightedShortestPath(const int &s);    //TODO...

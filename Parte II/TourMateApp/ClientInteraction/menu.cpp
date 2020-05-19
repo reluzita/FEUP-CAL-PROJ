@@ -2,34 +2,39 @@
 
 static vector<Graph> graphs; 
 
-Graph findCityGraph(const string& city){
-
-
+Graph searchGraph(const string& city, bool biDir, bool publicTransportation){
     
     for(Graph graph: graphs){
-        if(graph.getCityName() == city)
-            return graph;
+        if(graph.getCityName() == city){
+
+            if((!publicTransportation || graph.getPublicTransportation()) && (graph.getBiDir() == biDir)) //(no publicTransportation or graph has already bus/metro info) and graph is bidir
+                return graph;
+
+            else if(publicTransportation && (graph.getBiDir() == biDir)){ //when we need metro/bus info and graph is already bidir
+                graph.setPublicTransportation(true);
+                readBusFile(graph);
+                readMetroFile(graph);
+                return graph;
+            }
+            else if(graph.getBiDir() != biDir){ //when we need to change edges 
+                graph.clearEdges();
+                graph.setBiDir(biDir);
+                string lowercase = city;
+                transform(lowercase.begin(), lowercase.end(), lowercase.begin(), ::tolower);
+                readEdgesFile(graph, city, lowercase, biDir);
+                return graph;
+            }
+        }
     }
 
-    return Graph();
+    Graph graph = readMap(city, biDir, publicTransportation);
+    graphs.push_back(graph);
+    return graph;
 }
-
-//TO IMPLEMENT:
-/*  Graph g = findCityGraph(city);
-    if(g == null){
-        g = readMap(city, bidir, publicTransportation);
-        graphs.push_back(g);
-    }
-    if(!g.getPublicTransportation() && needTransportation){
-        g.setPublicTransportation(true);
-        readBusFile(g);
-        readMetroFile(g);
-    }
-*/
 
 
 int mainMenu(ClientInfo *info){
-    vector<string> items = {"View Maps", "Generate Path", "Surprise Me", "Manage Preferences", "Quit Program"};
+    vector<string> items = {"View Maps", "Generate Path", "Surprise Me", "Manage Preferences", "Quit Program", "main"};
     string description = "Choose one option from the menu (integer number): ";
     
     int value = 0, option;
@@ -62,7 +67,7 @@ int generatePath(ClientInfo* info){
     bool publictransportation = (op == 3);
     bool bidir = (op == 1);
     
-    Graph graph = readMap(city, bidir, publictransportation);
+    Graph graph = searchGraph(city, bidir, publictransportation);
 
     //inicio --  por coordenadas ou pesquisa nao exata
 
@@ -117,43 +122,38 @@ int managePreferences(ClientInfo * info){
 
 int viewMaps(){
     
-    vector<string> items = {"Aveiro", "Braga", "Coimbra", "Ermesinde", "Fafe", "Gondomar", "Lisboa", "Maia", "Porto","Viseu"};
+    vector<string> items = {"Aveiro", "Braga", "Coimbra", "Ermesinde", "Fafe", "Gondomar", "Lisboa", "Maia", "Porto","Viseu", "Back to Main"};
     string description = "Choose a city from the menu (integer number): ";
     int option = displayMenu("View Maps", items, description);
     
     if(option == -1)
         return -1;
     
+    if(option == items.size())
+        return 0;
     string city = items.at(option - 1);
-    Graph g = findCityGraph(city);
 
-    if(g == Graph()){
-        g = readMap(city, false, false);
-        graphs.push_back(g);
-    }
-    
+
+    Graph g = searchGraph(city, false, false);
+
     GraphViewer *gv = createMapViewer(g);  
-        
 
     return 0;
 }
 
 int supriseMe(){
 
-    vector<string> items = {"Aveiro", "Braga", "Coimbra", "Ermesinde", "Fafe", "Gondomar", "Lisboa", "Maia", "Porto","Viseu"};
+    vector<string> items = {"Aveiro", "Braga", "Coimbra", "Ermesinde", "Fafe", "Gondomar", "Lisboa", "Maia", "Porto","Viseu", "Back to Main"};
     string description = "Choose a city from the menu (integer number): ";
     int option = displayMenu("Surprise Me", items, description);
 
     if(option == -1)
         return -1;
 
+        
+    if(option == items.size())
+        return 0;
     string city = items.at(option - 1);
-    Graph g = findCityGraph(city);
-
-    if(g == Graph()){
-        g = readMap(city, false, false);
-        graphs.push_back(g);
-    }
 
     //random caminho, não sei como fazer isto ainda
 

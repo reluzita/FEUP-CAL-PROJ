@@ -2,13 +2,9 @@
 #include "GraphView.h"
 
 GraphViewer* createMapViewer(const Graph &g) {
-    cout << g.getMinY()<< " " << g.getMaxY() << endl;
-    cout << g.getMinX() << " " << g.getMaxY() << endl;
-
     double height = g.getMaxY() - g.getMinY();
     double width = g.getMaxX() - g.getMinX();
 
-    cout << height << " " << width << endl;
     int graphHeight, graphWidth;
     if(width/height < 2) {
         graphHeight = 600;
@@ -18,8 +14,6 @@ GraphViewer* createMapViewer(const Graph &g) {
         graphWidth = 1500;
         graphHeight = (height * graphWidth) / width;
     }
-
-    cout << graphHeight << " " << graphWidth << endl;
 
     auto *gv = new GraphViewer(graphWidth, graphHeight, false);
     gv->createWindow(graphWidth, graphHeight);

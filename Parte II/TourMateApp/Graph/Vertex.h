@@ -72,6 +72,8 @@ public:
     void setInvertedVisited(bool visited);
     void setDuration(int dur);
 
+    void clearEdges();
+
     double distanceLatLon(Vertex* v2);
     /*T getInfo() const;
     double getDist() const;

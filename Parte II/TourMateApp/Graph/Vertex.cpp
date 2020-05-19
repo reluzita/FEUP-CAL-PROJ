@@ -125,6 +125,10 @@ void Vertex::setInvertedVisited(bool visited) {
     this->invertedVisited = visited;
 }
 
+void Vertex::clearEdges() {
+    adj.clear();
+}
+
 double Vertex::distanceLatLon(Vertex* v2) {
     double deg2radMultiplier =  PI / 180;
     double lon1 = lon * deg2radMultiplier;

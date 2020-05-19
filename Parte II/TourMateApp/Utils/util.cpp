@@ -26,12 +26,16 @@ void menu_int_options(int &option, int omin, int nmax, const string& description
 int displayMenu(const string& title, vector<string>options, const string& description){
     int option = -1;
     system("cls");
-
+    unsigned i = 0;
     cout << "---------------- "<<title <<" ----------------\n\n";
-    for(unsigned i=0; i<options.size();i++){
-        cout << i+1 <<" . "<<options[i]<<"\n";
+    for(; i<options.size()-1;i++){
+        cout << i+1 <<" . "<<options.at(i)<<"\n";
     }
-    cout <<"\nInsert CTRL+Z to leave the app\n";
+    i++;
+    if(options.at(options.size()-1)!= "main"){
+        cout << i +1 << options.at(i)<<endl;
+        cout <<"\nInsert CTRL+Z to leave the app\n";
+    }
     cout << "--------------------------------------\n";
 
 

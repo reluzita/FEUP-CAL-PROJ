@@ -123,6 +123,11 @@ bool Graph::addBiDirEdge(const int &sourc, const int &dest, double w) {
     return true;
 }
 
+void Graph::clearEdges() {
+    for(Vertex* vertex: vertexSet)
+        vertex->clearEdges();
+}
+
 
 double Graph::getMaxX() const{
     return maxX;
