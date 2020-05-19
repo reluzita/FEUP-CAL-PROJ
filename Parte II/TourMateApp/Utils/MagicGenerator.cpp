@@ -111,7 +111,6 @@ queue<Vertex*> findPoiInPath(Graph &g, vector<Vertex*> poi, const int &orig, con
 int hasTime(queue<Vertex*> path, char transportation, int availableTime) {
     double distance = distancePath(path);
     int dur = minutesFromDistance(distance, transportation);
-    //cout << endl << dur << endl;
     return availableTime - dur;
 }
 
@@ -121,18 +120,13 @@ int hasTime(queue<Vertex*> path, char transportation, int availableTime) {
 };*/
 
 
-OptimizedPath findPoiInPath(Graph &g, vector<Vertex*> poi, const int &orig, const int &dest, const int &availableTime, char transportation) {
+OptimizedPath findPoiInPath(Graph &g, const vector<Vertex*> &poi, const int &orig, const int &dest, const int &availableTime, char transportation) {
     struct OptimizedPath empty;  //empty queue to return when cant find path
     struct OptimizedPath best;
     best.path = dijkstraShortestPath(g, orig, dest);
 
-    int numPOIs = 0;//countPOIs(best.path, poi);
-
     int time = hasTime(best.path, transportation, availableTime);
-    cout << endl << endl;
-    cout << "From orig to dest: " << time << endl;
     if(time <= 0) {
-        cout << "No time!" << endl;
         return empty;   //no time to go straight from orig to dest
     }
 
@@ -145,9 +139,7 @@ OptimizedPath findPoiInPath(Graph &g, vector<Vertex*> poi, const int &orig, cons
 
         queue<Vertex *> pathFromOrig = dijkstraShortestPath(g, orig, point->getID());
         int remainingTime = hasTime(pathFromOrig, transportation, availableTime) - point->getDuration();
-        cout << "From orig to point: " << remainingTime << endl;
         if (remainingTime <= 0) {
-            cout << "No time!" << endl;
             continue;   //no time to go from orig to point
         }
 
@@ -163,19 +155,20 @@ OptimizedPath findPoiInPath(Graph &g, vector<Vertex*> poi, const int &orig, cons
 
 
         int finalTime = hasTime(pathToDest, transportation, remainingTime);
-        cout << "Time from origin to point to dest: " << finalTime << endl;
 
         if (finalTime <= 0) {
-            cout << "No time!" << endl;
             continue;       //no time to go from orig to point to dest
         }
 
-        int temp = 1;//countPOIs(res, poi);
-        if (temp > numPOIs) {
-            cout << "Found a path ( didnt make recursive call): " << hasTime(res, transportation, availableTime - point->getDuration()) << endl;
+        vector<int> temp;
+        temp.push_back(point->getID());
+        if (temp.size() > best.visitedId.size()) {
+            //cout << "Found a path ( didnt make recursive call): " << hasTime(res, transportation, availableTime - point->getDuration()) << endl;
             best.path = res;
-            numPOIs = temp;
-            best.visitedId.push_back(point->getID());
+            while(!res.empty()) {
+                res.pop();
+            }
+            best.visitedId = temp;
         }
 
         //remove points of interest already visited in the way from orig to point
@@ -207,21 +200,24 @@ OptimizedPath findPoiInPath(Graph &g, vector<Vertex*> poi, const int &orig, cons
         if(time <= 0)
             continue;
 
-        cout << "Found a path: " << hasTime(res, transportation, availableTime) << endl;
-        temp = optPathToDest.visitedId.size() + 1; //countPOIs(res, poi);
-        if (temp > numPOIs) {
+        //cout << "Found a path: " << hasTime(res, transportation, availableTime) << endl;
+        temp = optPathToDest.visitedId;
+        temp.push_back(point->getID());
+        if (temp.size() > best.visitedId.size()) {
             best.path = res;
-            numPOIs = temp;
-            for(int i: optPathToDest.visitedId)
-                best.visitedId.push_back(i);
+            while(!res.empty()) {
+                res.pop();
+            }
+            best.visitedId = temp;
         }
     }
-
+    queue<Vertex*> aux = best.path;
+    while(!aux.empty()) {
+        aux.pop();
+    }
+    cout << "Nodes in path: " << best.path.size() << " Visited nodes: " << best.visitedId.size() << endl;
     return best;
 }
-
-//chamar funcao outra vez
-    //pôr o static int a 0
 
 template <class T>
 queue<T> joinQueue(queue<T> frontQ, queue<T> backQ) {

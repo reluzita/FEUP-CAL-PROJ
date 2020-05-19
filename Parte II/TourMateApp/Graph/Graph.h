@@ -23,6 +23,7 @@ class Graph {
     double minLon;
 
     bool publicTransportation;
+    bool biDir;
 
     std::string cityName;
     //vector<vector<int>> D;
@@ -43,6 +44,7 @@ public:
     void setVertexSet(vector<Vertex*> vertexSet);
     void setCityName(string name );
     void setPublicTransportation(bool publicTransportation);
+    void setBiDir(bool biDir);
 
     double getMaxX() const;
     double getMinX() const;
@@ -55,6 +57,7 @@ public:
     double getMinLon()const;
     string getCityName() const;
     bool getPublicTransportation() const;
+    bool getBiDir() const;
 
 /*
     // Fp05 - single source

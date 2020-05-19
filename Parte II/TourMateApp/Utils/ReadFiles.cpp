@@ -19,7 +19,8 @@ Graph readMap(const string &cityName, bool bidir, bool publictransportation)
     }
 
     graph.setCityName(cityName);
-    graph.setPublicTransportation(publictransportation); //é preciso?
+    graph.setBiDir(bidir);
+    graph.setPublicTransportation(publictransportation);
     return graph;
 }
 

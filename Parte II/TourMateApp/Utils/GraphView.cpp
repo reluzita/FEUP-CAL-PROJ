@@ -82,7 +82,10 @@ GraphViewer* createPathViewer(const Graph &g, queue<Vertex*> path, vector<int> v
             gv->setVertexColor(vertex->getID(), "green");
         else if(find(visitedPoi.begin(), visitedPoi.end(), vertex->getID()) != visitedPoi.end()) {
             gv->setVertexColor(vertex->getID(), "red");
-            gv->setVertexLabel(vertex->getID(), to_string(vertex->getID()) + "-" + to_string(vertex->getDuration()));
+            gv->setVertexLabel(vertex->getID(), /*to_string(vertex->getID())*/vertex->getType() + "-" + to_string(vertex->getDuration()));
+        } else if(vertex->getType() != " ") {
+            gv->setVertexColor(vertex->getID(), "pink");
+            gv->setVertexLabel(vertex->getID(), /*to_string(vertex->getID())*/vertex->getType() + "-" + to_string(vertex->getDuration()));
         }
         gv->setVertexSize(vertex->getID(), 10);
     }

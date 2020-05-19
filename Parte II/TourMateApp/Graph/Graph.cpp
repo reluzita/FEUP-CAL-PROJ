@@ -14,6 +14,7 @@ Graph::Graph() {
     minLon = INT_MAX;
 
     publicTransportation = false;
+    bidir = false;
 }
 
 void Graph::initializeGraph() {
@@ -137,6 +138,10 @@ double Graph::getMinY() const{
     return minY;
 }
 
+bool Graph::getBiDir() const{
+    return biDir;
+}
+
 void Graph::checkLatLon(double lat, double lon) {
     if(lat > maxLat) maxLat = lat;
     if(lat < minLat) minLat = lat;
@@ -172,6 +177,10 @@ void Graph::setCityName(string name){
 
 void Graph::setPublicTransportation(bool publicTransportation){
     this->publicTransportation = publicTransportation;
+}
+
+void Graph::setBiDir(bool biDir){
+    this->biDir = biDir;
 }
 
 vector<pair<double,double>> Graph::getCityCoords(){

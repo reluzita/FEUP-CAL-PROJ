@@ -22,7 +22,7 @@ struct OptimizedPath{
 };
 
 queue<Vertex*> magicGenerator(Graph &g, ClientInfo* info);
-OptimizedPath findPoiInPath(Graph &g, vector<Vertex*> poi, const int &orig, const int &dest, const int &availableTime, char transportation);
+OptimizedPath findPoiInPath(Graph &g, const vector<Vertex*> &poi, const int &orig, const int &dest, const int &availableTime, char transportation);
 template <class T>
 queue<T> joinQueue(queue<T> frontQ, queue<T> backQ);
 int hasTime(queue<Vertex*> path, char transportation, int availableTime);

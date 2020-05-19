@@ -32,11 +32,13 @@ int main() {
     //FOR TESTING MAGIC GENERATOR//
 
     string city = "Porto";
-    Graph g = readMap(city, false, false);
+    Graph g = readMap(city, true, false);
 
-    int orig = 1223751712, dest = 447867546;
+    //int orig = 1223751712, dest = 447867546;
+    int orig = 90380348;
 
     vector<Vertex*> visit = bfsAll(g, orig);
+    int dest = visit[visit.size()/2]->getID();
     vector<Vertex*> poi;
     int i = 0;
     for(Vertex* p: visit) {
@@ -51,10 +53,10 @@ int main() {
     //cout << poi.size() << endl;
 
    // g.initializeForFindPOI();
-    OptimizedPath optPath = findPoiInPath(g, poi, orig, dest, 120, 'c');
+    OptimizedPath optPath = findPoiInPath(g, poi, orig, dest, 200, 'w');
     queue<Vertex*> path = optPath.path;
     GraphViewer* gv = createPathViewer(g, path, optPath.visitedId);
-    cout << endl << hasTime(path, 'c', 120) << endl;
+    cout << endl << hasTime(path, 'w', 200) << endl;
 
     //GraphViewer* gv = createMapViewer(g);
     //showPOI(gv, poi);
