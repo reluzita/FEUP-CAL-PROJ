@@ -1,7 +1,7 @@
 #include "menu.h"
 
 
-int mainMenu(ClientInfo *info, Graph &g){
+int mainMenu(ClientInfo *info, Graph &g, Graph &gbdir){
     vector<string> items = {"View Map", "Generate Path", "Surprise Me", "Manage Preferences", "Quit Program", "main"};
     string description = "Choose one option from the menu (integer number): ";
     
@@ -10,8 +10,8 @@ int mainMenu(ClientInfo *info, Graph &g){
     do{
         option = displayMenu("Welcome", items, description);
 
-        if(option == 1) value = viewMaps();
-        else if (option == 2) value = generatePath(info, g);
+        if(option == 1) value = viewMaps(g);
+        else if (option == 2) value = generatePath(info, g, gbdir);
         else if (option == 3) value = supriseMe();
         else if (option == 4) value = managePreferences(info);
         
@@ -20,7 +20,7 @@ int mainMenu(ClientInfo *info, Graph &g){
     return 0;
 }
 
-int generatePath(ClientInfo* info, Graph &g){
+int generatePath(ClientInfo* info, Graph &g, Graph &gbdir){
     
     //inicio --  por coordenadas ou pesquisa nao exata
 
@@ -85,11 +85,9 @@ int managePreferences(ClientInfo * info){
     return 0;
 }
 
-int viewMaps(){
+int viewMaps(const Graph &g){
 
-    //Graph g = 
-
-    //GraphViewer *gv = createMapViewer(g);  
+    GraphViewer *gv = createMapViewer(g);  
 
     return 0;
 }

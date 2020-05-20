@@ -28,14 +28,17 @@ public:
 };
 
 class MetroStation {
+    int ID;
     string stationName;
-    vector<string> lines;
+    int stopNum;
 
 public:
     MetroStation(){}
-    MetroStation(string stationName, vector<string> lines): stationName(stationName), lines(lines) {}
+    MetroStation(int ID, string stationName, int stopNum): ID(ID), stationName(stationName), stopNum(stopNum) {}
     void setStationName(string stationName){ this->stationName = stationName;}
-    void addLine(string line){this->lines.push_back(line);}
+    int getID() {return ID;}
+    string getStationName() {return stationName;}
+    int getStopNum() {return stopNum;}
 };
 
 

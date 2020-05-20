@@ -50,7 +50,7 @@ string getTypeEndPoint(){
     vector<string> items = {"Information", "Hotel", "Attraction", "ViewPoint", "Guest_House", "Picnic_Site", "Artwork", "Camp_site","Museum","Generic", "Back to main"};
 
     string description = "Choose what type of point where your journey ends (integer number):";
-    string title = "Type of start point";
+    string title = "Type of end point";
     
     int op = displayMenu(title, items, description);
 
@@ -63,12 +63,11 @@ string getTypeEndPoint(){
 }
 
 int getEndPoint(const Graph &g, int orig, string typeEnd) {
-    cout << "orig " << orig << endl;
-    //mudar para usar o graphviewer
+
     GraphViewer* gv = createMapViewer(g);
     gv->setVertexColor(orig, "green");
     gv->setVertexSize(orig, 15);
-    gv->setVertexLabel(orig, "Start");
+    gv->setVertexLabel(orig, "You're here");
 
     vector<Vertex*> v = bfsAll(g, orig);
     vector<Vertex*> poi;

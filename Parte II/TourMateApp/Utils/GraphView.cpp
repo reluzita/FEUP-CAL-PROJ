@@ -21,11 +21,13 @@ GraphViewer* createMapViewer(const Graph &g) {
     gv->defineEdgeColor("black");
 
     for(Vertex* vertex: g.getVertexSet()) {
-        double y = (vertex->getY() - g.getMinY())/height;
-        double x = (vertex->getX() - g.getMinX())/width;
+        if(vertex->getStrong()){
+            double y = (vertex->getY() - g.getMinY())/height;
+            double x = (vertex->getX() - g.getMinX())/width;
 
-        gv->addNode(vertex->getID(), (int)(x*graphWidth), (int)(y*graphHeight));
-        gv->setVertexSize(vertex->getID(), 1);
+            gv->addNode(vertex->getID(), (int)(x*graphWidth), (int)(y*graphHeight));
+            gv->setVertexSize(vertex->getID(), 1);
+        }
     }
     gv->rearrange();
     return gv;
@@ -52,11 +54,13 @@ GraphViewer* createPathViewer(const Graph &g, queue<Vertex*> path, vector<int> v
     gv->defineEdgeColor("black");
 
     for(Vertex* vertex: g.getVertexSet()) {
-        double y = abs(vertex->getY() - g.getMinY())/height;
-        double x = abs(vertex->getX() - g.getMinX())/width;
+        if(vertex->getStrong()){
+            double y = abs(vertex->getY() - g.getMinY())/height;
+            double x = abs(vertex->getX() - g.getMinX())/width;
 
-        gv->addNode(vertex->getID(), (int)(x*graphWidth), (int)(y*graphHeight));
-        gv->setVertexSize(vertex->getID(), 2);
+            gv->addNode(vertex->getID(), (int)(x*graphWidth), (int)(y*graphHeight));
+            gv->setVertexSize(vertex->getID(), 2);
+        }
     }
 
     int i = 0;
@@ -66,7 +70,7 @@ GraphViewer* createPathViewer(const Graph &g, queue<Vertex*> path, vector<int> v
         path.pop();
 
         for(Edge edge: path.front()->getAdj()) {
-            if (edge.getDest() == vertex->getID()) {
+            if (edge.getDest() == vertex->getID() && edge.isStrong()) {
                 gv->addEdge(i, path.front()->getID(), vertex->getID(), EdgeType::DIRECTED);
                 i++;
             }
@@ -92,7 +96,6 @@ void showPOI(GraphViewer* gv, const vector<Vertex*>& points) {
         gv->setVertexColor(points.at(i)->getID(), "red");
         gv->setVertexLabel(points.at(i)->getID(), points.at(i)->getType() +" - " + to_string(i+1));
         gv->setVertexSize(points.at(i)->getID(), 10);
-        cout << "Here" << endl;
     }
 
     gv->rearrange();

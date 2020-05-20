@@ -11,15 +11,12 @@ Graph readMap(bool bidir)
     readEdgesFile(graph, bidir);
     readTags(graph);
 
-    readBusFile(graph);
-    readMetroFile(graph);
-
     graph.setBiDir(bidir);
     return graph;
 }
 
-void readNodesFile(Graph &graph){
-    string nodesfile = "../resources/nodes_x_y.txt";
+void readNodesFile(Graph &graph){   
+    string nodesfile = "../resources/porto_full_nodes_xy.txt";
     ifstream nodes;
     string line;
     int numNodes;
@@ -35,21 +32,39 @@ void readNodesFile(Graph &graph){
         double x, y;
         size_t pos = line.find(',');
         id = stoi(line.substr(1, pos));
-        line.erase(0, pos + 2);
+        line.erase(0, pos + 1);
         pos = line.find(',');
         x = stof(line.substr(0, pos));
-        line.erase(0, pos + 2);
+        line.erase(0, pos + 1);
         pos = line.find(')');
         y = stof(line.substr(0, pos));
         graph.addVertex(id, x, y);
     }
     nodes.close();
 
+    nodesfile = "../resources/porto_strong_nodes_xy.txt";
+    nodes.open(nodesfile);
+
+    getline(nodes, line);
+    numNodes = stoi(line);
+
+
+    for (int i = 0; i < numNodes; i++) {
+        getline(nodes, line);
+        int id;
+        size_t pos = line.find(',');
+        id = stoi(line.substr(1, pos));
+        Vertex* v = graph.findVertex(id);
+        v->setStrong(true);
+    }
+
+
+    nodes.close();
 }
 
 void readEdgesFile(Graph &graph, bool bidir){
 
-    string edgesfile = "../resources/edges.txt";
+    string edgesfile = "../resources/porto_full_edges.txt";
     ifstream edges;
     string line;
 
@@ -62,7 +77,7 @@ void readEdgesFile(Graph &graph, bool bidir){
         int n1, n2;
         size_t pos = line.find(',');
         n1 = stoi(line.substr(1, pos));
-        line.erase(0, pos + 2);
+        line.erase(0, pos + 1);
         pos = line.find(')');
         n2 = stoi(line.substr(0, pos));
 
@@ -75,10 +90,36 @@ void readEdgesFile(Graph &graph, bool bidir){
             graph.addEdge(n1, n2, weight);
     }
     edges.close();
+
+    edgesfile = "../resources/porto_strong_edges.txt";
+    edges.open(edgesfile);
+
+    getline(edges, line);
+    numEdges = stoi(line);
+
+    for (int i = 0; i < numEdges; i++) {
+        int n1, n2;
+        size_t pos = line.find(',');
+        n1 = stoi(line.substr(1, pos));
+        line.erase(0, pos + 1);
+        pos = line.find(')');
+        n2 = stoi(line.substr(0, pos));
+
+        Vertex* v = graph.findVertex(n1);
+        for(Edge edge: v->getAdj()) {
+            if(edge.getDest() == n2) {
+                edge.setStrong(true);
+                break;
+            }
+        }
+    }
+
+
+    edges.close();
 }
 
 void readLatLonFile(Graph &graph){
-    string latlonfile = "../resources/nodes_lat_lon.txt";
+    string latlonfile = "../resources/porto_full_nodes_latlng.txt";
     ifstream latlon;
     string line;
     int numNodes;
@@ -96,10 +137,10 @@ void readLatLonFile(Graph &graph){
         id = stoi(line.substr(1, pos));
         line.erase(0, pos + 2);
         pos = line.find(',');
-        lat = stof(line.substr(0, pos));
+        lon = stof(line.substr(0, pos));
         line.erase(0, pos + 2);
         pos = line.find(')');
-        lon = stof(line.substr(0, pos));
+        lat = stof(line.substr(0, pos));
         Vertex* v = graph.findVertex(id);
         v->setLat(lat);
         v->setLon(lon);
@@ -141,7 +182,7 @@ vector<int> readTags(Graph &g) {
     return res;
 }
 
-void readMetroFile(Graph &g) {
+vector<MetroStation> readMetroFile() {
     ifstream file;
     string line;
     int numStations;
@@ -151,86 +192,23 @@ void readMetroFile(Graph &g) {
     getline(file, line);
     numStations = stoi(line);
 
+    vector<MetroStation> stations;
     for(int i = 0; i < numStations; i++){
-        auto metroStation = new MetroStation();
-
         getline(file, line);
         size_t pos = line.find(',');
 
-        Vertex* v = g.findVertex(stoi(line.substr(1, pos-1)));
-        if(v == nullptr)
-            continue;
+        int ID = stoi(line.substr(1, pos));
 
         line.erase(0, pos + 2);
 
         pos = line.find(',');
-        metroStation->setStationName(line.substr(1, pos-2));
+        string stationName = line.substr(0, pos);
         line.erase(0, pos + 2);
 
-        pos = line.find('[');
-        line.erase(0, pos+1);
-
-        while(line.empty()){
-            pos = line.find(',');
-            if(pos == string::npos){
-                pos = line.find(']');
-            }
-            metroStation->addLine(line.substr(1, pos-2));
-            line.erase(0, pos+2);
-        }
+        int numStop = stoi(line.substr(0, pos));
        
-        v->setMetroStation(metroStation);
+        MetroStation ms(ID, stationName, numStop);
+        stations.push_back(ms);
     }
-
-}
-
-
-void readBusFile(Graph &g) {
-    ifstream file;
-    file.open("../resources/stcp_routes.txt");
-
-    string line;
-    getline(file, line);
-    int n = stoi(line);
-    for (int i = 0; i < n; i++) {
-        auto busStop = new BusStop();
-        
-        getline(file, line);
-        size_t pos = line.find(',');
-        Vertex* v = g.findVertex(stoi(line.substr(1, pos)));
-        if(v == nullptr)
-            continue;
-        line.erase(0, pos + 2);
-        
-        pos = line.find(',');
-        busStop->setCodStop(line.substr(1, pos-1));
-        line.erase(0, pos + 2);
-
-        pos = line.find(',');
-        busStop->setCodLine(line.substr(1, pos-1));
-        line.erase(0, pos + 2);
-
-        pos = line.find(',');
-        busStop->setCodZone(line.substr(1, pos-1));
-        line.erase(0, pos + 2);
-        
-        pos = line.find(',');
-        busStop->setCounty(line.substr(1, pos-1));
-        line.erase(0, pos + 2);
-
-        pos = line.find(',');
-        busStop->setParish(line.substr(1, pos-1));
-        line.erase(0, pos + 2);
-
-        pos = line.find(',');
-        busStop->setAddress(line.substr(1, pos-1));
-        line.erase(0, pos + 2);
-
-        pos = line.find(',');
-        busStop->setType(line.substr(1, pos-1));
-        line.erase(0, pos + 2);
-        
-        v->setBusStop(busStop);
-    }
-
+    return stations;
 }

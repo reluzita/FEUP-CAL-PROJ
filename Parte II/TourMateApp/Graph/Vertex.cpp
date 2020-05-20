@@ -9,6 +9,62 @@ Vertex::Vertex(int id, double x, double y, string type): id(id), x(x), y(y), typ
     this->visited = false;
     this->duration = 0;
 }
+void Vertex::setLat(double lat) {
+    this->lat = lat;
+}
+
+void Vertex::setLon(double lon) {
+    this->lon = lon;
+}
+
+void Vertex::setBusStop(BusStop* busStop) {
+    this->busStop = busStop;
+}
+
+void Vertex::setMetroStation(MetroStation* metroStation) {
+    this->metroStation = metroStation;
+}
+
+void Vertex::setDuration(int dur) {
+    this->duration = dur;
+}
+void Vertex::setDist(double dist) {
+    this->dist = dist;
+}
+
+void Vertex::setStrong(bool strong){
+    this->strong = strong;
+}
+
+void Vertex::setDistFromDest(double dist) {
+    distFromDest = dist;
+}
+
+void Vertex::setType(string type) {
+    this->type = type;
+}
+
+
+void Vertex::setInvertedVisited(bool visited) {
+    this->invertedVisited = visited;
+}
+
+void Vertex::setVisited(bool visited) {
+    this->visited = visited;
+}
+
+void Vertex::setUsedInPath(bool stopped) {
+    this->usedInPath = stopped;
+}
+
+void Vertex::setPath(Vertex* v) {
+    path = v;
+}
+
+void Vertex::setInvertedPath(Vertex* v) {
+    invertedPath = v;
+}
+
 
 int Vertex::getID() {
     return id;
@@ -34,76 +90,34 @@ int Vertex::getDuration() {
     return duration;
 }
 
-void Vertex::setLat(double lat) {
-    this->lat = lat;
-}
-
-void Vertex::setLon(double lon) {
-    this->lon = lon;
-}
-
-void Vertex::setBusStop(BusStop* busStop) {
-    this->busStop = busStop;
-}
-
-void Vertex::setMetroStation(MetroStation* metroStation) {
-    this->metroStation = metroStation;
-}
-
-void Vertex::setDuration(int dur) {
-    this->duration = dur;
-}
-
-void Vertex::addEdge(const int &dest, double w) {
-    adj.emplace_back(dest, w);
-}
-
 double Vertex::getDist() {
     return dist;
-}
-
-void Vertex::setDist(double dist) {
-    this->dist = dist;
 }
 
 double Vertex::getDistFromDest() {
     return distFromDest;
 }
 
-void Vertex::setDistFromDest(double dist) {
-    distFromDest = dist;
-}
-
 string Vertex::getType() {
     return type;
 }
-void Vertex::setType(string type) {
-    this->type = type;
+
+bool Vertex::getStrong(){
+    return strong;
 }
 
 Vertex* Vertex::getPath() {
     return path;
 }
 
-void Vertex::setPath(Vertex* v) {
-    path = v;
-}
-
 bool Vertex::isUsedInPath() {
     return usedInPath;
-}
-
-void Vertex::setUsedInPath(bool stopped) {
-    this->usedInPath = stopped;
 }
 
 Vertex* Vertex::getInvertedPath() {
     return invertedPath;
 }
 
-void Vertex::setInvertedPath(Vertex* v) {
-    invertedPath = v;
-}
 
 vector<Edge> Vertex::getAdj() {
     return adj;
@@ -113,16 +127,9 @@ bool Vertex::isVisited() {
     return visited;
 }
 
-void Vertex::setVisited(bool visited) {
-    this->visited = visited;
-}
 
 bool Vertex::isInvertedVisited() {
     return invertedVisited;
-}
-
-void Vertex::setInvertedVisited(bool visited) {
-    this->invertedVisited = visited;
 }
 
 void Vertex::clearEdges() {
@@ -144,6 +151,9 @@ double Vertex::distanceLatLon(Vertex* v2) {
     return distance;
 }
 
+void Vertex::addEdge(const int &dest, double w) {
+    adj.emplace_back(dest, w, false);
+}
 
 
 bool Vertex::operator<(Vertex & vertex) const {

@@ -13,26 +13,27 @@ using namespace std::chrono;
 int main() {
 
     //FOR TESTING MENUS//
-
+/*
     int res;
     ClientInfo info;
     cout << "Hi! Welcome to TourMateApp\n";
     cout <<"Let's go ahead and fill out the preferences form\n"<<endl;
 
-    Graph g = readMap(true);
-    res = mainMenu(&info, g);
+    Graph gBi = readMap(true);
+    Graph gUni = readMap(false);
+    res = mainMenu(&info, gBi, gUni);
 
     //magicGenerator(graph, &info);
     system("cls");
     cout <<"\nYou're exiting ...\n";
     cout <<"Thanks for using our app!\n";
     sleep(2);
-
+*/
 
     //FOR TESTING MAGIC GENERATOR//
-/*
-    string city = "Porto";
-    Graph g = readMap(city, true, false);
+
+    /*
+    Graph g = readMap(true);
 
     //int orig = 1223751712, dest = 447867546;
     int orig = 90380348;
@@ -65,11 +66,19 @@ int main() {
 */
 
     //FOR TESTING GRAPHVIEWER///
- /*   Graph g = readMap(true);
+    Graph g = readMap(true);
+
+    vector<MetroStation> res = readMetroFile();
+    vector<Vertex*> poi;
+    for(MetroStation ms: res)
+        poi.push_back(g.findVertex(ms.getID()));
+
+
     GraphViewer * gv = createMapViewer(g);
+    showPOI(gv, poi);
 
     getchar();
-*/
+
     return 0;
 }
 

@@ -13,11 +13,45 @@
 #include "GeneratePathMenu.h"
 
 using namespace std;
+/** @defgroup Menu menu
+ * @{
+ *
+ * Menu functions
+ */
 
-int mainMenu(ClientInfo *info, Graph &g);
-int generatePath(ClientInfo* info, Graph &g);
+
+/**
+* @brief Main menu function
+* @param info - Object with the user's info
+* @param g - oriented graph of the city
+* @param gbdir - bidirectional graph
+* @return Returns an integer to deal in the main
+*/
+int mainMenu(ClientInfo *info, Graph &g, Graph &gbdir);
+/**
+* @brief Function that generates the user intended path
+* @param info - Object with the user's info
+* @param g - oriented graph of the city
+* @param gbdir - bidirectional graph
+* @return Returns an integer to deal in the mainMenu
+*/
+int generatePath(ClientInfo* info, Graph &g, Graph &gbdir);
+/**
+* @brief Function to manage the user preferences
+* @param info - Object with the user's info
+* @return Returns an integer to deal in the mainMenu
+*/
 int managePreferences(ClientInfo * info);
-int viewMaps();
+/**
+* @brief Function to view the map of the city
+* @param g - oriented graph of the city
+* @return Returns an integer to deal in the mainMenu
+*/
+int viewMaps(const Graph &g);
+/**
+* @brief Function to generate a sugestion to the user
+* @return Returns an integer to deal in the mainMenu
+*/
 int supriseMe();
 
 #endif //TOURMATEAPP_MENU2_H

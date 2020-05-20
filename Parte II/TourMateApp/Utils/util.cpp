@@ -77,36 +77,6 @@ int minutesFromDistance(double distance, const char& transportation) {
     return 0;
 }
 
-void trim(string &str){
-    str.erase(0, str.find_first_not_of(' '));
-    str.erase(str.find_last_not_of(' ') + 1);
-}
-
-
-void verification_int(string &aux) {
-    string numbers = "0123456789";
-
-    bool isValid = false;
-
-    while (!isValid || aux.empty()) {
-        if (aux.empty()) {
-            trim(aux);
-            isValid = (aux.find_last_not_of(numbers) == string::npos);
-        }
-        if (!isValid) {
-            cout << "Invalid character. Please insert a valid input: ";
-            getline(cin, aux);
-            if (cin.fail()) {
-                if (cin.eof()) {
-                    cin.clear();
-                    aux = "-1";
-                    return;
-                }
-            }
-        }
-    }
-}
-
 int generateRandomTime(string type) {
 
     if(type == "information") return rand()%11 + 10;

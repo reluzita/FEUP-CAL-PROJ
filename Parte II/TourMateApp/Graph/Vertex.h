@@ -4,7 +4,6 @@
 #include "Edge.h"
 #include "Stop.h"
 #include "MutablePriorityQueue.h"
-#include <string>
 #include <vector>
 #include <cmath>
 #include <iostream>
@@ -21,6 +20,7 @@ class Vertex {
     string type;            // content of the vertex
     BusStop *busStop = nullptr;
     MetroStation *metroStation = nullptr;
+    bool strong; 
 
     vector<Edge> adj;		// outgoing edges
 
@@ -49,33 +49,37 @@ public:
     double getY();
     double getLon();
     double getLat();
+    double getDist();
     int getDuration();
+    double getDistFromDest();
+    Vertex* getPath();
+    bool getStrong();
+    Vertex* getInvertedPath();
+    vector<Edge> getAdj();
+
+    void setStrong(bool strong);
     void setLat(double lat);
     void setLon(double lon);
     void setBusStop(BusStop* busStop);
     void setMetroStation(MetroStation* metroStation);
-    double getDist();
     void setDist(double dist);
-    double getDistFromDest();
     void setDistFromDest(double dist);
     string getType();
     void setType(string type);
-    Vertex* getPath();
     void setPath(Vertex* v);
-    bool isUsedInPath();
     void setUsedInPath(bool stopped);
-    Vertex* getInvertedPath();
-    void setInvertedPath(Vertex* v);
-    vector<Edge> getAdj();
-    bool isVisited();
-    void setVisited(bool visited);
-    bool isInvertedVisited();
     void setInvertedVisited(bool visited);
     void setDuration(int dur);
-
+    void setInvertedPath(Vertex* v);
+    void setVisited(bool visited);
+   
+    bool isUsedInPath(); 
+    bool isVisited();
+    bool isInvertedVisited();
     void clearEdges();
-
     double distanceLatLon(Vertex* v2);
+
+
     /*T getInfo() const;
     double getDist() const;
     Vertex *getPath() const;

@@ -1,6 +1,6 @@
 #include "Edge.h"
 
-Edge::Edge(int destID, double w): destID(destID), weight(w) {}
+Edge::Edge(int destID, double w, bool strong): destID(destID), weight(w), strong(strong) {}
 
 int Edge::getDest() {
     return destID;
@@ -8,4 +8,12 @@ int Edge::getDest() {
 
 double Edge::getWeight() {
     return weight;
+}
+
+bool Edge::isStrong() {
+    return strong;
+}
+
+void Edge::setStrong(bool strong) {
+    this->strong = strong;
 }
