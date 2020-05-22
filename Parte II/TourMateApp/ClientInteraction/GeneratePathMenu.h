@@ -15,8 +15,8 @@ using namespace std;
 string getTypeStartPoint();
 string getTypeEndPoint();
 int getTransportation();
-int getStartPoint(const Graph &g, string typeStart);
-int getEndPoint(const Graph &g, int orig, string typeEnd);
+int getStartPoint(const Graph &g, const string &typeStart);
+int getEndPoint(const Graph &g, int orig, const string &typeEnd);
 int getAvailableTime();
 //int pointsMenu(const string& title, const vector<Vertex*>& items, const string& description);
 

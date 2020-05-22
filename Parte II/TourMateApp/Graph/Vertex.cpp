@@ -1,7 +1,5 @@
 #include "Vertex.h"
 
-#include <utility>
-
 using namespace std;
 
 
@@ -30,10 +28,6 @@ void Vertex::setDuration(int dur) {
 }
 void Vertex::setDist(double dist) {
     this->dist = dist;
-}
-
-void Vertex::setStrong(bool strong){
-    this->strong = strong;
 }
 
 void Vertex::setDistFromDest(double dist) {
@@ -102,10 +96,6 @@ string Vertex::getType() {
     return type;
 }
 
-bool Vertex::getStrong(){
-    return strong;
-}
-
 Vertex* Vertex::getPath() {
     return path;
 }
@@ -152,7 +142,7 @@ double Vertex::distanceLatLon(Vertex* v2) {
 }
 
 void Vertex::addEdge(const int &dest, double w) {
-    adj.emplace_back(dest, w, false);
+    adj.emplace_back(dest, w);
 }
 
 

@@ -26,6 +26,7 @@ int generatePath(ClientInfo* info, Graph &g, Graph &gbdir){
 
     string typeStart = getTypeStartPoint();
     if(typeStart.empty()) return 0;
+    if(typeStart == "crash") return -1;
 
     int idStart = getStartPoint(g, typeStart);
     if(idStart == -1 || idStart == 0) return idStart;
@@ -34,6 +35,7 @@ int generatePath(ClientInfo* info, Graph &g, Graph &gbdir){
     //fim
     string typeEnd = getTypeEndPoint();
     if(typeEnd.empty()) return 0;
+    if(typeStart == "crash") return -1;
 
     int idEnd = getEndPoint(g, idStart, typeEnd);
     if(idEnd == -1 || idEnd == 0) return idEnd;
@@ -44,6 +46,10 @@ int generatePath(ClientInfo* info, Graph &g, Graph &gbdir){
     if(op == -1 || op == 0) return op;
 
     bool bidir = (op == 1);
+    if(op==1) info->setMeansOfTransportation('w');
+    else if(op==2) info->setMeansOfTransportation('c');
+    else if(op==3) info->setMeansOfTransportation('p');
+
 
     //tempo
 
@@ -53,18 +59,27 @@ int generatePath(ClientInfo* info, Graph &g, Graph &gbdir){
 
     //nota: avisar se não houver caminho no tempo indicado
 
+
     if(op == 3){
         metroPathGenerator(gbdir, info);
         return 0;
     }
 
     OptimizedPath optPath;
-    if(bidir) {
-        optPath = magicGenerator(gbdir, info);
-    } else {
-        optPath = magicGenerator(g, info);
+    if(idStart == idEnd){
+        if(bidir)
+            optPath = circularPath(gbdir, info);
+        else
+            optPath = circularPath(g, info);
     }
-
+    else {
+        if(bidir) {
+            optPath = magicGenerator(gbdir, info);
+        } 
+        else {
+            optPath = magicGenerator(g, info);
+        }
+    }
     GraphViewer *gv = createPathViewer(g, optPath.path, optPath.visitedId);
     getchar();
     gv->closeWindow();
@@ -95,8 +110,10 @@ int managePreferences(ClientInfo * info){
 }
 
 int viewMaps(const Graph &g){
+    GraphViewer *gv = createMapViewer(g);
 
-    GraphViewer *gv = createMapViewer(g);  
+    getchar();
+    gv->closeWindow();
 
     return 0;
 }

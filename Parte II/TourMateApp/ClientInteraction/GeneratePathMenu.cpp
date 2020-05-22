@@ -21,13 +21,14 @@ string getTypeStartPoint(){
 
     if(op == items.size()) return "";
     if(op == items.size()-1) return " ";
+    if(op == -1) return "crash";
 
     string lowercase = items.at(op-1);
     transform(lowercase.begin(), lowercase.end(), lowercase.begin(), ::tolower);
     return lowercase;
 }
 
-int getStartPoint(const Graph &g, string typeStart) {
+int getStartPoint(const Graph &g, const string &typeStart) {
     //mudar para usar o graphviewer
     GraphViewer* gv = createMapViewer(g);
     //filtrar para mostrar
@@ -37,13 +38,13 @@ int getStartPoint(const Graph &g, string typeStart) {
             poi.push_back(vertex);
     }
     //mostrar
-    showPOI(gv, poi);
+    showPOI(gv, poi, -1);
     //escolher o ponto
     int op;
     string description = "Choose the id of your starting point on the map (integer number): ";
     menu_int_options(op,1, poi.size(), description);
     gv->closeWindow();
-    return poi.at(op)->getID();
+    return poi.at(op-1)->getID();
 }
 
 string getTypeEndPoint(){
@@ -56,13 +57,14 @@ string getTypeEndPoint(){
 
     if(op == items.size()) return "";
     if(op == items.size()-1) return " ";
+    if(op == -1) return "crash";
 
     string lowercase = items.at(op-1);
     transform(lowercase.begin(), lowercase.end(), lowercase.begin(), ::tolower);
     return lowercase;
 }
 
-int getEndPoint(const Graph &g, int orig, string typeEnd) {
+int getEndPoint(const Graph &g, int orig, const string &typeEnd) {
     GraphViewer* gv = createMapViewer(g);
 
     vector<Vertex*> v = bfsAll(g, orig);
@@ -72,17 +74,13 @@ int getEndPoint(const Graph &g, int orig, string typeEnd) {
             poi.push_back(i);
     }
     cout << "poi " << poi.size() << endl;
-    showPOI(gv, poi);
-
-    gv->setVertexColor(orig, "green");
-    gv->setVertexSize(orig, 15);
-    gv->setVertexLabel(orig, "You're here");
+    showPOI(gv, poi, orig);
 
     int op;
-    string description = "Choose the id of your starting point on the map (integer number): ";
+    string description = "Choose the id of your ending point on the map (integer number): ";
     menu_int_options(op,1, poi.size(), description);
     gv->closeWindow();
-    return poi.at(op)->getID();
+    return poi.at(op-1)->getID();
 }
 
 int getAvailableTime() {

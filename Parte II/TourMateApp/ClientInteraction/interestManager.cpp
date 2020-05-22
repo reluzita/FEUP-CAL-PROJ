@@ -47,8 +47,6 @@ void addInterest(ClientInfo * info){
 
     if(option == (possibleNew.size()-1)) info->addAllPoi(availablePOI);
 
-    return;
-
 }
 
 void removeInterest(ClientInfo * info){
@@ -73,7 +71,6 @@ void removeInterest(ClientInfo * info){
     }
 
     if(option == (poi.size()-1)) info->removeAllPoi();
-    return;
 
 }
 
@@ -86,8 +83,8 @@ void viewInterest(ClientInfo* info){//a verficaçao do input so está certa para
     }
     else {
         cout << "\nThese are you defined interests at the moment:\n\n";
-        for (int i = 0; i < poi.size(); i++) {
-            cout << poi.at(i) << endl;
+        for (const auto & i : poi) {
+            cout << i << endl;
         }
     }
     int op;
@@ -101,5 +98,5 @@ void viewInterest(ClientInfo* info){//a verficaçao do input so está certa para
         cout <<"Invalid input. Try again: ";
         cin >> op;
     }
-    return;
+
 }

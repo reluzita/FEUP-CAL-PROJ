@@ -20,7 +20,6 @@ class Vertex {
     string type;            // content of the vertex
     BusStop *busStop = nullptr;
     MetroStation *metroStation = nullptr;
-    bool strong; 
 
     vector<Edge> adj;		// outgoing edges
 
@@ -53,11 +52,9 @@ public:
     int getDuration();
     double getDistFromDest();
     Vertex* getPath();
-    bool getStrong();
     Vertex* getInvertedPath();
     vector<Edge> getAdj();
 
-    void setStrong(bool strong);
     void setLat(double lat);
     void setLon(double lon);
     void setBusStop(BusStop* busStop);
@@ -79,15 +76,10 @@ public:
     void clearEdges();
     double distanceLatLon(Vertex* v2);
 
-
-    /*T getInfo() const;
-    double getDist() const;
-    Vertex *getPath() const;
-*/
     bool operator<(Vertex & vertex) const; // // required by MutablePriorityQueue
 
     friend class Graph;
     friend class MutablePriorityQueue<Vertex>;
-
 };
+
 #endif //TOURMATEAPP_VERTEX_H

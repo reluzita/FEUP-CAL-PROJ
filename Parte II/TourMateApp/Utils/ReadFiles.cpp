@@ -17,7 +17,7 @@ Graph readMap(bool bidir)
 }
 
 void readNodesFile(Graph &graph){   
-    string nodesfile = "../resources/porto_full_nodes_xy.txt";
+    string nodesfile = "../resources/porto_strong_nodes_xy.txt";
     ifstream nodes;
     string line;
     int numNodes;
@@ -43,29 +43,12 @@ void readNodesFile(Graph &graph){
     }
     nodes.close();
 
-    nodesfile = "../resources/porto_strong_nodes_xy.txt";
-    nodes.open(nodesfile);
-
-    getline(nodes, line);
-    numNodes = stoi(line);
-
-
-    for (int i = 0; i < numNodes; i++) {
-        getline(nodes, line);
-        int id;
-        size_t pos = line.find(',');
-        id = stoi(line.substr(1, pos));
-        Vertex* v = graph.findVertex(id);
-        v->setStrong(true);
-    }
-
-
-    nodes.close();
+    
 }
 
 void readEdgesFile(Graph &graph, bool bidir){
 
-    string edgesfile = "../resources/porto_full_edges.txt";
+    string edgesfile = "../resources/porto_strong_edges.txt";
     ifstream edges;
     string line;
 
@@ -92,35 +75,10 @@ void readEdgesFile(Graph &graph, bool bidir){
     }
     edges.close();
 
-    edgesfile = "../resources/porto_strong_edges.txt";
-    edges.open(edgesfile);
-
-    getline(edges, line);
-    numEdges = stoi(line);
-
-    for (int i = 0; i < numEdges; i++) {
-        int n1, n2;
-        size_t pos = line.find(',');
-        n1 = stoi(line.substr(1, pos));
-        line.erase(0, pos + 1);
-        pos = line.find(')');
-        n2 = stoi(line.substr(0, pos));
-
-        Vertex* v = graph.findVertex(n1);
-        for(Edge edge: v->getAdj()) {
-            if(edge.getDest() == n2) {
-                edge.setStrong(true);
-                break;
-            }
-        }
-    }
-
-
-    edges.close();
 }
 
 void readLatLonFile(Graph &graph){
-    string latlonfile = "../resources/porto_full_nodes_latlng.txt";
+    string latlonfile = "../resources/porto_strong_nodes_latlng.txt";
     ifstream latlon;
     string line;
     int numNodes;

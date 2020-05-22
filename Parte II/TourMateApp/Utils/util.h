@@ -60,6 +60,6 @@ vector<string> pairToString(const vector<pair<double,double>>& v);
 * @param type - Type of point of interest
 * @return Returns a vector of strings made with the pairs
 */
-int generateRandomTime(string type);
+int generateRandomTime(const string &type);
 
 #endif //TOURMATEAPP_UTIL_H

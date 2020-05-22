@@ -66,24 +66,38 @@ int main() {
 */
 
     //FOR TESTING GRAPHVIEWER///
-    Graph g = readMap(true);
-    ClientInfo info;
+     Graph g = readMap(true);
+    /*      ClientInfo info;
 
-    info.setIdStart(26999);
-    info.setIdEnd(24112);
-    info.setTimeAvailable(30);
+          info.setIdStart(26999);
+          info.setIdEnd(24112);
+          info.setTimeAvailable(30);
 
-    int stopOrig = 1, stopEnd = 8;
-    queue<Vertex*> path = dijkstraShortestPath(g, 26999, 1969);
-    queue<Vertex*> path2 = dijkstraShortestPath(g, 27817, 24112);
+          int stopOrig = 1, stopEnd = 8;
+          queue<Vertex*> path = dijkstraShortestPath(g, 26999, 1969);
+          queue<Vertex*> path2 = dijkstraShortestPath(g, 27817, 24112);
 
 
-    metroPathGenerator(g, &info);
-    //vector<int> v;
-    //GraphViewer* gv = createMapViewer(g);
+          metroPathGenerator(g, &info);*/
+
+    if(bfs(g, 27772, 28445).empty()) {
+        cout << "No path! " << endl;
+        return 0;
+    }
+//18083
+    vector<Vertex*> poi = {g.findVertex(1144), g.findVertex(41230), g.findVertex(14820), g.findVertex(24107), g.findVertex(18083), g.findVertex(41920), g.findVertex(3295), g.findVertex(35225), g.findVertex(17238)};
+    OptimizedPath p = findPoiInPath(g, poi, 27772, 28445, 200, 'w');
+
+    double distance = distancePath(p.path);
+    cout << endl << "Distance = " << distance << endl;
+    int dur = minutesFromDistance(distance, 'w');
+    cout << endl << "Duration = " << dur << endl;
+
+    GraphViewer* gv = createRealPOIPath(g, p.path, p.visitedId);
+
     //showPathWithMetro(gv, path, path2, v, g, stopOrig, stopEnd);
 
-
+    getchar();
     return 0;
 }
 

@@ -69,15 +69,15 @@ double distancePath(queue<Vertex*> path) {
 
 int minutesFromDistance(double distance, const char& transportation) {
     if (transportation == 'w') //walking
-        return (distance/5.0)*60;
+        return ceil((distance/5.0)*60);
     else if(transportation == 'c') //car
-        return (distance/30.0)*60;
+        return ceil((distance/30.0)*60);
     else if (transportation == 'p') //public
-        return (distance/50.0)*60;
+        return ceil((distance/50.0)*60);
     return 0;
 }
 
-int generateRandomTime(string type) {
+int generateRandomTime(const string &type) {
 
     if(type == "information") return rand()%11 + 10;
     
