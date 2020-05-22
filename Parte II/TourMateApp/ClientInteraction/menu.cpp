@@ -43,7 +43,6 @@ int generatePath(ClientInfo* info, Graph &g, Graph &gbdir){
     int op = getTransportation();
     if(op == -1 || op == 0) return op;
 
-
     bool bidir = (op == 1);
 
     //tempo
@@ -54,9 +53,19 @@ int generatePath(ClientInfo* info, Graph &g, Graph &gbdir){
 
     //nota: avisar se não houver caminho no tempo indicado
 
-    OptimizedPath optPath = magicGenerator(g, info);
-    GraphViewer* gv = createPathViewer(g, optPath.path, optPath.visitedId);
+    if(op == 3){
+        metroPathGenerator(gbdir, info);
+        return 0;
+    }
 
+    OptimizedPath optPath;
+    if(bidir) {
+        optPath = magicGenerator(gbdir, info);
+    } else {
+        optPath = magicGenerator(g, info);
+    }
+
+    GraphViewer *gv = createPathViewer(g, optPath.path, optPath.visitedId);
     getchar();
     gv->closeWindow();
     return 0;

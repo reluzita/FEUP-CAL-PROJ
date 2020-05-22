@@ -10,6 +10,7 @@ Graph readMap(bool bidir)
     readLatLonFile(graph);
     readEdgesFile(graph, bidir);
     readTags(graph);
+    readMetroFile(graph);
 
     graph.setBiDir(bidir);
     return graph;
@@ -182,7 +183,7 @@ vector<int> readTags(Graph &g) {
     return res;
 }
 
-vector<MetroStation> readMetroFile() {
+void readMetroFile(Graph &g) {
     ifstream file;
     string line;
     int numStations;
@@ -192,7 +193,6 @@ vector<MetroStation> readMetroFile() {
     getline(file, line);
     numStations = stoi(line);
 
-    vector<MetroStation> stations;
     for(int i = 0; i < numStations; i++){
         getline(file, line);
         size_t pos = line.find(',');
@@ -208,7 +208,6 @@ vector<MetroStation> readMetroFile() {
         int numStop = stoi(line.substr(0, pos));
        
         MetroStation ms(ID, stationName, numStop);
-        stations.push_back(ms);
+        g.addMetroStation(ms);
     }
-    return stations;
 }

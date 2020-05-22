@@ -63,11 +63,7 @@ string getTypeEndPoint(){
 }
 
 int getEndPoint(const Graph &g, int orig, string typeEnd) {
-
     GraphViewer* gv = createMapViewer(g);
-    gv->setVertexColor(orig, "green");
-    gv->setVertexSize(orig, 15);
-    gv->setVertexLabel(orig, "You're here");
 
     vector<Vertex*> v = bfsAll(g, orig);
     vector<Vertex*> poi;
@@ -77,6 +73,10 @@ int getEndPoint(const Graph &g, int orig, string typeEnd) {
     }
     cout << "poi " << poi.size() << endl;
     showPOI(gv, poi);
+
+    gv->setVertexColor(orig, "green");
+    gv->setVertexSize(orig, 15);
+    gv->setVertexLabel(orig, "You're here");
 
     int op;
     string description = "Choose the id of your starting point on the map (integer number): ";

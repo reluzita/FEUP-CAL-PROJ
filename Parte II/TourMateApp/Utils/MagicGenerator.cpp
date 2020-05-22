@@ -38,83 +38,16 @@ OptimizedPath magicGenerator(Graph &g, ClientInfo* info) {
     return res;
 }
 
-/*
-queue<Vertex*> findPoiInPath(Graph &g, vector<Vertex*> poi, const int &orig, const int &dest, const int &availableTime, char transportation) {
-    queue<Vertex*> empty;
-    queue<Vertex*> best = dijkstraShortestPath(g, orig, dest);
-    if(hasTime(best, transportation, availableTime) < 0) {
-        return empty;
-    }
-
-    //escolher um poi do vetor
-    for(Vertex* point: poi) {
-        cout << "Starting at point " << point->getID() << endl;
-        cout << endl << "Time available: " << availableTime << endl << endl;
-        queue<Vertex*> res;
-        // ver caminho entre inicio e o ponto
-        if(bfs(g, orig, point->getID()).empty())
-            continue; //é continue??
-
-        queue<Vertex*> pathFromOrig = dijkstraShortestPath(g, orig, point->getID());
-
-        int timeleft = hasTime(pathFromOrig, transportation, availableTime);
-        //se nao tiver tempo para chegar do inicio ao ponto passa ao seguinte
-        if(timeleft - point->getDuration() > 0) {
-            timeleft -= point->getDuration();
-            cout << endl << "Time calculated: " << timeleft << endl << endl;
-            res = pathFromOrig;
-        }
-        else {
-            continue;
-        }
-
-        // ver caminho entre ponto e o destino
-        if(bfs(g, point->getID(), dest).empty())
-            continue; // é continue??
-        queue<Vertex*> pathToDest = dijkstraShortestPath(g, point->getID(), dest);
-
-        if(hasTime(pathToDest, transportation, timeleft)) {
-            vector<Vertex*> temp = poi;
-            temp.erase(find(temp.begin(), temp.end(), point));
-
-            vector<Vertex*> temp2 = POIsInPath(pathToDest);
-            for(Vertex* aux: temp2) {
-                auto it = find(temp.begin(), temp.end(), aux);
-                if(it != temp.end())
-                    temp.erase(it);
-            }
-
-            queue<Vertex*> found = findPoiInPath(g, temp, point->getID(), dest, timeleft, transportation);
-            if(found.empty()) {
-                queue<Vertex*> a;
-                return a;
-            }
-            while(!found.empty()) {
-                res.push(found.front());
-                found.pop();
-            }
-            cout << "POINT OF INTEREST STOP: " << point->getID() << endl;
-            return res;
-            if(countPOIs(best) < countPOIs(res)) {
-                cout << "better!" << endl;
-                best = res;
-            }
-        }
-    }
-    return best;
-} */
-
 int hasTime(queue<Vertex*> path, char transportation, int availableTime) {
     double distance = distancePath(path);
     int dur = minutesFromDistance(distance, transportation);
     return availableTime - dur;
 }
 
-/*struct OptimizedPath{
-    queue<Vertex*> path;
-    vector<int> visitedPoi;
-};*/
-
+int pathTime(queue<Vertex*> path, char transportation) {
+    double distance = distancePath(path);
+    return minutesFromDistance(distance, transportation);
+}
 
 OptimizedPath findPoiInPath(Graph &g, const vector<Vertex*> &poi, const int &orig, const int &dest, const int &availableTime, char transportation) {
     struct OptimizedPath empty;  //empty queue to return when cant find path
@@ -213,6 +146,94 @@ OptimizedPath findPoiInPath(Graph &g, const vector<Vertex*> &poi, const int &ori
     }
     cout << "Nodes in path: " << best.path.size() << " Visited nodes: " << best.visitedId.size() << endl;
     return best;
+}
+
+void metroPathGenerator(Graph &g, ClientInfo* info) {
+    Vertex* orig = g.findVertex(info->getIdStart());
+    Vertex* end = g.findVertex(info->getIdEnd());
+
+    queue<Vertex*> fromOrig;
+    queue<Vertex*> toEnd;
+
+    double origDist = INT_MAX, endDist = INT_MAX;
+    int stopOrig, stopEnd;
+
+    for(MetroStation station: g.getMetroStations()) {
+        if(!bfs(g, info->getIdStart(), station.getID()).empty()) {
+            queue<Vertex*> path = dijkstraShortestPath(g, info->getIdStart(), station.getID());
+            double dist = distancePath(path);
+            if (dist < origDist) {
+                fromOrig = path;
+                origDist = dist;
+                stopOrig = station.getStopNum();
+            }
+        }
+        if(!bfs(g, station.getID(), info->getIdEnd()).empty()) {
+            queue<Vertex*> path = dijkstraShortestPath(g, station.getID(), info->getIdEnd());
+            double dist = distancePath(path);
+            if (dist < endDist) {
+                toEnd = path;
+                endDist = dist;
+                stopEnd = station.getStopNum();
+            }
+        }
+    }
+
+    int timeLeft = info->getTimeAvailable() - g.getMetroTime(stopOrig, stopEnd);
+
+    if(timeLeft <= 0) {
+        cout << "No time for the metro trip" << endl;
+        return; //no time to do the metro trip
+    }
+
+    int origTime = pathTime(fromOrig, 'w');
+    int endTime = pathTime(toEnd, 'w');
+
+    cout << "Metro: " << timeLeft << " p1: " << origTime << " p2: " << endTime << endl;
+    if(origTime + endTime >= timeLeft) {
+        cout << "No time to get to the metro" << endl;
+        return;
+    }
+
+    double origFactor = timeLeft * (double)origTime / (endTime + origTime);
+
+    vector<Vertex*> poi = bfsAll(g, info->getIdStart());
+    vector<Vertex*> res;
+    for(Vertex* v: poi) {
+        if(v->getType() != " " && v->getDuration() < origFactor) {
+            if (info->getPoi().empty())
+                res.push_back(v);
+            if (find(info->getPoi().begin(), info->getPoi().end(), v->getType()) != info->getPoi().end())
+                res.push_back(v);
+        }
+    }
+
+    OptimizedPath pathFromOrig = findPoiInPath(g, res, info->getIdStart(), g.findStationID(stopOrig), origFactor, 'w');
+
+    double endFactor = timeLeft * (double)endTime / (endTime + origTime);
+
+    poi = bfsAll(g, g.findStationID(stopEnd));
+    res.clear();
+    for(Vertex* v: poi) {
+        if(v->getType() != " " && v->getDuration() < endFactor) {
+            if (info->getPoi().empty())
+                res.push_back(v);
+            if (find(info->getPoi().begin(), info->getPoi().end(), v->getType()) != info->getPoi().end())
+                res.push_back(v);
+        }
+    }
+
+    OptimizedPath pathToEnd = findPoiInPath(g, res, g.findStationID(stopEnd), info->getIdEnd(), endFactor, 'w');
+
+
+    GraphViewer* gv = createMapViewer(g);
+
+    showPathWithMetro(gv, pathFromOrig.path, pathToEnd.path, pathFromOrig.visitedId /*E PRECISO MUDAR*/, g, stopOrig, stopEnd);
+
+    getchar();
+
+    gv->closeWindow();
+
 }
 
 template <class T>

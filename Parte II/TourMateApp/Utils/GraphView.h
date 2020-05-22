@@ -31,4 +31,6 @@ GraphViewer* createPathViewer(const Graph &g, queue<Vertex*> path, vector<int> v
 */
 void showPOI(GraphViewer* gv, const vector<Vertex*> &points);
 
+void showPathWithMetro(GraphViewer* gv, queue<Vertex*> path1, queue<Vertex*> path2, vector<int> visitedPoi, Graph g, int origStop, int endStop);
+
 #endif //TOURMATEAPP_GRAPHVIEW_H

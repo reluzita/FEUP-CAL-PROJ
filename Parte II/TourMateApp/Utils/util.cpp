@@ -73,7 +73,7 @@ int minutesFromDistance(double distance, const char& transportation) {
     else if(transportation == 'c') //car
         return (distance/30.0)*60;
     else if (transportation == 'p') //public
-        return (distance/20.0)*60;
+        return (distance/50.0)*60;
     return 0;
 }
 

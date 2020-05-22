@@ -13,7 +13,6 @@ Graph::Graph() {
     maxLon = INT_MIN;
     minLon = INT_MAX;
 
-    publicTransportation = false;
     biDir = false;
 }
 
@@ -78,6 +77,11 @@ Vertex * Graph::findVertex(const int &id) const {
     if(it == vertexMap.end())
         return nullptr;
     return vertexSet.at(it->second);
+}
+
+int Graph::findStationID(const int &numStop) const {
+    auto it = stationsMap.find(numStop);
+    return it->second;
 }
 
 /*
@@ -168,24 +172,42 @@ double Graph::getMinLon() const{
     return minLon;
 }
 
-string Graph::getCityName() const{
-    return cityName;
+void Graph::addMetroStation(MetroStation station) {
+    stations.push_back(station);
+    stationsMap.insert(make_pair(station.getStopNum(), station.getID()));
 }
 
-bool Graph::getPublicTransportation() const{
-    return publicTransportation;
-}
-
-void Graph::setCityName(string name){
-    this->cityName = name;
-}
-
-void Graph::setPublicTransportation(bool publicTransportation){
-    this->publicTransportation = publicTransportation;
+vector<MetroStation> Graph::getMetroStations() const{
+    return stations;
 }
 
 void Graph::setBiDir(bool biDir){
     this->biDir = biDir;
+}
+
+
+int Graph::getMetroTime(int stopOrig, int stopEnd) {
+    cout << stopOrig << " " << stopEnd << endl;
+    int total = 0;
+    int min, max;
+    if(stopOrig < stopEnd) {
+        min = stopOrig;
+        max = stopEnd;
+    }
+    else {
+        min = stopEnd;
+        max = stopOrig;
+    }
+    for(int i = min; i < max; i++) {
+        Vertex* v1 = findVertex(stationsMap.find(i)->second);
+        Vertex* v2 = findVertex(stationsMap.find(i+1)->second);
+
+        double distance = v1->distanceLatLon(v2);
+        cout << "Distance : " << distance << endl;
+        total += minutesFromDistance(distance, 'p');
+        cout << total << endl;
+    }
+    return total;
 }
 
 vector<pair<double,double>> Graph::getCityCoords(){
@@ -205,10 +227,6 @@ vector<pair<double,double>> Graph::idToCoords(const vector<int>& v){
         coords.push_back(c);
     }
     return coords;
-}
-
-bool Graph::operator== (const Graph &graph) {
-    return cityName == graph.cityName;
 }
 
 

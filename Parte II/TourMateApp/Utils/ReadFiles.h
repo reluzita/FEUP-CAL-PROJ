@@ -64,6 +64,6 @@ vector<int> readTags(Graph &g);
 * @param nmax - Maximum integer option valid
 * @param description - Description of the menu 
 */
-vector<MetroStation> readMetroFile();
+void readMetroFile(Graph &g);
 
 #endif //READFILES_H

@@ -2,6 +2,7 @@
 #define TOURMATEAPP_GRAPH_H
 
 #include "Vertex.h"
+#include "../Utils/util.h"
 #include <string>
 #include <map>
 #include <utility>
@@ -22,11 +23,10 @@ class Graph {
     double maxLon;
     double minLon;
 
-    bool publicTransportation;
     bool biDir;
 
-    std::string cityName;
-    //vector<vector<int>> D;
+    unordered_map<int, int> stationsMap; //<stopNum, vertexID>
+    vector<MetroStation> stations;
 
 public:
     Graph();
@@ -36,14 +36,14 @@ public:
     void initializeForFindPOI();
     void initializeForBirDir();
     Vertex *findVertex(const int &id) const;
+    int findStationID(const int &numStop) const;
     bool addVertex(const int &id, const double &x, const double &y);
     bool addEdge(const int &sourc, const int &dest, double w);
     bool addBiDirEdge(const int &sourc, const int &dest, double w);
     int getNumVertex() const;
     std::vector<Vertex*> getVertexSet() const;
     void setVertexSet(vector<Vertex*> vertexSet);
-    void setCityName(string name );
-    void setPublicTransportation(bool publicTransportation);
+    void addMetroStation(MetroStation station);
     void setBiDir(bool biDir);
 
     double getMaxX() const;
@@ -55,11 +55,12 @@ public:
     double getMinLat() const;
     double getMaxLon() const;
     double getMinLon()const;
-    string getCityName() const;
-    bool getPublicTransportation() const;
+    vector<MetroStation> getMetroStations() const;
     bool getBiDir() const;
 
     void clearEdges();
+
+    int getMetroTime(int stopOrig, int stopEnd);
 
 /*
     // Fp05 - single source

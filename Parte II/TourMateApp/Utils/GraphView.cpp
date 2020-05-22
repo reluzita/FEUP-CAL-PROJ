@@ -69,12 +69,11 @@ GraphViewer* createPathViewer(const Graph &g, queue<Vertex*> path, vector<int> v
         Vertex* vertex = path.front();
         path.pop();
 
-        for(Edge edge: path.front()->getAdj()) {
-            if (edge.getDest() == vertex->getID() && edge.isStrong()) {
-                gv->addEdge(i, path.front()->getID(), vertex->getID(), EdgeType::DIRECTED);
-                i++;
-            }
+        if(!path.empty()) {
+            gv->addEdge(i, path.front()->getID(), vertex->getID(), EdgeType::DIRECTED);
+            i++;
         }
+
         if(path.empty())
             gv->setVertexColor(vertex->getID(), "green");
         else if(find(visitedPoi.begin(), visitedPoi.end(), vertex->getID()) != visitedPoi.end()) {
@@ -101,3 +100,60 @@ void showPOI(GraphViewer* gv, const vector<Vertex*>& points) {
     gv->rearrange();
 }
 
+void showPathWithMetro(GraphViewer* gv, queue<Vertex*> path1, queue<Vertex*> path2, vector<int> visitedPoi, Graph g, int origStop, int endStop) {
+    int i = 0;
+
+    while(!path1.empty()) {
+        Vertex* vertex = path1.front();
+        path1.pop();
+
+        if(!path1.empty()) {
+            gv->addEdge(i, path1.front()->getID(), vertex->getID(), EdgeType::DIRECTED);
+            i++;
+        }
+        if(path1.empty())
+            gv->setVertexColor(vertex->getID(), "yellow");
+        if(find(visitedPoi.begin(), visitedPoi.end(), vertex->getID()) != visitedPoi.end()) {
+            gv->setVertexColor(vertex->getID(), "red");
+            gv->setVertexLabel(vertex->getID(), /*to_string(vertex->getID())*/vertex->getType() + "-" + to_string(vertex->getDuration()));
+        } else if(vertex->getType() != " ") {
+            gv->setVertexColor(vertex->getID(), "pink");
+            gv->setVertexLabel(vertex->getID(), /*to_string(vertex->getID())*/vertex->getType() + "-" + to_string(vertex->getDuration()));
+        }
+        gv->setVertexSize(vertex->getID(), 10);
+    }
+
+    int s = origStop, increment;
+    if(origStop < endStop)
+        increment = 1;
+    else
+        increment = -1;
+    while(s != endStop) {
+        gv->addEdge(i, g.findStationID(s), g.findStationID(s+increment), EdgeType::DIRECTED);
+        gv->setEdgeThickness(i, 5);
+        gv->setEdgeColor(i, "yellow");
+        s+=increment;
+        i++;
+    }
+
+    gv->setVertexColor(path2.front()->getID(), "green");
+    while(!path2.empty()) {
+        Vertex* vertex = path2.front();
+        path2.pop();
+
+        if(!path2.empty()) {
+            gv->addEdge(i, path2.front()->getID(), vertex->getID(), EdgeType::DIRECTED);
+            i++;
+        }
+
+        else if(find(visitedPoi.begin(), visitedPoi.end(), vertex->getID()) != visitedPoi.end()) {
+            gv->setVertexColor(vertex->getID(), "red");
+            gv->setVertexLabel(vertex->getID(), /*to_string(vertex->getID())*/vertex->getType() + "-" + to_string(vertex->getDuration()));
+        } else if(vertex->getType() != " ") {
+            gv->setVertexColor(vertex->getID(), "pink");
+            gv->setVertexLabel(vertex->getID(), /*to_string(vertex->getID())*/vertex->getType() + "-" + to_string(vertex->getDuration()));
+        }
+        gv->setVertexSize(vertex->getID(), 10);
+    }
+    gv->rearrange();
+}

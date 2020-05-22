@@ -67,17 +67,22 @@ int main() {
 
     //FOR TESTING GRAPHVIEWER///
     Graph g = readMap(true);
+    ClientInfo info;
 
-    vector<MetroStation> res = readMetroFile();
-    vector<Vertex*> poi;
-    for(MetroStation ms: res)
-        poi.push_back(g.findVertex(ms.getID()));
+    info.setIdStart(26999);
+    info.setIdEnd(24112);
+    info.setTimeAvailable(30);
+
+    int stopOrig = 1, stopEnd = 8;
+    queue<Vertex*> path = dijkstraShortestPath(g, 26999, 1969);
+    queue<Vertex*> path2 = dijkstraShortestPath(g, 27817, 24112);
 
 
-    GraphViewer * gv = createMapViewer(g);
-    showPOI(gv, poi);
+    metroPathGenerator(g, &info);
+    //vector<int> v;
+    //GraphViewer* gv = createMapViewer(g);
+    //showPathWithMetro(gv, path, path2, v, g, stopOrig, stopEnd);
 
-    getchar();
 
     return 0;
 }

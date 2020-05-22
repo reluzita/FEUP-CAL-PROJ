@@ -11,7 +11,7 @@
 #include "../Algorithms/BFS.h"
 #include "../Algorithms/Dijkstra.h"
 #include "../ClientInteraction/interestManager.h"
-//#include "../Utils/util.h"
+#include "../Utils/GraphView.h"
 #include <algorithm>
 #include <vector>
 using namespace std;
@@ -23,6 +23,7 @@ struct OptimizedPath{
 
 OptimizedPath magicGenerator(Graph &g, ClientInfo* info);
 OptimizedPath findPoiInPath(Graph &g, const vector<Vertex*> &poi, const int &orig, const int &dest, const int &availableTime, char transportation);
+void metroPathGenerator(Graph &g, ClientInfo* info);
 template <class T>
 queue<T> joinQueue(queue<T> frontQ, queue<T> backQ);
 int hasTime(queue<Vertex*> path, char transportation, int availableTime);
