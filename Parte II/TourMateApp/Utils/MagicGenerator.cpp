@@ -182,6 +182,7 @@ OptimizedPath circularPath(Graph &g, ClientInfo* info, double counterFactor){
 OptimizedPath findPoiInPath(Graph &g, const vector<Vertex*> &poi, const int &orig, const int &dest, const int &availableTime, char transportation, double counterFactor) {
     struct OptimizedPath empty;  //empty queue to return when cant find path
     struct OptimizedPath best;
+
     best.path = dijkstraShortestPath(g, orig, dest);
 
     if(hasTime(best.path, transportation, availableTime) <= 0) {
@@ -189,9 +190,10 @@ OptimizedPath findPoiInPath(Graph &g, const vector<Vertex*> &poi, const int &ori
     }
 
     int counter = ceil(poi.size()*counterFactor);
+    cout << "Size: " << poi.size() << endl;
     for (Vertex* point: poi) {
         if(counter == 0) {
-            //cout << "gave up" << endl;
+            cout << "gave up" << endl;
             break;
         }
 

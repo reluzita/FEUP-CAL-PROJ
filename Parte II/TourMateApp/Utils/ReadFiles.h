@@ -66,4 +66,6 @@ vector<int> readTags(Graph &g);
 */
 void readMetroFile(Graph &g);
 
+Graph readDistanceFile(Graph &graph, string filename);
+
 #endif //READFILES_H

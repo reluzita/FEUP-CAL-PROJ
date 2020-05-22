@@ -9,7 +9,7 @@ Graph readMap(bool bidir)
     readNodesFile(graph);
     readLatLonFile(graph);
     readEdgesFile(graph, bidir);
-    readTags(graph);
+    vector<int> tags = readTags(graph);
     readMetroFile(graph);
 
     graph.setBiDir(bidir);
@@ -42,8 +42,6 @@ void readNodesFile(Graph &graph){
         graph.addVertex(id, x, y);
     }
     nodes.close();
-
-    
 }
 
 void readEdgesFile(Graph &graph, bool bidir){
@@ -168,4 +166,37 @@ void readMetroFile(Graph &g) {
         MetroStation ms(ID, stationName, numStop);
         g.addMetroStation(ms);
     }
+}
+
+Graph readDistanceFile(Graph &graph, string filename){
+    ifstream file;
+    string line;
+    int numNodes;
+
+    Graph res;
+    for(Vertex* vertex: graph.getVertexSet()) {
+        res.addVertex(vertex->getID(), 0, 0);
+    }
+
+    file.open(filename);
+
+    getline(file, line);
+    numNodes = stoi(line);
+
+    for (int i = 0; i < numNodes; i++) {
+        getline(file, line);
+        int id1, id2;
+        double dist;
+        size_t pos = line.find(',');
+        id1 = stoi(line.substr(1, pos));
+        line.erase(0, pos + 1);
+        pos = line.find(',');
+        id2 = stoi(line.substr(0, pos));
+        line.erase(0, pos + 1);
+        pos = line.find(')');
+        dist = stof(line.substr(0, pos));
+        res.addEdge(id1, id2, dist);
+    }
+    file.close();
+    return res;
 }

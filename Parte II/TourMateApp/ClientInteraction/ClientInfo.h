@@ -1,6 +1,7 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include "../Graph/Graph.h"
 
 using namespace std;
 
@@ -13,8 +14,11 @@ class ClientInfo{
         int timeAvailable;
         vector<string> poi;
         double counterFactor;
+        Graph poiGraph;
 
-    public: 
+    public:
+        void startGraph(Graph g);
+        double getDistance(Graph g,int orig, int end);
         void setMeansOfTransportation(char meansOfTransportation);
         void setIdStart(int idStart);
         void setIdEnd(int idEnd);

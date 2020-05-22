@@ -1,5 +1,28 @@
 #include "ClientInfo.h"
 
+void ClientInfo::startGraph(Graph g) {
+    for(Vertex* vertex: g.getVertexSet()) {
+        poiGraph.addVertex(vertex->getID(), vertex->getX(), vertex->getY());
+        Vertex* v = poiGraph.findVertex(vertex->getID());
+        v->setLat(vertex->getLat());
+        v->setLon(vertex->getLon());
+    }
+}
+
+double ClientInfo::getDistance(Graph g, int orig, int end) {
+    Vertex* v = poiGraph.findVertex(orig);
+    for (Edge edge: v->getAdj()) {
+        if(edge.getDest() == end) {
+            return edge.getWeight();
+        }
+    }
+
+    queue<Vertex*> path = g.dijkstraShortestPath(orig, end);
+    double distance = distancePath(path);
+
+    poiGraph.addEdge(orig, end, distance);
+    return distance;
+}
 
 void ClientInfo::setMeansOfTransportation(char meansOfTransportation){
     this->meansOfTransportation = meansOfTransportation;

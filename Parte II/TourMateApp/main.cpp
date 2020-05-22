@@ -69,6 +69,9 @@ int main() {
     Graph g = readMap(false);
 
     ClientInfo info;
+    info.startGraph(g);
+
+    cout << "Graphs are done" << endl;
 
     info.setIdStart(26999);
     info.setIdEnd(24112);
@@ -77,11 +80,12 @@ int main() {
     info.setPoi(types);
     info.setMeansOfTransportation('w');
 
-    vector<Vertex*> points = bfsAllPOI(g, info.getIdStart(), info.getPoi(), info.getTimeAvailable());
+
 
     cout << "100%" << endl;
+    info.setCounterFactor(1);
     milliseconds t0 = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
-    OptimizedPath op = circularPath(g, &info, 1);
+    OptimizedPath op = magicGenerator(g, &info);
     milliseconds t1 = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
 
     double distance = distancePath(op.path);
@@ -91,8 +95,9 @@ int main() {
     cout << "Execution time: " << t1.count() - t0.count() << endl << endl;
 
     cout << "50%" << endl;
+    info.setCounterFactor(0.5);
     t0 = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
-    op = circularPath(g, &info, 0.5);
+    op = magicGenerator(g, &info);
     t1 = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
 
 
@@ -103,8 +108,9 @@ int main() {
     cout << "Execution time: " << t1.count() - t0.count() << endl << endl;
 
     cout << "30%" << endl;
+    info.setCounterFactor(0.3);
     t0 = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
-    op = circularPath(g, &info, 0.3);
+    op = magicGenerator(g, &info);
     t1 = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
 
 
@@ -115,8 +121,9 @@ int main() {
     cout << "Execution time: " << t1.count() - t0.count() << endl << endl;
 
     cout << "25%" << endl;
+    info.setCounterFactor(0.25);
     t0 = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
-    op = circularPath(g, &info, 0.25);
+    op = magicGenerator(g, &info);
     t1 = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
 
 
@@ -126,9 +133,25 @@ int main() {
     cout << "Duration = " << dur << endl;
     cout << "Execution time: " << t1.count() - t0.count() << endl << endl;
 
+
+
     cout << "10%" << endl;
+    info.setCounterFactor(0.1);
+    milliseconds t0 = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
+    OptimizedPath op = magicGenerator(g, &info);
+    milliseconds t1 = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
+
+
+    double distance = distancePath(op.path);
+    cout << "Distance = " << distance << " Num POIs: " << op.visitedId.size()<< endl;
+    int dur = minutesFromDistance(distance, 'w');
+    cout << "Duration = " << dur << endl;
+    cout << "Execution time: " << t1.count() - t0.count() << endl << endl;
+
+    cout << "5%" << endl;
+    info.setCounterFactor(0.05);
     t0 = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
-    op = circularPath(g, &info, 0.1);
+    op = magicGenerator(g, &info);
     t1 = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
 
 
@@ -139,7 +162,7 @@ int main() {
     cout << "Execution time: " << t1.count() - t0.count() << endl << endl;
 
     GraphViewer* gv = createPathViewer(g, op.path, op.visitedId);
-
+*/
 
 /*
     int stopOrig = 1, stopEnd = 8;
@@ -166,7 +189,6 @@ int main() {
 
     //showPathWithMetro(gv, path, path2, v, g, stopOrig, stopEnd);
 
-    getchar();
     return 0;
 }
 
