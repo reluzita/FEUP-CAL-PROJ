@@ -21,6 +21,10 @@ void ClientInfo::setPoi(vector <string> poi){
     this->poi = poi;
 }
 
+void ClientInfo::setCounterFactor(double factor) {
+    this->counterFactor = factor;
+}
+
 char ClientInfo::getMeansOfTransportation(){
     return meansOfTransportation;
 }
@@ -40,6 +44,11 @@ int ClientInfo::getTimeAvailable(){
 vector<string> ClientInfo::getPoi(){
     return poi;
 }
+
+double ClientInfo::getCounterFactor() {
+    return counterFactor;
+}
+
 void ClientInfo::addPoi(const string& point){
     this->poi.push_back(point);
 }

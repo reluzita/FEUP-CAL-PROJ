@@ -73,16 +73,70 @@ int main() {
     info.setIdStart(26999);
     info.setIdEnd(24112);
     info.setTimeAvailable(60);
-    vector<string> types = {"picnic_site"};
+    vector<string> types = {"information"};
     info.setPoi(types);
     info.setMeansOfTransportation('w');
 
-    OptimizedPath op = circularPath(g, &info);
+    vector<Vertex*> points = bfsAllPOI(g, info.getIdStart(), info.getPoi(), info.getTimeAvailable());
+
+    cout << "100%" << endl;
+    milliseconds t0 = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
+    OptimizedPath op = circularPath(g, &info, 1);
+    milliseconds t1 = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
 
     double distance = distancePath(op.path);
-    cout << endl << "Distance = " << distance << endl;
+    cout << "Distance = " << distance << " Num POIs: " << op.visitedId.size() << endl;
     int dur = minutesFromDistance(distance, 'w');
-    cout << endl << "Duration = " << dur << endl;
+    cout << "Duration = " << dur << endl;
+    cout << "Execution time: " << t1.count() - t0.count() << endl << endl;
+
+    cout << "50%" << endl;
+    t0 = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
+    op = circularPath(g, &info, 0.5);
+    t1 = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
+
+
+    distance = distancePath(op.path);
+    cout << "Distance = " << distance << " Num POIs: " << op.visitedId.size() << endl;
+    dur = minutesFromDistance(distance, 'w');
+    cout << "Duration = " << dur << endl;
+    cout << "Execution time: " << t1.count() - t0.count() << endl << endl;
+
+    cout << "30%" << endl;
+    t0 = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
+    op = circularPath(g, &info, 0.3);
+    t1 = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
+
+
+    distance = distancePath(op.path);
+    cout << "Distance = " << distance << " Num POIs: " << op.visitedId.size() << endl;
+    dur = minutesFromDistance(distance, 'w');
+    cout << "Duration = " << dur << endl;
+    cout << "Execution time: " << t1.count() - t0.count() << endl << endl;
+
+    cout << "25%" << endl;
+    t0 = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
+    op = circularPath(g, &info, 0.25);
+    t1 = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
+
+
+    distance = distancePath(op.path);
+    cout << "Distance = " << distance << " Num POIs: " << op.visitedId.size()<< endl;
+    dur = minutesFromDistance(distance, 'w');
+    cout << "Duration = " << dur << endl;
+    cout << "Execution time: " << t1.count() - t0.count() << endl << endl;
+
+    cout << "10%" << endl;
+    t0 = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
+    op = circularPath(g, &info, 0.1);
+    t1 = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
+
+
+    distance = distancePath(op.path);
+    cout << "Distance = " << distance << " Num POIs: " << op.visitedId.size()<< endl;
+    dur = minutesFromDistance(distance, 'w');
+    cout << "Duration = " << dur << endl;
+    cout << "Execution time: " << t1.count() - t0.count() << endl << endl;
 
     GraphViewer* gv = createPathViewer(g, op.path, op.visitedId);
 

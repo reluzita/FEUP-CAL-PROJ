@@ -23,10 +23,10 @@ struct OptimizedPath{
 
 
 OptimizedPath magicGenerator(Graph &g, ClientInfo* info);
-OptimizedPath circularPath(Graph &g, ClientInfo* info);
+OptimizedPath circularPath(Graph &g, ClientInfo* info, double counterFactor);
 void metroPathGenerator(Graph &g, ClientInfo* info);
 
-OptimizedPath findPoiInPath(Graph &g, const vector<Vertex*> &poi, const int &orig, const int &dest, const int &availableTime, char transportation);
+OptimizedPath findPoiInPath(Graph &g, const vector<Vertex*> &poi, const int &orig, const int &dest, const int &availableTime, char transportation, double counterFactor);
 
 queue<Vertex*> joinQueue(queue<Vertex*> frontQ, queue<Vertex*> backQ);
 int hasTime(queue<Vertex*> path, char transportation, int availableTime);

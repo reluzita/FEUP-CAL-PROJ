@@ -54,4 +54,6 @@ int viewMaps(const Graph &g);
 */
 int supriseMe();
 
+
+int generateCircularPath(ClientInfo * info, Graph &g, Graph &gbdir);
 #endif //TOURMATEAPP_MENU2_H

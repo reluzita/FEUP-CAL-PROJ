@@ -12,6 +12,7 @@ class ClientInfo{
         int idEnd;
         int timeAvailable;
         vector<string> poi;
+        double counterFactor;
 
     public: 
         void setMeansOfTransportation(char meansOfTransportation);
@@ -19,11 +20,13 @@ class ClientInfo{
         void setIdEnd(int idEnd);
         void setTimeAvailable(int timeAvailable);
         void setPoi(vector <string> poi);
+        void setCounterFactor(double factor);
         char getMeansOfTransportation();
         int getIdStart();
         int getIdEnd();
         int getTimeAvailable();
         vector<string> getPoi();
+        double getCounterFactor();
         void addPoi(const string &point);
         void addAllPoi(const vector<string> &points);
         void removePoi(const string& point);

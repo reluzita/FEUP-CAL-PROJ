@@ -26,7 +26,7 @@ OptimizedPath magicGenerator(Graph &g, ClientInfo* info) {
     }
 
     vector<Vertex*> poi = bfsAllPOI(g, info->getIdStart(), info->getPoi(), info->getTimeAvailable());
-    res = findPoiInPath(g, poi, info->getIdStart(), info->getIdEnd(), info->getTimeAvailable(), info->getMeansOfTransportation());
+    res = findPoiInPath(g, poi, info->getIdStart(), info->getIdEnd(), info->getTimeAvailable(), info->getMeansOfTransportation(), info->getCounterFactor());
 
     return res;
 }
@@ -87,7 +87,7 @@ void metroPathGenerator(Graph &g, ClientInfo* info) {
 
     cout << "Found " << poi.size() << " points" << endl;
 
-    OptimizedPath pathFromOrig = findPoiInPath(g, poi, info->getIdStart(), g.findStationID(stopOrig), origFactor, 'w');
+    OptimizedPath pathFromOrig = findPoiInPath(g, poi, info->getIdStart(), g.findStationID(stopOrig), origFactor, 'w', info->getCounterFactor());
 
     cout << "Done first generator" << endl;
 
@@ -97,7 +97,7 @@ void metroPathGenerator(Graph &g, ClientInfo* info) {
 
     cout << "Found " << poi.size() << " points" << endl;
 
-    OptimizedPath pathToEnd = findPoiInPath(g, poi, g.findStationID(stopEnd), info->getIdEnd(), endFactor, 'w');
+    OptimizedPath pathToEnd = findPoiInPath(g, poi, g.findStationID(stopEnd), info->getIdEnd(), endFactor, 'w', info->getCounterFactor());
 
     cout << "Done second generator" << endl;
 
@@ -118,7 +118,7 @@ void metroPathGenerator(Graph &g, ClientInfo* info) {
 /*--------------------------------------------- Circular Path ---------------------------------------------------------------------*/
 
 
-OptimizedPath circularPath(Graph &g, ClientInfo* info){
+OptimizedPath circularPath(Graph &g, ClientInfo* info, double counterFactor){
     cout <<"We're building something\n";
     OptimizedPath res;
 
@@ -130,13 +130,19 @@ OptimizedPath circularPath(Graph &g, ClientInfo* info){
     }
 
     cout << points.size() << endl;
+    int counter = ceil(points.size()*counterFactor);
     for(Vertex* point: points) {
+        if(counter == 0)
+            break;
+
         queue<Vertex*> path = dijkstraShortestPath(g, info->getIdStart(), point->getID());
 
         int timeLeft = hasTime(path, info->getMeansOfTransportation(),info->getTimeAvailable());
         timeLeft -= point->getDuration();
-        if(timeLeft <= 0)
+        if(timeLeft <= 0) {
+            counter--;
             continue;
+        }
 
         vector<Vertex*> poi = bfsAllPOI(g, point->getID(), info->getPoi(), timeLeft);
 
@@ -149,10 +155,10 @@ OptimizedPath circularPath(Graph &g, ClientInfo* info){
                 poi.erase(it);
         }
 
-        cout << "Going to find POI" << endl;
-        OptimizedPath optPath = findPoiInPath(g, poi, point->getID(), info->getIdStart(), timeLeft, info->getMeansOfTransportation());
+        //cout << "Going to find POI" << endl;
+        OptimizedPath optPath = findPoiInPath(g, poi, point->getID(), info->getIdStart(), timeLeft, info->getMeansOfTransportation(), counterFactor);
         if(optPath.path.empty()) {
-            cout << "empty!" << endl;
+            counter--;
             continue;
         }
 
@@ -166,14 +172,14 @@ OptimizedPath circularPath(Graph &g, ClientInfo* info){
             res = newOpt;
     }
     if(res.path.empty())
-        cout << "too bad" << endl;
+        cout << "Not enough time to see any points of interest!" << endl;
     return res;
 }
 
 /*----------------------------------------------- Find poi in path ---------------------------------------------------------------*/
 
 
-OptimizedPath findPoiInPath(Graph &g, const vector<Vertex*> &poi, const int &orig, const int &dest, const int &availableTime, char transportation) {
+OptimizedPath findPoiInPath(Graph &g, const vector<Vertex*> &poi, const int &orig, const int &dest, const int &availableTime, char transportation, double counterFactor) {
     struct OptimizedPath empty;  //empty queue to return when cant find path
     struct OptimizedPath best;
     best.path = dijkstraShortestPath(g, orig, dest);
@@ -182,7 +188,13 @@ OptimizedPath findPoiInPath(Graph &g, const vector<Vertex*> &poi, const int &ori
         return empty;   //no time to go straight from orig to dest
     }
 
+    int counter = ceil(poi.size()*counterFactor);
     for (Vertex* point: poi) {
+        if(counter == 0) {
+            //cout << "gave up" << endl;
+            break;
+        }
+
         if (point->getID() == orig || point->getID() == dest)
             continue;   //point is the same as orig or dest
 
@@ -192,6 +204,7 @@ OptimizedPath findPoiInPath(Graph &g, const vector<Vertex*> &poi, const int &ori
         queue<Vertex *> pathFromOrig = dijkstraShortestPath(g, orig, point->getID());
         int remainingTime = hasTime(pathFromOrig, transportation, availableTime) - point->getDuration();
         if (remainingTime <= 0) {
+            counter--;
             continue;   //no time to go from orig to point
         }
 
@@ -209,6 +222,7 @@ OptimizedPath findPoiInPath(Graph &g, const vector<Vertex*> &poi, const int &ori
         int finalTime = hasTime(pathToDest, transportation, remainingTime);
 
         if (finalTime <= 0) {
+            counter--;
             continue;       //no time to go from orig to point to dest
         }
 
@@ -235,7 +249,7 @@ OptimizedPath findPoiInPath(Graph &g, const vector<Vertex*> &poi, const int &ori
                 aux.push_back(vertex);
         }
 
-        OptimizedPath optPathToDest = findPoiInPath(g, aux, point->getID(), dest, remainingTime, transportation);
+        OptimizedPath optPathToDest = findPoiInPath(g, aux, point->getID(), dest, remainingTime, transportation, aux.size());
         pathToDest = optPathToDest.path;
 
         if (pathToDest.empty()) {
@@ -267,7 +281,7 @@ OptimizedPath findPoiInPath(Graph &g, const vector<Vertex*> &poi, const int &ori
     while(!aux.empty()) {
         aux.pop();
     }
-    cout << "Nodes in path: " << best.path.size() << " Visited nodes: " << best.visitedId.size() << endl;
+    //cout << "Nodes in path: " << best.path.size() << " Visited nodes: " << best.visitedId.size() << endl;
     return best;
 }
 

@@ -1,7 +1,9 @@
 #include "GeneratePathMenu.h"
 
-int getTransportation() {
-    vector<string> items = {"Walking/Biking", "Car", "Public Transportations", "Back to main"};
+int getTransportation(bool circular) {
+    vector<string> items;
+    if(circular) items = {"Walking/Biking", "Car", "Back to main"};
+    else items = {"Walking/Biking", "Car", "Public Transportations", "Back to main"};
 
     string description = "Choose one means of transportation from the menu (integer number): ";
  
@@ -28,7 +30,7 @@ string getTypeStartPoint(){
     return lowercase;
 }
 
-int getStartPoint(const Graph &g, const string &typeStart) {
+int getStartPoint(const Graph &g, const string &typeStart, bool circular) {
     //mudar para usar o graphviewer
     GraphViewer* gv = createMapViewer(g);
     //filtrar para mostrar
@@ -41,7 +43,9 @@ int getStartPoint(const Graph &g, const string &typeStart) {
     showPOI(gv, poi, -1);
     //escolher o ponto
     int op;
-    string description = "Choose the id of your starting point on the map (integer number): ";
+    string description;
+    if(circular ) description = "Choose the id of the point where your journey starts and ends on the map (integer number): ";
+    else description = "Choose the id of your starting point on the map (integer number): ";
     menu_int_options(op,1, poi.size(), description);
     gv->closeWindow();
     return poi.at(op-1)->getID();

@@ -2,7 +2,7 @@
 
 
 int mainMenu(ClientInfo *info, Graph &g, Graph &gbdir){
-    vector<string> items = {"View Map", "Generate Path", "Surprise Me", "Manage Preferences", "Quit Program", "main"};
+    vector<string> items = {"View Map", "Generate Path","Generate Circular Path", "Surprise Me", "Manage Preferences", "Quit Program", "main"};
     string description = "Choose one option from the menu (integer number): ";
     
     int value = 0, option;
@@ -12,8 +12,9 @@ int mainMenu(ClientInfo *info, Graph &g, Graph &gbdir){
 
         if(option == 1) value = viewMaps(g);
         else if (option == 2) value = generatePath(info, g, gbdir);
-        else if (option == 3) value = supriseMe();
-        else if (option == 4) value = managePreferences(info);
+        else if (option == 3) value = generateCircularPath(info, g, gbdir);
+        else if (option == 4) value = supriseMe();
+        else if (option == 5) value = managePreferences(info);
         
     } while((option != 5) && (value != -1));
 
@@ -28,7 +29,7 @@ int generatePath(ClientInfo* info, Graph &g, Graph &gbdir){
     if(typeStart.empty()) return 0;
     if(typeStart == "crash") return -1;
 
-    int idStart = getStartPoint(g, typeStart);
+    int idStart = getStartPoint(g, typeStart, false);
     if(idStart == -1 || idStart == 0) return idStart;
     info->setIdStart(idStart);
 
@@ -41,8 +42,16 @@ int generatePath(ClientInfo* info, Graph &g, Graph &gbdir){
     if(idEnd == -1 || idEnd == 0) return idEnd;
     info->setIdEnd(idEnd);
 
+    //escolheu o mesmo ponto para fim e inicio -- circular path
+    if(idStart == idEnd){
+        cout << "If you want a path starting and ending in the same point choose Generate Circular Path in the main menu"<<endl;
+        cout << "We're redirecting you to the main menu ..."<<endl;
+        sleep(3);
+        return 0;
+    }
+
     //meio de transporte
-    int op = getTransportation();
+    int op = getTransportation(false);
     if(op == -1 || op == 0) return op;
 
     bool bidir = (op == 1);
@@ -66,25 +75,64 @@ int generatePath(ClientInfo* info, Graph &g, Graph &gbdir){
     }
 
     OptimizedPath optPath;
-    if(idStart == idEnd){
-        if(bidir)
-            optPath = circularPath(gbdir, info);
-        else
-            optPath = circularPath(g, info);
-    }
+    if(bidir) {
+        optPath = magicGenerator(gbdir, info);
+    } 
     else {
-        if(bidir) {
-            optPath = magicGenerator(gbdir, info);
-        } 
-        else {
-            optPath = magicGenerator(g, info);
-        }
+        optPath = magicGenerator(g, info);
     }
+
+    if(optPath.path.empty()) return 0;
+
+    GraphViewer *gv = createPathViewer(g, optPath.path, optPath.visitedId);
+    getchar();
+    gv->closeWindow();
+    return 0;
+
+}
+int generateCircularPath(ClientInfo * info, Graph &g, Graph &gbdir){
+    //mudar isto tudo ASAP
+
+    string typeStart = getTypeStartPoint();
+    if(typeStart.empty()) return 0;
+    if(typeStart == "crash") return -1;
+
+    int idStart = getStartPoint(g, typeStart, true);
+    if(idStart == -1 || idStart == 0) return idStart;
+    info->setIdStart(idStart);
+
+
+    //meio de transporte
+    int op = getTransportation(true);
+    if(op == -1 || op == 0) return op;
+
+    bool bidir = (op == 1);
+    if(op==1) info->setMeansOfTransportation('w');
+    else if(op==2) info->setMeansOfTransportation('c');
+
+    //tempo
+    int time = getAvailableTime();
+    if(time == -1 || time == 0) return time;
+    info->setTimeAvailable(time);
+
+    //nota: avisar se não houver caminho no tempo indicado
+
+    OptimizedPath optPath;
+    
+    if(bidir)
+        optPath = circularPath(gbdir, info, -1);
+    else
+        optPath = circularPath(g, info, -1);
+    
+    if(optPath.path.empty()) return 0;
+
     GraphViewer *gv = createPathViewer(g, optPath.path, optPath.visitedId);
     getchar();
     gv->closeWindow();
     return 0;
 }
+
+
 
 int managePreferences(ClientInfo * info){
     vector<string> items = {"Add interest", "Remove interest", "View current interests", "Back to Main"};
@@ -108,6 +156,7 @@ int managePreferences(ClientInfo * info){
     }  
     return 0;
 }
+
 
 int viewMaps(const Graph &g){
     GraphViewer *gv = createMapViewer(g);
