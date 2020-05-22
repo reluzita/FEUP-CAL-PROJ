@@ -113,6 +113,10 @@ bool Graph::addEdge(const int &sourc, const int &dest, double w) {
     auto v2 = findVertex(dest);
     if (v1 == nullptr || v2 == nullptr)
         return false;
+    for(Edge e: v1->getAdj()){
+        if(e.getDest() == dest)
+            return false;
+    }
     v1->addEdge(dest,w);
     return true;
 }

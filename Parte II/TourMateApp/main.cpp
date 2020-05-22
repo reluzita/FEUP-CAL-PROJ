@@ -66,20 +66,34 @@ int main() {
 */
 
     //FOR TESTING GRAPHVIEWER///
-    Graph g = readMap(true);
+    Graph g = readMap(false);
 
     ClientInfo info;
 
     info.setIdStart(26999);
     info.setIdEnd(24112);
-    info.setTimeAvailable(30);
+    info.setTimeAvailable(60);
+    vector<string> types = {"picnic_site"};
+    info.setPoi(types);
+    info.setMeansOfTransportation('w');
 
+    OptimizedPath op = circularPath(g, &info);
+
+    double distance = distancePath(op.path);
+    cout << endl << "Distance = " << distance << endl;
+    int dur = minutesFromDistance(distance, 'w');
+    cout << endl << "Duration = " << dur << endl;
+
+    GraphViewer* gv = createPathViewer(g, op.path, op.visitedId);
+
+
+/*
     int stopOrig = 1, stopEnd = 8;
     queue<Vertex *> path = dijkstraShortestPath(g, 26999, 1969);
     queue<Vertex *> path2 = dijkstraShortestPath(g, 27817, 24112);
 
 
-    metroPathGenerator(g, &info);
+    metroPathGenerator(g, &info);*/
 /*
     if(bfs(g, 27772, 28445).empty()) {
         cout << "No path! " << endl;
