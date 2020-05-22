@@ -59,3 +59,33 @@ vector<Vertex*> bfsAll(Graph g, const int & source) {
     }
     return res;
 }
+
+vector<Vertex*> bfsAllPOI(Graph g, const int & source, vector<string> types, int dur) {
+    vector<Vertex*> res;
+    queue<Vertex*> q;
+    g.initializeForSearch();
+
+    Vertex* s = g.findVertex(source);
+    if(s == nullptr)
+        return res;
+    q.push(s);
+    s->setVisited(true);
+
+    while (!q.empty()) {
+        Vertex* temp = q.front();
+        q.pop();
+        if(temp->getType() != " " && temp->getDuration() < dur) {
+            if (types.empty() || find(types.begin(), types.end(), temp->getType()) != types.end()) {
+                res.push_back(temp);
+            }
+        }
+        for(Edge edge: temp->getAdj()) {
+            Vertex *d = g.findVertex(edge.getDest());
+            if (!d->isVisited()) {
+                q.push(d);
+                d->setVisited(true);
+            }
+        }
+    }
+    return res;
+}

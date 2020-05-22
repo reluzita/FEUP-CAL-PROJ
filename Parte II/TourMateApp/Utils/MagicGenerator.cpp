@@ -195,40 +195,26 @@ void metroPathGenerator(Graph &g, ClientInfo* info) {
         return;
     }
 
-    double origFactor = timeLeft * (double)origTime / (endTime + origTime);
+    int origFactor = timeLeft * origTime / (endTime + origTime);
 
-    vector<Vertex*> poi = bfsAll(g, info->getIdStart());
-    vector<Vertex*> res;
-    for(Vertex* v: poi) {
-        if(v->getType() != " " && v->getDuration() < origFactor) {
-            if (info->getPoi().empty())
-                res.push_back(v);
-            if (find(info->getPoi().begin(), info->getPoi().end(), v->getType()) != info->getPoi().end())
-                res.push_back(v);
-        }
-    }
+    vector<Vertex*> poi = bfsAllPOI(g, info->getIdStart(), info->getPoi(), origFactor);
 
-    OptimizedPath pathFromOrig = findPoiInPath(g, res, info->getIdStart(), g.findStationID(stopOrig), origFactor, 'w');
+    cout << "Found " << poi.size() << " points" << endl;
+
+    OptimizedPath pathFromOrig = findPoiInPath(g, poi, info->getIdStart(), g.findStationID(stopOrig), origFactor, 'w');
 
     cout << "Done first generator" << endl;
-    
+
     double endFactor = timeLeft * (double)endTime / (endTime + origTime);
 
-    poi = bfsAll(g, g.findStationID(stopEnd));
-    res.clear();
-    for(Vertex* v: poi) {
-        if(v->getType() != " " && v->getDuration() < endFactor) {
-            if (info->getPoi().empty())
-                res.push_back(v);
-            if (find(info->getPoi().begin(), info->getPoi().end(), v->getType()) != info->getPoi().end())
-                res.push_back(v);
-        }
-    }
+    poi = bfsAllPOI(g, g.findStationID(stopEnd), info->getPoi(), endFactor);
 
-    OptimizedPath pathToEnd = findPoiInPath(g, res, g.findStationID(stopEnd), info->getIdEnd(), endFactor, 'w');
+    cout << "Found " << poi.size() << " points" << endl;
+
+    OptimizedPath pathToEnd = findPoiInPath(g, poi, g.findStationID(stopEnd), info->getIdEnd(), endFactor, 'w');
 
     cout << "Done second generator" << endl;
-    
+
     for(int id: pathToEnd.visitedId)
         pathFromOrig.visitedId.push_back(id);
 

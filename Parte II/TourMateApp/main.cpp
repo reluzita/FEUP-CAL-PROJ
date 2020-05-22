@@ -66,20 +66,21 @@ int main() {
 */
 
     //FOR TESTING GRAPHVIEWER///
-     Graph g = readMap(true);
-    /*      ClientInfo info;
+    Graph g = readMap(true);
 
-          info.setIdStart(26999);
-          info.setIdEnd(24112);
-          info.setTimeAvailable(30);
+    ClientInfo info;
 
-          int stopOrig = 1, stopEnd = 8;
-          queue<Vertex*> path = dijkstraShortestPath(g, 26999, 1969);
-          queue<Vertex*> path2 = dijkstraShortestPath(g, 27817, 24112);
+    info.setIdStart(26999);
+    info.setIdEnd(24112);
+    info.setTimeAvailable(30);
+
+    int stopOrig = 1, stopEnd = 8;
+    queue<Vertex *> path = dijkstraShortestPath(g, 26999, 1969);
+    queue<Vertex *> path2 = dijkstraShortestPath(g, 27817, 24112);
 
 
-          metroPathGenerator(g, &info);*/
-
+    metroPathGenerator(g, &info);
+/*
     if(bfs(g, 27772, 28445).empty()) {
         cout << "No path! " << endl;
         return 0;
@@ -93,7 +94,7 @@ int main() {
     int dur = minutesFromDistance(distance, 'w');
     cout << endl << "Duration = " << dur << endl;
 
-    GraphViewer* gv = createRealPOIPath(g, p.path, p.visitedId);
+    GraphViewer* gv = createRealPOIPath(g, p.path, p.visitedId);*/
 
     //showPathWithMetro(gv, path, path2, v, g, stopOrig, stopEnd);
 

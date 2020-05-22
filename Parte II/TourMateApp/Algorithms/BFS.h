@@ -30,4 +30,6 @@ vector<Vertex*> bfs(Graph g, const int &source, const int &dest);
 */
 vector<Vertex*> bfsAll(Graph g, const int &source);
 
+vector<Vertex*> bfsAllPOI(Graph g, const int & source, vector<string> types, int dur);
+
 #endif //TOURMATEAPP_BFS_H
