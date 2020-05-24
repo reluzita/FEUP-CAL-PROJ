@@ -13,24 +13,37 @@ int main() {
 
     info.startGraph(gBi);
     info.setMeansOfTransportation('w');
+    info.setPoi({"picnic_site"});
     info.setIdStart(30413);
     info.setIdEnd( 36869);
-    info.setTimeAvailable(30);
+    info.setTimeAvailable(60);
+    info.setCounterFactor(0.3);
     //res = mainMenu(&info, gBi, gUni);
 
     //magicGenerator(graph, &info);
-
+/*
     milliseconds t0 = duration_cast<milliseconds >(system_clock::now().time_since_epoch());
     //OptimizedPath path = circularPath(gBi, &info);
     OptimizedPath path = magicGenerator(gBi, &info);
     milliseconds t1 = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
-    cout << "AStar execution time: "<< t1.count()- t0.count()<< " milliseconds"<<endl;
+    cout << "First execution time: "<< t1.count()- t0.count()<< " milliseconds"<<endl;
 
     GraphViewer* gv = createMapViewer(gBi);
     showPath(gv, path.path, path.visitedId);
 
-    getchar();
-    //compareAllSmallPath(gBi);
+    info.setCounterFactor(1);
+
+    t0 = duration_cast<milliseconds >(system_clock::now().time_since_epoch());
+    //OptimizedPath path = circularPath(gBi, &info);
+    path = magicGenerator(gBi, &info);
+    t1 = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
+    cout << "First execution time: "<< t1.count()- t0.count()<< " milliseconds"<<endl;
+
+    GraphViewer* gv2 = createMapViewer(gBi);
+    showPath(gv2, path.path, path.visitedId);
+
+    getchar();*/
+    compareAllGrid();
 
     system("cls");
     cout <<"\nYou're exiting ...\n";

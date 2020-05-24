@@ -88,6 +88,12 @@ Vertex<T> * Edge<T>::getDest() const {
 
 /**************************************  Graph  ***************************************/
 
+template <class T>
+Graph<T>::~Graph() {
+    deleteMatrix(W, vertexSet.size());
+    deleteMatrix(P, vertexSet.size());
+}
+
 
 template <class T>
 void Graph<T>::initializeRealPOIs(){
@@ -555,18 +561,14 @@ queue<Vertex<T>*> Graph<T>::aStarShortestPath(const int &origin, const int &dest
 
 
 template <class T>
-void Graph<T>::floydWarshallShortestPath(vector<int> points){
-
-    currentPoints = points;
-    unsigned n = points.size();
+void Graph<T>::floydWarshallShortestPath(){
+    unsigned n = vertexSet.size();
 
     deleteMatrix(W, n);
     deleteMatrix(P, n);
 
     W = new double *[n];
     P = new int *[n];
-    queue<Vertex<T>*> empty;
-
 
     for (unsigned i = 0; i < n; i++) {
         W[i] = new double[n];
@@ -574,19 +576,38 @@ void Graph<T>::floydWarshallShortestPath(vector<int> points){
         for (unsigned j = 0; j < n; j++) {
             W[i][j] = i == j? 0 : INT_MAX;
             P[i][j] = -1;
-        }   
+        }
 
-        for (unsigned j = 0; j < n; j++) {
-            if( j != i){
-                if(!bfs(points.at(i), points.at(j)).empty()) {
-                    queue<Vertex<T>*> path = dijkstraShortestPath(points.at(i), points.at(j));
-                    W[i][j] = distancePath(path);
-                    P[i][j] = i;
-                }
-            }
-
+        for (auto e : vertexSet.at(i)->outgoing) {
+            int j = findVertexIdx(e->dest->id);
+            W[i][j] = e->weight;
+            P[i][j] = i;
         }
     }
+    for(unsigned k = 0; k < n; k++)
+        for(unsigned i = 0; i < n; i++)
+            for(unsigned j = 0; j < n; j++) {
+                if(W[i][k] == INT_MAX || W[k][j] == INT_MAX)
+                    continue; // avoid overflow
+                int val = W[i][k] + W[k][j];
+                if (val < W[i][j]) {
+                    W[i][j] = val;
+                    P[i][j] = P[k][j];
+                }
+            }
+}
+
+template<class T>
+vector<T> Graph<T>::getfloydWarshallPath(const int &orig, const int &dest) const{
+    vector<T> res;
+    int i = orig;
+    int j = dest;
+    if (i == -1 || j == -1 || W[i][j] == INT_MAX) // missing or disconnected
+        return res;
+    for ( ; j != -1; j = P[i][j])
+        res.push_back(vertexSet[j]->info);
+    reverse(res.begin(), res.end());
+    return res;
 }
 
 

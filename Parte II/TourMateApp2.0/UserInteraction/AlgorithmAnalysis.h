@@ -15,6 +15,8 @@ void compareAllBigPath(Graph<coord> &g);
 void compareBidirectional(Graph<coord> &g);
 void compareDFSBFS(Graph<coord> &g);
 
+void compareAllGrid();
+
 
 
 #endif //TOURMATEAPP_ALGORITHMANALYSIS_H

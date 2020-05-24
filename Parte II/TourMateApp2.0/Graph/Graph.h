@@ -110,6 +110,7 @@ class Graph {
 
 
 public:
+    ~Graph();
 	void initializeRealPOIs();
 
 	double getMaxX() const;
@@ -151,7 +152,8 @@ public:
 	queue<Vertex<T>*> aStarShortestPath(const int &origin, const int &dest);
 	queue<Vertex<T>*> biDirDijkstraShortestPath(const int &origin, const int &dest);
 	queue<Vertex<T>*> biDirAStarShortestPath(const int &origin, const int &dest);
-	void floydWarshallShortestPath(vector<int> points);
+	void floydWarshallShortestPath();
+    vector<T> getfloydWarshallPath(const int &orig, const int &dest) const;
 
 };
 

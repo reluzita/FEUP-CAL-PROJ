@@ -19,6 +19,7 @@ GraphViewer* createMapViewer(const Graph<coord> &g) {
     gv->createWindow(graphWidth, graphHeight);
     gv->defineVertexColor("blue");
     gv->defineEdgeColor("black");
+    gv->defineEdgeCurved(false);
 
     for(Vertex<coord>* vertex: g.getVertexSet()) {
         double y = (vertex->getInfo().second - g.getMinY()) / height;
@@ -122,7 +123,39 @@ void showPath(GraphViewer* gv, queue<Vertex<coord>*> path, vector<int> visitedPo
     gv->rearrange();
 }
 
+void showTestPath(GraphViewer* gv, queue<Vertex<coord>*> path) {
+    int i = 0;
+    gv->setVertexColor(path.front()->getId(), "yellow");
+    gv->setVertexSize(path.front()->getId(), 10);
+    gv->setVertexLabel(path.front()->getId(), "End");
+    int s = 3;
+    while(!path.empty()) {
+        Vertex<coord>* vertex = path.front();
+        path.pop();
 
+        if(!path.empty()) {
+            if(s == 0) {
+                gv->addEdge(i, path.front()->getId(), vertex->getId(), EdgeType::DIRECTED);
+                s = 3;
+            }
+            else {
+                gv->addEdge(i, path.front()->getId(), vertex->getId(), EdgeType::UNDIRECTED);
+                s--;
+            }
+            gv->setEdgeColor(i, "yellow");
+            gv->setEdgeThickness(i, 10);
+            i++;
+        }
+
+        if(path.empty()) {
+            gv->setVertexColor(vertex->getId(), "green");
+            gv->setVertexSize(vertex->getId(), 10);
+            gv->setVertexLabel(vertex->getId(), "Start");
+        }
+    }
+
+    gv->rearrange();
+}
 
 void showPOI(GraphViewer* gv, const vector<Vertex<coord>*>& points, const int &orig) {
     for(int i = 1; i < points.size(); i++) {

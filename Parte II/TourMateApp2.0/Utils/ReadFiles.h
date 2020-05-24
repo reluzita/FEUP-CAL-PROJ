@@ -12,9 +12,9 @@ using namespace std;
 
 Graph<coord> readMap(bool bidir);
 
-void readNodesFile(Graph<coord> &graph);
+void readNodesFile(Graph<coord> &graph, string nodesfile);
 
-void readEdgesFile(Graph<coord> &graph, bool bidir);
+void readEdgesFile(Graph<coord> &graph, bool bidir, string edgesfile);
 
 void readLatLonFile(Graph<coord> &graph);
 

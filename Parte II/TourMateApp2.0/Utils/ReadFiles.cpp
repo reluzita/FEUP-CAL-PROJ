@@ -4,8 +4,8 @@
 Graph<coord> readMap(bool bidir){
     Graph<coord> graph;
 
-    readNodesFile(graph);
-    readEdgesFile(graph, bidir);
+    readNodesFile(graph, "../resources/porto_strong_nodes_xy.txt");
+    readEdgesFile(graph, bidir, "../resources/porto_strong_edges.txt");
     vector<int> tags = readTags(graph);
     readMetroFile(graph);
     graph.initializeRealPOIs();
@@ -13,8 +13,7 @@ Graph<coord> readMap(bool bidir){
     return graph;
 }
 
-void readNodesFile(Graph<coord> &graph){
-    string nodesfile = "../resources/porto_strong_nodes_xy.txt";
+void readNodesFile(Graph<coord> &graph, string nodesfile){
     ifstream nodes;
     string line;
     int numNodes;
@@ -41,9 +40,7 @@ void readNodesFile(Graph<coord> &graph){
     nodes.close();
 }
 
-void readEdgesFile(Graph<coord> &graph, bool bidir){
-
-    string edgesfile = "../resources/porto_strong_edges.txt";
+void readEdgesFile(Graph<coord> &graph, bool bidir, string edgesfile){
     ifstream edges;
     string line;
 

@@ -40,15 +40,12 @@ public:
     }
     double getDist(Graph<coord> &g, const int &source, const int &dest) {
         POIVertex* v1 = findVertex(source);
-        cout << "found vertex" << v1->id << endl;
         for(POIEdge edge: v1->adj) {
             if(edge.destID == dest)
                 return edge.dist;
         }
 
-        cout << "crashed in bfs " << source << " " << dest << endl;
         if(!g.bfs(source, dest).empty()) {
-            cout << "crashed in dijkstra " << source << " " << dest << endl;
             queue<Vertex<coord>*> path = g.dijkstraShortestPath(source, dest);
             //queue<Vertex<coord>*> path = g.aStarShortestPath(source, dest);
             double dist = g.distancePath(path);
@@ -66,7 +63,6 @@ public:
         }
 
         if(!g.bfs(source, dest).empty()) {
-            cout << "crashed here " << source << " " << dest << endl;
             queue<Vertex<coord>*> path = g.dijkstraShortestPath(source, dest);
             //queue<Vertex<coord>*> path = g.aStarShortestPath(source, dest);
             double dist = g.distancePath(path);
