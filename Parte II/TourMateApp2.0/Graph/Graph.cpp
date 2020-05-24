@@ -306,7 +306,7 @@ double Graph<T>::euclideanDistance(Vertex<T> * v1, Vertex<T> * v2) const {
 }
 
 template <class T>
-string Graph<T>::realPOIName(const int &id){
+string Graph<T>::realPOIName(const int &id) const{
     auto it = realPOIs.find(id);
     return it->second;
 }
@@ -682,11 +682,13 @@ queue<Vertex<T>*> Graph<T>:: biDirDijkstraShortestPath(const int &origin, const 
 
     //Starting values
     Vertex<T> *src = findVertex(origin), *final = findVertex(dest), *mid;
+
     src->dist = 0;
     final->distI = 0;
 
     fQueue.insert(src);
     iQueue.insert(final);
+
 
     while(!fQueue.empty() && !iQueue.empty()){
         //Forward search
@@ -722,7 +724,6 @@ queue<Vertex<T>*> Graph<T>:: biDirDijkstraShortestPath(const int &origin, const 
             mid = iV;
             break;
         }
-
 
         //Explore edges in reverse graph
         for (Edge<T> *edge: iV->incoming){
@@ -785,9 +786,10 @@ queue<Vertex<T>*> Graph<T>:: biDirDijkstraShortestPath(const int &origin, const 
         t.push_back(v);
     }
 
-    for(Vertex<T>* vertex: t){
-        path.push(vertex);
+    for (unsigned i = t.size(); i-- > 0; ){
+        path.push(t.at(i));
     }
+
 
     return path;
 }
@@ -807,7 +809,7 @@ queue<Vertex<T>*> Graph<T>::biDirAStarShortestPath(const int &origin, const int 
 
     //Creating forward and reverse priority queues
     MutablePriorityQueue<Vertex<T>> fQueue;
-    MutablePriorityQueue<Vertex<T>> iQueue;
+    MutablePriorityQueue<Vertex<T>> iQueue(true);
 
 
     //Starting values
@@ -839,11 +841,8 @@ queue<Vertex<T>*> Graph<T>::biDirAStarShortestPath(const int &origin, const int 
                 v->dist = temp;
                 v->path = fV;
                 if(notFound) fQueue.insert(v);
-                else{
-                    cout << "ola bitch 1" << endl;
+                else
                     fQueue.decreaseKey(v);
-                    cout << "adeus bitch 1" << endl;
-                }
             }
         }
 
@@ -869,11 +868,8 @@ queue<Vertex<T>*> Graph<T>::biDirAStarShortestPath(const int &origin, const int 
                 v->distI = temp;
                 v->pathI = iV;
                 if(notFound) iQueue.insert(v);
-                else {
-                    cout << "ola bitch 2" << endl;
+                else
                     iQueue.decreaseKey(v);
-                    cout << "adeus bitch 2" << endl;
-                }
             }
         }
     }
@@ -901,7 +897,7 @@ queue<Vertex<T>*> Graph<T>::biDirAStarShortestPath(const int &origin, const int 
             }
         }
     }
-    cout << "NAO CRASHEI" << endl;
+
     //Start to build the final path from mid
     vector<Vertex<T>*> t;
     t.push_back(mid);
@@ -911,13 +907,16 @@ queue<Vertex<T>*> Graph<T>::biDirAStarShortestPath(const int &origin, const int 
         v = v->path;
         t.emplace(t.begin(),v);
     }
+
     v = mid;
-    while(v->path != NULL){
+
+    while(v->pathI != NULL){
         v = v->pathI;
         t.push_back(v);
     }
-    for(Vertex<T>* vertex: t){
-        path.push(vertex);
+
+    for (unsigned i = t.size(); i-- > 0; ){
+        path.push(t.at(i));
     }
 
     return path;

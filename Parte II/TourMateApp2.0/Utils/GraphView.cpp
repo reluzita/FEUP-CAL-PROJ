@@ -75,13 +75,13 @@ GraphViewer* createRealPOIPath(const Graph<coord> &g, queue<Vertex<coord>*> path
         if (path.empty())
             gv->setVertexColor(vertex->getId(), "green");
         else if (find(visitedPoi.begin(), visitedPoi.end(), vertex->getId()) != visitedPoi.end()) {
-            string name = poiName(vertex);
+            string name = g.realPOIName(vertex->getId());
             if (name != "") {
                 gv->setVertexColor(vertex->getId(), "red");
                 gv->setVertexLabel(vertex->getId(), name + to_string(vertex->getDuration()));
             }
         } else if (vertex->getType() != " ") {
-            string name = poiName(vertex);
+            string name = g.realPOIName(vertex->getId());
             if (name != "") {
                 gv->setVertexColor(vertex->getId(), "pink");
                 gv->setVertexLabel(vertex->getId(), name + to_string(vertex->getDuration()));
@@ -180,9 +180,9 @@ void showPOI(GraphViewer* gv, const vector<Vertex<coord>*>& points, const int &o
         gv->setVertexSize(points.at(i)->getId(), 10);
     }
     if(orig != -1) {
-        gv->setVertexColor(points.at(0)->getId(), "green");
-        gv->setVertexSize(points.at(0)->getId(), 15);
-        gv->setVertexLabel(points.at(0)->getId(), "You're here: " + to_string(1));//atençao a isto
+        gv->setVertexColor(orig, "green");
+        gv->setVertexSize(orig, 15);
+        gv->setVertexLabel(orig, "You're here: " + to_string(1));//atençao a isto
     }
     gv->rearrange();
 }
@@ -283,19 +283,4 @@ void showPathWithMetro(GraphViewer* gv, Graph<coord> g, queue<Vertex<coord>*> pa
     gv->setVertexSize(idEnd, 20);
 
     gv->rearrange();
-}
-
-
-string poiName(Vertex<coord> * v){
-    vector<int> poiId = {1144, 41230, 28445, 14820, 24107, 27772, 18083, 41920, 3295, 35225, 17238};
-    vector<string> poiName = {"Museu do Vinho do Porto", "Clerigos", "Palacio da Bolsa", "Ribeira", "Aliados", "Jardins do Palacio de Cristal", "Santa Catarina",
-                              "Hard Club", "Livraria Lello", "Sao Bento", "Se do Porto"};
-
-    for(int i = 0; i < poiId.size(); i++){
-        if(v->getId() == poiId.at(i)){
-            return poiName.at(i) + "-";
-        }
-    }
-
-    return "";
 }

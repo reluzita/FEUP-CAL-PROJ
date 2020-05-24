@@ -28,7 +28,6 @@ void showMetroLine(GraphViewer* gv, Graph<coord> g);
 
 void showPathWithMetro(GraphViewer* gv, Graph<coord> g, queue<Vertex<coord>*> path1, queue<Vertex<coord>*> path2, vector<int> visitedPoi,  MetroStation origStop, MetroStation endStop);
 
-string poiName(Vertex<coord> * v);
 
 
 

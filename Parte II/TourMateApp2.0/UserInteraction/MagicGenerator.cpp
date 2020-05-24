@@ -14,10 +14,12 @@ OptimizedPath magicGenerator(Graph<coord> &g, ClientInfo* info) {
         cout << "There is no time to get from where you are to the point you want!" << endl;
         cout << "However, we have found the quickest way to get there ..."<< endl;
         res.path = info->getPath(g, info->getIdStart(), info->getIdEnd());
+        cout << "inicio = " << info->getIdStart() << "\t fim = " << info->getIdEnd() << endl;
         cout << "It takes " << g.minutesFromDistance(g.distancePath(res.path), info->getMeansOfTransportation()) << " minutes." << endl;
         return res;
     }
 
+    cout <<endl << endl<< "Loading Path..." << endl;
     vector<Vertex<coord>*> poi = g.bfsAllPOI(info->getIdStart(), info->getPoi(), info->getTimeAvailable());
     res = findPoiInPath(g, info, poi, info->getIdStart(), info->getIdEnd(), info->getTimeAvailable());
 
@@ -27,6 +29,9 @@ OptimizedPath magicGenerator(Graph<coord> &g, ClientInfo* info) {
 /*------------------------------------------------- Public Transportation function --------------------------------------------------*/
 
 void metroPathGenerator(Graph<coord> &g, ClientInfo* info) {
+
+    cout <<endl << endl<< "Loading Path..." << endl;
+
     double origDist = INT_MAX, endDist = INT_MAX;
     MetroStation stopOrig, stopEnd;
 
@@ -116,6 +121,9 @@ void metroPathGenerator(Graph<coord> &g, ClientInfo* info) {
 /*--------------------------------------------- Circular Path ---------------------------------------------------------------------*/
 
 OptimizedPath circularPath(Graph<coord> &g, ClientInfo* info){
+
+    cout <<endl << endl<< "Loading Path..." << endl;
+
     OptimizedPath res;
 
     //getting all points acessible from the orig
@@ -190,7 +198,7 @@ OptimizedPath findPoiInPath(Graph<coord> &g, ClientInfo* info, const vector<Vert
     }
 
     int counter = ceil(poi.size()*info->getCounterFactor());
-    cout << "Time Available: " << availableTime << endl;
+
     for (Vertex<coord>* point: poi) {
         if(counter == 0) {
             //cout << "gave up" << endl;
@@ -370,9 +378,18 @@ string getTypeEndPoint(){
 }
 
 int getEndPoint(Graph<coord> &g, int orig, const string &typeEnd, const int &availableTime, bool metro) {
-    GraphViewer* gv = createMapViewer(g);
     //filtrar para mostrar
+
     vector<Vertex<coord>*> v = g.bfsAllPOI(orig,{typeEnd},availableTime);
+
+    if(v.empty()){
+        cout << "There isn't any points of that type to reach from your starting point with your available time! " << endl;
+        cout << "We're redirecting you to the main menu ..." << endl;
+        sleep(3);
+        return 0;
+    }
+
+    GraphViewer* gv = createMapViewer(g);
     vector<Vertex<coord>*> poi;
     for(Vertex<coord>* i: v) {
         if(i->getType() == typeEnd)

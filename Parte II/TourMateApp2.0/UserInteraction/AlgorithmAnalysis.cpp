@@ -26,17 +26,30 @@ void comparePath(Graph<coord> &g, int idStart, int idEnd){
 
 void compareBidirectional(Graph<coord> &g){
     system("cls");
-    int idStart, idEnd; 
+
+    Graph<coord> graph;
+    readNodesFile(graph, "../Resources/GridGraphs/16x16/nodes.txt");
+    readEdgesFile(graph, true, "../Resources/GridGraphs/16x16/edges.txt");
+
+    int idStart = 0, idEnd = 288;
     cout << "Execution of the bidirectional algorithms"<<endl;
     milliseconds t0 = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
-    //chamar bidirdijkstra
+    queue<Vertex<coord>*> path = graph.biDirDijkstraShortestPath(idStart, idEnd);
     milliseconds t1 = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
-    //chamar bidirastar
-    milliseconds t2 = duration_cast< milliseconds >(system_clock::now().time_since_epoch());  
-
     cout << "Bidirectional Dijkstra execution time: "<< t1.count()- t0.count()<< " milliseconds"<<endl;
+
+    GraphViewer* gv = createMapViewer(graph);
+    showTestPath(gv, path);
+
+    idStart = 0, idEnd = 288;
+    t1 = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
+    queue<Vertex<coord>*> path2 = graph.biDirAStarShortestPath(idStart, idEnd);
+    milliseconds t2 = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
     cout << "Bidirectional AStar execution time: "<< t2.count()- t1.count()<< " milliseconds"<<endl;
- 
+
+    GraphViewer *gv1 = createMapViewer(graph);
+    showTestPath(gv1, path2);
+
     cout << endl << "Insert any key to return to the menu..."<<endl;
     char input;
     cin >> input;

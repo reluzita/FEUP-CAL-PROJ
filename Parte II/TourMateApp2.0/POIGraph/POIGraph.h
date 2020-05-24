@@ -49,7 +49,7 @@ public:
 
         if(!g.bfs(source, dest).empty()) {
             queue<Vertex<coord>*> path;
-            if(biDir) path = g.biDirDijkstraShortestPath(source, dest);
+            if(biDir) path = g.biDirAStarShortestPath(source, dest);
             else path = g.aStarShortestPath(source, dest);
 
             double dist = g.distancePath(path);
@@ -60,6 +60,7 @@ public:
         return -1;
     }
     queue<Vertex<coord>*> getPath(Graph<coord> &g, const int &source, const int &dest, bool biDir) {
+
         POIVertex* v1 = findVertex(source);
         if(v1 == nullptr)
             return queue<Vertex<coord>*>();
@@ -71,7 +72,7 @@ public:
         if(!g.bfs(source, dest).empty()) {
 
             queue<Vertex<coord>*> path;
-            if(biDir) path = g.biDirDijkstraShortestPath(source, dest);
+            if(biDir) path = g.biDirAStarShortestPath(source, dest);
             else path = g.aStarShortestPath(source, dest);
 
             double dist = g.distancePath(path);

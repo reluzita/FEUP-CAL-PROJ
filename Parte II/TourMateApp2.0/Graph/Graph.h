@@ -142,7 +142,7 @@ public:
 
 	double euclideanDistance(Vertex<T> * v1, Vertex<T> * v2) const ;
 	
-	string realPOIName(const int &id);
+	string realPOIName(const int &id) const;
 
 	double distancePath(queue<Vertex<T>*> path); 
 	int minutesFromDistance(double distance, const char& transportation) const;
