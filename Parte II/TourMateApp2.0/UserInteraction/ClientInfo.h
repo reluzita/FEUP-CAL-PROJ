@@ -6,7 +6,6 @@
 #include <vector>
 #include <algorithm>
 #include "../POIGraph/POIGraph.h"
-#include "../Graph/Graph.h"
 
 
 using namespace std;
@@ -18,7 +17,7 @@ class ClientInfo{
         int idEnd;
         int timeAvailable;
         vector<string> poi;
-        double counterFactor;
+        double counterFactor = 1;
         POIGraph poiGraph;
 
     public:

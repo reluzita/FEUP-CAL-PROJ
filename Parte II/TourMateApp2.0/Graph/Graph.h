@@ -54,7 +54,7 @@ public:
 	double getDist() const;
 	Vertex *getPath() const;
 	string getType() const;
-	double getDuration() const;
+	int getDuration() const;
 
 	void setDuration(int dur);
 	void setType(string type);
@@ -149,6 +149,8 @@ public:
 	vector<Vertex<T>*> bfsAllPOI(const int & source, vector<string> types, int dur);
 	queue<Vertex<T>*> dijkstraShortestPath(const int &origin, const int &dest);
 	queue<Vertex<T>*> aStarShortestPath(const int &origin, const int &dest);
+	queue<Vertex<T>*> biDirDijkstraShortestPath(const int &origin, const int &dest);
+	queue<Vertex<T>*> biDirAStarShortestPath(const int &origin, const int &dest);
 	void floydWarshallShortestPath(vector<int> points);
 
 };

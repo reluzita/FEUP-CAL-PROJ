@@ -255,7 +255,7 @@ vector<Vertex<coord>*> POIsInPath(queue<Vertex<coord>*> path, vector<Vertex<coor
     return res;
 }
 
-
+/*------------------------------------ Functions to get client info --------------------------*/
 int getTransportation(bool circular) {
     vector<string> items;
     if(circular) items = {"Walking/Biking", "Car", "Back to main"};

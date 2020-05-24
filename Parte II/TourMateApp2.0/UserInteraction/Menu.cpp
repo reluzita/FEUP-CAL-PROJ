@@ -14,7 +14,7 @@ int mainMenu(ClientInfo *info, Graph<coord> &g, Graph<coord> &gbdir){
         else if (option == 3) value = generateCircularPath(info, g, gbdir);
         else if (option == 4) value = supriseMe();
         else if (option == 5) value = managePreferences(info);
-        //else if (option == 6) value = algorithmAnalysis();
+        else if (option == 6) value = algorithmAnalysis(g, gbdir);
     } while((option != 7) && (value != -1));
 
     return 0;
@@ -86,7 +86,10 @@ int generatePath(ClientInfo* info, Graph<coord> &g, Graph<coord> &gbdir){
 
     GraphViewer *gv = createMapViewer(g);
     showPath(gv, optPath.path, optPath.visitedId);
-    getchar();
+
+    int input;
+    cin >> input;
+
     gv->closeWindow();
     return 0;
 

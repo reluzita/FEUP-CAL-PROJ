@@ -1,8 +1,7 @@
 #include "ReadFiles.h"
 
 
-Graph<coord> readMap(bool bidir)
-{
+Graph<coord> readMap(bool bidir){
     Graph<coord> graph;
 
     readNodesFile(graph);

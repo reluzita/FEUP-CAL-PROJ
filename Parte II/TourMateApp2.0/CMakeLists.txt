@@ -20,4 +20,4 @@ add_executable(tourmateapp lib/connection.cpp lib/graphviewer.cpp
         Utils/ReadFiles.cpp Utils/ReadFiles.h
         UserInteraction/AlgorithmAnalysis.cpp UserInteraction/AlgorithmAnalysis.h
         UserInteraction/Menu.cpp UserInteraction/Menu.h
-        )
+        Utils/GraphView.cpp Utils/GraphView.h)

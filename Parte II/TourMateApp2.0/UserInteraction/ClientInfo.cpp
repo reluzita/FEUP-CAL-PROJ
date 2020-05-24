@@ -14,7 +14,9 @@ queue<Vertex<coord>*> ClientInfo::getPath(Graph<coord> g, int orig, int end) {
 }
 
 int ClientInfo::getMinutes(Graph<coord> g,int orig, int end) {
+    cout << "getting minutes" << endl;
     double dist = poiGraph.getDist(g, orig, end);
+    cout << "got minutes" << endl;
     if(dist == -1)
         return -1;
     return g.minutesFromDistance(dist, meansOfTransportation);

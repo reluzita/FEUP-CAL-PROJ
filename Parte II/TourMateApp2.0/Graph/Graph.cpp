@@ -48,7 +48,7 @@ string Vertex<T>::getType() const {
 }
 
 template <class T>
-double Vertex<T>::getDuration() const {
+int Vertex<T>::getDuration() const {
 	return this->duration;
 }
 
@@ -273,7 +273,7 @@ template <class T>
 double Graph<T>::euclideanDistance(Vertex<T> * v1, Vertex<T> * v2) const {
     T info1 = v1->getInfo();
     T info2 = v2->getInfo();
-    return sqrt(pow((info1.first, info2.first), 2) + pow((info1.second - info2.second), 2));
+    return sqrt(pow((info1.first - info2.first), 2) + pow((info1.second - info2.second), 2));
 }
 
 template <class T>
@@ -303,7 +303,7 @@ double Graph<T>::distancePath(queue<Vertex<T>*> path) {
         }
         v1 = v2;
     }
-    return res;
+    return res / 1000;
 }
 
 template <class T>
@@ -531,9 +531,8 @@ queue<Vertex<T>*> Graph<T>::aStarShortestPath(const int &origin, const int &dest
             bool notFound = (v->getDist() == INT_MAX);
 
             if(f < v->getDist()){
-
                 v->dist = f;
-                v->path = v;
+                v->path = temp;
 
                 if(notFound) q.insert(v);
                 else q.decreaseKey(v);
@@ -589,6 +588,27 @@ void Graph<T>::floydWarshallShortestPath(vector<int> points){
         }
     }
 }
+
+
+/*
+queue<Vertex<T>*> Graph:: biDirDijkstraShortestPath(const int &origin, const int &dest){
+    queue<Vertex<T>*> res;
+
+
+
+
+
+
+
+
+
+
+    return res;
+}
+queue<Vertex<T>*> Graph::biDirAStarShortestPath(const int &origin, const int &dest){
+    queue<Vertex<T>*> res;
+    return res;
+}*/
 
 template class Graph<coord>;
 template class Vertex<coord>;

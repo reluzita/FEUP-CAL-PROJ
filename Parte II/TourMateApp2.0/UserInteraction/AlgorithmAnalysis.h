@@ -17,8 +17,4 @@ void compareDFSBFS(Graph<coord> &g);
 
 
 
-
-
-
-
 #endif //TOURMATEAPP_ALGORITHMANALYSIS_H

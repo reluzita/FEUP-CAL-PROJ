@@ -15,7 +15,7 @@ int choice(const string& title, const string& description, vector<string> poi);
 void addInterest(ClientInfo * info);
 void removeInterest(ClientInfo * info);
 void viewInterest(ClientInfo* info);
-//void menu_int_options(int &option, int omin, int nmax, const string& description);
+
 
 
 #endif //TOURMATEAPP_INTERESTMANAGER_H

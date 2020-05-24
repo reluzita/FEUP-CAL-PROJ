@@ -3,12 +3,12 @@
 using namespace std::chrono;
 void compareAllSmallPath(Graph<coord> &g){
     system("cls");
-    int idStrt, idEnd; 
+    int idStrt = 30413, idEnd = 36869;
     cout << "Execution of the algorithms in a small path"<<endl;
     milliseconds t0 = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
-    //chamar dijkstra
+    queue<Vertex<coord>*> path = g.dijkstraShortestPath(30413, 36869);
     milliseconds t1 = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
-    //chamar astar
+    queue<Vertex<coord>*> path2 = g.aStarShortestPath(30413, 36869);
     milliseconds t2 = duration_cast< milliseconds >(system_clock::now().time_since_epoch());  
     //chamar floydWarshall 
     milliseconds t3 = duration_cast< milliseconds >(system_clock::now().time_since_epoch());  
@@ -17,9 +17,13 @@ void compareAllSmallPath(Graph<coord> &g){
     cout << "Dijkstra execution time: "<< t1.count()- t0.count()<< " milliseconds"<<endl;
     cout << "AStar execution time: "<< t2.count()- t1.count()<< " milliseconds"<<endl;
     cout << "Floy-Warshall execution time: "<< t3.count()- t2.count()<< " milliseconds"<<endl;
-    
+
+    GraphViewer* gv = createMapViewer(g);
+    showPath(gv, path, {});
+
     cout << endl << "Insert any key to return to the menu..."<<endl;
-    getchar();
+    int input;
+    cin >> input;
 }
 
 
