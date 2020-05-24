@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="tourmateapp"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Project/FEUP-CAL-PROJ/Parte II/TourMateApp2.0/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Project/FEUP-CAL-PROJ/Parte II/TourMateApp2.0/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Project/FEUP-CAL-PROJ/Parte II/TourMateApp2.0/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Project/FEUP-CAL-PROJ/Parte II/TourMateApp2.0/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Project/FEUP-CAL-PROJ/Parte II/TourMateApp2.0/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Project/FEUP-CAL-PROJ/Parte II/TourMateApp2.0/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Project/FEUP-CAL-PROJ/Parte II/TourMateApp2.0/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Project/FEUP-CAL-PROJ/Parte II/TourMateApp2.0/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Project/FEUP-CAL-PROJ/Parte II/TourMateApp2.0/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Project/FEUP-CAL-PROJ/Parte II/TourMateApp2.0/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="tourmateapp">
+				<Option output="C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Project/FEUP-CAL-PROJ/Parte II/TourMateApp2.0/cmake-build-debug/tourmateapp.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Project/FEUP-CAL-PROJ/Parte II/TourMateApp2.0/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Project/FEUP-CAL-PROJ/Parte II/TourMateApp2.0/lib"/>
+					<Add directory="C:/Program Files (x86)/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include/c++"/>
+					<Add directory="C:/Program Files (x86)/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include/c++/i686-w64-mingw32"/>
+					<Add directory="C:/Program Files (x86)/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include/c++/backward"/>
+					<Add directory="C:/Program Files (x86)/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include"/>
+					<Add directory="C:/Program Files (x86)/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include-fixed"/>
+					<Add directory="C:/Program Files (x86)/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/8.1.0/../../../../i686-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Project/FEUP-CAL-PROJ/Parte II/TourMateApp2.0/cmake-build-debug/Makefile&quot;  VERBOSE=1 tourmateapp"/>
+					<CompileFile command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Project/FEUP-CAL-PROJ/Parte II/TourMateApp2.0/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Project/FEUP-CAL-PROJ/Parte II/TourMateApp2.0/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Project/FEUP-CAL-PROJ/Parte II/TourMateApp2.0/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="tourmateapp/fast">
+				<Option output="C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Project/FEUP-CAL-PROJ/Parte II/TourMateApp2.0/cmake-build-debug/tourmateapp.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Project/FEUP-CAL-PROJ/Parte II/TourMateApp2.0/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Project/FEUP-CAL-PROJ/Parte II/TourMateApp2.0/lib"/>
+					<Add directory="C:/Program Files (x86)/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include/c++"/>
+					<Add directory="C:/Program Files (x86)/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include/c++/i686-w64-mingw32"/>
+					<Add directory="C:/Program Files (x86)/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include/c++/backward"/>
+					<Add directory="C:/Program Files (x86)/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include"/>
+					<Add directory="C:/Program Files (x86)/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include-fixed"/>
+					<Add directory="C:/Program Files (x86)/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/8.1.0/../../../../i686-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Project/FEUP-CAL-PROJ/Parte II/TourMateApp2.0/cmake-build-debug/Makefile&quot;  VERBOSE=1 tourmateapp/fast"/>
+					<CompileFile command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Project/FEUP-CAL-PROJ/Parte II/TourMateApp2.0/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Project/FEUP-CAL-PROJ/Parte II/TourMateApp2.0/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Project/FEUP-CAL-PROJ/Parte II/TourMateApp2.0/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Project/FEUP-CAL-PROJ/Parte II/TourMateApp2.0/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Project/FEUP-CAL-PROJ/Parte II/TourMateApp2.0/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Project/FEUP-CAL-PROJ/Parte II/TourMateApp2.0/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Project/FEUP-CAL-PROJ/Parte II/TourMateApp2.0/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Project/FEUP-CAL-PROJ/Parte II/TourMateApp2.0/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Project/FEUP-CAL-PROJ/Parte II/TourMateApp2.0/Graph/Graph.cpp">
+			<Option target="tourmateapp"/>
+		</Unit>
+		<Unit filename="C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Project/FEUP-CAL-PROJ/Parte II/TourMateApp2.0/Graph/Graph.h">
+			<Option target="tourmateapp"/>
+		</Unit>
+		<Unit filename="C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Project/FEUP-CAL-PROJ/Parte II/TourMateApp2.0/Graph/MutablePriorityQueue.h">
+			<Option target="tourmateapp"/>
+		</Unit>
+		<Unit filename="C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Project/FEUP-CAL-PROJ/Parte II/TourMateApp2.0/POIGraph/POIEdge.h">
+			<Option target="tourmateapp"/>
+		</Unit>
+		<Unit filename="C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Project/FEUP-CAL-PROJ/Parte II/TourMateApp2.0/POIGraph/POIGraph.h">
+			<Option target="tourmateapp"/>
+		</Unit>
+		<Unit filename="C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Project/FEUP-CAL-PROJ/Parte II/TourMateApp2.0/POIGraph/POIVertex.h">
+			<Option target="tourmateapp"/>
+		</Unit>
+		<Unit filename="C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Project/FEUP-CAL-PROJ/Parte II/TourMateApp2.0/UserInteraction/AlgorithmAnalysis.cpp">
+			<Option target="tourmateapp"/>
+		</Unit>
+		<Unit filename="C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Project/FEUP-CAL-PROJ/Parte II/TourMateApp2.0/UserInteraction/AlgorithmAnalysis.h">
+			<Option target="tourmateapp"/>
+		</Unit>
+		<Unit filename="C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Project/FEUP-CAL-PROJ/Parte II/TourMateApp2.0/UserInteraction/ClientInfo.cpp">
+			<Option target="tourmateapp"/>
+		</Unit>
+		<Unit filename="C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Project/FEUP-CAL-PROJ/Parte II/TourMateApp2.0/UserInteraction/ClientInfo.h">
+			<Option target="tourmateapp"/>
+		</Unit>
+		<Unit filename="C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Project/FEUP-CAL-PROJ/Parte II/TourMateApp2.0/UserInteraction/InterestManager.cpp">
+			<Option target="tourmateapp"/>
+		</Unit>
+		<Unit filename="C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Project/FEUP-CAL-PROJ/Parte II/TourMateApp2.0/UserInteraction/InterestManager.h">
+			<Option target="tourmateapp"/>
+		</Unit>
+		<Unit filename="C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Project/FEUP-CAL-PROJ/Parte II/TourMateApp2.0/UserInteraction/MagicGenerator.cpp">
+			<Option target="tourmateapp"/>
+		</Unit>
+		<Unit filename="C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Project/FEUP-CAL-PROJ/Parte II/TourMateApp2.0/UserInteraction/MagicGenerator.h">
+			<Option target="tourmateapp"/>
+		</Unit>
+		<Unit filename="C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Project/FEUP-CAL-PROJ/Parte II/TourMateApp2.0/UserInteraction/Menu.cpp">
+			<Option target="tourmateapp"/>
+		</Unit>
+		<Unit filename="C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Project/FEUP-CAL-PROJ/Parte II/TourMateApp2.0/UserInteraction/Menu.h">
+			<Option target="tourmateapp"/>
+		</Unit>
+		<Unit filename="C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Project/FEUP-CAL-PROJ/Parte II/TourMateApp2.0/Utils/ReadFiles.cpp">
+			<Option target="tourmateapp"/>
+		</Unit>
+		<Unit filename="C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Project/FEUP-CAL-PROJ/Parte II/TourMateApp2.0/Utils/ReadFiles.h">
+			<Option target="tourmateapp"/>
+		</Unit>
+		<Unit filename="C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Project/FEUP-CAL-PROJ/Parte II/TourMateApp2.0/Utils/Stop.h">
+			<Option target="tourmateapp"/>
+		</Unit>
+		<Unit filename="C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Project/FEUP-CAL-PROJ/Parte II/TourMateApp2.0/Utils/Util.cpp">
+			<Option target="tourmateapp"/>
+		</Unit>
+		<Unit filename="C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Project/FEUP-CAL-PROJ/Parte II/TourMateApp2.0/Utils/Util.h">
+			<Option target="tourmateapp"/>
+		</Unit>
+		<Unit filename="C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Project/FEUP-CAL-PROJ/Parte II/TourMateApp2.0/lib/connection.cpp">
+			<Option target="tourmateapp"/>
+		</Unit>
+		<Unit filename="C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Project/FEUP-CAL-PROJ/Parte II/TourMateApp2.0/lib/connection.h">
+			<Option target="tourmateapp"/>
+		</Unit>
+		<Unit filename="C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Project/FEUP-CAL-PROJ/Parte II/TourMateApp2.0/lib/graphviewer.cpp">
+			<Option target="tourmateapp"/>
+		</Unit>
+		<Unit filename="C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Project/FEUP-CAL-PROJ/Parte II/TourMateApp2.0/lib/graphviewer.h">
+			<Option target="tourmateapp"/>
+		</Unit>
+		<Unit filename="C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Project/FEUP-CAL-PROJ/Parte II/TourMateApp2.0/main.cpp">
+			<Option target="tourmateapp"/>
+		</Unit>
+		<Unit filename="C:/Users/ineso/OneDrive/Documentos/Ines-Universidade/2 ano/2 semestre/CAL-Project/FEUP-CAL-PROJ/Parte II/TourMateApp2.0/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
