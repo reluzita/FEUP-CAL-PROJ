@@ -40,6 +40,8 @@ public:
     }
     double getDist(Graph<coord> &g, const int &source, const int &dest, bool biDir) {
         POIVertex* v1 = findVertex(source);
+        if(v1 == nullptr)
+            return -1;
         for(POIEdge edge: v1->adj) {
             if(edge.destID == dest)
                 return edge.dist;
@@ -59,6 +61,8 @@ public:
     }
     queue<Vertex<coord>*> getPath(Graph<coord> &g, const int &source, const int &dest, bool biDir) {
         POIVertex* v1 = findVertex(source);
+        if(v1 == nullptr)
+            return queue<Vertex<coord>*>();
         for(const POIEdge& edge: v1->adj) {
             if(edge.destID == dest)
                 return edge.path;

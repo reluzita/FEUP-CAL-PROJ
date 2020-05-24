@@ -153,6 +153,8 @@ public:
     void initializeForBiDir();
 
 	//Algorithms
+    vector<Vertex<T>*> dfs(const int &source) const;
+    vector<Vertex<T>*> dfsVisit(Vertex<T> *v, vector<Vertex<T>*> & res) const;
 	vector<Vertex<T>*> bfs(const int &source, const int &dest);
 	vector<Vertex<T>*> bfsAll( const int & source);
 	vector<Vertex<T>*> bfsAllPOI(const int & source, vector<string> types, int dur);

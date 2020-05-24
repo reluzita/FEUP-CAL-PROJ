@@ -185,7 +185,7 @@ int Graph<T>::getMetroTime(MetroStation stopOrig, MetroStation stopEnd) const {
         Vertex<T>* v1 = findVertex(stationsMap.find(i)->second);
         Vertex<T>* v2 = findVertex(stationsMap.find(i+1)->second);
 
-        double distance = euclideanDistance(v1, v2);
+        double distance = euclideanDistance(v1, v2) / 1000;
         total += minutesFromDistance(distance, 'p');
     }
     return total;
@@ -389,6 +389,30 @@ void Graph<T>::initializeForBiDir(){
 
 
 /**************************************  Algorithms  ***************************************/
+
+template<class T>
+vector<Vertex<T>*> Graph<T>::dfs(const int &source) const {
+    vector<Vertex<T>*> res;
+    for (auto v : vertexSet)
+        v->visited = false;
+    Vertex<T>* s = findVertex(source);
+    dfsVisit(s, res);
+    return res;
+
+}
+
+template <class T>
+vector<Vertex<T>*> Graph<T>::dfsVisit(Vertex<T> *v, vector<Vertex<T>*> & res) const {
+    v->visited = true;
+    res.push_back(v);
+    for (auto & e : v->getAdj()) {
+        auto w = e->dest;
+        vector<Vertex<T>*> aux;
+        if (!w->visited)
+            dfsVisit(w, res);
+    }
+    return res;
+}
 
 template <class T>
 vector<Vertex<T>*> Graph<T>::bfs(const int &source, const int &dest){

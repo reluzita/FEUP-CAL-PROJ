@@ -46,7 +46,7 @@ int generatePath(ClientInfo* info, Graph<coord> &g, Graph<coord> &gbdir){
     if(typeStart.empty()) return 0;
     if(typeStart == "crash") return -1;
 
-    int idStart = getStartPoint(g, typeStart, false);
+    int idStart = getStartPoint(g, typeStart, false, (op==3));
     if(idStart == -1 || idStart == 0) return idStart;
     info->setIdStart(idStart);
 
@@ -55,7 +55,7 @@ int generatePath(ClientInfo* info, Graph<coord> &g, Graph<coord> &gbdir){
     if(typeEnd.empty()) return 0;
     if(typeStart == "crash") return -1;
 
-    int idEnd = getEndPoint(g, idStart, typeEnd, time);
+    int idEnd = getEndPoint(g, idStart, typeEnd, time, (op==3));
     if(idEnd == -1 || idEnd == 0) return idEnd;
     info->setIdEnd(idEnd);
 
@@ -117,7 +117,7 @@ int generateCircularPath(ClientInfo * info, Graph<coord> &g, Graph<coord> &gbdir
     if(typeStart.empty()) return 0;
     if(typeStart == "crash") return -1;
 
-    int idStart = getStartPoint(g, typeStart, true);
+    int idStart = getStartPoint(g, typeStart, true, false);
     if(idStart == -1 || idStart == 0) return idStart;
     info->setIdStart(idStart);
 
@@ -128,11 +128,39 @@ int generateCircularPath(ClientInfo * info, Graph<coord> &g, Graph<coord> &gbdir
     else
         optPath = circularPath(g, info);
     
-    if(optPath.path.empty()) return 0;
+    if(optPath.path.empty()) {
+        cout << endl << endl << "No time! Insert any key to return to the menu..." << endl;
+        char input;
+        cin >> input;
+        return 0;
+    }
+
+    double dist = g.distancePath(optPath.path);
+    cout << "Total distance: " << dist << "km" << endl;
+    cout << "Moving time: " << g.minutesFromDistance(dist, info->getMeansOfTransportation()) << "m" << endl;
+    if(!optPath.visitedId.empty()) {
+        cout << "Average time in visited points:" << endl;
+        for(int id: optPath.visitedId) {
+            Vertex<coord>* v = g.findVertex(id);
+            cout << id << " - " << v->getType() << " - " << v->getDuration() << "m" << endl;
+        }
+    }
+
+    cout << endl;
+    queue<Vertex<coord>*> aux = optPath.path;
+    while(!aux.empty()) {
+        cout << aux.front()->getId() << " - ";
+        aux.pop();
+    }
+    cout << endl;
 
     GraphViewer *gv = createMapViewer(g);
     showPath(gv, optPath.path, optPath.visitedId);
-    getchar();
+
+    cout << endl << endl << "Insert any key to return to the menu..." << endl;
+    char input;
+    cin >> input;
+
     gv->closeWindow();
 
     return 0;
@@ -182,14 +210,15 @@ int supriseMe(){
 }
 
 int algorithmAnalysis(Graph<coord> &g, Graph<coord> &gbdir){
-    vector<string> items = {"Comparing Dijkstra, AStar and Floyd-Warshall in small path", "Comparing Dijkstra, AStar and Floyd-Warshall in big path", "Comparing Dijkstra, AStar bidirectional in small and big path", "Comparing DFS and BFS in medium paths"};
+    vector<string> items = {"Comparing Dijkstra and AStar in small path", "Comparing Dijkstra and AStar in big path", "Comparing bidirectional Dijkstra and bidirectional AStar", "Comparing DFS and BFS", "Comparing Dijkstra, AStar and Floyd-Warshall in grid graphs"};
     string description = "Choose one option from the menu(integer number): ";
-    int option = displayMenu("Manage Preferences", items, description); 
+    int option = displayMenu("Manage Preferences", items, description);
 
-    if(option == 1) compareAllSmallPath(g);
-    else if (option == 2) compareAllBigPath(g);
+    if(option == 1) comparePath(g, 30413, 36869);
+    else if (option == 2) comparePath(g, 30413, 36869);
     else if (option == 3) compareBidirectional(gbdir);
     else if (option == 4) compareDFSBFS(g);
+    else if (option == 5) compareAllGrid();
     
     return 0;
 }

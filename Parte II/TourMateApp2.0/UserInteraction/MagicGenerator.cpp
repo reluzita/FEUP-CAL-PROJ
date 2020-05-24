@@ -50,6 +50,7 @@ void metroPathGenerator(Graph<coord> &g, ClientInfo* info) {
 
     int timeLeft = info->getTimeAvailable() - g.getMetroTime(stopOrig, stopEnd);
 
+    //cout << "Time Left after metro: " << timeLeft << endl;
     if(timeLeft <= 0) {
         cout << "No time for the metro trip" << endl;
         return; //no time to do the metro trip
@@ -58,33 +59,56 @@ void metroPathGenerator(Graph<coord> &g, ClientInfo* info) {
     int origTime = info->getMinutes(g, info->getIdStart(), stopOrig.getID());
     int endTime = info->getMinutes(g, stopEnd.getID(), info->getIdEnd());
 
-    //cout << "Metro: " << timeLeft << " p1: " << origTime << " p2: " << endTime << endl;
+    cout << "Metro: " << timeLeft << " p1: " << origTime << " p2: " << endTime << endl;
     if(origTime + endTime >= timeLeft) {
-        cout << "No time to get to the metro" << endl;
+        cout << "No time to get to the metro." << endl;
+        cout << endl << endl << "Insert any key to return to the menu..." << endl;
+        char input;
+        cin >> input;
         return;
     }
 
-    int origFactor = timeLeft * origTime / (endTime + origTime);
+    int origFactor = floor(timeLeft * (double)origTime / (double)(endTime + origTime));
+    cout << "Time given for path1 : " << origFactor << endl;
     vector<Vertex<coord>*> poi = g.bfsAllPOI(info->getIdStart(), info->getPoi(), origFactor);
-    cout << "Found " << poi.size() << " points" << endl;
+    //cout << "Found " << poi.size() << " points" << endl;
 
     OptimizedPath pathFromOrig = findPoiInPath(g, info, poi, info->getIdStart(), stopOrig.getID(), origFactor);
-    cout << "Done first generator" << endl;
+    //cout << "Done first generator" << endl;
 
-    double endFactor = timeLeft * (double)endTime / (endTime + origTime);
+    int endFactor = floor(timeLeft * (double)endTime / (double)(endTime + origTime));
+    cout << "Time given for path2 : " << endFactor << endl;
     poi = g.bfsAllPOI(stopEnd.getID(), info->getPoi(), endFactor);
-    cout << "Found " << poi.size() << " points" << endl;
+    //cout << "Found " << poi.size() << " points" << endl;
 
     OptimizedPath pathToEnd = findPoiInPath(g, info, poi, stopEnd.getID(), info->getIdEnd(), endFactor);
-    cout << "Done second generator" << endl;
+    //cout << "Done second generator" << endl;
 
+    vector<int> aux;
     for(int id: pathToEnd.visitedId)
-        pathFromOrig.visitedId.push_back(id);
+        aux.push_back(id);
+    for(int id: pathFromOrig.visitedId)
+        aux.push_back(id);
 
     GraphViewer* gv = createMapViewer(g);
-    showPathWithMetro(gv, g, pathFromOrig.path, pathToEnd.path, pathFromOrig.visitedId, stopOrig, stopEnd);
+    showPathWithMetro(gv, g, pathFromOrig.path, pathToEnd.path, aux, stopOrig, stopEnd);
 
-    getchar();
+
+    double dist = g.distancePath(pathFromOrig.path) + g.distancePath(pathToEnd.path);
+    cout << "Walking distance: " << dist << "km" << endl;
+    cout << "Moving time: " << g.minutesFromDistance(dist, 'w') << "m" << endl;
+    if(!pathFromOrig.visitedId.empty()) {
+        cout << "Average time in visited points:" << endl;
+        for(int id: aux) {
+            Vertex<coord>* v = g.findVertex(id);
+            cout << id << " - " << v->getType() << " - " << v->getDuration() << "m" << endl;
+        }
+    }
+
+    cout << endl << endl << "Insert any key to return to the menu..." << endl;
+    char input;
+    cin >> input;
+
     gv->closeWindow();
 }
 
@@ -102,10 +126,12 @@ OptimizedPath circularPath(Graph<coord> &g, ClientInfo* info){
     }
 
     int counter = ceil(points.size()*info->getCounterFactor());
-    cout << points.size() << endl;
+    //cout << points.size() << endl;
     for(Vertex<coord>* point: points) {
+        if(point->getId() == info->getIdStart())
+            continue;
+
         if(counter == 0) {
-            cout << "gave up!" << endl;
             break;
         }
 
@@ -126,19 +152,19 @@ OptimizedPath circularPath(Graph<coord> &g, ClientInfo* info){
                 poi.erase(it);
         }
 
-        cout << "Going to find POI" << endl;
         OptimizedPath optPath = findPoiInPath(g, info, poi, point->getId(), info->getIdStart(), timeLeft);
         if(optPath.path.empty()) {
             counter--;
             continue;
         }
 
-        if(optPath.visitedId.size() + 1 > res.visitedId.size()) {
-            OptimizedPath newOpt;
-            newOpt.path = joinQueue(optPath.path, path);
-            newOpt.visitedId = optPath.visitedId;
-            newOpt.visitedId.push_back(point->getId());
-
+        OptimizedPath newOpt;
+        path.pop();
+        newOpt.path = joinQueue(optPath.path, path);
+        newOpt.visitedId = optPath.visitedId;
+        newOpt.visitedId.push_back(point->getId());
+        if(optPath.visitedId.size() > res.visitedId.size()
+        || (optPath.visitedId.size() == res.visitedId.size() && g.distancePath(optPath.path) < g.distancePath(res.path))) {
             res = newOpt;
         }
     }
@@ -153,17 +179,18 @@ OptimizedPath circularPath(Graph<coord> &g, ClientInfo* info){
 OptimizedPath findPoiInPath(Graph<coord> &g, ClientInfo* info, const vector<Vertex<coord>*> &poi, const int &orig, const int &dest, const int &availableTime) {
     struct OptimizedPath empty;  //empty queue to return when cant find path
     struct OptimizedPath best;
-    best.path = best.path = info->getPath(g, orig, dest);
 
     int time = info->getMinutes(g, orig, dest);
+    best.path = info->getPath(g, orig, dest);
     if(time > availableTime) {
         return empty;   //no time to go straight from orig to dest
     }
-    else if(time == availableTime) return best;
-
+    else if(time == availableTime) {
+        return best;
+    }
 
     int counter = ceil(poi.size()*info->getCounterFactor());
-    //cout << "Size: " << poi.size() << endl;
+    cout << "Time Available: " << availableTime << endl;
     for (Vertex<coord>* point: poi) {
         if(counter == 0) {
             //cout << "gave up" << endl;
@@ -227,7 +254,7 @@ OptimizedPath findPoiInPath(Graph<coord> &g, ClientInfo* info, const vector<Vert
         optPathToDest.visitedId.push_back(point->getId());
         optPathToDest.path = joinQueue(optPathToDest.path, info->getPath(g, orig, point->getId()));
         if (optPathToDest.visitedId.size() > best.visitedId.size()
-            || (optPathToDest.visitedId.size() == best.visitedId.size() && g.distancePath(optPathToDest.path) < g.distancePath(best.path))) {
+             || (optPathToDest.visitedId.size() == best.visitedId.size() && g.distancePath(optPathToDest.path) < g.distancePath(best.path))) {
             best = optPathToDest;
         }
     }
@@ -294,7 +321,7 @@ string getTypeStartPoint(){
     int op = displayMenu(title, items, description);
 
     if(op == items.size()) return "";
-    if(op == items.size()-1) return " ";
+    if(op == items.size()-1) return "*";
     if(op == -1) return "crash";
 
     string lowercase = items.at(op-1);
@@ -302,7 +329,7 @@ string getTypeStartPoint(){
     return lowercase;
 }
 
-int getStartPoint(const Graph<coord> &g, const string &typeStart, bool circular) {
+int getStartPoint(const Graph<coord> &g, const string &typeStart, bool circular, bool metro) {
     GraphViewer* gv = createMapViewer(g);
     //filtrar para mostrar
     vector<Vertex<coord>*> poi;
@@ -312,7 +339,8 @@ int getStartPoint(const Graph<coord> &g, const string &typeStart, bool circular)
     }
     //mostrar
     showPOI(gv, poi, -1);
-
+    if(metro)
+        showMetroLine(gv, g);
     //escolher o ponto
     int op;
     string description;
@@ -333,7 +361,7 @@ string getTypeEndPoint(){
     int op = displayMenu(title, items, description);
 
     if(op == items.size()) return "";
-    if(op == items.size()-1) return " ";
+    if(op == items.size()-1) return "*";
     if(op == -1) return "crash";
 
     string lowercase = items.at(op-1);
@@ -341,7 +369,7 @@ string getTypeEndPoint(){
     return lowercase;
 }
 
-int getEndPoint(Graph<coord> &g, int orig, const string &typeEnd, const int &availableTime) {
+int getEndPoint(Graph<coord> &g, int orig, const string &typeEnd, const int &availableTime, bool metro) {
     GraphViewer* gv = createMapViewer(g);
     //filtrar para mostrar
     vector<Vertex<coord>*> v = g.bfsAllPOI(orig,{typeEnd},availableTime);
@@ -352,6 +380,8 @@ int getEndPoint(Graph<coord> &g, int orig, const string &typeEnd, const int &ava
     }
     //mostrar
     showPOI(gv, poi, orig);
+    if(metro)
+        showMetroLine(gv, g);
 
     //escolher o ponto
     int op;

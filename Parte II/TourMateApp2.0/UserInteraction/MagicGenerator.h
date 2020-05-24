@@ -23,7 +23,7 @@ vector<Vertex<coord>*> POIsInPath(queue<Vertex<coord>*> path, vector<Vertex<coor
 int getTransportation(bool circular);
 int getAvailableTime();
 string getTypeStartPoint();
-int getStartPoint(const Graph<coord> &g, const string &typeStart, bool circular);
+int getStartPoint(const Graph<coord> &g, const string &typeStart, bool circular, bool metro);
 string getTypeEndPoint();
-int getEndPoint(Graph<coord> &g, int orig, const string &typeEnd, const int &availableTime);
+int getEndPoint(Graph<coord> &g, int orig, const string &typeEnd, const int &availableTime, bool metro);
 #endif //TOURMATEAPP_MAGICGENERATOR_H
