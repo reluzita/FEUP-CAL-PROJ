@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <queue>
+#include <iostream>
 #include <limits>
 #include <algorithm>
 #include <unordered_set>
@@ -85,6 +86,7 @@ public:
 
 	double getWeight() const;
 	Vertex<T> *getDest() const;
+    Vertex<T> *getOrig() const;
 
 	friend class Graph<T>;
 	friend class Vertex<T>;

@@ -38,7 +38,7 @@ public:
         v1->addEdge(dest,w, path);
         return true;
     }
-    double getDist(Graph<coord> &g, const int &source, const int &dest) {
+    double getDist(Graph<coord> &g, const int &source, const int &dest, bool biDir) {
         POIVertex* v1 = findVertex(source);
         for(POIEdge edge: v1->adj) {
             if(edge.destID == dest)
@@ -46,8 +46,10 @@ public:
         }
 
         if(!g.bfs(source, dest).empty()) {
-            queue<Vertex<coord>*> path = g.dijkstraShortestPath(source, dest);
-            //queue<Vertex<coord>*> path = g.aStarShortestPath(source, dest);
+            queue<Vertex<coord>*> path;
+            if(biDir) path = g.biDirDijkstraShortestPath(source, dest);
+            else path = g.aStarShortestPath(source, dest);
+
             double dist = g.distancePath(path);
 
             v1->addEdge(dest, dist, path);
@@ -55,7 +57,7 @@ public:
         }
         return -1;
     }
-    queue<Vertex<coord>*> getPath(Graph<coord> &g, const int &source, const int &dest) {
+    queue<Vertex<coord>*> getPath(Graph<coord> &g, const int &source, const int &dest, bool biDir) {
         POIVertex* v1 = findVertex(source);
         for(const POIEdge& edge: v1->adj) {
             if(edge.destID == dest)
@@ -63,8 +65,11 @@ public:
         }
 
         if(!g.bfs(source, dest).empty()) {
-            queue<Vertex<coord>*> path = g.dijkstraShortestPath(source, dest);
-            //queue<Vertex<coord>*> path = g.aStarShortestPath(source, dest);
+
+            queue<Vertex<coord>*> path;
+            if(biDir) path = g.biDirDijkstraShortestPath(source, dest);
+            else path = g.aStarShortestPath(source, dest);
+
             double dist = g.distancePath(path);
 
             v1->addEdge(dest, dist, path);

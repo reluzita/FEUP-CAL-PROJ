@@ -104,7 +104,10 @@ template <class T>
 Vertex<T> * Edge<T>::getDest() const {
 	return this->dest;
 }
-
+template <class T>
+Vertex<T>* Edge<T>::getOrig() const {
+    return this->orig;
+}
 
 /**************************************  Graph  ***************************************/
 
@@ -642,7 +645,7 @@ queue<Vertex<T>*> Graph<T>:: biDirDijkstraShortestPath(const int &origin, const 
     queue<Vertex<T>*> path;
     if(origin == dest) return path;
 
-    initializeForShortestPath();
+    initializeForBiDir();
 
     //Maps to keep track of visited vertices
     unordered_map<int, bool> fVisited;
@@ -650,16 +653,16 @@ queue<Vertex<T>*> Graph<T>:: biDirDijkstraShortestPath(const int &origin, const 
 
     //Creating forward and reverse priority queues
     MutablePriorityQueue<Vertex<T>> fQueue;
-    MutablePriorityQueue<Vertex<T>> iQueue;
+    MutablePriorityQueue<Vertex<T>> iQueue(true);
 
 
     //Starting values
-    Vertex<T> *src = findVertex(origin), *d = findVertex(dest), *mid;
+    Vertex<T> *src = findVertex(origin), *final = findVertex(dest), *mid;
     src->dist = 0;
-    d->distI = 0;
+    final->distI = 0;
 
     fQueue.insert(src);
-    iQueue.insert(d);
+    iQueue.insert(final);
 
     while(!fQueue.empty() && !iQueue.empty()){
         //Forward search
@@ -673,14 +676,13 @@ queue<Vertex<T>*> Graph<T>:: biDirDijkstraShortestPath(const int &origin, const 
             break;
         }
 
+
         //Explore edges in regular graph
-        for (Edge<T>* e: fV->outgoing){
-            Vertex<T> * v = e->getDest();
-            double temp = fV->getDist() + e->getWeight();
+        for (Edge<T>* edge: fV->outgoing){
+            Vertex<T> * v = edge->getDest();
             bool notFound = (v->getDist() == INT_MAX);
-            if(v->getDist() > temp){
-                v->dist = temp;
-                v->path = fV;
+
+            if(relax(fV, v, edge->getWeight())){
                 if(notFound) fQueue.insert(v);
                 else fQueue.decreaseKey(v);
             }
@@ -699,13 +701,17 @@ queue<Vertex<T>*> Graph<T>:: biDirDijkstraShortestPath(const int &origin, const 
 
 
         //Explore edges in reverse graph
-        for (Edge<T> *e: iV->incoming){
-            Vertex<T> * v = e->getDest();
-            double temp = iV->distI + e->getWeight();
+        for (Edge<T> *edge: iV->incoming){
+            Vertex<T> * v = edge->getOrig();
             bool notFound = (v->distI == INT_MAX);
+
+            double temp = iV->distI + edge->getWeight();
+
             if(v->distI > temp){
+
                 v->distI = temp;
                 v->pathI = iV;
+
                 if(notFound) iQueue.insert(v);
                 else iQueue.decreaseKey(v);
             }
@@ -714,13 +720,25 @@ queue<Vertex<T>*> Graph<T>:: biDirDijkstraShortestPath(const int &origin, const 
 
     //Verify if alternatives paths are better, not passing through the mid vertex
     queue<Vertex<T>*> aux;
+
+    double f = mid->dist + mid->distI;
+
     for (auto node : fVisited){
         Vertex<T>* temp = findVertex(node.first);
+
         for(Edge<T>* e: temp->outgoing){
+
             Vertex<T>* tent = e->getDest();
-            if(iVisited.count(tent->getId())>0){
-                tent->path = temp;
-                mid = tent;
+            if(iVisited.count(tent->getId()) > 0){
+
+                double f_temp = temp->getDist() + tent->getDist() + e->getWeight();
+
+                if(f_temp < f){
+                    tent->path = temp;
+                    mid = tent;
+                    f = f_temp;
+                }
+
             }
         }
     }
@@ -729,29 +747,35 @@ queue<Vertex<T>*> Graph<T>:: biDirDijkstraShortestPath(const int &origin, const 
     vector<Vertex<T>*> t;
     t.push_back(mid);
     Vertex<T>* v = mid;
-    //path.push(mid);
+
 
     while(v->path != NULL){
         v = v->path;
         t.emplace(t.begin(),v);
     }
+
     v = mid;
-    while(v->path != NULL){
+
+    while(v->pathI != NULL){
         v = v->pathI;
         t.push_back(v);
     }
+
     for(Vertex<T>* vertex: t){
         path.push(vertex);
     }
 
     return path;
 }
+
+
 template <class T>
 queue<Vertex<T>*> Graph<T>::biDirAStarShortestPath(const int &origin, const int &dest){
+
     queue<Vertex<T>*> path;
     if(origin == dest) return path;
 
-    initializeForShortestPath();
+    initializeForBiDir();
 
     //Maps to keep track of visited vertices
     unordered_map<int, bool> fVisited;
@@ -763,12 +787,12 @@ queue<Vertex<T>*> Graph<T>::biDirAStarShortestPath(const int &origin, const int 
 
 
     //Starting values
-    Vertex<T> *src = findVertex(origin), *d = findVertex(dest), *mid;
+    Vertex<T> *src = findVertex(origin), *final = findVertex(dest), *mid;
     src->dist = 0;
-    d->distI = 0;
+    final->distI = 0;
 
     fQueue.insert(src);
-    iQueue.insert(d);
+    iQueue.insert(final);
 
     while(!fQueue.empty() && !iQueue.empty()){
         //Forward search
@@ -785,13 +809,17 @@ queue<Vertex<T>*> Graph<T>::biDirAStarShortestPath(const int &origin, const int 
         //Explore edges in regular graph
         for (Edge<T>* e: fV->outgoing){
             Vertex<T> * v = e->getDest();
-            double temp = fV->getDist() + e->getWeight() - euclideanDistance(fV, d) + euclideanDistance(v, d);
+            double temp = fV->getDist() + e->getWeight() - euclideanDistance(fV, final) + euclideanDistance(v, final);
             bool notFound = (v->getDist() == INT_MAX);
             if(v->getDist() > temp){
                 v->dist = temp;
                 v->path = fV;
                 if(notFound) fQueue.insert(v);
-                else fQueue.decreaseKey(v);
+                else{
+                    cout << "ola bitch 1" << endl;
+                    fQueue.decreaseKey(v);
+                    cout << "adeus bitch 1" << endl;
+                }
             }
         }
 
@@ -809,31 +837,47 @@ queue<Vertex<T>*> Graph<T>::biDirAStarShortestPath(const int &origin, const int 
 
         //Explore edges in reverse graph
         for (Edge<T> *e: iV->incoming){
-            Vertex<T> * v = e->getDest();
-            double temp = iV->distI + e->getWeight() - euclideanDistance(iV, d) + euclideanDistance(v, d);
+            Vertex<T> * v = e->getOrig();
+
+            double temp = iV->distI + e->getWeight() - euclideanDistance(iV, src) + euclideanDistance(v, src);
             bool notFound = (v->distI == INT_MAX);
             if(v->distI > temp){
                 v->distI = temp;
                 v->pathI = iV;
                 if(notFound) iQueue.insert(v);
-                else iQueue.decreaseKey(v);
+                else {
+                    cout << "ola bitch 2" << endl;
+                    iQueue.decreaseKey(v);
+                    cout << "adeus bitch 2" << endl;
+                }
             }
         }
     }
 
     //Verify if alternatives paths are better, not passing through mid vertex
     queue<Vertex<T>*> aux;
+    double f = mid->dist - euclideanDistance(mid, final) + euclideanDistance(mid, src) + mid->distI;
+
     for (auto node : fVisited){
         Vertex<T>* temp = findVertex(node.first);
+
         for(Edge<T>* e: temp->outgoing){
+
             Vertex<T>* tent = e->getDest();
-            if(iVisited.count(tent->getId())>0){
-                tent->path = temp;
-                mid = tent;
+            if(iVisited.count(tent->getId()) > 0){
+
+                double f_temp = temp->getDist() + tent->getDist() + e->getWeight() - euclideanDistance(temp, final) - euclideanDistance(tent, src);
+
+                if(f_temp < f){
+                    tent->path = temp;
+                    mid = tent;
+                    f = f_temp;
+                }
+
             }
         }
     }
-
+    cout << "NAO CRASHEI" << endl;
     //Start to build the final path from mid
     vector<Vertex<T>*> t;
     t.push_back(mid);

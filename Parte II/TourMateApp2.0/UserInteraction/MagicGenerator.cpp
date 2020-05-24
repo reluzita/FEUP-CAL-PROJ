@@ -153,21 +153,20 @@ OptimizedPath circularPath(Graph<coord> &g, ClientInfo* info){
 OptimizedPath findPoiInPath(Graph<coord> &g, ClientInfo* info, const vector<Vertex<coord>*> &poi, const int &orig, const int &dest, const int &availableTime) {
     struct OptimizedPath empty;  //empty queue to return when cant find path
     struct OptimizedPath best;
+    best.path = best.path = info->getPath(g, orig, dest);
 
     int time = info->getMinutes(g, orig, dest);
     if(time > availableTime) {
         return empty;   //no time to go straight from orig to dest
     }
-    else if(time == availableTime) {
-        best.path = info->getPath(g, orig, dest);
-        return best;
-    }
+    else if(time == availableTime) return best;
+
 
     int counter = ceil(poi.size()*info->getCounterFactor());
-    cout << "Size: " << poi.size() << endl;
+    //cout << "Size: " << poi.size() << endl;
     for (Vertex<coord>* point: poi) {
         if(counter == 0) {
-            cout << "gave up" << endl;
+            //cout << "gave up" << endl;
             break;
         }
 
@@ -226,12 +225,13 @@ OptimizedPath findPoiInPath(Graph<coord> &g, ClientInfo* info, const vector<Vert
 
         //update best with path found recursively
         optPathToDest.visitedId.push_back(point->getId());
-        if (optPathToDest.visitedId.size() > best.visitedId.size()) {
-            best.path = joinQueue(optPathToDest.path, info->getPath(g, orig, point->getId()));
-            best.visitedId = optPathToDest.visitedId;
+        optPathToDest.path = joinQueue(optPathToDest.path, info->getPath(g, orig, point->getId()));
+        if (optPathToDest.visitedId.size() > best.visitedId.size()
+            || (optPathToDest.visitedId.size() == best.visitedId.size() && g.distancePath(optPathToDest.path) < g.distancePath(best.path))) {
+            best = optPathToDest;
         }
     }
-    cout << "Nodes in path: " << best.path.size() << " Visited nodes: " << best.visitedId.size() << endl;
+    //cout << "Nodes in path: " << best.path.size() << " Visited nodes: " << best.visitedId.size() << endl;
     return best;
 }
 
