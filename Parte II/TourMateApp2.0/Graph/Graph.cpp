@@ -62,9 +62,29 @@ void Vertex<T>::setDuration(int dur) {
 	this->duration = dur;
 }
 
+template<class T>
+bool Vertex<T>::compare(const Vertex<T> &vertex, bool inv) {
+    return (inv)? (this->distI < vertex.distI) : (this->dist < vertex.dist);
+}
+
 template <class T>
-bool Vertex<T>::operator<(Vertex<T> & vertex) const {
-	return this->dist < vertex.dist;
+bool Vertex<T>::operator<(const Vertex &vertex) const {
+    return this->dist < vertex.dist;
+}
+
+template<class T>
+bool Vertex<T>::operator>(const Vertex &vertex) const {
+    return vertex < *this;
+}
+
+template<class T>
+bool Vertex<T>::operator<=(const Vertex &vertex) const {
+    return !(vertex < *this);
+}
+
+template<class T>
+bool Vertex<T>::operator>=(const Vertex &vertex) const {
+    return !(*this < vertex);
 }
 
 
@@ -354,7 +374,14 @@ void Graph<T>::initializeForShortestPath(){
 
 template <class T>
 void Graph<T>::initializeForBiDir(){
-
+    for(Vertex<T>* v: vertexSet){
+        v->dist = INT_MAX;
+        v->distI = INT_MAX;
+        v->queueIndex = 0;
+        v->queueIndexInv = 0;
+        v->path = NULL;
+        v->pathI = NULL;
+    }
 }
 
 
@@ -610,26 +637,227 @@ vector<T> Graph<T>::getfloydWarshallPath(const int &orig, const int &dest) const
     return res;
 }
 
+template <class T>
+queue<Vertex<T>*> Graph<T>:: biDirDijkstraShortestPath(const int &origin, const int &dest){
+    queue<Vertex<T>*> path;
+    if(origin == dest) return path;
 
-/*
-queue<Vertex<T>*> Graph:: biDirDijkstraShortestPath(const int &origin, const int &dest){
-    queue<Vertex<T>*> res;
+    initializeForShortestPath();
+
+    //Maps to keep track of visited vertices
+    unordered_map<int, bool> fVisited;
+    unordered_map<int, bool> iVisited;
+
+    //Creating forward and reverse priority queues
+    MutablePriorityQueue<Vertex<T>> fQueue;
+    MutablePriorityQueue<Vertex<T>> iQueue;
 
 
+    //Starting values
+    Vertex<T> *src = findVertex(origin), *d = findVertex(dest), *mid;
+    src->dist = 0;
+    d->distI = 0;
+
+    fQueue.insert(src);
+    iQueue.insert(d);
+
+    while(!fQueue.empty() && !iQueue.empty()){
+        //Forward search
+        //Starting by extracting the minimum from forward queue and set vertex as visited by forward search
+        Vertex<T>* fV = fQueue.extractMin();
+        fVisited.emplace(fV->getId(), true);
+
+        //Checks if it has been visited by reverse search, if so the path has been found
+        if(iVisited.count(fV->getId())>0){
+            mid = fV;
+            break;
+        }
+
+        //Explore edges in regular graph
+        for (Edge<T>* e: fV->outgoing){
+            Vertex<T> * v = e->getDest();
+            double temp = fV->getDist() + e->getWeight();
+            bool notFound = (v->getDist() == INT_MAX);
+            if(v->getDist() > temp){
+                v->dist = temp;
+                v->path = fV;
+                if(notFound) fQueue.insert(v);
+                else fQueue.decreaseKey(v);
+            }
+        }
+
+        //Reverse seacrh
+        //Starting by extracting the minimum from reverse queue and set vertex as visited by reverse search
+        Vertex<T>* iV = iQueue.extractMin();
+        iVisited.emplace(iV->getId(), true);
+
+        //Checks if it has been visited by forward search, if so the path has been found
+        if(fVisited.count(iV->getId())>0){
+            mid = iV;
+            break;
+        }
 
 
+        //Explore edges in reverse graph
+        for (Edge<T> *e: iV->incoming){
+            Vertex<T> * v = e->getDest();
+            double temp = iV->distI + e->getWeight();
+            bool notFound = (v->distI == INT_MAX);
+            if(v->distI > temp){
+                v->distI = temp;
+                v->pathI = iV;
+                if(notFound) iQueue.insert(v);
+                else iQueue.decreaseKey(v);
+            }
+        }
+    }
 
+    //Verify if alternatives paths are better, not passing through the mid vertex
+    queue<Vertex<T>*> aux;
+    for (auto node : fVisited){
+        Vertex<T>* temp = findVertex(node.first);
+        for(Edge<T>* e: temp->outgoing){
+            Vertex<T>* tent = e->getDest();
+            if(iVisited.count(tent->getId())>0){
+                tent->path = temp;
+                mid = tent;
+            }
+        }
+    }
 
+    //Start to build the final path from mid
+    vector<Vertex<T>*> t;
+    t.push_back(mid);
+    Vertex<T>* v = mid;
+    //path.push(mid);
 
+    while(v->path != NULL){
+        v = v->path;
+        t.emplace(t.begin(),v);
+    }
+    v = mid;
+    while(v->path != NULL){
+        v = v->pathI;
+        t.push_back(v);
+    }
+    for(Vertex<T>* vertex: t){
+        path.push(vertex);
+    }
 
-
-
-    return res;
+    return path;
 }
-queue<Vertex<T>*> Graph::biDirAStarShortestPath(const int &origin, const int &dest){
-    queue<Vertex<T>*> res;
-    return res;
-}*/
+template <class T>
+queue<Vertex<T>*> Graph<T>::biDirAStarShortestPath(const int &origin, const int &dest){
+    queue<Vertex<T>*> path;
+    if(origin == dest) return path;
+
+    initializeForShortestPath();
+
+    //Maps to keep track of visited vertices
+    unordered_map<int, bool> fVisited;
+    unordered_map<int, bool> iVisited;
+
+    //Creating forward and reverse priority queues
+    MutablePriorityQueue<Vertex<T>> fQueue;
+    MutablePriorityQueue<Vertex<T>> iQueue;
+
+
+    //Starting values
+    Vertex<T> *src = findVertex(origin), *d = findVertex(dest), *mid;
+    src->dist = 0;
+    d->distI = 0;
+
+    fQueue.insert(src);
+    iQueue.insert(d);
+
+    while(!fQueue.empty() && !iQueue.empty()){
+        //Forward search
+        //Starting by extracting the minimum from forward queue and set vertex as visited by forward search
+        Vertex<T>* fV = fQueue.extractMin();
+        fVisited.emplace(fV->getId(), true);
+
+        //Checks if it has been visited by reverse search, if so the path has been found
+        if(iVisited.count(fV->getId())>0){
+            mid = fV;
+            break;
+        }
+
+        //Explore edges in regular graph
+        for (Edge<T>* e: fV->outgoing){
+            Vertex<T> * v = e->getDest();
+            double temp = fV->getDist() + e->getWeight() - euclideanDistance(fV, d) + euclideanDistance(v, d);
+            bool notFound = (v->getDist() == INT_MAX);
+            if(v->getDist() > temp){
+                v->dist = temp;
+                v->path = fV;
+                if(notFound) fQueue.insert(v);
+                else fQueue.decreaseKey(v);
+            }
+        }
+
+        //Reverse seacrh
+        //Starting by extracting the minimum from reverse queue and set vertex as visited by reverse search
+        Vertex<T>* iV = iQueue.extractMin();
+        iVisited.emplace(iV->getId(), true);
+
+        //Checks if it has been visited by forward search, if so the path has been found
+        if(fVisited.count(iV->getId())>0){
+            mid = iV;
+            break;
+        }
+
+
+        //Explore edges in reverse graph
+        for (Edge<T> *e: iV->incoming){
+            Vertex<T> * v = e->getDest();
+            double temp = iV->distI + e->getWeight() - euclideanDistance(iV, d) + euclideanDistance(v, d);
+            bool notFound = (v->distI == INT_MAX);
+            if(v->distI > temp){
+                v->distI = temp;
+                v->pathI = iV;
+                if(notFound) iQueue.insert(v);
+                else iQueue.decreaseKey(v);
+            }
+        }
+    }
+
+    //Verify if alternatives paths are better, not passing through mid vertex
+    queue<Vertex<T>*> aux;
+    for (auto node : fVisited){
+        Vertex<T>* temp = findVertex(node.first);
+        for(Edge<T>* e: temp->outgoing){
+            Vertex<T>* tent = e->getDest();
+            if(iVisited.count(tent->getId())>0){
+                tent->path = temp;
+                mid = tent;
+            }
+        }
+    }
+
+    //Start to build the final path from mid
+    vector<Vertex<T>*> t;
+    t.push_back(mid);
+    Vertex<T>* v = mid;
+
+    while(v->path != NULL){
+        v = v->path;
+        t.emplace(t.begin(),v);
+    }
+    v = mid;
+    while(v->path != NULL){
+        v = v->pathI;
+        t.push_back(v);
+    }
+    for(Vertex<T>* vertex: t){
+        path.push(vertex);
+    }
+
+    return path;
+}
+
+
+
+
 
 template class Graph<coord>;
 template class Vertex<coord>;

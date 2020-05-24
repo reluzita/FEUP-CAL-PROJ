@@ -1,6 +1,3 @@
-/*
- * Graph.h
- */
 #ifndef GRAPH_H_
 #define GRAPH_H_
 
@@ -30,15 +27,19 @@ class Vertex {
 	string type = " "; //if " ", not point of interest
 
 	//Auxiliar Field
-	bool visited;   
-	
-	double dist = 0;
-	int duration = 0; // if 0, not point of interest
-	Vertex<T> *path = nullptr;  
-	
-	int queueIndex = 0; 		// required by MutablePriorityQueue
+	bool visited;
 
-	//Bidirectional
+    double dist = 0;
+    double distI = 0;
+    int duration = 0; // if 0, not point of interest
+    Vertex<T> *path = nullptr;
+    Vertex<T> *pathI = nullptr;
+
+    //required by MutablePriorityQueue
+	int queueIndex = 0;
+    int queueIndexInv = 0;
+
+    //Bidirectional
 	vector<Edge<T> *> outgoing;
     vector<Edge<T> *> incoming;
 
@@ -59,7 +60,12 @@ public:
 	void setDuration(int dur);
 	void setType(string type);
 
-	bool operator<(Vertex<T> & vertex) const; // required by MutablePriorityQueue
+    // required by MutablePriorityQueue
+    bool compare(const Vertex<T> &vertex, bool inv);
+    bool operator<(const Vertex &vertex) const;
+    bool operator>(const Vertex &vertex) const;
+    bool operator<=(const Vertex &vertex) const;
+    bool operator>=(const Vertex &vertex) const;
 
 	friend class Graph<T>;
 	friend class MutablePriorityQueue<Vertex<T>>;
@@ -150,8 +156,8 @@ public:
 	vector<Vertex<T>*> bfsAllPOI(const int & source, vector<string> types, int dur);
 	queue<Vertex<T>*> dijkstraShortestPath(const int &origin, const int &dest);
 	queue<Vertex<T>*> aStarShortestPath(const int &origin, const int &dest);
-	queue<Vertex<T>*> biDirDijkstraShortestPath(const int &origin, const int &dest);
-	queue<Vertex<T>*> biDirAStarShortestPath(const int &origin, const int &dest);
+    queue<Vertex<T>*> biDirDijkstraShortestPath(const int &origin, const int &dest);
+    queue<Vertex<T>*> biDirAStarShortestPath(const int &origin, const int &dest);
 	void floydWarshallShortestPath();
     vector<T> getfloydWarshallPath(const int &orig, const int &dest) const;
 
