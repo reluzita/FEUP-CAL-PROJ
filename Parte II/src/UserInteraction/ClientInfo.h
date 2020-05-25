@@ -41,6 +41,7 @@ class ClientInfo{
         void addAllPoi(const vector<string> &points);
         void removePoi(const string& point);
         void removeAllPoi();
+        void meanOfTransportationToString();
 };
 
 #endif //TOURMATEAPP_CLIENTINFO_H

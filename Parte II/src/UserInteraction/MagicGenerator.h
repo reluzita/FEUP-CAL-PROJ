@@ -16,6 +16,9 @@ OptimizedPath magicGenerator(Graph<coord> &g, ClientInfo* info);
 OptimizedPath circularPath(Graph<coord> &g, ClientInfo* info);
 void metroPathGenerator(Graph<coord> &g, ClientInfo* info);
 OptimizedPath findPoiInPath(Graph<coord> &g, ClientInfo* info, const vector<Vertex<coord>*> &poi, const int &orig, const int &dest, const int &availableTime);
+queue<Vertex<coord>*> calculateDayTour(Graph<coord> &g);
+queue<Vertex<coord>*> calculateMorningTour(Graph<coord> &g);
+queue<Vertex<coord>*> calculateAfternoonTour(Graph<coord> &g);
 
 queue<Vertex<coord>*> joinQueue(queue<Vertex<coord>*> frontQ, queue<Vertex<coord>*> backQ);
 vector<Vertex<coord>*> POIsInPath(queue<Vertex<coord>*> path, vector<Vertex<coord>*> poi);

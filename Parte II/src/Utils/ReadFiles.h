@@ -16,8 +16,6 @@ void readNodesFile(Graph<coord> &graph, string nodesfile);
 
 void readEdgesFile(Graph<coord> &graph, bool bidir, string edgesfile);
 
-void readLatLonFile(Graph<coord> &graph);
-
 vector<int> readTags(Graph<coord> &g);
 
 void readMetroFile(Graph<coord> &g);

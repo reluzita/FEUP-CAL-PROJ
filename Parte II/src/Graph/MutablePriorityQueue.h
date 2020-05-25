@@ -12,7 +12,7 @@ using namespace std;
 
 template <class T>
 class MutablePriorityQueue {
-    bool inv;
+    bool inv = false;
     vector<T *> H;
     void heapifyUp(unsigned i);
     void heapifyDown(unsigned i);

@@ -9,7 +9,7 @@ link_libraries(ws2_32 wsock32)
 include_directories(lib)
 add_executable(tourmateapp lib/connection.cpp lib/graphviewer.cpp
         main.cpp
-        Utils/Stop.h
+        Graph/Stop.h
         Graph/MutablePriorityQueue.h
         Graph/Graph.cpp Graph/Graph.h
         POIGraph/POIEdge.h POIGraph/POIVertex.h POIGraph/POIGraph.h

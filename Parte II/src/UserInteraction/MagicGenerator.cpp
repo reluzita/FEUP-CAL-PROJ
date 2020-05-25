@@ -6,7 +6,7 @@ OptimizedPath magicGenerator(Graph<coord> &g, ClientInfo* info) {
 
     int time = info->getMinutes(g, info->getIdStart(), info->getIdEnd());
     if(time == -1) {
-        cout << "There is no path between starting and end point" << endl;
+        cout << "There is no path between starting and end point." << endl;
         return res;
     }
 
@@ -18,7 +18,11 @@ OptimizedPath magicGenerator(Graph<coord> &g, ClientInfo* info) {
         return res;
     }
 
-    cout <<endl << endl<< "Loading Path..." << endl;
+    system("cls");
+
+    cout << endl <<  "Loading Path between " << info->getIdStart() << " and " << info->getIdEnd() << "." << endl;
+    info->meanOfTransportationToString();
+
     vector<Vertex<coord>*> poi = g.bfsAllPOI(info->getIdStart(), info->getPoi(), info->getTimeAvailable());
     res = findPoiInPath(g, info, poi, info->getIdStart(), info->getIdEnd(), info->getTimeAvailable());
 
@@ -31,7 +35,10 @@ OptimizedPath magicGenerator(Graph<coord> &g, ClientInfo* info) {
 
 void metroPathGenerator(Graph<coord> &g, ClientInfo* info) {
 
-    cout <<endl << endl<< "Loading Path..." << endl;
+    system("cls");
+
+    cout << endl <<  "Loading Path between " << info->getIdStart() << " and " << info->getIdEnd() << "." << endl;
+    info->meanOfTransportationToString();
 
     double origDist = INT_MAX, endDist = INT_MAX;
     MetroStation stopOrig, stopEnd;
@@ -88,7 +95,7 @@ void metroPathGenerator(Graph<coord> &g, ClientInfo* info) {
     for(int id: pathFromOrig.visitedId)
         aux.push_back(id);
 
-    GraphViewer* gv = createMapViewer(g);
+    GraphViewer* gv = createMapViewer(g, false);
     showPathWithMetro(gv, g, pathFromOrig.path, pathToEnd.path, aux, stopOrig, stopEnd);
 
 
@@ -115,7 +122,9 @@ void metroPathGenerator(Graph<coord> &g, ClientInfo* info) {
 
 OptimizedPath circularPath(Graph<coord> &g, ClientInfo* info){
 
-    cout <<endl << endl<< "Loading Path..." << endl;
+    system("cls");
+    cout << endl <<  "Loading Circular Path starting at "<< info->getIdStart() << "." << endl;
+    info->meanOfTransportationToString();
 
     OptimizedPath res;
 
@@ -257,6 +266,49 @@ OptimizedPath findPoiInPath(Graph<coord> &g, ClientInfo* info, const vector<Vert
     return best;
 }
 
+/*----------------------------------------------- Day Tour ---------------------------------------------------------------*/
+
+//cafe majestic, santa catarina, bolhao, aliados, livraria lello, centro da fotografia, clerigos
+
+queue<Vertex<coord>*> calculateDayTour(Graph<coord> &g){
+    queue<Vertex<coord>*> morning = calculateMorningTour(g);
+    queue<Vertex<coord>*> afternoon = calculateAfternoonTour(g);
+
+    return joinQueue(afternoon, morning);
+}
+
+queue<Vertex<coord>*> calculateMorningTour(Graph<coord> &g){
+
+    queue<Vertex<coord>*> path = g.biDirAStarShortestPath(30413, 18083);
+    queue<Vertex<coord>*> path1 = g.biDirAStarShortestPath(18083, 17001);
+    queue<Vertex<coord>*> path2 = g.biDirAStarShortestPath(17001, 24107);
+    queue<Vertex<coord>*> path3 = g.biDirAStarShortestPath(24107, 3295);
+    queue<Vertex<coord>*> path4 = g.biDirAStarShortestPath(3295, 36869);
+    queue<Vertex<coord>*> path5 = g.biDirAStarShortestPath(36869, 41230);
+
+    queue<Vertex<coord>*> final = joinQueue(path5, path4);
+    final = joinQueue(final, path3);
+    final = joinQueue(final, path2);
+    final = joinQueue(final, path1);
+    final = joinQueue(final, path);
+    return final;
+}
+
+queue<Vertex<coord>*> calculateAfternoonTour(Graph<coord> &g){
+
+    queue<Vertex<coord>*> path = g.biDirAStarShortestPath(41230, 35225);
+    queue<Vertex<coord>*> path1 = g.biDirAStarShortestPath(35225, 28445);
+    queue<Vertex<coord>*> path2 = g.biDirAStarShortestPath(28445, 1144);
+    queue<Vertex<coord>*> path3 = g.biDirAStarShortestPath(1144, 14820);
+
+    queue<Vertex<coord>*> final = joinQueue(path3, path2);
+    final = joinQueue(final, path1);
+    final = joinQueue(final, path);
+    return final;
+}
+
+
+
 /*------------------------------------------Auxiliar functions-----------------------------------------*/
 
 queue<Vertex<coord>*> joinQueue(queue<Vertex<coord>*> frontQ, queue<Vertex<coord>*> backQ) {
@@ -325,7 +377,7 @@ string getTypeStartPoint(){
 }
 
 int getStartPoint(const Graph<coord> &g, const string &typeStart, bool circular, bool metro) {
-    GraphViewer* gv = createMapViewer(g);
+    GraphViewer* gv = createMapViewer(g, false);
     //filtrar para mostrar
     vector<Vertex<coord>*> poi;
     for(Vertex<coord>* vertex: g.getVertexSet()) {
@@ -376,7 +428,7 @@ int getEndPoint(Graph<coord> &g, int orig, const string &typeEnd, const int &ava
         return 0;
     }
 
-    GraphViewer* gv = createMapViewer(g);
+    GraphViewer* gv = createMapViewer(g, false);
     vector<Vertex<coord>*> poi;
     for(Vertex<coord>* i: v) {
         if(i->getType() == typeEnd)

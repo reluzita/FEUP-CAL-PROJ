@@ -192,6 +192,11 @@ int Graph<T>::getMetroTime(MetroStation stopOrig, MetroStation stopEnd) const {
 }
 
 template <class T>
+unordered_map<int, string> Graph<T>::getRealPOIs() const{
+    return realPOIs;
+}
+
+template <class T>
 int Graph<T>::getPath(const int &orig, const int &dest) const{
     int i = findVertexIdx(orig);
     int j = findVertexIdx(dest);

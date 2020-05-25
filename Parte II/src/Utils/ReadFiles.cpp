@@ -2,6 +2,7 @@
 
 
 Graph<coord> readMap(bool bidir){
+    //lê todos os ficheiros e guarda toda a informaçao necessária
     Graph<coord> graph;
 
     readNodesFile(graph, "../resources/porto_strong_nodes_xy.txt");
@@ -14,6 +15,7 @@ Graph<coord> readMap(bool bidir){
 }
 
 void readNodesFile(Graph<coord> &graph, string nodesfile){
+    //ler o ficheiros de nodes 
     ifstream nodes;
     string line;
     int numNodes;
@@ -41,6 +43,7 @@ void readNodesFile(Graph<coord> &graph, string nodesfile){
 }
 
 void readEdgesFile(Graph<coord> &graph, bool bidir, string edgesfile){
+    //ler o ficheiro de edges
     ifstream edges;
     string line;
 

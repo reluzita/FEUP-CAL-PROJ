@@ -17,7 +17,7 @@ int managePreferences(ClientInfo * info);
 
 int viewMaps(const Graph<coord> &g);
 
-int supriseMe();
+int dayTour(Graph<coord> &g);
 
 int generateCircularPath(ClientInfo * info, Graph<coord> &g, Graph<coord> &gbdir);
 

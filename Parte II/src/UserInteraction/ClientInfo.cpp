@@ -88,3 +88,23 @@ void ClientInfo::removePoi(const string& point){
 void ClientInfo::removeAllPoi(){
     this->poi.erase(this->poi.begin(), this->poi.end());
 }
+
+void ClientInfo::meanOfTransportationToString(){
+
+    cout << "Mean of transportation: ";
+
+    switch (meansOfTransportation) {
+        case 'c':
+            cout << "car" << endl;
+        break;
+        case 'w':
+            cout << "walking/biking" << endl;
+        break;
+        case 'p':
+            cout << "public transportation" << endl;
+        break;
+    }
+
+    cout << "Available Time: " << timeAvailable << " minutes" << endl << endl;
+
+}

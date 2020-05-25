@@ -2,6 +2,7 @@
 
 
 int choice(const string& title, const string& description, vector<string> poi){
+    //funcao que mostra o menu de gestao de interesses
     int option = -1;
     system("cls");
 
@@ -18,8 +19,9 @@ int choice(const string& title, const string& description, vector<string> poi){
 }
 
 void addInterest(ClientInfo * info){
+    //funcao para adicionar um interesse
     vector<string> poi = info->getPoi();
-    vector<string> availablePOI = {"Information", "Hotel", "Attraction", "ViewPoint", "GuestHouse", "Picnic Site", "Artwork", "Campsite","Museum"};
+    vector<string> availablePOI = {"Information", "Hotel", "Attraction", "ViewPoint", "GuestHouse", "Picnic Site", "Artwork", "Campsite","Museum", "*"};
     vector<string> possibleNew;
 
     for(const auto & i : availablePOI){
@@ -34,7 +36,7 @@ void addInterest(ClientInfo * info){
         return;
     }
     possibleNew.emplace_back("All");
-    possibleNew.emplace_back("Back to Main");
+    possibleNew.emplace_back("Back to Menu");
     string description = "Choose the interest you want to add (integer number): ";
     int option = choice("Add interest",description , possibleNew);//retorna o indice no vetor
     cin.ignore(1000,'\n');
@@ -51,9 +53,10 @@ void addInterest(ClientInfo * info){
 }
 
 void removeInterest(ClientInfo * info){
+    //funcao para remover um interesse
     vector<string> poi = info->getPoi();
     poi.emplace_back("All");
-    poi.emplace_back("Back to main");
+    poi.emplace_back("Back to menu");
     if(poi.empty()){
         system("cls");
         cout << "\nThere aren't any interests to remove. You will be redirected to the previous menu\n\n";
@@ -75,7 +78,8 @@ void removeInterest(ClientInfo * info){
 
 }
 
-void viewInterest(ClientInfo* info){//a verficaçao do input so está certa para ints
+void viewInterest(ClientInfo* info){
+    //menu de visualizar os interesses ja definidos 
     vector<string> poi = info->getPoi();
 
     system("cls");
@@ -88,16 +92,9 @@ void viewInterest(ClientInfo* info){//a verficaçao do input so está certa para
             cout << i << endl;
         }
     }
-    int op;
-    cout <<"\nPress 0 to go back to the menu: ";
-    cin >> op;
-    while(op!=0){
-        if(cin.fail()||cin.eof()){
-            cin.clear();
-            cin.ignore(1000,'\n');
-        }
-        cout <<"Invalid input. Try again: ";
-        cin >> op;
-    }
+    
+    cout << endl << "Insert any key to return to the menu..."<<endl;
+    char input;
+    cin >> input;
 
 }

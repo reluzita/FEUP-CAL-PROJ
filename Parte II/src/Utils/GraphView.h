@@ -14,9 +14,9 @@
 #include "../UserInteraction/ClientInfo.h"
 
 
-GraphViewer* createMapViewer(const Graph<coord> &g);
+GraphViewer* createMapViewer(const Graph<coord> &g, bool showPoi);
 
-GraphViewer* createRealPOIPath(const Graph<coord> &g, queue<Vertex<coord>*> path, vector<int> visitedPoi);
+void showRealPOIPath(GraphViewer* gv, const Graph<coord> &g, queue<Vertex<coord>*> path, vector<int> visitedPoi);
 
 void showPath(GraphViewer* gv, queue<Vertex<coord>*> path, vector<int> visitedPoi);
 

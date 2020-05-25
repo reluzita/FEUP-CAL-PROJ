@@ -9,7 +9,7 @@
 #include <unordered_set>
 #include <unordered_map>
 #include "MutablePriorityQueue.h"
-#include "../Utils/Stop.h"
+#include "Stop.h"
 #include <cmath>
 
 using namespace std;
@@ -128,6 +128,7 @@ public:
 	vector<Vertex<T> *> getVertexSet() const;
 	vector<MetroStation> getMetroStations() const;
     int getMetroTime(MetroStation stopOrig, MetroStation stopEnd) const;
+    unordered_map<int, string> getRealPOIs() const;
 	int getPath(const int &orig, const int &dest) const;
     double getDistance(const int &orig, const int &dest) const;
 

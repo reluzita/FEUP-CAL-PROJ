@@ -1,7 +1,7 @@
 #include "GraphView.h"
 
 
-GraphViewer* createMapViewer(const Graph<coord> &g) {
+GraphViewer* createMapViewer(const Graph<coord> &g, bool showPoi) {
     double height = g.getMaxY() - g.getMinY();
     double width = g.getMaxX() - g.getMinX();
 
@@ -11,7 +11,7 @@ GraphViewer* createMapViewer(const Graph<coord> &g) {
         graphWidth = (width * graphHeight) / height;
     }
     else {
-        graphWidth = 1500;
+        graphWidth = 1000;
         graphHeight = (height * graphWidth) / width;
     }
 
@@ -29,69 +29,62 @@ GraphViewer* createMapViewer(const Graph<coord> &g) {
         gv->setVertexSize(vertex->getId(), 1);
     }
 
+    if(showPoi) {
+        for (auto i: g.getRealPOIs()) {
+            Vertex<coord> *vertex = g.findVertex(i.first);
+            gv->setVertexColor(i.first, "orange");
+            gv->setVertexLabel(i.first, i.second + "-" + to_string(vertex->getDuration()) + "m");
+            gv->setVertexSize(i.first, 10);
+        }
+    }
+
     gv->rearrange();
     return gv;
 }
 
-GraphViewer* createRealPOIPath(const Graph<coord> &g, queue<Vertex<coord>*> path, vector<int> visitedPoi) {
-
-    double height = abs(g.getMaxY() - g.getMinY());
-    double width = abs(g.getMaxX() - g.getMinX());
-
-    int graphHeight, graphWidth;
-    if (width / height < 2) {
-        graphHeight = 600;
-        graphWidth = (width * graphHeight) / height;
-    } else {
-        graphWidth = 1500;
-        graphHeight = (height * graphWidth) / width;
-    }
-
-    auto *gv = new GraphViewer(graphWidth, graphHeight, false);
-    gv->createWindow(graphWidth, graphHeight);
-    gv->defineVertexColor("blue");
-    gv->defineEdgeColor("black");
-
-    for (Vertex<coord> *vertex: g.getVertexSet()) {
-        double y = abs(vertex->getInfo().second - g.getMinY()) / height;
-        double x = abs(vertex->getInfo().first - g.getMinX()) / width;
-
-        gv->addNode(vertex->getId(), (int) (x * graphWidth), (int) (y * graphHeight));
-        gv->setVertexSize(vertex->getId(), 2);
-
-    }
-
+void showRealPOIPath(GraphViewer* gv, const Graph<coord> &g, queue<Vertex<coord>*> path, vector<int> visitedPoi) {
     int i = 0;
-    gv->setVertexColor(path.front()->getId(), "yellow");
+    int idEnd = path.front()->getId(), idStart;
+    int counter = 3;
+
+    gv->defineEdgeColor("yellow");
     while (!path.empty()) {
         Vertex<coord> *vertex = path.front();
         path.pop();
 
         if (!path.empty()) {
-            gv->addEdge(i, path.front()->getId(), vertex->getId(), EdgeType::DIRECTED);
+            if (counter == 0) {
+                gv->addEdge(i, path.front()->getId(), vertex->getId(), EdgeType::DIRECTED);
+                gv->setEdgeThickness(i, 5);
+                counter = 3;
+            } else {
+                gv->addEdge(i, path.front()->getId(), vertex->getId(), EdgeType::UNDIRECTED);
+                gv->setEdgeThickness(i, 5);
+                counter--;
+            }
             i++;
         }
 
         if (path.empty())
-            gv->setVertexColor(vertex->getId(), "green");
+            idStart = vertex->getId();
         else if (find(visitedPoi.begin(), visitedPoi.end(), vertex->getId()) != visitedPoi.end()) {
-            string name = g.realPOIName(vertex->getId());
-            if (name != "") {
-                gv->setVertexColor(vertex->getId(), "red");
-                gv->setVertexLabel(vertex->getId(), name + to_string(vertex->getDuration()));
-            }
-        } else if (vertex->getType() != " ") {
-            string name = g.realPOIName(vertex->getId());
-            if (name != "") {
-                gv->setVertexColor(vertex->getId(), "pink");
-                gv->setVertexLabel(vertex->getId(), name + to_string(vertex->getDuration()));
-            }
+            gv->setVertexColor(vertex->getId(), "red");
+            gv->setVertexLabel(vertex->getId(), g.realPOIName(vertex->getId()) + "-" + to_string(vertex->getDuration()) + "m");
+            gv->setVertexSize(vertex->getId(), 10);
         }
-        gv->setVertexSize(vertex->getId(), 10);
     }
 
+    gv->setVertexColor(idEnd, "yellow");
+    gv->setVertexLabel(idEnd, g.realPOIName(idEnd));
+    gv->setVertexSize(idEnd, 10);
+
+
+    gv->setVertexColor(idStart, "green");
+    gv->setVertexLabel(idStart, g.realPOIName(idStart));
+    gv->setVertexSize(idStart, 10);
+
+
     gv->rearrange();
-    return gv;
 }
 
 
@@ -134,9 +127,8 @@ void showPath(GraphViewer* gv, queue<Vertex<coord>*> path, vector<int> visitedPo
     gv->setVertexColor(idEnd, "yellow");
     gv->setVertexSize(idEnd, 20);
     gv->setVertexColor(idStart, "green");
-    gv->setVertexSize(idEnd, 20);
+    gv->setVertexSize(idStart, 20);
 
-    cout << "id start " << idStart << " id end" << idEnd << endl;
 
     gv->rearrange();
 
@@ -145,7 +137,7 @@ void showPath(GraphViewer* gv, queue<Vertex<coord>*> path, vector<int> visitedPo
 void showTestPath(GraphViewer* gv, queue<Vertex<coord>*> path) {
     int i = 0;
     gv->setVertexColor(path.front()->getId(), "yellow");
-    gv->setVertexSize(path.front()->getId(), 10);
+    gv->setVertexSize(path.front()->getId(), 20);
     gv->setVertexLabel(path.front()->getId(), "End");
     int s = 3;
     while(!path.empty()) {
@@ -168,7 +160,7 @@ void showTestPath(GraphViewer* gv, queue<Vertex<coord>*> path) {
 
         if(path.empty()) {
             gv->setVertexColor(vertex->getId(), "green");
-            gv->setVertexSize(vertex->getId(), 10);
+            gv->setVertexSize(vertex->getId(), 20);
             gv->setVertexLabel(vertex->getId(), "Start");
         }
     }
@@ -185,7 +177,7 @@ void showPOI(GraphViewer* gv, const vector<Vertex<coord>*>& points, const int &o
     if(orig != -1) {
         gv->setVertexColor(orig, "green");
         gv->setVertexSize(orig, 15);
-        gv->setVertexLabel(orig, "You're here: " + to_string(1));//atençao a isto
+        gv->setVertexLabel(orig, "You're here: " + to_string(1));
     }
     gv->rearrange();
 }

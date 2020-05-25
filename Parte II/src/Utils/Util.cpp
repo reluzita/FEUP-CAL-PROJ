@@ -1,6 +1,7 @@
 #include "Util.h"
 
 void menu_int_options(int &option, int omin, int nmax, const string& description){
+//funcao que verifica os inputs do menu 
     cout << endl << description;
     cin >> option;
     while (cin.fail() || option > nmax || option < omin) {
@@ -25,6 +26,7 @@ void menu_int_options(int &option, int omin, int nmax, const string& description
 
 
 int displayMenu(const string& title, vector<string>options, const string& description){
+    //funcao generica de display de menus
     int option = -1;
     system("cls");
     unsigned i = 0;
