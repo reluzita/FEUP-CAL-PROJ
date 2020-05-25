@@ -14,7 +14,6 @@ OptimizedPath magicGenerator(Graph<coord> &g, ClientInfo* info) {
         cout << "There is no time to get from where you are to the point you want!" << endl;
         cout << "However, we have found the quickest way to get there ..."<< endl;
         res.path = info->getPath(g, info->getIdStart(), info->getIdEnd());
-        cout << "inicio = " << info->getIdStart() << "\t fim = " << info->getIdEnd() << endl;
         cout << "It takes " << g.minutesFromDistance(g.distancePath(res.path), info->getMeansOfTransportation()) << " minutes." << endl;
         return res;
     }
@@ -55,7 +54,6 @@ void metroPathGenerator(Graph<coord> &g, ClientInfo* info) {
 
     int timeLeft = info->getTimeAvailable() - g.getMetroTime(stopOrig, stopEnd);
 
-    //cout << "Time Left after metro: " << timeLeft << endl;
     if(timeLeft <= 0) {
         cout << "No time for the metro trip" << endl;
         return; //no time to do the metro trip
@@ -64,7 +62,6 @@ void metroPathGenerator(Graph<coord> &g, ClientInfo* info) {
     int origTime = info->getMinutes(g, info->getIdStart(), stopOrig.getID());
     int endTime = info->getMinutes(g, stopEnd.getID(), info->getIdEnd());
 
-    cout << "Metro: " << timeLeft << " p1: " << origTime << " p2: " << endTime << endl;
     if(origTime + endTime >= timeLeft) {
         cout << "No time to get to the metro." << endl;
         cout << endl << endl << "Insert any key to return to the menu..." << endl;
@@ -74,20 +71,14 @@ void metroPathGenerator(Graph<coord> &g, ClientInfo* info) {
     }
 
     int origFactor = floor(timeLeft * (double)origTime / (double)(endTime + origTime));
-    cout << "Time given for path1 : " << origFactor << endl;
     vector<Vertex<coord>*> poi = g.bfsAllPOI(info->getIdStart(), info->getPoi(), origFactor);
-    //cout << "Found " << poi.size() << " points" << endl;
 
     OptimizedPath pathFromOrig = findPoiInPath(g, info, poi, info->getIdStart(), stopOrig.getID(), origFactor);
-    //cout << "Done first generator" << endl;
 
     int endFactor = floor(timeLeft * (double)endTime / (double)(endTime + origTime));
-    cout << "Time given for path2 : " << endFactor << endl;
     poi = g.bfsAllPOI(stopEnd.getID(), info->getPoi(), endFactor);
-    //cout << "Found " << poi.size() << " points" << endl;
 
     OptimizedPath pathToEnd = findPoiInPath(g, info, poi, stopEnd.getID(), info->getIdEnd(), endFactor);
-    //cout << "Done second generator" << endl;
 
     vector<int> aux;
     for(int id: pathToEnd.visitedId)
@@ -134,7 +125,6 @@ OptimizedPath circularPath(Graph<coord> &g, ClientInfo* info){
     }
 
     int counter = ceil(points.size()*info->getCounterFactor());
-    //cout << points.size() << endl;
     for(Vertex<coord>* point: points) {
         if(point->getId() == info->getIdStart())
             continue;
@@ -176,8 +166,6 @@ OptimizedPath circularPath(Graph<coord> &g, ClientInfo* info){
             res = newOpt;
         }
     }
-    if(res.path.empty())
-        cout << "Not enough time to see any points of interest!" << endl;
     return res;
 }
 
@@ -188,12 +176,12 @@ OptimizedPath findPoiInPath(Graph<coord> &g, ClientInfo* info, const vector<Vert
     struct OptimizedPath empty;  //empty queue to return when cant find path
     struct OptimizedPath best;
 
-    int time = info->getMinutes(g, orig, dest);
+    int minTime = info->getMinutes(g, orig, dest);
     best.path = info->getPath(g, orig, dest);
-    if(time > availableTime) {
+    if(minTime > availableTime) {
         return empty;   //no time to go straight from orig to dest
     }
-    else if(time == availableTime) {
+    else if(minTime == availableTime) {
         return best;
     }
 
@@ -201,7 +189,6 @@ OptimizedPath findPoiInPath(Graph<coord> &g, ClientInfo* info, const vector<Vert
 
     for (Vertex<coord>* point: poi) {
         if(counter == 0) {
-            //cout << "gave up" << endl;
             break;
         }
 
@@ -233,7 +220,6 @@ OptimizedPath findPoiInPath(Graph<coord> &g, ClientInfo* info, const vector<Vert
         }
 
         if (best.visitedId.empty()) {
-            //cout << "Found a path ( didnt make recursive call) " << endl;
             best.path = joinQueue(info->getPath(g, point->getId(), dest), info->getPath(g, orig, point->getId()));
             best.visitedId = {point->getId()};
         }
@@ -266,7 +252,6 @@ OptimizedPath findPoiInPath(Graph<coord> &g, ClientInfo* info, const vector<Vert
             best = optPathToDest;
         }
     }
-    //cout << "Nodes in path: " << best.path.size() << " Visited nodes: " << best.visitedId.size() << endl;
     return best;
 }
 
