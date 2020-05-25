@@ -33,7 +33,7 @@ GraphViewer* createMapViewer(const Graph<coord> &g, bool showPoi) {
         for (auto i: g.getRealPOIs()) {
             Vertex<coord> *vertex = g.findVertex(i.first);
             gv->setVertexColor(i.first, "orange");
-            gv->setVertexLabel(i.first, i.second + "-" + to_string(vertex->getDuration()) + "m");
+            gv->setVertexLabel(i.first, i.second + "-" + to_string(vertex->getDuration()) + "min");
             gv->setVertexSize(i.first, 10);
         }
     }
@@ -69,7 +69,7 @@ void showRealPOIPath(GraphViewer* gv, const Graph<coord> &g, queue<Vertex<coord>
             idStart = vertex->getId();
         else if (find(visitedPoi.begin(), visitedPoi.end(), vertex->getId()) != visitedPoi.end()) {
             gv->setVertexColor(vertex->getId(), "red");
-            gv->setVertexLabel(vertex->getId(), g.realPOIName(vertex->getId()) + "-" + to_string(vertex->getDuration()) + "m");
+            gv->setVertexLabel(vertex->getId(), g.realPOIName(vertex->getId()) + "-" + to_string(vertex->getDuration()) + "min");
             gv->setVertexSize(vertex->getId(), 10);
         }
     }
@@ -116,11 +116,11 @@ void showPath(GraphViewer* gv, queue<Vertex<coord>*> path, vector<int> visitedPo
             idStart = vertex->getId();
         else if (find(visitedPoi.begin(), visitedPoi.end(), vertex->getId()) != visitedPoi.end()) {
             gv->setVertexColor(vertex->getId(), "red");
-            gv->setVertexLabel(vertex->getId(), vertex->getType() + "-" + to_string(vertex->getDuration()) + "m");
+            gv->setVertexLabel(vertex->getId(), vertex->getType() + "-" + to_string(vertex->getDuration()) + "min");
             gv->setVertexSize(vertex->getId(), 10);
         } else if (vertex->getType() != " ") {
             gv->setVertexColor(vertex->getId(), "pink");
-            gv->setVertexLabel(vertex->getId(), vertex->getType() + "-" + to_string(vertex->getDuration()) + "m");
+            gv->setVertexLabel(vertex->getId(), vertex->getType() + "-" + to_string(vertex->getDuration()) + "min");
             gv->setVertexSize(vertex->getId(), 5);
         }
     }
@@ -222,11 +222,11 @@ void showPathWithMetro(GraphViewer* gv, Graph<coord> g, queue<Vertex<coord>*> pa
 
         if (find(visitedPoi.begin(), visitedPoi.end(), vertex->getId()) != visitedPoi.end()) {
             gv->setVertexColor(vertex->getId(), "red");
-            gv->setVertexLabel(vertex->getId(), vertex->getType() + "-" + to_string(vertex->getDuration()) + "m");
+            gv->setVertexLabel(vertex->getId(), vertex->getType() + "-" + to_string(vertex->getDuration()) + "min");
             gv->setVertexSize(vertex->getId(), 10);
         } else if (vertex->getType() != " ") {
             gv->setVertexColor(vertex->getId(), "pink");
-            gv->setVertexLabel(vertex->getId(), vertex->getType() + "-" + to_string(vertex->getDuration()) + "m");
+            gv->setVertexLabel(vertex->getId(), vertex->getType() + "-" + to_string(vertex->getDuration()) + "min");
             gv->setVertexSize(vertex->getId(), 5);
         }
     }
@@ -263,11 +263,11 @@ void showPathWithMetro(GraphViewer* gv, Graph<coord> g, queue<Vertex<coord>*> pa
             i++;
         } else if (find(visitedPoi.begin(), visitedPoi.end(), vertex->getId()) != visitedPoi.end()) {
             gv->setVertexColor(vertex->getId(), "red");
-            gv->setVertexLabel(vertex->getId(), vertex->getType() + "-" + to_string(vertex->getDuration()) + "m");
+            gv->setVertexLabel(vertex->getId(), vertex->getType() + "-" + to_string(vertex->getDuration()) + "min");
             gv->setVertexSize(vertex->getId(), 10);
         } else if (vertex->getType() != " ") {
             gv->setVertexColor(vertex->getId(), "pink");
-            gv->setVertexLabel(vertex->getId(), vertex->getType() + "-" + to_string(vertex->getDuration()) + "m");
+            gv->setVertexLabel(vertex->getId(), vertex->getType() + "-" + to_string(vertex->getDuration()) + "min");
             gv->setVertexSize(vertex->getId(), 5);
         }
     }

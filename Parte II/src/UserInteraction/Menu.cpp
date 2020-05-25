@@ -80,12 +80,12 @@ int generatePath(ClientInfo* info, Graph<coord> &g, Graph<coord> &gbdir){
 
     double dist = g.distancePath(optPath.path);
     cout << "Walking distance: " << dist << "km" << endl;
-    cout << "Moving time: " << g.minutesFromDistance(dist, info->getMeansOfTransportation()) << "m" << endl;
+    cout << "Moving time: " << g.minutesFromDistance(dist, info->getMeansOfTransportation()) << "min" << endl;
     if(!optPath.visitedId.empty()) {
         cout << "Average time in visited points:" << endl;
         for(int id: optPath.visitedId) {
             Vertex<coord>* v = g.findVertex(id);
-            cout << id << " - " << v->getType() << " - " << v->getDuration() << "m" << endl;
+            cout << id << " - " << v->getType() << " - " << v->getDuration() << "min" << endl;
         }
     }
 
@@ -142,12 +142,12 @@ int generateCircularPath(ClientInfo * info, Graph<coord> &g, Graph<coord> &gbdir
 
     double dist = g.distancePath(optPath.path);
     cout << "Total distance: " << dist << "km" << endl;
-    cout << "Moving time: " << g.minutesFromDistance(dist, info->getMeansOfTransportation()) << "m" << endl;
+    cout << "Moving time: " << g.minutesFromDistance(dist, info->getMeansOfTransportation()) << "min" << endl;
     if(!optPath.visitedId.empty()) {
         cout << "Average time in visited points:" << endl;
         for(int id: optPath.visitedId) {
             Vertex<coord>* v = g.findVertex(id);
-            cout << id << " - " << v->getType() << " - " << v->getDuration() << "m" << endl;
+            cout << id << " - " << v->getType() << " - " << v->getDuration() << "min" << endl;
         }
     }
 
@@ -216,18 +216,17 @@ int dayTour(Graph<coord> &g){
 
     double dist = g.distancePath(path);
     cout << "Total distance: " << dist << "km" << endl;
-    cout << "Moving time: " << g.minutesFromDistance(dist, 'w') << "m" << endl;
+    cout << "Moving time: " << g.minutesFromDistance(dist, 'w') << "min" << endl<<endl;
 
-        cout << "Time in visited points:" << endl;
-        cout << "Starting in " << g.realPOIName(30413) << endl;
+        cout << "Starting in "<< g.realPOIName(30413) << endl<< endl;
         for(int id: visitedPoi) {
             Vertex<coord> * v = g.findVertex(id);
             if(id == 41230) {
                 cout << "--Almoco--"<< endl;
             }
-            cout << id << " - " << g.realPOIName(id) << " - " << v->getDuration() << "m" << endl;
+            cout << id << " - " << g.realPOIName(id) << " - " << v->getDuration() << "min" << endl;
         }
-        cout << "Endind in " << g.realPOIName(14820) << endl;
+        cout <<endl <<"Ending in " << g.realPOIName(14820) << endl;
 
 
     cout << endl << endl << "Insert any key to return to the menu..." << endl;
@@ -240,16 +239,18 @@ int dayTour(Graph<coord> &g){
 }
 
 int algorithmAnalysis(Graph<coord> &g, Graph<coord> &gbdir){
-    vector<string> items = {"Comparing Dijkstra and AStar in small path", "Comparing Dijkstra and AStar in big path", "Comparing bidirectional Dijkstra and bidirectional AStar", "Comparing DFS and BFS", "Comparing Dijkstra, AStar and Floyd-Warshall in grid graphs"};
+    vector<string> items = {"Comparing Dijkstra and AStar in small path", "Comparing Dijkstra and AStar in big path", "Comparing bidirectional Dijkstra and bidirectional AStar", "Comparing DFS and BFS", "Comparing Dijkstra, AStar and Floyd-Warshall in grid graphs",  "Back to main menu"};
     string description = "Choose one option from the menu(integer number): ";
-    int option = displayMenu("Manage Preferences", items, description);
-
-    if(option == 1) comparePath(g, 30413, 36869);
-    else if (option == 2) comparePath(g, 1231, 29789);
-    else if (option == 3) compareBidirectional(gbdir);
-    else if (option == 4) compareDFSBFS(g);
-    else if (option == 5) compareAllGrid();
-    
+    int option;
+    do {
+        option = displayMenu("Manage Preferences", items, description);
+        if (option == 1) comparePath(g, 30413, 36869);
+        else if (option == 2) comparePath(g, 1231, 29789);
+        else if (option == 3) compareBidirectional(gbdir);
+        else if (option == 4) compareDFSBFS(g);
+        else if (option == 5) compareAllGrid();
+    }while(option != 6 && option != -1);
+    if (option == -1) return option;
     return 0;
 }
 

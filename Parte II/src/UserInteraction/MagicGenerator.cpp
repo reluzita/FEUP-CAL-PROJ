@@ -58,6 +58,7 @@ void metroPathGenerator(Graph<coord> &g, ClientInfo* info) {
 
     if(stopOrig.getStopNum() == stopEnd.getStopNum()){
         cout << "It's better to just walk this route! Please select a different menu." << endl;
+        sleep(3);
         return;
     }
 
@@ -65,6 +66,7 @@ void metroPathGenerator(Graph<coord> &g, ClientInfo* info) {
 
     if(timeLeft <= 0) {
         cout << "No time for the metro trip" << endl;
+        sleep(3);
         return; //no time to do the metro trip
     }
 
@@ -395,6 +397,8 @@ int getStartPoint(const Graph<coord> &g, const string &typeStart, bool circular,
     else description = "Choose the id of your starting point on the map (integer number): ";
     menu_int_options(op,1, poi.size(), description);
     gv->closeWindow();
+    if(op==-1) return -1;
+
 
     return poi.at(op-1)->getId();
 }
@@ -444,7 +448,7 @@ int getEndPoint(Graph<coord> &g, int orig, const string &typeEnd, const int &ava
     string description = "Choose the id of your ending point on the map (integer number): ";
     menu_int_options(op,1, poi.size(), description);
     gv->closeWindow();
-
+    if(op==-1) return -1;
     return poi.at(op-1)->getId();
 }
 
