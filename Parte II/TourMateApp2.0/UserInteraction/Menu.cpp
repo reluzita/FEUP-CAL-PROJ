@@ -84,10 +84,22 @@ int generatePath(ClientInfo* info, Graph<coord> &g, Graph<coord> &gbdir){
 
     if(optPath.path.empty()) return 0;
 
+    double dist = g.distancePath(optPath.path);
+    cout << "Walking distance: " << dist << "km" << endl;
+    cout << "Moving time: " << g.minutesFromDistance(dist, info->getMeansOfTransportation()) << "m" << endl;
+    if(!optPath.visitedId.empty()) {
+        cout << "Average time in visited points:" << endl;
+        for(int id: optPath.visitedId) {
+            Vertex<coord>* v = g.findVertex(id);
+            cout << id << " - " << v->getType() << " - " << v->getDuration() << "m" << endl;
+        }
+    }
+
     GraphViewer *gv = createMapViewer(g);
     showPath(gv, optPath.path, optPath.visitedId);
 
-    int input;
+    cout << endl << endl << "Insert any key to return to the menu..." << endl;
+    char input;
     cin >> input;
 
     gv->closeWindow();

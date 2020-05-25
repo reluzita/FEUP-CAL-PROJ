@@ -22,6 +22,8 @@ OptimizedPath magicGenerator(Graph<coord> &g, ClientInfo* info) {
     vector<Vertex<coord>*> poi = g.bfsAllPOI(info->getIdStart(), info->getPoi(), info->getTimeAvailable());
     res = findPoiInPath(g, info, poi, info->getIdStart(), info->getIdEnd(), info->getTimeAvailable());
 
+
+
     return res;
 }
 

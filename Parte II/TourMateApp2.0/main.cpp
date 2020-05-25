@@ -14,35 +14,63 @@ int main() {
     info.startGraph(gBi);
     info.setMeansOfTransportation('w');
     info.setPoi({"*"});
-    info.setIdStart(231);
-    info.setIdEnd( 38);
+    info.setIdStart(30413);
+    info.setIdEnd( 36869);
     info.setTimeAvailable(60);
     info.setCounterFactor(0.3);
-    res = mainMenu(&info, gBi, gUni);
+    //res = mainMenu(&info, gBi, gUni);
 
-    //magicGenerator(gBi, &info);
+    cout << "Running dfs for each node..." << endl;
+    double sum = 0;
+    for(Vertex<coord>* vertex: gUni.getVertexSet()) {
+        gUni.dfs(vertex->getId());
+        sum += (double)gUni.numOfVisitedNodes() / gUni.getVertexSet().size();
+    }
+    cout << "Average percentage of nodes reached: " << sum / gUni.getVertexSet().size() << endl;
+
 /*
+    info.setCounterFactor(1);
     milliseconds t0 = duration_cast<milliseconds >(system_clock::now().time_since_epoch());
     //OptimizedPath path = circularPath(gBi, &info);
     OptimizedPath path = magicGenerator(gBi, &info);
     milliseconds t1 = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
-    cout << "First execution time: "<< t1.count()- t0.count()<< " milliseconds"<<endl;
+    cout << "Execution time processing all points: "<< t1.count()- t0.count()<< " milliseconds"<<endl;
+    cout << "found path with " << gBi.distancePath(path.path) << "km and " << path.visitedId.size() << " points" << endl;
 
-    GraphViewer* gv = createMapViewer(gBi);
-    showPath(gv, path.path, path.visitedId);
-
-    info.setCounterFactor(1);
-
+    info.setCounterFactor(0.5);
     t0 = duration_cast<milliseconds >(system_clock::now().time_since_epoch());
     //OptimizedPath path = circularPath(gBi, &info);
     path = magicGenerator(gBi, &info);
     t1 = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
-    cout << "First execution time: "<< t1.count()- t0.count()<< " milliseconds"<<endl;
+    cout << "Execution time giving up when 50% of points fail: "<< t1.count()- t0.count()<< " milliseconds"<<endl;
+    cout << "found path with " << gBi.distancePath(path.path) << "km and " << path.visitedId.size() << " points" << endl;
 
-    GraphViewer* gv2 = createMapViewer(gBi);
-    showPath(gv2, path.path, path.visitedId);
+    info.setCounterFactor(0.3);
+    t0 = duration_cast<milliseconds >(system_clock::now().time_since_epoch());
+    //OptimizedPath path = circularPath(gBi, &info);
+    path = magicGenerator(gBi, &info);
+    t1 = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
+    cout << "Execution time giving up when 30% of points fail: "<< t1.count()- t0.count()<< " milliseconds"<<endl;
+    cout << "found path with " << gBi.distancePath(path.path) << "km and " << path.visitedId.size() << " points" << endl;
 
-    getchar();*/
+    info.setCounterFactor(0.10);
+    t0 = duration_cast<milliseconds >(system_clock::now().time_since_epoch());
+    //OptimizedPath path = circularPath(gBi, &info);
+    path = magicGenerator(gBi, &info);
+    t1 = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
+    cout << "Execution time giving up when 10% of points fail: "<< t1.count()- t0.count()<< " milliseconds"<<endl;
+    cout << "found path with " << gBi.distancePath(path.path) << "km and " << path.visitedId.size() << " points" << endl;
+
+    info.setCounterFactor(0.05);
+    t0 = duration_cast<milliseconds >(system_clock::now().time_since_epoch());
+    //OptimizedPath path = circularPath(gBi, &info);
+    path = magicGenerator(gBi, &info);
+    t1 = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
+    cout << "Execution time giving up when 5% of points fail: "<< t1.count()- t0.count()<< " milliseconds"<<endl;
+    cout << "found path with " << gBi.distancePath(path.path) << "km and " << path.visitedId.size() << " points" << endl;
+*/
+
+    //getchar();
     //compareAllGrid();
 
     system("cls");
