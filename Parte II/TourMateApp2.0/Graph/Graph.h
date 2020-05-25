@@ -165,6 +165,8 @@ public:
 	void floydWarshallShortestPath();
     vector<T> getfloydWarshallPath(const int &orig, const int &dest) const;
 
+    int numOfVisitedNodes();
+
 };
 
 template<class T>

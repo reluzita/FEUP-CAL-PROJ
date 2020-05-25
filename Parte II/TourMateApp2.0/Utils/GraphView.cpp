@@ -130,13 +130,16 @@ void showPath(GraphViewer* gv, queue<Vertex<coord>*> path, vector<int> visitedPo
             gv->setVertexLabel(vertex->getId(), vertex->getType() + "-" + to_string(vertex->getDuration()) + "m");
             gv->setVertexSize(vertex->getId(), 5);
         }
-        gv->setVertexColor(idEnd, "yellow");
-        gv->setVertexSize(idEnd, 20);
-        gv->setVertexColor(idStart, "green");
-        gv->setVertexSize(idEnd, 20);
-
-        gv->rearrange();
     }
+    gv->setVertexColor(idEnd, "yellow");
+    gv->setVertexSize(idEnd, 20);
+    gv->setVertexColor(idStart, "green");
+    gv->setVertexSize(idEnd, 20);
+
+    cout << "id start " << idStart << " id end" << idEnd << endl;
+
+    gv->rearrange();
+
 }
 
 void showTestPath(GraphViewer* gv, queue<Vertex<coord>*> path) {
@@ -280,7 +283,7 @@ void showPathWithMetro(GraphViewer* gv, Graph<coord> g, queue<Vertex<coord>*> pa
     gv->setVertexColor(idEnd, "yellow");
     gv->setVertexSize(idEnd, 20);
     gv->setVertexColor(idStart, "green");
-    gv->setVertexSize(idEnd, 20);
+    gv->setVertexSize(idStart, 20);
 
     gv->rearrange();
 }

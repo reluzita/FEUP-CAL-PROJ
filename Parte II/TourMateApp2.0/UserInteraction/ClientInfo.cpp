@@ -6,21 +6,24 @@ void ClientInfo::startGraph(Graph<coord> g) {
 }
 
 double ClientInfo::getDistance(Graph<coord> g, int orig, int end) {
-    bool bidir = (meansOfTransportation == 'w');
+    bool bidir = (meansOfTransportation != 'c');
     return poiGraph.getDist(g, orig, end, bidir);
 }
 
 queue<Vertex<coord>*> ClientInfo::getPath(Graph<coord> g, int orig, int end) {
-    bool bidir = (meansOfTransportation == 'w');
+    bool bidir = (meansOfTransportation != 'c');
     return poiGraph.getPath(g, orig, end, bidir);
 }
 
 int ClientInfo::getMinutes(Graph<coord> g, int orig, int end) {
-    bool bidir = (meansOfTransportation == 'w');
+    bool bidir = (meansOfTransportation != 'c');
     double dist = poiGraph.getDist(g, orig, end, bidir);
     if(dist == -1)
         return -1;
-    return g.minutesFromDistance(dist, meansOfTransportation);
+    if(bidir)
+        return g.minutesFromDistance(dist, 'w');
+    else
+        return g.minutesFromDistance(dist, 'c');
 }
 
 void ClientInfo::setMeansOfTransportation(char meansOfTransportation){

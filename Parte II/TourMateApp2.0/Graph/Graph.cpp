@@ -922,8 +922,15 @@ queue<Vertex<T>*> Graph<T>::biDirAStarShortestPath(const int &origin, const int 
     return path;
 }
 
-
-
+template<class T>
+int Graph<T>::numOfVisitedNodes() {
+    int sum = 0;
+    for(Vertex<T>* vertex: vertexSet) {
+        if(vertex->visited)
+            sum++;
+    }
+    return sum;
+}
 
 
 template class Graph<coord>;
